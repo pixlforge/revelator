@@ -1,0 +1,100 @@
+<template>
+  <main class="auth__container" @keyup.enter="submit">
+    <router-link :to="{ name: 'auth.login' }"
+                 tag="a"
+                 class="auth__back">
+      <i class="fas fa-arrow-left"></i>
+    </router-link>
+
+    <h1 class="auth__title">
+      Request Password Reset Link
+    </h1>
+
+    <!--Email-->
+    <div class="form__group">
+      <label for="email" class="form__label">Email address</label>
+      <input type="email"
+             name="email"
+             id="email"
+             class="form__input"
+             :class="{ 'form__input--invalid': errors.email }"
+             @input="$v.user.email.$touch()"
+             v-model="user.email"
+             required autofocus autocomplete="off">
+      <AppTooltip v-if="$v.user.email.$error"
+                  :pos-x="40">
+        <p v-if="!$v.user.email.required">Please, provide a valid email address.</p>
+        <p v-if="!$v.user.email.email">Email format must have the 'address@email.tld' pattern.</p>
+      </AppTooltip>
+      <AppFeedback>
+        <p v-if="errors.email">{{ errors.email[0] }}</p>
+      </AppFeedback>
+    </div>
+
+    <div class="form__group form__group--inline">
+      <!--Submit-->
+      <button class="btn btn--primary"
+              :disabled="$v.$invalid"
+              @click="submit">
+        Send Password Reset Link
+      </button>
+    </div>
+  </main>
+</template>
+
+<script>
+  import AppTooltip from '../../../components/forms/AppTooltip'
+  import AppFeedback from '../../../components/forms/AppFeedback'
+  import { required, email } from 'vuelidate/lib/validators'
+
+  export default {
+    components: {
+      AppTooltip,
+      AppFeedback
+    },
+    data() {
+      return {
+        user: {
+          email: ''
+        },
+        old: {
+          email: ''
+        },
+        errors: {}
+      }
+    },
+    validations: {
+      user: {
+        email: {
+          required,
+          email
+        }
+      }
+    },
+    watch: {
+      'user.email'() {
+        if (this.user.email !== this.old.email) {
+          this.errors = {}
+        }
+      }
+    },
+    methods: {
+      submit() {
+        if (!this.$v.$invalid) {
+          this.$store.dispatch('toggleLoader')
+          axios.post(route('password.email'), this.user).then(res => {
+            this.$store.dispatch('toggleLoader')
+            this.$toasted.global.success({
+              message: `We've sent you an email containing your password reset link!`
+            })
+            this.$router.push({ name: 'home' })
+          }).catch(err => {
+            this.$store.dispatch('toggleLoader')
+            this.$toasted.global.danger()
+            this.errors = err.response.data.errors
+          })
+        }
+      }
+    }
+  }
+</script>

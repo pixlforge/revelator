@@ -1,0 +1,66 @@
+.main {
+  &__container {
+    width: 93vw;
+    margin: 8rem auto 0;
+    position: relative;
+
+    &--medium {
+      width: 50vw;
+    }
+  }
+
+  &__title {
+    font-size: 6.4rem;
+    text-align: center;
+
+    &--big {
+      font-size: 10rem;
+    }
+  }
+
+  &__subtitle {
+    font-family: $body-stack-light;
+    font-size: 2.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2pt;
+    margin-top: 2rem;
+  }
+
+  &__header {
+    width: 100%;
+    margin: 3rem auto;
+    display: flex;
+    justify-content: space-between;
+
+    &--center {
+      justify-content: center;
+    }
+  }
+
+  &__row {
+    margin-top: 5rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    &--center {
+      justify-content: center;
+    }
+  }
+
+  &__back {
+    position: absolute;
+    top: 1.8rem;
+    left: 0;
+    color: lighten($silver, 10%) !important;
+    font-size: 4rem;
+    transition: all .4s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: lighten($silver, 5%) !important;
+    }
+  }
+}

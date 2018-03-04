@@ -1,0 +1,32 @@
+.manageable {
+  &__container {
+    width: 35rem;
+    padding: 3rem;
+    background-color: $white;
+    box-shadow: 0 8px 15px rgba($black, .1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all .4s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba($black, .2);
+    }
+  }
+
+  &__icon {
+    font-size: 4rem !important;
+    margin-right: 3rem;
+  }
+
+  &__label {
+    font-size: 4rem;
+    font-weight: 700;
+  }
+}

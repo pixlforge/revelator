@@ -1,0 +1,9 @@
+.feedback {
+  &__container {
+    color: $danger;
+    font-size: 1.2rem;
+    position: absolute;
+    bottom: -3rem;
+    left: 4rem;
+  }
+}

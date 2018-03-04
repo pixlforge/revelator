@@ -1,0 +1,32 @@
+.auth {
+  &__container {
+    width: 50vw;
+    margin: 8rem auto 0;
+    position: relative;
+  }
+
+  &__title {
+    font-size: 6.4rem;
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  &__forgotten {
+    margin-left: 2rem;
+  }
+
+  &__back {
+    position: absolute;
+    top: 1.8rem;
+    left: 0;
+    color: lighten($silver, 10%) !important;
+    font-size: 4rem;
+    transition: all .4s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: lighten($silver, 5%) !important;
+    }
+  }
+}

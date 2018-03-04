@@ -1,0 +1,35 @@
+.table {
+  margin-top: 7rem;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.4rem;
+
+  &__row {
+    transition: all .4s ease;
+
+    &:nth-of-type(even) {
+      background-color: $gallery;
+    }
+
+    &:hover:not(:first-child) {
+      background-color: $white;
+    }
+  }
+
+  &__header,
+  &__cell {
+    padding: 2rem 0;
+  }
+
+  &__header {
+    font-size: 1.6rem;
+  }
+
+  &__cell {
+    text-align: center;
+
+    &:last-child > :first-child {
+      margin-right: 3rem;
+    }
+  }
+}

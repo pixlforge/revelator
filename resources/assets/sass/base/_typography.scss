@@ -1,0 +1,46 @@
+@font-face {
+  font-family: BrandonGrotesque-Light;
+  src: url(../fonts/BrandonGrotesque-Light.otf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: BrandonGrotesque-Regular;
+  src: url(../fonts/BrandonGrotesque-Regular.otf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Didot-Italic;
+  src: url(../fonts/Didot-Italic.ttf);
+  font-weight: 400;
+}
+
+$headline-stack: "Didot-Italic", serif;
+$body-stack: "BrandonGrotesque-Regular", sans-serif;
+$body-stack-light: "BrandonGrotesque-Light", sans-serif;
+
+body {
+  font-family: $body-stack;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $headline-stack;
+  text-transform: initial;
+  font-weight: 400;
+}
+
+.text{
+  &--dark-grey {
+    color: $dark-grey;
+  }
+
+  &--red {
+    color: $danger;
+  }
+}

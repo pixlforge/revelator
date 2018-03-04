@@ -1,0 +1,57 @@
+.form {
+  &__group {
+    margin: 6rem 0;
+    position: relative;
+
+    &--inline {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__label {
+    user-select: none;
+    display: block;
+    width: 100%;
+    letter-spacing: 2pt;
+    transform: translateX(4rem);
+
+    &--left {
+      transform: translateX(0);
+      display: initial;
+      cursor: pointer;
+    }
+  }
+
+  &__input,
+  &__select {
+    display: block;
+    width: 100%;
+    font-family: $body-stack;
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: $dark-grey;
+    margin-top: 1rem;
+    padding: 2rem 3rem;
+    text-align: center;
+    border: 2px solid $white;
+    border-radius: 5rem;
+    transition: all .4s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      box-shadow: 0 8px 15px rgba($black, .1);
+    }
+
+    &--invalid {
+      border: 2px solid $danger;
+    }
+  }
+
+  &__select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+}

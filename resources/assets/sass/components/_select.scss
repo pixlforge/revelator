@@ -1,0 +1,41 @@
+.select {
+  width: 100%;
+  background-color: $white;
+  margin-top: 1rem;
+  border-radius: 10rem;
+  font-size: 3rem;
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  padding: 2rem 3rem;
+  transition: all .4s ease;
+
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+    box-shadow: 0 8px 15px rgba($black, .1);
+  }
+
+  &__dropdown {
+    z-index: 100;
+    position: absolute;
+    top: 100%;
+    left: 5%;
+    width: 90%;
+    background-color: $white;
+    list-style: none;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    box-shadow: 0 8px 15px rgba($black, .1);
+
+    & li {
+      padding: 2rem 0;
+      transition: all .4s ease;
+
+      &:hover {
+        background-color: $gallery;
+      }
+    }
+  }
+}
