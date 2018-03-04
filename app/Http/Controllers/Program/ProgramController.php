@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Program;
 
-use App\Program;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Program\StoreProgramRequest;
+use App\Http\Requests\Program\UpdateProgramRequest;
+use App\Program;
 
 class ProgramController extends Controller
 {
@@ -43,5 +44,45 @@ class ProgramController extends Controller
         $program->save();
 
         return response($program, 200);
+    }
+
+    /**
+     * Get a single program.
+     *
+     * @param Program $program
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function edit(Program $program)
+    {
+        return response($program, 200);
+    }
+
+    /**
+     * @param UpdateProgramRequest $request
+     * @param Program $program
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function update(UpdateProgramRequest $request, Program $program)
+    {
+        $program->title = $request->title;
+        $program->code = $request->code;
+        $program->description = $request->description;
+        $program->save();
+
+        return response($program, 200);
+    }
+
+    /**
+     * Delete an existing program.
+     *
+     * @param Program $program
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function destroy(Program $program)
+    {
+        $program->delete();
+
+        return response(null, 204);
     }
 }

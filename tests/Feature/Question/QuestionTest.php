@@ -418,4 +418,37 @@ class QuestionTest extends TestCase
 
         $this->assertCount(0, Question::all());
     }
+
+    /** @test */
+    function users_cannot_delete_existing_questions()
+    {
+        $this->withExceptionHandling();
+
+        $this->actingAs($this->user);
+
+        $question = factory(Question::class)->create();
+
+        $this->assertCount(1, Question::all());
+
+        $this->deleteJson(route('api.questions.destroy', $question))
+            ->assertStatus(401);
+
+        $this->assertCount(1, Question::all());
+    }
+
+    /** @test */
+    function unauthenticated_users_cannot_delete_existing_questions()
+    {
+        $this->withExceptionHandling();
+
+        $question = factory(Question::class)->create();
+
+        $this->assertCount(1, Question::all());
+
+        $this->deleteJson(route('api.questions.destroy', $question))
+            ->assertStatus(401);
+
+        $this->assertCount(1, Question::all());
+    }
+
 }

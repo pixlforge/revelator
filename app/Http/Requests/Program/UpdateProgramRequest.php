@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\Program;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateProgramRequest extends FormRequest
+class UpdateProgramRequest extends StoreProgramRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +11,7 @@ class UpdateProgramRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +21,16 @@ class UpdateProgramRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return array_merge(parent::rules(), []);
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return array_merge(parent::messages(), []);
     }
 }

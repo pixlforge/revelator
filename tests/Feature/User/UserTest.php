@@ -500,6 +500,35 @@ class UserTest extends TestCase
     }
 
     /** @test */
+    function devs_can_delete_existing_users()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->actingAs($this->dev);
+
+        $user = factory(User::class)->create([
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            'role' => 'user'
+        ]);
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            'role' => 'user'
+        ]);
+
+        $this->deleteJson(route('api.users.destroy', $user))
+            ->assertStatus(204);
+
+        $this->assertDatabaseMissing('users', [
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            'role' => 'user'
+        ]);
+    }
+
+    /** @test */
     function admins_can_delete_existing_users()
     {
         $this->withoutExceptionHandling();
@@ -522,6 +551,62 @@ class UserTest extends TestCase
             ->assertStatus(204);
 
         $this->assertDatabaseMissing('users', [
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            'role' => 'user'
+        ]);
+    }
+
+    /** @test */
+    function users_cannot_delete_existing_users()
+    {
+        $this->withExceptionHandling();
+
+        $this->actingAs($this->user);
+
+        $user = factory(User::class)->create([
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            'role' => 'user'
+        ]);
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            'role' => 'user'
+        ]);
+
+        $this->deleteJson(route('api.users.destroy', $user))
+            ->assertStatus(401);
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            'role' => 'user'
+        ]);
+    }
+
+    /** @test */
+    function unauthenticated_users_cannot_delete_existing_users()
+    {
+        $this->withExceptionHandling();
+
+        $user = factory(User::class)->create([
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            'role' => 'user'
+        ]);
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            'role' => 'user'
+        ]);
+
+        $this->deleteJson(route('api.users.destroy', $user))
+            ->assertStatus(401);
+
+        $this->assertDatabaseHas('users', [
             'name' => 'John Doe',
             'email' => 'johndoe@example.com',
             'role' => 'user'

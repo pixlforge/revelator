@@ -24,7 +24,32 @@ class StoreProgramRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|string|min:3|max:255',
+            'code' => 'nullable|string|min:3|max:45',
+            'description' => 'nullable|string|min:5|max:3000'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'A title is required.',
+            'title.string' => 'The title should be a character string.',
+            'title.min' => 'Minimum 3 characters.',
+            'title.max' => 'Maximum 255 characters.',
+
+            'code.string' => 'The code should be a character string.',
+            'code.min' => 'Minimum 3 characters.',
+            'code.max' => 'Maximum 45 characters.',
+
+            'description.string' => 'The description should be a character string.',
+            'description.min' => 'Minimum 5 characters.',
+            'description.max' => 'Maximum 3000 characters.'
         ];
     }
 }

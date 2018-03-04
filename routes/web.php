@@ -20,6 +20,9 @@ Route::prefix('/api')->group(function () {
     Route::prefix('/programs')->namespace('Program')->group(function () {
         Route::get('/', 'ProgramController@index')->name('api.programs.index');
         Route::post('/', 'ProgramController@store')->name('api.programs.store');
+        Route::get('/{program}/edit', 'ProgramController@edit')->name('api.programs.edit');
+        Route::patch('/{program}', 'ProgramController@update')->name('api.programs.update');
+        Route::delete('/{program}', 'ProgramController@destroy')->name('api.programs.destroy');
     });
 
     /**
