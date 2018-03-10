@@ -754,6 +754,8 @@ a:visited:focus {
   border-bottom-right-radius: 3px;
   -webkit-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
           box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  max-height: 25rem;
+  overflow-y: scroll;
 }
 
 .select__dropdown li {

@@ -28,6 +28,9 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     box-shadow: 0 8px 15px rgba($black, .1);
+    max-height: 25rem;
+    overflow-y: scroll;
+
 
     & li {
       padding: 2rem 0;
