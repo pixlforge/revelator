@@ -11,7 +11,9 @@ export const store = new Vuex.Store({
     passwordVisibility: false,
     currentUser: null,
     users: [],
-    questions: []
+    questions: [],
+    programs: [],
+    options: []
   },
   getters: {
     loaderState: state => {
@@ -40,7 +42,15 @@ export const store = new Vuex.Store({
 
     getQuestions: state => {
       return state.questions
-    }
+    },
+
+    getPrograms: state => {
+      return state.programs
+    },
+
+    getOptions: state => {
+      return state.options
+    },
   },
   mutations: {
     /**
@@ -78,6 +88,20 @@ export const store = new Vuex.Store({
      */
     fetchQuestions: (state, payload) => {
       state.questions = payload
+    },
+
+    /**
+     * fetchPrograms Mutation
+     */
+    fetchPrograms: (state, payload) => {
+      state.programs = payload
+    },
+
+    /**
+     * fetchOptions Mutation
+     */
+    fetchOptions: (state, payload) => {
+      state.options = payload
     },
 
     /**
@@ -281,12 +305,159 @@ export const store = new Vuex.Store({
     },
 
     /**
+     * fetchPrograms Action
+     */
+    fetchPrograms: ({ commit, dispatch }) => {
+      dispatch('toggleLoader')
+      return new Promise((resolve, reject) => {
+        axios.get(route('api.programs.index')).then(({ data }) => {
+          commit('fetchPrograms', data)
+          dispatch('toggleLoader')
+          resolve(data)
+        }).catch(err => {
+          dispatch('toggleLoader')
+          reject(err)
+        })
+      })
+    },
+
+    /**
+     * getProgram Action
+     */
+    getProgram: ({ commit, dispatch }, payload) => {
+      dispatch('toggleLoader')
+      return new Promise((resolve, reject) => {
+        axios.get(route('api.programs.edit', [payload])).then(({ data }) => {
+          dispatch('toggleLoader')
+          resolve(data)
+        }).catch(err => {
+          dispatch('toggleLoader')
+          reject(err)
+        })
+      })
+    },
+
+    /**
+     * addProgram Action
+     */
+    addProgram: ({ commit, dispatch }, payload) => {
+      dispatch('toggleLoader')
+      return new Promise((resolve, reject) => {
+        axios.post(route('api.programs.store'), payload).then(() => {
+          dispatch('toggleLoader')
+          resolve()
+        }).catch(err => {
+          dispatch('toggleLoader')
+          reject(err)
+        })
+      })
+    },
+
+    /**
+     * updateProgram Action
+     */
+    updateProgram: ({ commit, dispatch }, payload) => {
+      dispatch('toggleLoader')
+      return new Promise((resolve, reject) => {
+        axios.patch(route('api.programs.update', payload.id), payload).then(({ data }) => {
+          dispatch('toggleLoader')
+          resolve(data)
+        }).catch(err => {
+          dispatch('toggleLoader')
+          reject(err)
+        })
+      })
+    },
+
+    /**
+     * deleteProgram Action
+     */
+    deleteProgram: ({ commit, dispatch }, payload) => {
+      dispatch('toggleLoader')
+      return new Promise((resolve, reject) => {
+        axios.delete(route('api.programs.destroy', [payload.id])).then(() => {
+          dispatch('toggleLoader')
+          dispatch('fetchQuestions')
+          resolve()
+        }).catch(err => {
+          dispatch('toggleLoader')
+          reject(err)
+        })
+      })
+    },
+
+    /**
+     * fetchOptions Action
+     */
+    fetchOptions: ({ commit, dispatch }) => {
+      dispatch('toggleLoader')
+      return new Promise((resolve, reject) => {
+        axios.get(route('api.options.index')).then(({ data }) => {
+          commit('fetchOptions', data)
+          dispatch('toggleLoader')
+          resolve(data)
+        }).catch(err => {
+          dispatch('toggleLoader')
+          reject(err)
+        })
+      })
+    },
+
+    /**
+     * getOption Action
+     */
+    getOption: ({ commit, dispatch }, payload) => {
+      dispatch('toggleLoader')
+      return new Promise((resolve, reject) => {
+        axios.get(route('api.options.edit', [payload])).then(({ data }) => {
+          dispatch('toggleLoader')
+          resolve(data)
+        }).catch(err => {
+          dispatch('toggleLoader')
+          reject(err)
+        })
+      })
+    },
+
+    /**
+     * addOption Action
+     */
+    addOption: ({ commit, dispatch }, payload) => {
+      dispatch('toggleLoader')
+      return new Promise((resolve, reject) => {
+        axios.post(route('api.options.store'), payload).then(() => {
+          dispatch('toggleLoader')
+          resolve()
+        }).catch(err => {
+          dispatch('toggleLoader')
+          reject(err)
+        })
+      })
+    },
+
+    /**
+     * updateOption Action
+     */
+    updateOption: ({ commit, dispatch }, payload) => {
+      dispatch('toggleLoader')
+      return new Promise((resolve, reject) => {
+        axios.patch(route('api.options.update', payload.id), payload).then(({ data }) => {
+          dispatch('toggleLoader')
+          resolve(data)
+        }).catch(err => {
+          dispatch('toggleLoader')
+          reject(err)
+        })
+      })
+    },
+
+    /**
      * Logout Action
      */
     logout: ({ commit, dispatch }) => {
       commit('toggleLoader')
       return new Promise((resolve, reject) => {
-        axios.post(route('logout')).then(() => {
+        axios.post(route('logout')).then(res => {
           commit('logout')
           dispatch('toggleLoader')
           resolve()
