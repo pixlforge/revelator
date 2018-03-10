@@ -30435,11 +30435,31 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     },
 
     /**
-     * Logout Action
+     * deleteOption Action
      */
-    logout: function logout(_ref35) {
+    deleteOption: function deleteOption(_ref35, payload) {
       var commit = _ref35.commit,
           dispatch = _ref35.dispatch;
+
+      dispatch('toggleLoader');
+      return new Promise(function (resolve, reject) {
+        axios.delete(route('api.options.destroy', [payload.id])).then(function () {
+          dispatch('toggleLoader');
+          dispatch('fetchOptions');
+          resolve();
+        }).catch(function (err) {
+          dispatch('toggleLoader');
+          reject(err);
+        });
+      });
+    },
+
+    /**
+     * Logout Action
+     */
+    logout: function logout(_ref36) {
+      var commit = _ref36.commit,
+          dispatch = _ref36.dispatch;
 
       commit('toggleLoader');
       return new Promise(function (resolve, reject) {
@@ -30457,14 +30477,14 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * Login Action
      */
-    login: function login(_ref36, payload) {
-      var commit = _ref36.commit,
-          dispatch = _ref36.dispatch;
+    login: function login(_ref37, payload) {
+      var commit = _ref37.commit,
+          dispatch = _ref37.dispatch;
 
       dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
-        axios.post(route('login'), payload).then(function (_ref37) {
-          var data = _ref37.data;
+        axios.post(route('login'), payload).then(function (_ref38) {
+          var data = _ref38.data;
 
           dispatch('hydrateCurrentUser', data);
           dispatch('toggleLoader');

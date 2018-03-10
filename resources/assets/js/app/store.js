@@ -452,6 +452,23 @@ export const store = new Vuex.Store({
     },
 
     /**
+     * deleteOption Action
+     */
+    deleteOption: ({ commit, dispatch }, payload) => {
+      dispatch('toggleLoader')
+      return new Promise((resolve, reject) => {
+        axios.delete(route('api.options.destroy', [payload.id])).then(() => {
+          dispatch('toggleLoader')
+          dispatch('fetchOptions')
+          resolve()
+        }).catch(err => {
+          dispatch('toggleLoader')
+          reject(err)
+        })
+      })
+    },
+
+    /**
      * Logout Action
      */
     logout: ({ commit, dispatch }) => {
