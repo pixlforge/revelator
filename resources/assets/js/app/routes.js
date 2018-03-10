@@ -20,6 +20,10 @@ import ViewOptionIndex from './views/admin/options/ViewOptionIndex'
 import ViewOptionCreate from './views/admin/options/ViewOptionCreate'
 import ViewOptionEdit from './views/admin/options/ViewOptionEdit'
 
+import ViewProgramIndex from './views/admin/programs/ViewProgramIndex'
+import ViewProgramCreate from './views/admin/programs/ViewProgramCreate'
+import ViewProgramEdit from './views/admin/programs/ViewProgramEdit'
+
 import { store } from './store'
 
 export const routes = [
@@ -163,6 +167,33 @@ export const routes = [
     path: '/admin/options/:id/edit',
     name: 'admin.options.edit',
     component: ViewOptionEdit
+  },
+
+  /**
+   * Programs Index
+   */
+  {
+    path: '/admin/programs',
+    name: 'admin.programs.index',
+    component: ViewProgramIndex
+  },
+
+  /**
+   * Programs Create
+   */
+  {
+    path: '/admin/programs/create',
+    name: 'admin.programs.create',
+    component: ViewProgramCreate
+  },
+
+  /**
+   * Programs Edit
+   */
+  {
+    path: '/admin/programs/:id/edit',
+    name: 'admin.programs.edit',
+    component: ViewProgramEdit
   },
 
   /**

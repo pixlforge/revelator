@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Program;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Program\StoreProgramRequest;
 use App\Http\Requests\Program\UpdateProgramRequest;
+use App\Option;
 use App\Program;
 
 class ProgramController extends Controller
@@ -43,6 +44,12 @@ class ProgramController extends Controller
         $program->description = $request->description;
         $program->save();
 
+        $options = Option::all();
+
+        foreach ($options as $option) {
+            $option->programs()->save($program);
+        }
+
         return response($program, 200);
     }
 
@@ -58,6 +65,8 @@ class ProgramController extends Controller
     }
 
     /**
+     * Update an existing program.
+     *
      * @param UpdateProgramRequest $request
      * @param Program $program
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
