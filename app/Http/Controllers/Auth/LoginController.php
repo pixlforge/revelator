@@ -60,7 +60,7 @@ class LoginController extends Controller
     {
         $this->guard()->logout();
 
-        $request->session()->invalidate();
+        $request->session()->regenerate();
 
         return response(200);
     }

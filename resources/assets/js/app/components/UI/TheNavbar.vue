@@ -21,7 +21,8 @@
             Hello
           </router-link>
         </li>
-        <li v-if="!$store.getters.getCurrentUser">
+        <!--<li v-if="!$store.getters.getCurrentUser">-->
+        <li>
           <router-link :to="{ name: 'auth.login' }"
                        active-class="nav__link-active"
                        exact>
@@ -56,9 +57,7 @@
             this.$toasted.global.info({
               message : `You've been signed out successfully.`
             })
-            setTimeout(() => {
-              window.location = '/'
-            }, 1000)
+            this.$router.push({ name: 'home' })
           })
           .catch(() => this.$toasted.global.danger())
       }
