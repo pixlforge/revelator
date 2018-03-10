@@ -21,10 +21,6 @@
       <AppManageable to="admin.users.index"
                      icon="fa-exclamation"
                      label="Answers"/>
-
-      <AppManageable to="admin.users.index"
-                     icon="fa-chart-bar"
-                     label="Results"/>
     </div>
   </main>
 </template>
