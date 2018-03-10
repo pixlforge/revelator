@@ -109,7 +109,7 @@ export const store = new Vuex.Store({
      */
     logout: state => {
       window.currentUser = null
-      state.currentUser = {}
+      state.currentUser = null
     }
   },
   actions: {
