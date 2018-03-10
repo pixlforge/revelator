@@ -5098,6 +5098,8 @@ var admin = {
     if (window.currentUser) {
       if (window.currentUser.role === 'dev' || window.currentUser.role === 'admin') {
         return next();
+      } else {
+        next({ name: 'home' });
       }
     } else {
       next({ name: 'home' });
@@ -30003,7 +30005,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
      */
     logout: function logout(state) {
       window.currentUser = null;
-      state.currentUser = {};
+      state.currentUser = null;
     }
   },
   actions: {
@@ -37697,6 +37699,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -37742,103 +37746,119 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("nav", { staticClass: "nav__container" }, [
-    _c(
-      "div",
-      { staticClass: "nav__brand" },
-      [
-        _c("router-link", { attrs: { to: { name: "home" } } }, [
-          _c("img", {
-            attrs: { src: "/img/clp-logo.svg", alt: "Logo La Prairie" }
-          })
-        ])
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "nav__menu" }, [
-      _c("ul", { staticClass: "nav__list" }, [
-        _c(
-          "li",
-          [
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: { name: "home" },
-                  "active-class": "nav__link-active",
-                  exact: ""
-                }
-              },
-              [_vm._v("\n          Home\n        ")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          [
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: { name: "hello" },
-                  "active-class": "nav__link-active",
-                  exact: ""
-                }
-              },
-              [_vm._v("\n          Hello\n        ")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          [
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: { name: "auth.login" },
-                  "active-class": "nav__link-active",
-                  exact: ""
-                }
-              },
-              [_vm._v("\n          Sign in\n        ")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm.userIsAdmin
-          ? _c(
-              "li",
-              [
-                _c(
-                  "router-link",
-                  {
-                    attrs: {
-                      to: { name: "admin" },
-                      "active-class": "nav__link-active"
-                    }
-                  },
-                  [_vm._v("\n          Admin\n        ")]
-                )
-              ],
-              1
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.$store.getters.getCurrentUser
-          ? _c("li", [
-              _c("a", { on: { click: _vm.logout } }, [_vm._v("Sign out")])
-            ])
-          : _vm._e()
-      ])
-    ])
-  ])
+  return _c(
+    "nav",
+    { staticClass: "nav__container" },
+    [
+      _c(
+        "div",
+        { staticClass: "nav__brand" },
+        [
+          _c("router-link", { attrs: { to: { name: "home" } } }, [
+            _c("img", {
+              attrs: { src: "/img/clp-logo.svg", alt: "Logo La Prairie" }
+            })
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.$store.getters.getCurrentUser
+        ? [
+            _vm.$store.getters.getCurrentUser.role === "dev" ||
+            _vm.$store.getters.getCurrentUser.role === "admin"
+              ? _c("div", { staticClass: "nav__menu" }, [
+                  _c("ul", { staticClass: "nav__list" }, [
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              to: { name: "home" },
+                              "active-class": "nav__link-active",
+                              exact: ""
+                            }
+                          },
+                          [_vm._v("\n            Home\n          ")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              to: { name: "hello" },
+                              "active-class": "nav__link-active",
+                              exact: ""
+                            }
+                          },
+                          [_vm._v("\n            Hello\n          ")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    !_vm.$store.getters.getCurrentUser
+                      ? _c(
+                          "li",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                attrs: {
+                                  to: { name: "auth.login" },
+                                  "active-class": "nav__link-active",
+                                  exact: ""
+                                }
+                              },
+                              [_vm._v("\n            Sign in\n          ")]
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.userIsAdmin
+                      ? _c(
+                          "li",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                attrs: {
+                                  to: { name: "admin" },
+                                  "active-class": "nav__link-active"
+                                }
+                              },
+                              [_vm._v("\n            Admin\n          ")]
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.$store.getters.getCurrentUser
+                      ? _c("li", [
+                          _c("a", { on: { click: _vm.logout } }, [
+                            _vm._v("Sign out")
+                          ])
+                        ])
+                      : _vm._e()
+                  ])
+                ])
+              : _vm._e()
+          ]
+        : _vm._e()
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
