@@ -15,6 +15,21 @@ Route::namespace('Auth')->group(function () {
  */
 Route::prefix('/api')->group(function () {
     /**
+     * Answers
+     */
+
+    /**
+     * Options
+     */
+    Route::prefix('/options')->namespace('Option')->group(function () {
+        Route::get('/', 'OptionController@index')->name('api.options.index');
+        Route::post('/', 'OptionController@store')->name('api.options.store');
+        Route::get('/{option}/edit', 'OptionController@edit')->name('api.options.edit');
+        Route::patch('/{option}', 'OptionController@update')->name('api.options.update');
+        Route::delete('/{option}', 'OptionController@destroy')->name('api.options.destroy');
+    });
+
+    /**
      * Programs
      */
     Route::prefix('/programs')->namespace('Program')->group(function () {
