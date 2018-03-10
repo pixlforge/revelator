@@ -71,6 +71,27 @@
       </AppFeedback>
     </div>
 
+    <!--URL-->
+    <div class="form__group">
+      <label for="url" class="form__label">URL</label>
+      <input type="text"
+             name="url"
+             id="url"
+             class="form__input"
+             :class="{ 'form__input--invalid': errors.url }"
+             @input="$v.program.url.$touch()"
+             v-model="program.url">
+      <AppTooltip v-if="$v.program.url.$error"
+                  :pos-x="40">
+        <p v-if="!$v.program.url.required">Please, provide a URL for the program.</p>
+        <p v-if="!$v.program.url.url">Please, provide a valid URL.</p>
+        <p v-if="!$v.program.url.maxLength">Maximum 255 characters.</p>
+      </AppTooltip>
+      <AppFeedback>
+        <p v-if="errors.url">{{ errors.url[0] }}</p>
+      </AppFeedback>
+    </div>
+
     <div class="form__group">
       <!--Submit-->
       <button class="btn btn--primary"
@@ -91,7 +112,8 @@
   import {
     required,
     minLength,
-    maxLength
+    maxLength,
+    url
   } from 'vuelidate/lib/validators'
 
   export default {
@@ -105,12 +127,14 @@
         program: {
           title: '',
           code: '',
-          description: ''
+          description: '',
+          url: ''
         },
         old: {
           title: '',
           code: '',
-          description: ''
+          description: '',
+          url: ''
         },
         errors: {}
       }
@@ -129,6 +153,11 @@
         description: {
           minLength: minLength(5),
           maxLength: maxLength(3000)
+        },
+        url: {
+          required,
+          url,
+          maxLength: maxLength(255)
         }
       }
     },
@@ -150,6 +179,12 @@
           this.errors = {}
         }
       },
+
+      'program.url'() {
+        if (this.program.url !== this.old.url) {
+          this.errors = {}
+        }
+      },
     },
     mounted() {
       /**
@@ -160,6 +195,7 @@
         this.program.title = res.title
         this.program.code = res.code
         this.program.description = res.description
+        this.program.url = res.url
       }).catch(err => {
         this.errors = err.response.data.errors
       })
@@ -174,7 +210,8 @@
             id: this.program.id,
             title: this.program.title,
             code: this.program.code,
-            description: this.program.description
+            description: this.program.description,
+            url: this.program.url
           }).then(() => {
             this.$toasted.global.success({
               message: `Program updatd successfully!`

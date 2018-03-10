@@ -21,6 +21,7 @@
         <th class="table__header">Title</th>
         <th class="table__header">Code</th>
         <th class="table__header">Description</th>
+        <th class="table__header">URL</th>
         <th class="table__header">Created</th>
         <th class="table__header">Actions</th>
       </tr>
@@ -35,6 +36,9 @@
         </td>
         <td class="table__cell"
             v-text="program.description">
+        </td>
+        <td class="table__cell"
+            v-text="program.url">
         </td>
         <td class="table__cell"
             v-text="formatDate(program.created_at)">

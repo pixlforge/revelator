@@ -31,7 +31,8 @@ class ProgramTest extends TestCase
 
         $this->postJson(route('api.programs.store'), [
             'title' => 'Weight Loss',
-            'code' => 'Wloss'
+            'code' => 'Wloss',
+            'url' => 'http://laprairie.ch/medical-programs/random'
         ])->assertStatus(200);
 
         $this->assertCount(1, Program::all());
@@ -48,7 +49,8 @@ class ProgramTest extends TestCase
 
         $this->postJson(route('api.programs.store'), [
             'title' => 'Weight Loss',
-            'code' => 'Wloss'
+            'code' => 'Wloss',
+            'url' => 'http://laprairie.ch/medical-programs/random'
         ])->assertStatus(200);
 
         $this->assertCount(1, Program::all());
@@ -275,7 +277,8 @@ class ProgramTest extends TestCase
 
         $this->patchJson(route('api.programs.update', $programs), [
             'title' => 'Weight Loss+',
-            'code' => 'Wloss'
+            'code' => 'Wloss',
+            'url' => 'http://laprairie.ch/medical-programs/random'
         ])->assertStatus(200);
 
         $this->assertDatabaseMissing('programs', [
@@ -304,7 +307,8 @@ class ProgramTest extends TestCase
 
         $this->patchJson(route('api.programs.update', $programs), [
             'title' => 'Weight Loss+',
-            'code' => 'Wloss'
+            'code' => 'Wloss',
+            'url' => 'http://laprairie.ch/medical-programs/random'
         ])->assertStatus(200);
 
         $this->assertDatabaseMissing('programs', [

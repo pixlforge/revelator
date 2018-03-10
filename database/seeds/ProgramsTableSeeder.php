@@ -13,47 +13,56 @@ class ProgramsTableSeeder extends Seeder
     {
         factory(\App\Program::class)->create([
             'title' => 'Revitalisation',
-            'code' => 'Rev'
+            'code' => 'Rev',
+            'url' => 'http://laprairie.ch/medical-programs/revitalisation'
         ]);
 
         factory(\App\Program::class)->create([
             'title' => 'Master Detox',
-            'code' => 'MDtx'
+            'code' => 'MDtx',
+            'url' => 'http://laprairie.ch/medical-programs/master-detox'
         ]);
 
         factory(\App\Program::class)->create([
             'title' => 'Better Sleep',
-            'code' => 'BSleep'
+            'code' => 'BSleep',
+            'url' => 'http://laprairie.ch/medical-programs/better-sleep-old'
         ]);
 
         factory(\App\Program::class)->create([
             'title' => 'Medical Check-Up',
-            'code' => 'CheckU'
+            'code' => 'CheckU',
+            'url' => 'http://laprairie.ch/medical-programs/medical-check'
         ]);
 
         factory(\App\Program::class)->create([
             'title' => 'Beauty',
-            'code' => 'Beauty'
+            'code' => 'Beauty',
+            'url' => 'http://laprairie.ch/medical-programs/beauty'
         ]);
 
         factory(\App\Program::class)->create([
             'title' => 'Better Mobility',
-            'code' => 'Bmob'
+            'code' => 'Bmob',
+            'url' => 'http://laprairie.ch/medical-programs/better-mobility'
         ]);
 
         factory(\App\Program::class)->create([
             'title' => 'Weight Management',
-            'code' => 'Wloss'
+            'code' => 'Wloss',
+            'url' => 'http://laprairie.ch/medical-programs/weight-management'
         ]);
 
         factory(\App\Program::class)->create([
             'title' => 'Rebalancing',
-            'code' => 'Rebal'
+            'code' => 'Rebal',
+            'url' => 'http://laprairie.ch/medical-programs/rebalancing'
         ]);
 
         factory(\App\Program::class)->create([
             'title' => 'Weekend Escape',
-            'code' => 'WKND'
+            'code' => 'WKND',
+            'url' => 'http://laprairie.ch/medical-programs/weekend-escape'
         ]);
     }
 }

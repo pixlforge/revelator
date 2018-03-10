@@ -42,6 +42,7 @@ class ProgramController extends Controller
         $program->title = $request->title;
         $program->code = $request->code;
         $program->description = $request->description;
+        $program->url = $request->url;
         $program->save();
 
         $options = Option::all();
@@ -76,6 +77,7 @@ class ProgramController extends Controller
         $program->title = $request->title;
         $program->code = $request->code;
         $program->description = $request->description;
+        $program->url = $request->url;
         $program->save();
 
         return response($program, 200);

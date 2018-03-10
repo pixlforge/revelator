@@ -18,6 +18,7 @@ class CreateProgramsTable extends Migration
             $table->string('title')->index();
             $table->string('code', 45)->nullable();
             $table->text('description')->nullable();
+            $table->string('url');
             $table->timestamps();
         });
     }

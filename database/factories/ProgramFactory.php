@@ -6,6 +6,7 @@ $factory->define(App\Program::class, function (Faker $faker) {
     return [
         'title' => $title = $faker->sentence,
         'code' => str_slug($title, '-'),
-        'description' => null
+        'description' => null,
+        'url' => 'http://laprairie.ch/medical-programs/random'
     ];
 });

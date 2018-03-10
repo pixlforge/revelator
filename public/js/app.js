@@ -30342,7 +30342,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       return new Promise(function (resolve, reject) {
         axios.delete(route('api.programs.destroy', [payload.id])).then(function () {
           dispatch('toggleLoader');
-          dispatch('fetchQuestions');
+          dispatch('fetchPrograms');
           resolve();
         }).catch(function (err) {
           dispatch('toggleLoader');
@@ -49973,6 +49973,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -50070,6 +50074,11 @@ var render = function() {
               _vm._v(" "),
               _c("td", {
                 staticClass: "table__cell",
+                domProps: { textContent: _vm._s(program.url) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                staticClass: "table__cell",
                 domProps: {
                   textContent: _vm._s(_vm.formatDate(program.created_at))
                 }
@@ -50135,6 +50144,8 @@ var staticRenderFns = [
       _c("th", { staticClass: "table__header" }, [_vm._v("Code")]),
       _vm._v(" "),
       _c("th", { staticClass: "table__header" }, [_vm._v("Description")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "table__header" }, [_vm._v("URL")]),
       _vm._v(" "),
       _c("th", { staticClass: "table__header" }, [_vm._v("Created")]),
       _vm._v(" "),
@@ -50297,6 +50308,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -50314,12 +50346,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       program: {
         title: '',
         code: '',
-        description: ''
+        description: '',
+        url: ''
       },
       old: {
         title: '',
         code: '',
-        description: ''
+        description: '',
+        url: ''
       },
       errors: {}
     };
@@ -50339,6 +50373,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       description: {
         minLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["minLength"])(5),
         maxLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["maxLength"])(3000)
+      },
+      url: {
+        required: __WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["required"],
+        url: __WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["url"],
+        maxLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["maxLength"])(255)
       }
     }
   },
@@ -50357,6 +50396,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.program.description !== this.old.description) {
         this.errors = {};
       }
+    },
+    'program.url': function programUrl() {
+      if (this.program.url !== this.old.url) {
+        this.errors = {};
+      }
     }
   },
   methods: {
@@ -50367,7 +50411,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.$store.dispatch('addProgram', {
           title: this.program.title,
           code: this.program.code,
-          description: this.program.description
+          description: this.program.description,
+          url: this.program.url
         }).then(function () {
           _this.$toasted.global.success({
             message: 'Program added successfully!'
@@ -50604,6 +50649,67 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form__group" },
+        [
+          _c("label", { staticClass: "form__label", attrs: { for: "url" } }, [
+            _vm._v("URL")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.program.url,
+                expression: "program.url"
+              }
+            ],
+            staticClass: "form__input",
+            class: { "form__input--invalid": _vm.errors.url },
+            attrs: { type: "text", name: "url", id: "url" },
+            domProps: { value: _vm.program.url },
+            on: {
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.program, "url", $event.target.value)
+                },
+                function($event) {
+                  _vm.$v.program.url.$touch()
+                }
+              ]
+            }
+          }),
+          _vm._v(" "),
+          _vm.$v.program.url.$error
+            ? _c("AppTooltip", { attrs: { "pos-x": 40 } }, [
+                !_vm.$v.program.url.required
+                  ? _c("p", [_vm._v("Please, provide a URL for the program.")])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.program.url.url
+                  ? _c("p", [_vm._v("Please, provide a valid URL.")])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.program.url.maxLength
+                  ? _c("p", [_vm._v("Maximum 255 characters.")])
+                  : _vm._e()
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("AppFeedback", [
+            _vm.errors.url
+              ? _c("p", [_vm._v(_vm._s(_vm.errors.url[0]))])
+              : _vm._e()
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c("div", { staticClass: "form__group" }, [
         _c(
           "button",
@@ -50778,6 +50884,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -50795,12 +50922,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       program: {
         title: '',
         code: '',
-        description: ''
+        description: '',
+        url: ''
       },
       old: {
         title: '',
         code: '',
-        description: ''
+        description: '',
+        url: ''
       },
       errors: {}
     };
@@ -50820,6 +50949,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       description: {
         minLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["minLength"])(5),
         maxLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["maxLength"])(3000)
+      },
+      url: {
+        required: __WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["required"],
+        url: __WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["url"],
+        maxLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["maxLength"])(255)
       }
     }
   },
@@ -50838,6 +50972,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.program.description !== this.old.description) {
         this.errors = {};
       }
+    },
+    'program.url': function programUrl() {
+      if (this.program.url !== this.old.url) {
+        this.errors = {};
+      }
     }
   },
   mounted: function mounted() {
@@ -50851,6 +50990,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.program.title = res.title;
       _this.program.code = res.code;
       _this.program.description = res.description;
+      _this.program.url = res.url;
     }).catch(function (err) {
       _this.errors = err.response.data.errors;
     });
@@ -50868,7 +51008,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           id: this.program.id,
           title: this.program.title,
           code: this.program.code,
-          description: this.program.description
+          description: this.program.description,
+          url: this.program.url
         }).then(function () {
           _this2.$toasted.global.success({
             message: 'Program updatd successfully!'
@@ -51099,6 +51240,67 @@ var render = function() {
           _c("AppFeedback", [
             _vm.errors.description
               ? _c("p", [_vm._v(_vm._s(_vm.errors.description[0]))])
+              : _vm._e()
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form__group" },
+        [
+          _c("label", { staticClass: "form__label", attrs: { for: "url" } }, [
+            _vm._v("URL")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.program.url,
+                expression: "program.url"
+              }
+            ],
+            staticClass: "form__input",
+            class: { "form__input--invalid": _vm.errors.url },
+            attrs: { type: "text", name: "url", id: "url" },
+            domProps: { value: _vm.program.url },
+            on: {
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.program, "url", $event.target.value)
+                },
+                function($event) {
+                  _vm.$v.program.url.$touch()
+                }
+              ]
+            }
+          }),
+          _vm._v(" "),
+          _vm.$v.program.url.$error
+            ? _c("AppTooltip", { attrs: { "pos-x": 40 } }, [
+                !_vm.$v.program.url.required
+                  ? _c("p", [_vm._v("Please, provide a URL for the program.")])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.program.url.url
+                  ? _c("p", [_vm._v("Please, provide a valid URL.")])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.program.url.maxLength
+                  ? _c("p", [_vm._v("Maximum 255 characters.")])
+                  : _vm._e()
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("AppFeedback", [
+            _vm.errors.url
+              ? _c("p", [_vm._v(_vm._s(_vm.errors.url[0]))])
               : _vm._e()
           ])
         ],

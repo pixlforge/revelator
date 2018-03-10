@@ -377,7 +377,7 @@ export const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios.delete(route('api.programs.destroy', [payload.id])).then(() => {
           dispatch('toggleLoader')
-          dispatch('fetchQuestions')
+          dispatch('fetchPrograms')
           resolve()
         }).catch(err => {
           dispatch('toggleLoader')

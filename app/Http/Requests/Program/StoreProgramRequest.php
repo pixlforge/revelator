@@ -26,7 +26,8 @@ class StoreProgramRequest extends FormRequest
         return [
             'title' => 'required|string|min:3|max:255',
             'code' => 'nullable|string|min:3|max:45',
-            'description' => 'nullable|string|min:5|max:3000'
+            'description' => 'nullable|string|min:5|max:3000',
+            'url' => 'required|url|max:255'
         ];
     }
 
@@ -49,7 +50,11 @@ class StoreProgramRequest extends FormRequest
 
             'description.string' => 'The description should be a character string.',
             'description.min' => 'Minimum 5 characters.',
-            'description.max' => 'Maximum 3000 characters.'
+            'description.max' => 'Maximum 3000 characters.',
+
+            'url.required' => 'The URL related to the program is required.',
+            'url.url' => 'The URL should be a valid URL.',
+            'url.max' => "Maximum 255 characters."
         ];
     }
 }
