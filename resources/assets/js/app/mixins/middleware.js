@@ -3,6 +3,8 @@ export const admin = {
     if (window.currentUser) {
       if (window.currentUser.role === 'dev' || window.currentUser.role === 'admin') {
         return next()
+      } else {
+        next({ name: 'home' })
       }
     } else {
       next({ name: 'home' })
