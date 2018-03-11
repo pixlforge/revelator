@@ -1,6 +1,6 @@
 import App from './App'
 import ViewHome from './views/ViewHome'
-import ViewHello from './views/ViewHello'
+import ViewDiagnostic from './views/ViewDiagnostic'
 
 import ViewLogin from './views/auth/ViewLogin'
 import ViewResetEmail from './views/auth/passwords/ViewResetEmail'
@@ -37,12 +37,12 @@ export const routes = [
   },
 
   /**
-   * Hello
+   * Diagnostic
    */
   {
-    path: '/hello',
-    name: 'hello',
-    component: ViewHello
+    path: '/diagnostic',
+    name: 'diagnostic',
+    component: ViewDiagnostic
   },
 
   /**

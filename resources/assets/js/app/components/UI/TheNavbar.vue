@@ -17,10 +17,10 @@
             </router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'hello' }"
+            <router-link :to="{ name: 'diagnostic' }"
                          active-class="nav__link-active"
                          exact>
-              Hello
+              Diagnotic
             </router-link>
           </li>
           <li v-if="!$store.getters.getCurrentUser">

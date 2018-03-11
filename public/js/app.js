@@ -30374,15 +30374,12 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       var commit = _ref30.commit,
           dispatch = _ref30.dispatch;
 
-      dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
         axios.get(route('api.options.edit', [payload])).then(function (_ref31) {
           var data = _ref31.data;
 
-          dispatch('toggleLoader');
           resolve(data);
         }).catch(function (err) {
-          dispatch('toggleLoader');
           reject(err);
         });
       });
@@ -37808,12 +37805,12 @@ var render = function() {
                           "router-link",
                           {
                             attrs: {
-                              to: { name: "hello" },
+                              to: { name: "diagnostic" },
                               "active-class": "nav__link-active",
                               exact: ""
                             }
                           },
-                          [_vm._v("\n            Hello\n          ")]
+                          [_vm._v("\n            Diagnotic\n          ")]
                         )
                       ],
                       1
@@ -42099,8 +42096,8 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__App__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__views_ViewHome__ = __webpack_require__(287);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__views_ViewHome___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__views_ViewHome__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_ViewHello__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_ViewHello___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__views_ViewHello__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_ViewDiagnostic__ = __webpack_require__(384);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_ViewDiagnostic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__views_ViewDiagnostic__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_auth_ViewLogin__ = __webpack_require__(297);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_auth_ViewLogin___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__views_auth_ViewLogin__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_auth_passwords_ViewResetEmail__ = __webpack_require__(322);
@@ -42173,12 +42170,12 @@ var routes = [
 },
 
 /**
- * Hello
+ * Diagnostic
  */
 {
-  path: '/hello',
-  name: 'hello',
-  component: __WEBPACK_IMPORTED_MODULE_2__views_ViewHello___default.a
+  path: '/diagnostic',
+  name: 'diagnostic',
+  component: __WEBPACK_IMPORTED_MODULE_2__views_ViewDiagnostic___default.a
 },
 
 /**
@@ -42667,82 +42664,8 @@ if (false) {
 }
 
 /***/ }),
-/* 295 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = __webpack_require__(296)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/app/views/ViewHello.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0eb1a27c", Component.options)
-  } else {
-    hotAPI.reload("data-v-0eb1a27c", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 296 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("main", { staticClass: "main__container" }, [
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Hello")])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0eb1a27c", module.exports)
-  }
-}
-
-/***/ }),
+/* 295 */,
+/* 296 */,
 /* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49011,6 +48934,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -49028,7 +48952,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   mixins: [__WEBPACK_IMPORTED_MODULE_3__mixins_middleware__["a" /* admin */]],
   data: function data() {
     return {
-      showPrograms: false,
       option: {
         name: '',
         pos: '',
@@ -49047,8 +48970,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         }
       },
       errors: {},
-      options: [],
-      programOptions: [{ label: '0', value: 0 }, { label: '1', value: 1 }, { label: '2', value: 2 }, { label: '3', value: 3 }]
+      questions: [],
+      programOptions: [{ label: '0', value: 0 }, { label: '1', value: 1 }, { label: '2', value: 2 }, { label: '3', value: 3 }],
+      showPrograms: false
     };
   },
 
@@ -49101,7 +49025,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      */
     var fetchPrograms = this.$store.dispatch('fetchPrograms').then(function (res) {
       res.forEach(function (program) {
-        _this.$data.option.programs.push({
+        _this.option.programs.push({
           id: program.id,
           label: program.title,
           value: {
@@ -49119,7 +49043,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      */
     var fetchQuestions = this.$store.dispatch('fetchQuestions').then(function (res) {
       res.forEach(function (question) {
-        _this.options.push({
+        _this.questions.push({
           label: question.name,
           value: question.id
         });
@@ -49333,7 +49257,7 @@ var render = function() {
             attrs: {
               id: "question_id",
               name: "question_id",
-              options: _vm.options
+              options: _vm.questions
             },
             model: {
               value: _vm.option.question_id,
@@ -49572,6 +49496,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -49596,7 +49536,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         question_id: {
           label: 'Select a question',
           value: ''
-        }
+        },
+        programs: []
       },
       old: {
         name: '',
@@ -49607,7 +49548,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         }
       },
       errors: {},
-      options: []
+      questions: [],
+      programOptions: [{ label: '0', value: 0 }, { label: '1', value: 1 }, { label: '2', value: 2 }, { label: '3', value: 3 }],
+      showPrograms: false
     };
   },
 
@@ -49646,14 +49589,51 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }
     }
   },
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["c" /* mapGetters */])(['getQuestions'])),
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["c" /* mapGetters */])(['getQuestions', 'getPrograms'])),
   created: function created() {
     var _this = this;
 
     /**
+     * Turn on the loader.
+     */
+    this.$store.dispatch('toggleLoader');
+
+    /**
+     * Fetch all programs.
+     */
+    var fetchPrograms = this.$store.dispatch('fetchPrograms').then(function (res) {
+      res.forEach(function (program) {
+        _this.option.programs.push({
+          id: program.id,
+          label: program.title,
+          value: {
+            label: 'Select a value',
+            value: 0
+          }
+        });
+      });
+    });
+
+    /**
+     * Fetch all questions and push them to the options array.
+     */
+    var fetchQuestions = this.$store.dispatch('fetchQuestions').then(function (res) {
+      res.forEach(function (question) {
+        _this.questions.push({
+          label: question.name,
+          value: question.id
+        });
+      });
+    });
+
+    /**
      * Get the option passed in params and populate the fields accordingly.
      */
-    this.$store.dispatch('getOption', this.$route.params.id).then(function (res) {
+    var getOption = this.$store.dispatch('getOption', this.$route.params.id).then(function (res) {
+
+      // TODO (doesn't populate select fields correctly)
+      console.log(res);
+
       _this.option.id = res.id;
       _this.option.name = res.name;
       _this.option.pos = res.pos;
@@ -49664,22 +49644,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }).catch(function (err) {
       _this.errors = err.response.data.errors;
     });
-  },
-  mounted: function mounted() {
-    var _this2 = this;
 
     /**
-     * Get the questions and format them to be displayed in the select dropdown.
+     * Resolve all promises and turn off the loader once it's done.
      */
-    this.$store.dispatch('fetchQuestions').then(function (res) {
-      res.forEach(function (question) {
-        _this2.options.push({
-          label: question.name,
-          value: question.id
-        });
-      });
-    }).then(function () {
-      _this2.findAssociatedQuestion();
+    Promise.all([fetchPrograms, fetchQuestions, getOption]).then(function () {
+      _this.findAssociatedQuestion();
+      _this.showPrograms = true;
+      _this.$store.dispatch('toggleLoader');
     });
   },
 
@@ -49688,12 +49660,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Find the associated question.
      */
     findAssociatedQuestion: function findAssociatedQuestion() {
-      var _this3 = this;
+      var _this2 = this;
 
-      var selectedOption = this.options.find(function (option) {
-        return option.value === _this3.option.question_id.value;
-      });
-      this.option.question_id = selectedOption;
+      setTimeout(function () {
+        var selectedQuestion = _this2.questions.find(function (question) {
+          return question.value === _this2.option.question_id.value;
+        });
+        _this2.option.question_id = selectedQuestion;
+      }, 50);
     },
 
 
@@ -49701,22 +49675,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Submit and update the option.
      */
     submit: function submit() {
-      var _this4 = this;
+      var _this3 = this;
 
       if (!this.$v.$invalid) {
         this.$store.dispatch('updateOption', {
           id: this.option.id,
           name: this.option.name,
           pos: this.option.pos,
-          question_id: this.option.question_id.value
+          question_id: this.option.question_id.value,
+          programs: this.option.programs
         }).then(function () {
-          _this4.$toasted.global.success({
+          _this3.$toasted.global.success({
             message: 'Option updated successfully!'
           });
-          _this4.$router.push({ name: 'admin.options.index' });
+          _this3.$router.push({ name: 'admin.options.index' });
         }).catch(function () {
-          _this4.$toasted.global.danger();
-          _this4.errors = err.response.data.errors;
+          _this3.$toasted.global.danger();
+          _this3.errors = err.response.data.errors;
         });
       }
     }
@@ -49898,7 +49873,7 @@ var render = function() {
             attrs: {
               id: "question_id",
               name: "question_id",
-              options: _vm.options
+              options: _vm.questions
             },
             model: {
               value: _vm.option.question_id,
@@ -49928,6 +49903,40 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _vm.showPrograms
+        ? _vm._l(_vm.getPrograms, function(program, index) {
+            return _c(
+              "div",
+              { key: program.id, staticClass: "form__group" },
+              [
+                _c("label", {
+                  staticClass: "form__label",
+                  attrs: { for: "program_".concat(program.id) },
+                  domProps: {
+                    textContent: _vm._s(program.title.concat(" program value"))
+                  }
+                }),
+                _vm._v(" "),
+                _c("AppSelect", {
+                  attrs: {
+                    id: "program_".concat(program.id),
+                    name: "program_".concat(program.id),
+                    options: _vm.programOptions
+                  },
+                  model: {
+                    value: _vm.option.programs[index].value,
+                    callback: function($$v) {
+                      _vm.$set(_vm.option.programs[index], "value", $$v)
+                    },
+                    expression: "option.programs[index].value"
+                  }
+                })
+              ],
+              1
+            )
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c("div", { staticClass: "form__group" }, [
         _c(
           "button",
@@ -49943,7 +49952,7 @@ var render = function() {
         )
       ])
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -51446,6 +51455,89 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 377 */,
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(385)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/app/views/ViewDiagnostic.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-03020ded", Component.options)
+  } else {
+    hotAPI.reload("data-v-03020ded", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 385 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("main", { staticClass: "main__container" }, [
+      _c("h1", { staticClass: "main__title" }, [_vm._v("Diagnostic")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-03020ded", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
