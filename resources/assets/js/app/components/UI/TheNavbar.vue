@@ -57,7 +57,7 @@
         this.$store.dispatch('logout')
           .then(() => {
             this.$toasted.global.info({
-              message : `You've been signed out successfully.`
+              message: `You've been signed out successfully.`
             })
             this.$router.push({ name: 'home' })
           })
