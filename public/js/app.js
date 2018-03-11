@@ -30152,16 +30152,13 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       var commit = _ref12.commit,
           dispatch = _ref12.dispatch;
 
-      dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
         axios.get(route('api.questions.index')).then(function (_ref13) {
           var data = _ref13.data;
 
           commit('fetchQuestions', data);
-          dispatch('toggleLoader');
           resolve(data);
         }).catch(function (err) {
-          dispatch('toggleLoader');
           reject(err);
         });
       });
@@ -30255,16 +30252,13 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       var commit = _ref20.commit,
           dispatch = _ref20.dispatch;
 
-      dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
         axios.get(route('api.programs.index')).then(function (_ref21) {
           var data = _ref21.data;
 
           commit('fetchPrograms', data);
-          dispatch('toggleLoader');
           resolve(data);
         }).catch(function (err) {
-          dispatch('toggleLoader');
           reject(err);
         });
       });
@@ -45653,11 +45647,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     value: {
-      type: Object,
+      type: [Object, Number],
       required: false
     },
     options: {
@@ -45679,7 +45674,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     select: function select(option) {
-      // console.log(option)
       this.$emit('input', option);
     },
 
@@ -45727,7 +45721,11 @@ var render = function() {
       }
     },
     [
-      _c("span", { domProps: { textContent: _vm._s(_vm.value.label) } }),
+      _c("span", {
+        domProps: {
+          textContent: _vm._s(_vm.value ? _vm.value.label : "Select")
+        }
+      }),
       _vm._v(" "),
       _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
         _vm.open
@@ -47394,7 +47392,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_middleware__["a" /* admin */], __WEBPACK_IMPORTED_MODULE_1__mixins_dates__["a" /* dates */]],
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapGetters */])(['getQuestions'])),
   created: function created() {
-    this.$store.dispatch('fetchQuestions');
+    var _this = this;
+
+    this.$store.dispatch('toggleLoader');
+    this.$store.dispatch('fetchQuestions').then(function () {
+      _this.$store.dispatch('toggleLoader');
+    }).catch(function () {
+      _this.$store.dispatch('toggleLoader');
+    });
   },
 
   methods: {
@@ -47402,14 +47407,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Delete a question.
      */
     deleteQuestion: function deleteQuestion(question) {
-      var _this = this;
+      var _this2 = this;
 
       this.$store.dispatch('deleteQuestion', question).then(function () {
-        _this.$toasted.global.success({
+        _this2.$toasted.global.success({
           message: 'Question deleted successfully!'
         });
       }).catch(function () {
-        _this.$toasted.global.danger();
+        _this2.$toasted.global.danger();
       });
     }
   }
@@ -48991,6 +48996,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -49008,13 +49028,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   mixins: [__WEBPACK_IMPORTED_MODULE_3__mixins_middleware__["a" /* admin */]],
   data: function data() {
     return {
+      showPrograms: false,
       option: {
         name: '',
         pos: '',
         question_id: {
           label: 'Select a question',
           value: ''
-        }
+        },
+        programs: []
       },
       old: {
         name: '',
@@ -49025,7 +49047,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         }
       },
       errors: {},
-      options: []
+      options: [],
+      programOptions: [{ label: '0', value: 0 }, { label: '1', value: 1 }, { label: '2', value: 2 }, { label: '3', value: 3 }]
     };
   },
 
@@ -49064,30 +49087,51 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }
     }
   },
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["c" /* mapGetters */])(['getQuestions'])),
-  mounted: function mounted() {
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["c" /* mapGetters */])(['getQuestions', 'getPrograms'])),
+  created: function created() {
     var _this = this;
 
     /**
-     * Get the questions and format them to be displayed in the select dropdown.
+     * Turn on the loader.
      */
-    if (!this.getQuestions.length) {
-      this.$store.dispatch('fetchQuestions').then(function (res) {
-        res.forEach(function (question) {
-          _this.options.push({
-            label: question.name,
-            value: question.id
-          });
+    this.$store.dispatch('toggleLoader');
+
+    /**
+     * Fetch all programs.
+     */
+    var fetchPrograms = this.$store.dispatch('fetchPrograms').then(function (res) {
+      res.forEach(function (program) {
+        _this.$data.option.programs.push({
+          id: program.id,
+          label: program.title,
+          value: {
+            label: 'Select a value',
+            value: 0
+          }
         });
       });
-    } else {
-      this.getQuestions.forEach(function (question) {
+    }).then(function () {
+      _this.showPrograms = true;
+    });
+
+    /**
+     * Fetch all questions and push them to the options array.
+     */
+    var fetchQuestions = this.$store.dispatch('fetchQuestions').then(function (res) {
+      res.forEach(function (question) {
         _this.options.push({
           label: question.name,
           value: question.id
         });
       });
-    }
+    });
+
+    /**
+     * Resolve all promises and turn off the loader once it's done.
+     */
+    Promise.all([fetchPrograms, fetchQuestions]).then(function () {
+      _this.$store.dispatch('toggleLoader');
+    });
   },
 
   methods: {
@@ -49098,7 +49142,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         this.$store.dispatch('addOption', {
           name: this.option.name,
           pos: this.option.pos,
-          question_id: this.option.question_id.value
+          question_id: this.option.question_id.value,
+          programs: this.option.programs
         }).then(function () {
           _this2.$toasted.global.success({
             message: 'Option added successfully!'
@@ -49281,7 +49326,7 @@ var render = function() {
           _c(
             "label",
             { staticClass: "form__label", attrs: { for: "question_id" } },
-            [_vm._v("Question")]
+            [_vm._v("Related question")]
           ),
           _vm._v(" "),
           _c("AppSelect", {
@@ -49318,6 +49363,40 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _vm.showPrograms
+        ? _vm._l(_vm.getPrograms, function(program, index) {
+            return _c(
+              "div",
+              { key: program.id, staticClass: "form__group" },
+              [
+                _c("label", {
+                  staticClass: "form__label",
+                  attrs: { for: "program_".concat(program.id) },
+                  domProps: {
+                    textContent: _vm._s(program.title.concat(" program value"))
+                  }
+                }),
+                _vm._v(" "),
+                _c("AppSelect", {
+                  attrs: {
+                    id: "program_".concat(program.id),
+                    name: "program_".concat(program.id),
+                    options: _vm.programOptions
+                  },
+                  model: {
+                    value: _vm.option.programs[index].value,
+                    callback: function($$v) {
+                      _vm.$set(_vm.option.programs[index], "value", $$v)
+                    },
+                    expression: "option.programs[index].value"
+                  }
+                })
+              ],
+              1
+            )
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c("div", { staticClass: "form__group" }, [
         _c(
           "button",
@@ -49333,7 +49412,7 @@ var render = function() {
         )
       ])
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -50006,7 +50085,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_middleware__["a" /* admin */], __WEBPACK_IMPORTED_MODULE_1__mixins_dates__["a" /* dates */]],
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapGetters */])(['getPrograms'])),
   created: function created() {
-    this.$store.dispatch('fetchPrograms');
+    var _this = this;
+
+    this.$store.dispatch('toggleLoader');
+    this.$store.dispatch('fetchPrograms').then(function () {
+      _this.$store.dispatch('toggleLoader');
+    }).catch(function () {
+      _this.$store.dispatch('toggleLoader');
+    });
   },
 
   methods: {
@@ -50014,14 +50100,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Delete a program.
      */
     deleteProgram: function deleteProgram(program) {
-      var _this = this;
+      var _this2 = this;
 
       this.$store.dispatch('deleteProgram', program).then(function () {
-        _this.$toasted.global.success({
+        _this2.$toasted.global.success({
           message: 'Program deleted successfully!'
         });
       }).catch(function () {
-        _this.$toasted.global.danger();
+        _this2.$toasted.global.danger();
       });
     }
   }

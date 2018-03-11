@@ -53,7 +53,7 @@
 
     <!--Question-->
     <div class="form__group">
-      <label for="question_id" class="form__label">Question</label>
+      <label for="question_id" class="form__label">Related question</label>
       <AppSelect id="question_id"
                  name="question_id"
                  :options="options"
@@ -66,6 +66,21 @@
         <p v-if="errors.question_id">{{ errors.question_id[0] }}</p>
       </AppFeedback>
     </div>
+
+    <template v-if="showPrograms">
+      <div class="form__group"
+           v-for="(program, index) in getPrograms"
+           :key="program.id">
+        <label :for="'program_'.concat(program.id)"
+               class="form__label"
+               v-text="program.title.concat(' program value')">
+        </label>
+        <AppSelect :id="'program_'.concat(program.id)"
+                   :name="'program_'.concat(program.id)"
+                   :options="programOptions"
+                   v-model="option.programs[index].value"/>
+      </div>
+    </template>
 
     <div class="form__group">
       <!--Submit-->
@@ -103,13 +118,15 @@
     mixins: [admin],
     data() {
       return {
+        showPrograms: false,
         option: {
           name: '',
           pos: '',
           question_id: {
             label: 'Select a question',
             value: ''
-          }
+          },
+          programs: []
         },
         old: {
           name: '',
@@ -117,10 +134,16 @@
           question_id: {
             label: 'Select a question',
             value: ''
-          }
+          },
         },
         errors: {},
-        options: []
+        options: [],
+        programOptions: [
+          { label: '0', value: 0 },
+          { label: '1', value: 1 },
+          { label: '2', value: 2 },
+          { label: '3', value: 3 },
+        ]
       }
     },
     validations: {
@@ -162,15 +185,41 @@
     },
     computed: {
       ...mapGetters([
-        'getQuestions'
+        'getQuestions',
+        'getPrograms'
       ])
     },
-    mounted() {
+    created() {
       /**
-       * Get the questions and format them to be displayed in the select dropdown.
+       * Turn on the loader.
        */
-      if (!this.getQuestions.length) {
-        this.$store.dispatch('fetchQuestions').then(res => {
+      this.$store.dispatch('toggleLoader')
+
+      /**
+       * Fetch all programs.
+       */
+      const fetchPrograms = this.$store.dispatch('fetchPrograms')
+        .then(res => {
+          res.forEach(program => {
+            this.$data.option.programs.push({
+              id: program.id,
+              label: program.title,
+              value: {
+                label: 'Select a value',
+                value: 0
+              }
+            })
+          })
+        })
+        .then(() => {
+          this.showPrograms = true
+        })
+
+      /**
+       * Fetch all questions and push them to the options array.
+       */
+      const fetchQuestions = this.$store.dispatch('fetchQuestions')
+        .then(res => {
           res.forEach(question => {
             this.options.push({
               label: question.name,
@@ -178,14 +227,16 @@
             })
           })
         })
-      } else {
-        this.getQuestions.forEach(question => {
-          this.options.push({
-            label: question.name,
-            value: question.id
-          })
-        })
-      }
+
+      /**
+       * Resolve all promises and turn off the loader once it's done.
+       */
+      Promise.all([
+        fetchPrograms,
+        fetchQuestions
+      ]).then(() => {
+        this.$store.dispatch('toggleLoader')
+      })
     },
     methods: {
       submit() {
@@ -193,12 +244,13 @@
           this.$store.dispatch('addOption', {
             name: this.option.name,
             pos: this.option.pos,
-            question_id: this.option.question_id.value
+            question_id: this.option.question_id.value,
+            programs: this.option.programs
           }).then(() => {
             this.$toasted.global.success({
               message: `Option added successfully!`
             })
-            this.$router.push({ name: 'admin.options.index'})
+            this.$router.push({ name: 'admin.options.index' })
           }).catch(() => {
             this.$toasted.global.danger()
             this.errors = err.response.data.errors

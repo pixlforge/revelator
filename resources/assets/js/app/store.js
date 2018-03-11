@@ -226,14 +226,11 @@ export const store = new Vuex.Store({
      * fetchQuestions Action
      */
     fetchQuestions: ({ commit, dispatch }) => {
-      dispatch('toggleLoader')
       return new Promise((resolve, reject) => {
         axios.get(route('api.questions.index')).then(({ data }) => {
           commit('fetchQuestions', data)
-          dispatch('toggleLoader')
           resolve(data)
         }).catch(err => {
-          dispatch('toggleLoader')
           reject(err)
         })
       })
@@ -308,14 +305,11 @@ export const store = new Vuex.Store({
      * fetchPrograms Action
      */
     fetchPrograms: ({ commit, dispatch }) => {
-      dispatch('toggleLoader')
       return new Promise((resolve, reject) => {
         axios.get(route('api.programs.index')).then(({ data }) => {
           commit('fetchPrograms', data)
-          dispatch('toggleLoader')
           resolve(data)
         }).catch(err => {
-          dispatch('toggleLoader')
           reject(err)
         })
       })

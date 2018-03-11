@@ -1,11 +1,12 @@
 <template>
   <div class="select" ref="dropdownMenu" @click.prevent="toggleOpen">
-    <span v-text="value.label"></span>
+    <span v-text="value ? value.label : 'Select'"></span>
     <transition name="fade" mode="out-in">
       <ul class="select__dropdown" v-if="open">
         <li v-for="(option, index) in options"
             :key="index"
-            v-text="option.label" @click="select(option)">
+            v-text="option.label"
+            @click="select(option)">
         </li>
       </ul>
     </transition>
@@ -16,7 +17,7 @@
   export default {
     props: {
       value: {
-        type: Object,
+        type: [Object, Number],
         required: false
       },
       options: {
@@ -37,7 +38,6 @@
     },
     methods: {
       select(option) {
-        // console.log(option)
         this.$emit('input', option)
       },
 

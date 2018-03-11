@@ -72,7 +72,12 @@
       ])
     },
     created() {
-      this.$store.dispatch('fetchQuestions')
+      this.$store.dispatch('toggleLoader')
+      this.$store.dispatch('fetchQuestions').then(() => {
+        this.$store.dispatch('toggleLoader')
+      }).catch(() => {
+        this.$store.dispatch('toggleLoader')
+      })
     },
     methods: {
       /**

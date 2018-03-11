@@ -44,10 +44,21 @@ class OptionController extends Controller
         $option->question_id = $request->question_id;
         $option->save();
 
+        $sorted = array_values(array_sort($request->programs, function ($value) {
+            return $value['id'];
+        }));
+
         $programs = Program::all();
-        foreach ($programs as $program) {
-            $program->options()->save($option);
+        foreach ($programs as $index => $program) {
+            $program->options()->save($option, [
+                'value' => $sorted[$index]['value']['value']
+            ]);
         }
+//        foreach ($programs as $index => $program) {
+//            $program->options()->save($option, [
+//                'value' => $request->programs[$index]['value']['value']
+//            ]);
+//        }
 
         return response($option, 200);
     }
