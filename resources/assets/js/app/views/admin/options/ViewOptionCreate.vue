@@ -56,7 +56,7 @@
       <label for="question_id" class="form__label">Related question</label>
       <AppSelect id="question_id"
                  name="question_id"
-                 :options="options"
+                 :options="questions"
                  v-model="option.question_id"/>
       <AppTooltip v-if="$v.option.question_id.value.$error"
                   :pos-x="55">
@@ -67,6 +67,7 @@
       </AppFeedback>
     </div>
 
+    <!--Associated Programs-->
     <template v-if="showPrograms">
       <div class="form__group"
            v-for="(program, index) in getPrograms"
@@ -118,7 +119,6 @@
     mixins: [admin],
     data() {
       return {
-        showPrograms: false,
         option: {
           name: '',
           pos: '',
@@ -137,13 +137,14 @@
           },
         },
         errors: {},
-        options: [],
+        questions: [],
         programOptions: [
           { label: '0', value: 0 },
           { label: '1', value: 1 },
           { label: '2', value: 2 },
           { label: '3', value: 3 },
-        ]
+        ],
+        showPrograms: false
       }
     },
     validations: {
@@ -201,7 +202,7 @@
       const fetchPrograms = this.$store.dispatch('fetchPrograms')
         .then(res => {
           res.forEach(program => {
-            this.$data.option.programs.push({
+            this.option.programs.push({
               id: program.id,
               label: program.title,
               value: {
@@ -221,7 +222,7 @@
       const fetchQuestions = this.$store.dispatch('fetchQuestions')
         .then(res => {
           res.forEach(question => {
-            this.options.push({
+            this.questions.push({
               label: question.name,
               value: question.id
             })

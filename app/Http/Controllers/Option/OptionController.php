@@ -66,6 +66,8 @@ class OptionController extends Controller
      */
     public function edit(Option $option)
     {
+        $option->load('programs');
+
         return response($option, 200);
     }
 
@@ -82,6 +84,18 @@ class OptionController extends Controller
         $option->pos = $request->pos;
         $option->question_id = $request->question_id;
         $option->save();
+
+        // TODO (doesn't update)
+        $sorted = array_values(array_sort($request->programs, function ($value) {
+            return $value['id'];
+        }));
+
+        $programs = Program::all();
+        foreach ($programs as $index => $program) {
+            $program->options()->syncWithoutDetaching($option, [
+                'value' => $sorted[$index]['value']['value']
+            ]);
+        }
 
         return response($option, 200);
     }

@@ -401,13 +401,10 @@ export const store = new Vuex.Store({
      * getOption Action
      */
     getOption: ({ commit, dispatch }, payload) => {
-      dispatch('toggleLoader')
       return new Promise((resolve, reject) => {
         axios.get(route('api.options.edit', [payload])).then(({ data }) => {
-          dispatch('toggleLoader')
           resolve(data)
         }).catch(err => {
-          dispatch('toggleLoader')
           reject(err)
         })
       })
