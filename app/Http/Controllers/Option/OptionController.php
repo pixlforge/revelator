@@ -54,11 +54,6 @@ class OptionController extends Controller
                 'value' => $sorted[$index]['value']['value']
             ]);
         }
-//        foreach ($programs as $index => $program) {
-//            $program->options()->save($option, [
-//                'value' => $request->programs[$index]['value']['value']
-//            ]);
-//        }
 
         return response($option, 200);
     }
