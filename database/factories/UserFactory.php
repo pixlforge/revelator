@@ -24,9 +24,9 @@ $factory->state(App\User::class, 'admin', function () {
     ];
 });
 
-$factory->state(App\User::class, 'random', function () {
+$factory->state(App\User::class, 'diagnostic', function () {
     return [
-        'name' => 'random user',
+        'name' => 'diagnostic user',
         'email' => null,
         'password' => null,
         'role' => 'user'

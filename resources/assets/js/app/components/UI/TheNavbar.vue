@@ -7,7 +7,7 @@
     </div>
     <template v-if="$store.getters.getCurrentUser">
       <div class="nav__menu"
-           v-if="$store.getters.getCurrentUser.role === 'dev' || $store.getters.getCurrentUser.role === 'admin'">
+           v-if="$store.getters.getCurrentUser.role === 'dev' || $store.getters.getCurrentUser.role === 'admin' || $store.getters.getCurrentUser.role === 'user'">
         <ul class="nav__list">
           <li>
             <router-link :to="{ name: 'home' }"
@@ -20,7 +20,7 @@
             <router-link :to="{ name: 'diagnostic' }"
                          active-class="nav__link-active"
                          exact>
-              Diagnotic
+              Diagnostic
             </router-link>
           </li>
           <li v-if="!$store.getters.getCurrentUser">

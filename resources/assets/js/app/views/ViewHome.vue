@@ -5,7 +5,8 @@
       <h2 class="main__subtitle">Find the program that suits you</h2>
       <TheSummary/>
     </main>
-    <AppBigButton route-name="hello" label="Run the diagnostic"/>
+    <AppBigButton route-name="diagnostic"
+                  label="Run the diagnostic"/>
   </div>
 </template>
 
