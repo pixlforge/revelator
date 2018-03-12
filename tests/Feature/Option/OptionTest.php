@@ -343,7 +343,7 @@ class OptionTest extends TestCase
 
         $option = $this->postJson(route('api.options.store'), [
             'name' => 'Possible answer',
-            'pos' => 0,
+            'pos' => 1,
             'question_id' => $question->id
         ])->assertStatus(200);
 

@@ -17,7 +17,7 @@ class CreateOptionProgramTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('option_id');
             $table->unsignedInteger('program_id');
-            $table->tinyInteger('value')->default(0);
+            $table->tinyInteger('value')->nullable()->default(0);
 
             $table->foreign('option_id')->references('id')->on('options')->onDelete('cascade');
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');

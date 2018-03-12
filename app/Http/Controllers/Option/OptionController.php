@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Option;
 
+use App\Option;
+use App\Program;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Option\StoreOptionRequest;
 use App\Http\Requests\Option\UpdateOptionRequest;
-use App\Option;
-use App\Program;
 
 class OptionController extends Controller
 {
@@ -49,10 +49,17 @@ class OptionController extends Controller
         }));
 
         $programs = Program::all();
-        foreach ($programs as $index => $program) {
-            $program->options()->save($option, [
-                'value' => $sorted[$index]['value']['value']
-            ]);
+
+        if ($sorted) {
+            foreach ($programs as $index => $program) {
+                $program->options()->save($option, [
+                    'value' => $sorted[$index]['value']['value']
+                ]);
+            }
+        } else {
+            foreach ($programs as $index => $program) {
+                $program->options()->save($option);
+            }
         }
 
         return response($option, 200);
