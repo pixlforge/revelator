@@ -13,7 +13,8 @@ export const store = new Vuex.Store({
     users: [],
     questions: [],
     programs: [],
-    options: []
+    options: [],
+    answers: []
   },
   getters: {
     loaderState: state => {
@@ -50,6 +51,10 @@ export const store = new Vuex.Store({
 
     getOptions: state => {
       return state.options
+    },
+
+    getAnswers: state => {
+      return state.answers
     },
   },
   mutations: {
@@ -102,6 +107,29 @@ export const store = new Vuex.Store({
      */
     fetchOptions: (state, payload) => {
       state.options = payload
+    },
+
+    /**
+     * addAnswer Mutation
+     */
+    addAnswer: (state, payload) => {
+      let found = state.answers.find(answer => {
+        return answer.question === payload.question
+      })
+
+      if (found) {
+        found.option = payload.option
+        found.label = payload.label
+      } else {
+        state.answers.push(payload)
+      }
+    },
+
+    /**
+     * clearAnswers Mutation
+     */
+    clearAnswers: state => {
+      state.answers = []
     },
 
     /**
@@ -465,6 +493,7 @@ export const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios.get(route('api.diagnostics.logout')).then(() => {
           commit('logout')
+          commit('clearAnswers')
           resolve()
         }).catch(() => {
           reject()
@@ -498,6 +527,14 @@ export const store = new Vuex.Store({
           reject(err)
         })
       })
+    },
+
+    /**
+     * addAnswer Action
+     */
+    addAnswer: ({ commit, dispatch }, payload) => {
+      commit('addAnswer', payload)
+      axios.post(route('api.diagnostics.addAnswer'), payload)
     },
 
     /**

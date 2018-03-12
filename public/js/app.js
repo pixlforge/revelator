@@ -29909,7 +29909,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     users: [],
     questions: [],
     programs: [],
-    options: []
+    options: [],
+    answers: []
   },
   getters: {
     loaderState: function loaderState(state) {
@@ -29946,6 +29947,10 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 
     getOptions: function getOptions(state) {
       return state.options;
+    },
+
+    getAnswers: function getAnswers(state) {
+      return state.answers;
     }
   },
   mutations: {
@@ -29998,6 +30003,29 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
      */
     fetchOptions: function fetchOptions(state, payload) {
       state.options = payload;
+    },
+
+    /**
+     * addAnswer Mutation
+     */
+    addAnswer: function addAnswer(state, payload) {
+      var found = state.answers.find(function (answer) {
+        return answer.question === payload.question;
+      });
+
+      if (found) {
+        found.option = payload.option;
+        found.label = payload.label;
+      } else {
+        state.answers.push(payload);
+      }
+    },
+
+    /**
+     * clearAnswers Mutation
+     */
+    clearAnswers: function clearAnswers(state) {
+      state.answers = [];
     },
 
     /**
@@ -30454,6 +30482,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       return new Promise(function (resolve, reject) {
         axios.get(route('api.diagnostics.logout')).then(function () {
           commit('logout');
+          commit('clearAnswers');
           resolve();
         }).catch(function () {
           reject();
@@ -30500,11 +30529,22 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     },
 
     /**
-     * Logout Action
+     * addAnswer Action
      */
-    logout: function logout(_ref41) {
+    addAnswer: function addAnswer(_ref41, payload) {
       var commit = _ref41.commit,
           dispatch = _ref41.dispatch;
+
+      commit('addAnswer', payload);
+      axios.post(route('api.diagnostics.addAnswer'), payload);
+    },
+
+    /**
+     * Logout Action
+     */
+    logout: function logout(_ref42) {
+      var commit = _ref42.commit,
+          dispatch = _ref42.dispatch;
 
       commit('toggleLoader');
       return new Promise(function (resolve, reject) {
@@ -30522,14 +30562,14 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * Login Action
      */
-    login: function login(_ref42, payload) {
-      var commit = _ref42.commit,
-          dispatch = _ref42.dispatch;
+    login: function login(_ref43, payload) {
+      var commit = _ref43.commit,
+          dispatch = _ref43.dispatch;
 
       dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
-        axios.post(route('login'), payload).then(function (_ref43) {
-          var data = _ref43.data;
+        axios.post(route('login'), payload).then(function (_ref44) {
+          var data = _ref44.data;
 
           dispatch('hydrateCurrentUser', data);
           dispatch('toggleLoader');
@@ -51579,7 +51619,7 @@ var render = function() {
     [
       _c(
         "main",
-        { staticClass: "main__container" },
+        { staticClass: "main__container main__container--medium" },
         [
           _c("transition", { attrs: { name: "fade" } }, [
             _vm.getQuestions.length && _vm.showContent
@@ -51604,7 +51644,19 @@ var render = function() {
                     { attrs: { name: "fade", mode: "out-in" } },
                     [
                       _vm.typeDropdown
-                        ? _c("div", [_vm._v("\n          Dropdown\n        ")])
+                        ? _c(
+                            "div",
+                            [
+                              _c("AppDiagnosticSelect", {
+                                attrs: {
+                                  options: _vm.selectOptions,
+                                  value: _vm.selectedOptionLabel
+                                },
+                                on: { selectedOption: _vm.selectedOption }
+                              })
+                            ],
+                            1
+                          )
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.typeMultiple
@@ -51625,7 +51677,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("AppContinue", {
-        attrs: { label: "Continue" },
+        attrs: { label: "Continue", disabled: _vm.buttonDisabled },
         on: { nextQuestion: _vm.nextQuestion }
       })
     ],
@@ -51650,11 +51702,12 @@ if (false) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_buttons_AppContinue__ = __webpack_require__(387);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_buttons_AppContinue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_buttons_AppContinue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_forms_AppSelect__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_forms_AppSelect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_forms_AppSelect__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_forms_AppDiagnosticSelect__ = __webpack_require__(390);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_forms_AppDiagnosticSelect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_forms_AppDiagnosticSelect__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(7);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
 //
 //
 //
@@ -51700,7 +51753,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AppContinue: __WEBPACK_IMPORTED_MODULE_0__components_buttons_AppContinue___default.a,
-    AppSelect: __WEBPACK_IMPORTED_MODULE_1__components_forms_AppSelect___default.a
+    AppDiagnosticSelect: __WEBPACK_IMPORTED_MODULE_1__components_forms_AppDiagnosticSelect___default.a
   },
   data: function data() {
     return {
@@ -51719,6 +51772,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     typeInfos: function typeInfos() {
       return this.getQuestions[this.currentQuestion].type === 'infos' && this.showContent;
+    },
+    selectOptions: function selectOptions() {
+      var options = [];
+      this.getQuestions[this.currentQuestion].options.forEach(function (option) {
+        options.push({
+          label: option.name,
+          value: option.id
+        });
+      });
+      return options;
+    },
+    selectedOptionLabel: function selectedOptionLabel() {
+      if (this.$store.getters.getAnswers[this.currentQuestion]) {
+        return {
+          label: this.$store.getters.getAnswers[this.currentQuestion].label
+        };
+      } else {
+        return {
+          label: 'Select'
+        };
+      }
+    },
+    buttonDisabled: function buttonDisabled() {
+      return !this.$store.getters.getAnswers[this.currentQuestion];
     }
   }),
   created: function created() {
@@ -51745,6 +51822,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   methods: {
+    selectedOption: function selectedOption(data) {
+      this.$store.dispatch('addAnswer', {
+        user: this.$store.getters.getCurrentUser.id,
+        question: this.getQuestions[this.currentQuestion].id,
+        option: data.value,
+        label: data.label
+      });
+    },
     nextQuestion: function nextQuestion() {
       var _this2 = this;
 
@@ -51827,6 +51912,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     label: {
       type: String,
       required: true
+    },
+    disabled: {
+      type: Boolean,
+      required: true
+    }
+  },
+  methods: {
+    nextQuestion: function nextQuestion() {
+      if (!this.disabled) {
+        this.$emit('nextQuestion');
+      }
     }
   }
 });
@@ -51843,11 +51939,7 @@ var render = function() {
     _c("a", {
       staticClass: "btn__big",
       domProps: { textContent: _vm._s(_vm.label) },
-      on: {
-        click: function($event) {
-          _vm.$emit("nextQuestion")
-        }
-      }
+      on: { click: _vm.nextQuestion }
     })
   ])
 }
@@ -51858,6 +51950,186 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-dd8338be", module.exports)
+  }
+}
+
+/***/ }),
+/* 390 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(391)
+/* template */
+var __vue_template__ = __webpack_require__(392)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/app/components/forms/AppDiagnosticSelect.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-95af562a", Component.options)
+  } else {
+    hotAPI.reload("data-v-95af562a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 391 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    value: {
+      type: [Object, Number],
+      required: false
+    },
+    options: {
+      type: Array,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      open: false
+    };
+  },
+  created: function created() {
+    document.addEventListener('click', this.documentClick);
+  },
+  destroyed: function destroyed() {
+    document.removeEventListener('click', this.documentClick);
+  },
+
+  methods: {
+    select: function select(option) {
+      this.$emit('input', option);
+    },
+
+
+    /**
+     * Toggle the open state of the dropdown list.
+     */
+    toggleOpen: function toggleOpen() {
+      this.open = !this.open;
+    },
+
+
+    /**
+     * Retrieve the reference of the active dropdown and close
+     * it if another element is clicked.
+     */
+    documentClick: function documentClick(event) {
+      var el = this.$refs.dropdownMenu;
+      var target = event.target;
+      if (el !== target && !el.contains(target)) {
+        this.open = false;
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 392 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      ref: "dropdownMenu",
+      staticClass: "select",
+      on: {
+        click: function($event) {
+          $event.preventDefault()
+          _vm.toggleOpen($event)
+        }
+      }
+    },
+    [
+      _c("span", {
+        domProps: {
+          textContent: _vm._s(_vm.value ? _vm.value.label : "Select")
+        }
+      }),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
+        _vm.open
+          ? _c(
+              "ul",
+              { staticClass: "select__dropdown" },
+              _vm._l(_vm.options, function(option, index) {
+                return _c("li", {
+                  key: index,
+                  domProps: { textContent: _vm._s(option.label) },
+                  on: {
+                    click: function($event) {
+                      _vm.$emit("selectedOption", option)
+                    }
+                  }
+                })
+              })
+            )
+          : _vm._e()
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-95af562a", module.exports)
   }
 }
 

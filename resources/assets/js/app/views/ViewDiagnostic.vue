@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main class="main__container">
+    <main class="main__container main__container--medium">
       <transition name="fade">
         <h1 class="main__title"
             v-if="getQuestions.length && showContent"
@@ -10,11 +10,12 @@
 
       <div class="form__group"
            v-if="getQuestions.length">
-
         <transition name="fade" mode="out-in">
           <!--Dropdown-->
           <div v-if="typeDropdown">
-            Dropdown
+            <AppDiagnosticSelect :options="selectOptions"
+                                 :value="selectedOptionLabel"
+                                 @selectedOption="selectedOption"/>
           </div>
 
           <!--Multiple-->
@@ -27,23 +28,23 @@
             Infos
           </div>
         </transition>
-
       </div>
     </main>
     <AppContinue label="Continue"
+                 :disabled="buttonDisabled"
                  @nextQuestion="nextQuestion"/>
   </div>
 </template>
 
 <script>
   import AppContinue from '../components/buttons/AppContinue'
-  import AppSelect from '../components/forms/AppSelect'
+  import AppDiagnosticSelect from '../components/forms/AppDiagnosticSelect'
   import { mapGetters } from 'vuex'
 
   export default {
     components: {
       AppContinue,
-      AppSelect
+      AppDiagnosticSelect
     },
     data() {
       return {
@@ -71,6 +72,33 @@
         return this.getQuestions[this.currentQuestion].type === 'infos'
           && this.showContent
       },
+
+      selectOptions() {
+        let options = []
+        this.getQuestions[this.currentQuestion].options.forEach(option => {
+          options.push({
+            label: option.name,
+            value: option.id
+          })
+        })
+        return options
+      },
+
+      selectedOptionLabel() {
+        if (this.$store.getters.getAnswers[this.currentQuestion]) {
+          return {
+            label: this.$store.getters.getAnswers[this.currentQuestion].label
+          }
+        } else {
+          return {
+            label: 'Select'
+          }
+        }
+      },
+
+      buttonDisabled() {
+        return !this.$store.getters.getAnswers[this.currentQuestion]
+      }
     },
     created() {
       /**
@@ -93,6 +121,15 @@
       this.$store.dispatch('logoutDiagnosticUser')
     },
     methods: {
+      selectedOption(data) {
+        this.$store.dispatch('addAnswer', {
+          user: this.$store.getters.getCurrentUser.id,
+          question: this.getQuestions[this.currentQuestion].id,
+          option: data.value,
+          label: data.label
+        })
+      },
+
       nextQuestion() {
         if (this.currentQuestion < this.getQuestions.length - 1) {
           this.showContent = false

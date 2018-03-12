@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Diagnostic;
 
-use App\Http\Controllers\Controller;
-use App\Question;
 use App\User;
+use App\Answer;
+use App\Question;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class DiagnosticController extends Controller
@@ -46,8 +48,35 @@ class DiagnosticController extends Controller
      */
     public function fetchQuestions()
     {
-        $questions = Question::orderBy('pos')->get();
+        $questions = Question::with('options')->orderBy('pos')->get();
 
         return response($questions, 200);
+    }
+
+    /**
+     * Store an answer.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function addAnswer(Request $request)
+    {
+        $answer = Answer::where([
+            ['user_id', $request->user],
+            ['question_id', $request->question]
+        ])->first();
+
+        if ($answer) {
+            $answer->option_id = $request->option;
+            $answer->save();
+        } else {
+            $answer = new Answer;
+            $answer->user_id = $request->user;
+            $answer->question_id = $request->question;
+            $answer->option_id = $request->option;
+            $answer->save();
+        }
+
+        return response(null, 200);
     }
 }

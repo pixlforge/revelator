@@ -1,8 +1,8 @@
 <template>
   <div>
     <a class="btn__big"
-       @click="$emit('nextQuestion')"
-       v-text="label">
+       v-text="label"
+       @click="nextQuestion">
     </a>
   </div>
 </template>
@@ -13,6 +13,17 @@
       label: {
         type: String,
         required: true
+      },
+      disabled: {
+        type: Boolean,
+        required: true
+      }
+    },
+    methods: {
+      nextQuestion() {
+        if (!this.disabled) {
+          this.$emit('nextQuestion')
+        }
       }
     }
   }
