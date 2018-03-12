@@ -19,6 +19,15 @@ Route::prefix('/api')->group(function () {
      */
 
     /**
+     * Diagnostic
+     */
+    Route::prefix('/diagnostic')->namespace('Diagnostic')->group(function () {
+        Route::get('/logout', 'DiagnosticController@logout')->name('api.diagnostics.logout');
+        Route::get('/login', 'DiagnosticController@login')->name('api.diagnostics.login');
+        Route::get('/questions/fetch', 'DiagnosticController@fetchQuestions')->name('api.diagnostics.fetchQuestions');
+    });
+
+    /**
      * Options
      */
     Route::prefix('/options')->namespace('Option')->group(function () {

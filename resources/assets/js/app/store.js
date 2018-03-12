@@ -458,6 +458,47 @@ export const store = new Vuex.Store({
         })
       })
     },
+    /**
+     * logoutDiagnosticUser Action
+     */
+    logoutDiagnosticUser: ({ commit, dispatch }) => {
+      return new Promise((resolve, reject) => {
+        axios.get(route('api.diagnostics.logout')).then(() => {
+          commit('logout')
+          resolve()
+        }).catch(() => {
+          reject()
+        })
+      })
+    },
+
+    /**
+     * loginDiagnosticUser Action
+     */
+    loginDiagnosticUser: ({ commit, dispatch }) => {
+      return new Promise((resolve, reject) => {
+        axios.get(route('api.diagnostics.login')).then(({ data }) => {
+          dispatch('hydrateCurrentUser', data)
+          resolve()
+        }).catch(() => {
+          reject()
+        })
+      })
+    },
+
+    /**
+     * fetchDiagnosticQuestions Action
+     */
+    fetchDiagnosticQuestions: ({ commit, dispatch }) => {
+      return new Promise((resolve, reject) => {
+        axios.get(route('api.diagnostics.fetchQuestions')).then(({ data }) => {
+          commit('fetchQuestions', data)
+          resolve()
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
 
     /**
      * Logout Action
