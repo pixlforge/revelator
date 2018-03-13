@@ -30510,30 +30510,11 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     },
 
     /**
-     * fetchDiagnosticQuestions Action
-     */
-    fetchDiagnosticQuestions: function fetchDiagnosticQuestions(_ref39) {
-      var commit = _ref39.commit,
-          dispatch = _ref39.dispatch;
-
-      return new Promise(function (resolve, reject) {
-        axios.get(route('api.diagnostics.fetchQuestions')).then(function (_ref40) {
-          var data = _ref40.data;
-
-          commit('fetchQuestions', data);
-          resolve();
-        }).catch(function (err) {
-          reject(err);
-        });
-      });
-    },
-
-    /**
      * addAnswer Action
      */
-    addAnswer: function addAnswer(_ref41, payload) {
-      var commit = _ref41.commit,
-          dispatch = _ref41.dispatch;
+    addAnswer: function addAnswer(_ref39, payload) {
+      var commit = _ref39.commit,
+          dispatch = _ref39.dispatch;
 
       commit('addAnswer', payload);
       axios.post(route('api.answers.store'), payload);
@@ -30542,9 +30523,9 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * Logout Action
      */
-    logout: function logout(_ref42) {
-      var commit = _ref42.commit,
-          dispatch = _ref42.dispatch;
+    logout: function logout(_ref40) {
+      var commit = _ref40.commit,
+          dispatch = _ref40.dispatch;
 
       commit('toggleLoader');
       return new Promise(function (resolve, reject) {
@@ -30562,14 +30543,14 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * Login Action
      */
-    login: function login(_ref43, payload) {
-      var commit = _ref43.commit,
-          dispatch = _ref43.dispatch;
+    login: function login(_ref41, payload) {
+      var commit = _ref41.commit,
+          dispatch = _ref41.dispatch;
 
       dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
-        axios.post(route('login'), payload).then(function (_ref44) {
-          var data = _ref44.data;
+        axios.post(route('login'), payload).then(function (_ref42) {
+          var data = _ref42.data;
 
           dispatch('hydrateCurrentUser', data);
           dispatch('toggleLoader');
@@ -51832,7 +51813,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
     this.$store.dispatch('logoutDiagnosticUser').then(function () {
       _this.$store.dispatch('loginDiagnosticUser').then(function () {
-        _this.$store.dispatch('fetchDiagnosticQuestions').then(function () {
+        _this.$store.dispatch('fetchQuestions').then(function () {
           _this.$store.dispatch('toggleLoader');
         });
       });

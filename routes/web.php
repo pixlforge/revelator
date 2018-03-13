@@ -22,12 +22,11 @@ Route::prefix('/api')->group(function () {
     });
 
     /**
-     * Diagnostic
+     * Diagnostics
      */
-    Route::prefix('/diagnostic')->namespace('Diagnostic')->group(function () {
+    Route::prefix('/diagnostics')->namespace('Diagnostic')->group(function () {
         Route::get('/logout', 'DiagnosticController@logout')->name('api.diagnostics.logout');
         Route::get('/login', 'DiagnosticController@login')->name('api.diagnostics.login');
-        Route::get('/questions/fetch', 'DiagnosticController@fetchQuestions')->name('api.diagnostics.fetchQuestions');
     });
 
     /**

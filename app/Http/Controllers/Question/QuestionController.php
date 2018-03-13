@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Question;
 
+use App\Question;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Question\StoreQuestionRequest;
 use App\Http\Requests\Question\UpdateQuestionRequest;
-use App\Question;
 
 class QuestionController extends Controller
 {
@@ -14,7 +14,8 @@ class QuestionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'admin']);
+        $this->middleware(['auth', 'admin'])
+            ->except('index');
     }
 
     /**
@@ -24,7 +25,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::orderBy('pos')->get();
+        $questions = Question::with('options')->orderBy('pos')->get();
 
         return response($questions, 200);
     }

@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Diagnostic;
 
 use App\User;
-use App\Answer;
-use App\Question;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,17 +36,5 @@ class DiagnosticController extends Controller
         Auth::login($user);
 
         return response($user, 200);
-    }
-
-    /**
-     * Fetch all questions.
-     *
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
-     */
-    public function fetchQuestions()
-    {
-        $questions = Question::with('options')->orderBy('pos')->get();
-
-        return response($questions, 200);
     }
 }

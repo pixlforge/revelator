@@ -516,20 +516,6 @@ export const store = new Vuex.Store({
     },
 
     /**
-     * fetchDiagnosticQuestions Action
-     */
-    fetchDiagnosticQuestions: ({ commit, dispatch }) => {
-      return new Promise((resolve, reject) => {
-        axios.get(route('api.diagnostics.fetchQuestions')).then(({ data }) => {
-          commit('fetchQuestions', data)
-          resolve()
-        }).catch(err => {
-          reject(err)
-        })
-      })
-    },
-
-    /**
      * addAnswer Action
      */
     addAnswer: ({ commit, dispatch }, payload) => {

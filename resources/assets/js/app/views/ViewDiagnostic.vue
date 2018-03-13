@@ -123,7 +123,7 @@
 
       this.$store.dispatch('logoutDiagnosticUser').then(() => {
         this.$store.dispatch('loginDiagnosticUser').then(() => {
-          this.$store.dispatch('fetchDiagnosticQuestions').then(() => {
+          this.$store.dispatch('fetchQuestions').then(() => {
             this.$store.dispatch('toggleLoader')
           })
         })
