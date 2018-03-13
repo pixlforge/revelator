@@ -7,7 +7,7 @@
     </div>
     <template v-if="$store.getters.getCurrentUser">
       <div class="nav__menu"
-           v-if="$store.getters.getCurrentUser.role === 'dev' || $store.getters.getCurrentUser.role === 'admin' || $store.getters.getCurrentUser.role === 'user'">
+           v-if="$store.getters.getCurrentUser.role === 'dev' || $store.getters.getCurrentUser.role === 'admin'">
         <ul class="nav__list">
           <li>
             <router-link :to="{ name: 'home' }"
