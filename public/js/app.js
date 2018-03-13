@@ -51658,6 +51658,12 @@ var render = function() {
                     ? _c("div", [_vm._v("\n          Multiple\n        ")])
                     : _vm._e(),
                   _vm._v(" "),
+                  _vm.typeMultipleInline
+                    ? _c("div", [
+                        _vm._v("\n          Multiple Inline\n        ")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
                   _vm.typeInfos
                     ? _c("div", [_vm._v("\n          Infos\n        ")])
                     : _vm._e()
@@ -51751,6 +51757,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -51775,6 +51786,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     typeMultiple: function typeMultiple() {
       return this.getQuestions[this.currentQuestion].type === 'multiple' && this.showContent;
+    },
+    typeMultipleInline: function typeMultipleInline() {
+      return this.getQuestions[this.currentQuestion].type === 'multiple-inline' && this.showContent;
     },
     typeInfos: function typeInfos() {
       return this.getQuestions[this.currentQuestion].type === 'infos' && this.showContent;

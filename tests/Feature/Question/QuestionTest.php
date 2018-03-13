@@ -268,6 +268,24 @@ class QuestionTest extends TestCase
     }
 
     /** @test */
+    function add_new_question_validation_passes_when_attributing_the_multiple_inline_type()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->actingAs($this->admin);
+
+        $this->assertCount(0, Question::all());
+
+        $this->postJson(route('api.questions.store'), [
+            'name' => 'I was born',
+            'type' => 'multiple-inline',
+            'pos' => 1
+        ])->assertStatus(200);
+
+        $this->assertCount(1, Question::all());
+    }
+
+    /** @test */
     function devs_can_update_existing_questions()
     {
         $this->withoutExceptionHandling();

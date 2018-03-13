@@ -18,8 +18,8 @@ class QuestionsTableSeeder extends Seeder
         ]);
 
         factory(\App\Question::class)->create([
-            'name' => "I am a...",
-            'type' => 'multiple',
+            'name' => "I am...",
+            'type' => 'multiple-inline',
             'pos' => 2
         ]);
 

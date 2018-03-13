@@ -16,7 +16,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->index();
-            $table->enum('type', ['dropdown', 'multiple', 'infos']);
+            $table->enum('type', ['dropdown', 'multiple', 'multiple-inline', 'infos']);
             $table->smallInteger('pos')->default(0);
             $table->timestamps();
         });

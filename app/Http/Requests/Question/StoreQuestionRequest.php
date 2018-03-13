@@ -25,7 +25,7 @@ class StoreQuestionRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:3|max:255',
-            'type' => 'required|in:dropdown,multiple,infos',
+            'type' => 'required|in:dropdown,multiple,multiple-inline,infos',
             'pos' => 'required|numeric|between:0,999'
         ];
     }

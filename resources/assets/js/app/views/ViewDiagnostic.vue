@@ -23,6 +23,11 @@
             Multiple
           </div>
 
+          <!--Multiple Inline-->
+          <div v-if="typeMultipleInline">
+            Multiple Inline
+          </div>
+
           <!--Infos-->
           <div v-if="typeInfos">
             Infos
@@ -70,6 +75,11 @@
 
       typeMultiple() {
         return this.getQuestions[this.currentQuestion].type === 'multiple'
+          && this.showContent
+      },
+
+      typeMultipleInline() {
+        return this.getQuestions[this.currentQuestion].type === 'multiple-inline'
           && this.showContent
       },
 
