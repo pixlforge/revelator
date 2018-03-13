@@ -1,0 +1,31 @@
+.options {
+  &__list-inline {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+  }
+
+  &__list-inline-item {
+    background-color: transparent;
+    font-family: $body-stack-light;
+    font-size: 2.4rem;
+    letter-spacing: 2pt;
+    border-radius: 10rem;
+    padding: 3rem 6rem;
+    user-select: none;
+    transition: all .2s ease;
+
+    &:hover {
+      background-color: $dark-grey;
+      color: $white;
+      box-shadow: 0 8px 15px rgba($black, .1);
+      cursor: pointer;
+    }
+
+    &--active {
+      background-color: $dark-grey;
+      color: $white;
+      box-shadow: 0 8px 15px rgba($black, .1);
+    }
+  }
+}

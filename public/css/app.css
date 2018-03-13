@@ -817,6 +817,46 @@ a:visited:focus {
   background-color: #f0f0f0;
 }
 
+.options__list-inline {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  list-style: none;
+}
+
+.options__list-inline-item {
+  background-color: transparent;
+  font-family: "BrandonGrotesque-Light", sans-serif;
+  font-size: 2.4rem;
+  letter-spacing: 2pt;
+  border-radius: 10rem;
+  padding: 3rem 6rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.options__list-inline-item:hover {
+  background-color: #4e4f4f;
+  color: #fff;
+  -webkit-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.options__list-inline-item--active {
+  background-color: #4e4f4f;
+  color: #fff;
+  -webkit-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
 .main__container {
   width: 93vw;
   min-height: 72vh;

@@ -25,7 +25,14 @@
 
           <!--Multiple Inline-->
           <div v-if="typeMultipleInline">
-            Multiple Inline
+            <ul class="options__list-inline">
+              <li class="options__list-inline-item"
+                  v-for="option in getQuestions[currentQuestion].options"
+                  :class="{ 'options__list-inline-item--active': foundAnswer(option) }"
+                  v-text="option.name"
+                  @click="selectedOption({ label: option.name, value: option.id })">
+              </li>
+            </ul>
           </div>
 
           <!--Infos-->
@@ -65,7 +72,8 @@
     },
     computed: {
       ...mapGetters([
-        'getQuestions'
+        'getQuestions',
+        'getAnswers'
       ]),
 
       typeDropdown() {
@@ -125,7 +133,6 @@
        */
       if (!this.$store.getters.getQuestions.length) {
         this.$store.dispatch('toggleLoader')
-
         this.$store.dispatch('fetchQuestions').then(() => {
           this.$store.dispatch('toggleLoader')
         }).catch(err => {
@@ -136,7 +143,15 @@
 
     },
     methods: {
+      foundAnswer(option) {
+        return this.getAnswers.find(answer => {
+          return answer.question_id === this.getQuestions[this.currentQuestion].id
+            && answer.option_id === option.id
+        })
+      },
+
       selectedOption(data) {
+        console.log(data)
         this.$store.dispatch('addAnswer', {
           user_id: this.$store.getters.getCurrentUser.id,
           question_id: this.getQuestions[this.currentQuestion].id,
