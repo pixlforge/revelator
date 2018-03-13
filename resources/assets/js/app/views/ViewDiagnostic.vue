@@ -116,28 +116,24 @@
       }
     },
     created() {
-      /**
-       * Log out the current user then create a new one and connect it.
-       */
-      this.$store.dispatch('toggleLoader')
-
-      this.$store.dispatch('logoutDiagnosticUser').then(() => {
-        this.$store.dispatch('loginDiagnosticUser').then(() => {
-          this.$store.dispatch('fetchQuestions').then(() => {
-            this.$store.dispatch('toggleLoader')
-          })
-        })
-      })
-
       if (!this.$route.query.question) {
         this.$router.push({ query: { question: this.currentQuestion } })
       }
-    },
-    destroyed() {
+
       /**
-       * Log out the current user when they leave the page.
+       * Get the questions if the store is empty.
        */
-      this.$store.dispatch('logoutDiagnosticUser')
+      if (!this.$store.getters.getQuestions.length) {
+        this.$store.dispatch('toggleLoader')
+
+        this.$store.dispatch('fetchQuestions').then(() => {
+          this.$store.dispatch('toggleLoader')
+        }).catch(err => {
+          console.log(err)
+          this.$store.dispatch('toggleLoader')
+        })
+      }
+
     },
     methods: {
       selectedOption(data) {

@@ -1,23 +1,34 @@
 <template>
   <div>
-    <router-link :to="{ name: routeName, query: { question: 0 } }"
-                 class="btn__big"
-                 v-text="label">
-    </router-link>
+    <a class="btn__diagnostic"
+       @click="runDiagnostic"
+       v-text="'Run the diagnostic'">
+    </a>
   </div>
 </template>
 
 <script>
   export default {
-    props: {
-      routeName: {
-        type: String,
-        required: true
-      },
+    methods: {
+      runDiagnostic() {
+        /**
+         * Log out the current user then create a new one and connect it.
+         */
+        this.$store.dispatch('toggleLoader')
 
-      label: {
-        type: String,
-        required: true
+        this.$store.dispatch('logoutDiagnosticUser').then(() => {
+          this.$store.dispatch('loginDiagnosticUser').then(() => {
+            this.$store.dispatch('fetchQuestions').then(() => {
+              this.$store.dispatch('toggleLoader')
+              this.$router.push({
+                name: 'diagnostic',
+                query: {
+                  question: 0
+                }
+              })
+            })
+          })
+        })
       }
     }
   }

@@ -37851,8 +37851,7 @@ var render = function() {
       _vm.$store.getters.getCurrentUser
         ? [
             _vm.$store.getters.getCurrentUser.role === "dev" ||
-            _vm.$store.getters.getCurrentUser.role === "admin" ||
-            _vm.$store.getters.getCurrentUser.role === "user"
+            _vm.$store.getters.getCurrentUser.role === "admin"
               ? _c("div", { staticClass: "nav__menu" }, [
                   _c("ul", { staticClass: "nav__list" }, [
                     _c(
@@ -42484,7 +42483,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -42656,15 +42654,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    routeName: {
-      type: String,
-      required: true
-    },
+  methods: {
+    runDiagnostic: function runDiagnostic() {
+      var _this = this;
 
-    label: {
-      type: String,
-      required: true
+      /**
+       * Log out the current user then create a new one and connect it.
+       */
+      this.$store.dispatch('toggleLoader');
+
+      this.$store.dispatch('logoutDiagnosticUser').then(function () {
+        _this.$store.dispatch('loginDiagnosticUser').then(function () {
+          _this.$store.dispatch('fetchQuestions').then(function () {
+            _this.$store.dispatch('toggleLoader');
+            _this.$router.push({
+              name: 'diagnostic',
+              query: {
+                question: 0
+              }
+            });
+          });
+        });
+      });
     }
   }
 });
@@ -42677,17 +42688,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("router-link", {
-        staticClass: "btn__big",
-        attrs: { to: { name: _vm.routeName, query: { question: 0 } } },
-        domProps: { textContent: _vm._s(_vm.label) }
-      })
-    ],
-    1
-  )
+  return _c("div", [
+    _c("a", {
+      staticClass: "btn__diagnostic",
+      domProps: { textContent: _vm._s("Run the diagnostic") },
+      on: { click: _vm.runDiagnostic }
+    })
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -42727,9 +42734,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("AppBigButton", {
-        attrs: { "route-name": "diagnostic", label: "Run the diagnostic" }
-      })
+      _c("AppBigButton")
     ],
     1
   )
@@ -51806,28 +51811,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   created: function created() {
     var _this = this;
 
-    /**
-     * Log out the current user then create a new one and connect it.
-     */
-    this.$store.dispatch('toggleLoader');
-
-    this.$store.dispatch('logoutDiagnosticUser').then(function () {
-      _this.$store.dispatch('loginDiagnosticUser').then(function () {
-        _this.$store.dispatch('fetchQuestions').then(function () {
-          _this.$store.dispatch('toggleLoader');
-        });
-      });
-    });
-
     if (!this.$route.query.question) {
       this.$router.push({ query: { question: this.currentQuestion } });
     }
-  },
-  destroyed: function destroyed() {
+
     /**
-     * Log out the current user when they leave the page.
+     * Get the questions if the store is empty.
      */
-    this.$store.dispatch('logoutDiagnosticUser');
+    if (!this.$store.getters.getQuestions.length) {
+      this.$store.dispatch('toggleLoader');
+
+      this.$store.dispatch('fetchQuestions').then(function () {
+        _this.$store.dispatch('toggleLoader');
+      }).catch(function (err) {
+        console.log(err);
+        _this.$store.dispatch('toggleLoader');
+      });
+    }
   },
 
   methods: {
