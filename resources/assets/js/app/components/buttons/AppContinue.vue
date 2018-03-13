@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <a class="btn__big"
-       v-text="label"
-       @click="nextQuestion">
-    </a>
+  <div class="btn__container">
+    <button class="btn__continue"
+            v-text="label"
+            @click="nextQuestion">
+    </button>
   </div>
 </template>
 

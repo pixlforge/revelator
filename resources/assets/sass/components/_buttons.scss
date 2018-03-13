@@ -9,6 +9,7 @@
   transition: all .4s ease;
   display: block;
   letter-spacing: 2pt;
+  user-select: none;
 
   &:hover,
   &:focus,
@@ -113,6 +114,41 @@
     &:active {
       background-color: $dark-grey;
       text-decoration: none !important;
+    }
+  }
+
+  &__container {
+    position: absolute;
+    bottom: 5rem;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__continue {
+    background-color: transparent;
+    cursor: pointer;
+    color: $white;
+    font-size: 2.4rem;
+    margin: 0 auto;
+    padding: 2.25rem 10rem;
+    border-radius: 5rem;
+    text-transform: uppercase;
+    border: none;
+    letter-spacing: 2pt;
+    transition: all .2s ease;
+
+    &:hover {
+      background-color: $dark-grey;
+      outline: none;
+      border: none;
+      box-shadow: 0 8px 15px rgba($black, .1);
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
     }
   }
 

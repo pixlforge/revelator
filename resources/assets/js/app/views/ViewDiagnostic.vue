@@ -29,10 +29,15 @@
           </div>
         </transition>
       </div>
+
+      <transition name="fade" mode="out-in">
+        <AppContinue v-if="getQuestions.length && showContent"
+                     label="Continue"
+                     :disabled="buttonDisabled"
+                     @nextQuestion="nextQuestion"/>
+      </transition>
+
     </main>
-    <AppContinue label="Continue"
-                 :disabled="buttonDisabled"
-                 @nextQuestion="nextQuestion"/>
   </div>
 </template>
 

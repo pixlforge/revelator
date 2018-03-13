@@ -51614,75 +51614,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "main",
-        { staticClass: "main__container main__container--medium" },
-        [
-          _c("transition", { attrs: { name: "fade" } }, [
+  return _c("div", [
+    _c(
+      "main",
+      { staticClass: "main__container main__container--medium" },
+      [
+        _c("transition", { attrs: { name: "fade" } }, [
+          _vm.getQuestions.length && _vm.showContent
+            ? _c("h1", {
+                staticClass: "main__title",
+                domProps: {
+                  textContent: _vm._s(
+                    _vm.getQuestions[_vm.currentQuestion].name
+                  )
+                }
+              })
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _vm.getQuestions.length
+          ? _c(
+              "div",
+              { staticClass: "form__group" },
+              [
+                _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
+                  _vm.typeDropdown
+                    ? _c(
+                        "div",
+                        [
+                          _c("AppDiagnosticSelect", {
+                            attrs: {
+                              options: _vm.selectOptions,
+                              value: _vm.selectedOptionLabel
+                            },
+                            on: { selectedOption: _vm.selectedOption }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.typeMultiple
+                    ? _c("div", [_vm._v("\n          Multiple\n        ")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.typeInfos
+                    ? _c("div", [_vm._v("\n          Infos\n        ")])
+                    : _vm._e()
+                ])
+              ],
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "transition",
+          { attrs: { name: "fade", mode: "out-in" } },
+          [
             _vm.getQuestions.length && _vm.showContent
-              ? _c("h1", {
-                  staticClass: "main__title",
-                  domProps: {
-                    textContent: _vm._s(
-                      _vm.getQuestions[_vm.currentQuestion].name
-                    )
-                  }
+              ? _c("AppContinue", {
+                  attrs: { label: "Continue", disabled: _vm.buttonDisabled },
+                  on: { nextQuestion: _vm.nextQuestion }
                 })
               : _vm._e()
-          ]),
-          _vm._v(" "),
-          _vm.getQuestions.length
-            ? _c(
-                "div",
-                { staticClass: "form__group" },
-                [
-                  _c(
-                    "transition",
-                    { attrs: { name: "fade", mode: "out-in" } },
-                    [
-                      _vm.typeDropdown
-                        ? _c(
-                            "div",
-                            [
-                              _c("AppDiagnosticSelect", {
-                                attrs: {
-                                  options: _vm.selectOptions,
-                                  value: _vm.selectedOptionLabel
-                                },
-                                on: { selectedOption: _vm.selectedOption }
-                              })
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.typeMultiple
-                        ? _c("div", [_vm._v("\n          Multiple\n        ")])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.typeInfos
-                        ? _c("div", [_vm._v("\n          Infos\n        ")])
-                        : _vm._e()
-                    ]
-                  )
-                ],
-                1
-              )
-            : _vm._e()
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("AppContinue", {
-        attrs: { label: "Continue", disabled: _vm.buttonDisabled },
-        on: { nextQuestion: _vm.nextQuestion }
-      })
-    ],
-    1
-  )
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -51707,6 +51708,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(7);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -51935,9 +51941,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("a", {
-      staticClass: "btn__big",
+  return _c("div", { staticClass: "btn__container" }, [
+    _c("button", {
+      staticClass: "btn__continue",
       domProps: { textContent: _vm._s(_vm.label) },
       on: { click: _vm.nextQuestion }
     })
