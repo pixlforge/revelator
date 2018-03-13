@@ -1,6 +1,9 @@
 <template>
   <div>
-    <router-link :to="{ name: routeName }" class="btn__big">{{ label }}</router-link>
+    <router-link :to="{ name: routeName, query: { question: 0 } }"
+                 class="btn__big"
+                 v-text="label">
+    </router-link>
   </div>
 </template>
 

@@ -59,7 +59,7 @@
     data() {
       return {
         showContent: true,
-        currentQuestion: 0,
+        currentQuestion: this.$route.query.question,
         answers: []
       }
     },
@@ -125,10 +125,13 @@
         this.$store.dispatch('loginDiagnosticUser').then(() => {
           this.$store.dispatch('fetchDiagnosticQuestions').then(() => {
             this.$store.dispatch('toggleLoader')
-            this.$router.push({ query: { question: this.currentQuestion } })
           })
         })
       })
+
+      if (!this.$route.query.question) {
+        this.$router.push({ query: { question: this.currentQuestion } })
+      }
     },
     destroyed() {
       /**

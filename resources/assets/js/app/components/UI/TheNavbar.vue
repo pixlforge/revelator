@@ -17,9 +17,8 @@
             </router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'diagnostic' }"
-                         active-class="nav__link-active"
-                         exact>
+            <router-link :to="{ name: 'diagnostic', query: { question: 0 } }"
+                         active-class="nav__link-active">
               Diagnostic
             </router-link>
           </li>

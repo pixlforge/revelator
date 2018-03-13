@@ -37805,7 +37805,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -37900,9 +37899,11 @@ var render = function() {
                           "router-link",
                           {
                             attrs: {
-                              to: { name: "diagnostic" },
-                              "active-class": "nav__link-active",
-                              exact: ""
+                              to: {
+                                name: "diagnostic",
+                                query: { question: 0 }
+                              },
+                              "active-class": "nav__link-active"
                             }
                           },
                           [_vm._v("\n            Diagnostic\n          ")]
@@ -42669,6 +42670,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -42695,11 +42699,11 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "router-link",
-        { staticClass: "btn__big", attrs: { to: { name: _vm.routeName } } },
-        [_vm._v(_vm._s(_vm.label))]
-      )
+      _c("router-link", {
+        staticClass: "btn__big",
+        attrs: { to: { name: _vm.routeName, query: { question: 0 } } },
+        domProps: { textContent: _vm._s(_vm.label) }
+      })
     ],
     1
   )
@@ -51775,7 +51779,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   data: function data() {
     return {
       showContent: true,
-      currentQuestion: 0,
+      currentQuestion: this.$route.query.question,
       answers: []
     };
   },
@@ -51830,10 +51834,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       _this.$store.dispatch('loginDiagnosticUser').then(function () {
         _this.$store.dispatch('fetchDiagnosticQuestions').then(function () {
           _this.$store.dispatch('toggleLoader');
-          _this.$router.push({ query: { question: _this.currentQuestion } });
         });
       });
     });
+
+    if (!this.$route.query.question) {
+      this.$router.push({ query: { question: this.currentQuestion } });
+    }
   },
   destroyed: function destroyed() {
     /**
