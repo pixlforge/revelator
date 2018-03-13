@@ -51816,6 +51816,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       _this.$store.dispatch('loginDiagnosticUser').then(function () {
         _this.$store.dispatch('fetchDiagnosticQuestions').then(function () {
           _this.$store.dispatch('toggleLoader');
+          _this.$router.push({ query: { question: _this.currentQuestion } });
         });
       });
     });
@@ -51845,6 +51846,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         setTimeout(function () {
           _this2.showContent = true;
         }, 5);
+        this.$router.push({ query: { question: this.currentQuestion } });
       }
     }
   }

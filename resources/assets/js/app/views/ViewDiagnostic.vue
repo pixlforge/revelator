@@ -115,6 +115,7 @@
         this.$store.dispatch('loginDiagnosticUser').then(() => {
           this.$store.dispatch('fetchDiagnosticQuestions').then(() => {
             this.$store.dispatch('toggleLoader')
+            this.$router.push({ query: { question: this.currentQuestion } })
           })
         })
       })
@@ -142,6 +143,7 @@
           setTimeout(() => {
             this.showContent = true
           }, 5)
+          this.$router.push({ query: { question: this.currentQuestion } })
         }
       }
     }
