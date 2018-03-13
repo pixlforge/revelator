@@ -21,7 +21,9 @@ class UpdateQuestionRequest extends StoreQuestionRequest
      */
     public function rules()
     {
-        return array_merge(parent::rules(), []);
+        return array_merge(parent::rules(), [
+            //
+        ]);
     }
 
     /**
@@ -31,6 +33,8 @@ class UpdateQuestionRequest extends StoreQuestionRequest
      */
     public function messages()
     {
-        return array_merge(parent::messages(), []);
+        return array_merge(parent::messages(), [
+            //
+        ]);
     }
 }

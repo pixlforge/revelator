@@ -39,6 +39,8 @@ class UpdateUserRequest extends StoreUserRequest
      */
     public function messages()
     {
-        return array_merge(parent::messages(), []);
+        return array_merge(parent::messages(), [
+            //
+        ]);
     }
 }
