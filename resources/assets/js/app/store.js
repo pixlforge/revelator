@@ -114,11 +114,11 @@ export const store = new Vuex.Store({
      */
     addAnswer: (state, payload) => {
       let found = state.answers.find(answer => {
-        return answer.question === payload.question
+        return answer.question_id === payload.question_id
       })
 
       if (found) {
-        found.option = payload.option
+        found.option_id = payload.option_id
         found.label = payload.label
       } else {
         state.answers.push(payload)
@@ -534,7 +534,7 @@ export const store = new Vuex.Store({
      */
     addAnswer: ({ commit, dispatch }, payload) => {
       commit('addAnswer', payload)
-      axios.post(route('api.diagnostics.addAnswer'), payload)
+      axios.post(route('api.answers.store'), payload)
     },
 
     /**

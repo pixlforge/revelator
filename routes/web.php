@@ -17,6 +17,9 @@ Route::prefix('/api')->group(function () {
     /**
      * Answers
      */
+    Route::prefix('/answers')->namespace('Answer')->group(function () {
+        Route::post('/', 'AnswerController@store')->name('api.answers.store');
+    });
 
     /**
      * Diagnostic
@@ -25,7 +28,6 @@ Route::prefix('/api')->group(function () {
         Route::get('/logout', 'DiagnosticController@logout')->name('api.diagnostics.logout');
         Route::get('/login', 'DiagnosticController@login')->name('api.diagnostics.login');
         Route::get('/questions/fetch', 'DiagnosticController@fetchQuestions')->name('api.diagnostics.fetchQuestions');
-        Route::post('/answers/add', 'DiagnosticController@addAnswer')->name('api.diagnostics.addAnswer');
     });
 
     /**

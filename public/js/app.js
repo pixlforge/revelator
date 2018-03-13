@@ -30010,11 +30010,11 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
      */
     addAnswer: function addAnswer(state, payload) {
       var found = state.answers.find(function (answer) {
-        return answer.question === payload.question;
+        return answer.question_id === payload.question_id;
       });
 
       if (found) {
-        found.option = payload.option;
+        found.option_id = payload.option_id;
         found.label = payload.label;
       } else {
         state.answers.push(payload);
@@ -30536,7 +30536,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
           dispatch = _ref41.dispatch;
 
       commit('addAnswer', payload);
-      axios.post(route('api.diagnostics.addAnswer'), payload);
+      axios.post(route('api.answers.store'), payload);
     },
 
     /**
@@ -51845,9 +51845,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   methods: {
     selectedOption: function selectedOption(data) {
       this.$store.dispatch('addAnswer', {
-        user: this.$store.getters.getCurrentUser.id,
-        question: this.getQuestions[this.currentQuestion].id,
-        option: data.value,
+        user_id: this.$store.getters.getCurrentUser.id,
+        question_id: this.getQuestions[this.currentQuestion].id,
+        option_id: data.value,
         label: data.label
       });
     },

@@ -139,9 +139,9 @@
     methods: {
       selectedOption(data) {
         this.$store.dispatch('addAnswer', {
-          user: this.$store.getters.getCurrentUser.id,
-          question: this.getQuestions[this.currentQuestion].id,
-          option: data.value,
+          user_id: this.$store.getters.getCurrentUser.id,
+          question_id: this.getQuestions[this.currentQuestion].id,
+          option_id: data.value,
           label: data.label
         })
       },
