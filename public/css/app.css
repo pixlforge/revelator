@@ -58,6 +58,7 @@ html {
 
 body {
   min-height: 100vh;
+  padding-bottom: 8rem;
   font-size: 1.6rem;
   text-transform: uppercase;
   color: #4e4f4f;

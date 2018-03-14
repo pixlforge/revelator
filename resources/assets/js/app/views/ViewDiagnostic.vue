@@ -1,6 +1,8 @@
 <template>
   <div>
     <main class="main__container main__container--medium">
+
+      <!--Question-->
       <transition name="fade">
         <h1 class="main__title"
             v-if="getQuestions.length && showContent"
@@ -8,56 +10,54 @@
         </h1>
       </transition>
 
+      <!--Answers-->
       <div v-if="getQuestions.length">
         <div class="form__group">
           <transition name="fade" mode="out-in">
-            <!--Dropdown-->
+
+            <!--Type Dropdown-->
             <div v-if="typeDropdown">
               <AppDiagnosticSelect :options="selectOptions"
                                    :value="selectedOptionLabel"
-                                   @selectedOption="selectedOption"/>
+                                   @selectedOption="addAnswer"/>
             </div>
 
-            <!--Multiple-->
+            <!--Type Multiple-->
             <div v-if="typeMultiple">
               <ul class="options__list">
                 <li class="options__list-item"
                     v-for="option in getQuestions[currentQuestion].options"
-                    :class="{ 'options__list-item--active': foundAnswer(option) }"
+                    :class="{ 'options__list-item--active': answerExistsInStore(option) }"
                     v-text="option.name"
-                    @click="selectedOption({ label: option.name, value: option.id })">
+                    @click="addAnswer({ label: option.name, value: option.id })">
                 </li>
               </ul>
             </div>
 
-            <!--Multiple Inline-->
+            <!--Type Multiple Inline-->
             <div v-if="typeMultipleInline">
               <ul class="options__list-inline">
                 <li class="options__list-inline-item"
                     v-for="option in getQuestions[currentQuestion].options"
-                    :class="{ 'options__list-inline-item--active': foundAnswer(option) }"
+                    :class="{ 'options__list-inline-item--active': answerExistsInStore(option) }"
                     v-text="option.name"
-                    @click="selectedOption({ label: option.name, value: option.id })">
+                    @click="addAnswer({ label: option.name, value: option.id })">
                 </li>
               </ul>
             </div>
 
-            <!--Infos-->
+            <!--Type Infos-->
             <div v-if="typeInfos">
               Infos
             </div>
           </transition>
         </div>
-
       </div>
 
-      <transition name="fade" mode="out-in">
-        <AppContinue v-if="getQuestions.length && showContent"
-                     label="Continue"
-                     :disabled="buttonDisabled"
-                     @nextQuestion="nextQuestion"/>
-      </transition>
-
+      <!--Button Continue-->
+      <AppContinue label="Continue"
+                   :disabled="buttonDisabled"
+                   @nextQuestion="nextQuestion"/>
     </main>
   </div>
 </template>
@@ -80,43 +80,61 @@
       }
     },
     computed: {
+      /**
+       * Map the following getters from the store.
+       */
       ...mapGetters([
         'getCurrentUser',
         'getQuestions',
         'getAnswers'
       ]),
 
+      /**
+       * Filter questions of type 'dropdown'.
+       */
       typeDropdown() {
         return this.getQuestions[this.currentQuestion].type === 'dropdown'
           && this.showContent
       },
 
+      /**
+       * Filter questions of type 'multiple'.
+       */
       typeMultiple() {
         return this.getQuestions[this.currentQuestion].type === 'multiple'
           && this.showContent
       },
 
+      /**
+       * Filter questions of type 'multiple-inline'.
+       */
       typeMultipleInline() {
         return this.getQuestions[this.currentQuestion].type === 'multiple-inline'
           && this.showContent
       },
 
+      /**
+       * Filter questions of type 'infos'.
+       */
       typeInfos() {
         return this.getQuestions[this.currentQuestion].type === 'infos'
           && this.showContent
       },
 
+      /**
+       * Get all questions and format them to be displayed in the select component.
+       */
       selectOptions() {
         let options = []
         this.getQuestions[this.currentQuestion].options.forEach(option => {
-          options.push({
-            label: option.name,
-            value: option.id
-          })
+          options.push({ label: option.name, value: option.id })
         })
         return options
       },
 
+      /**
+       * What to display in the select component.
+       */
       selectedOptionLabel() {
         if (this.getAnswers[this.currentQuestion]) {
           return {
@@ -129,6 +147,9 @@
         }
       },
 
+      /**
+       * Continue button is disabled unless an answer has been selected.
+       */
       buttonDisabled() {
         return !this.getAnswers[this.currentQuestion]
       }
@@ -148,16 +169,20 @@
       }
     },
     methods: {
-      foundAnswer(option) {
+      /**
+       * Check whether an answer to the current question is present in the store.
+       */
+      answerExistsInStore(option) {
         return this.getAnswers.find(answer => {
           return answer.question_id === this.getQuestions[this.currentQuestion].id
             && answer.option_id === option.id
         })
       },
 
-      selectedOption(data) {
-        console.log(data)
-
+      /**
+       * Add or update an answer.
+       */
+      addAnswer(data) {
         this.$store.dispatch('addAnswer', {
           user_id: this.getCurrentUser.id,
           question_id: this.getQuestions[this.currentQuestion].id,
@@ -166,6 +191,9 @@
         })
       },
 
+      /**
+       * Continue to the next question.
+       */
       nextQuestion() {
         if (this.currentQuestion < this.getQuestions.length - 1) {
           this.showContent = false

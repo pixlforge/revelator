@@ -42909,28 +42909,54 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapGetters */])(['getCurrentUser', 'getQuestions', 'getAnswers']), {
+
+    /**
+     * Filter questions of type 'dropdown'.
+     */
     typeDropdown: function typeDropdown() {
       return this.getQuestions[this.currentQuestion].type === 'dropdown' && this.showContent;
     },
+
+
+    /**
+     * Filter questions of type 'multiple'.
+     */
     typeMultiple: function typeMultiple() {
       return this.getQuestions[this.currentQuestion].type === 'multiple' && this.showContent;
     },
+
+
+    /**
+     * Filter questions of type 'multiple-inline'.
+     */
     typeMultipleInline: function typeMultipleInline() {
       return this.getQuestions[this.currentQuestion].type === 'multiple-inline' && this.showContent;
     },
+
+
+    /**
+     * Filter questions of type 'infos'.
+     */
     typeInfos: function typeInfos() {
       return this.getQuestions[this.currentQuestion].type === 'infos' && this.showContent;
     },
+
+
+    /**
+     * Get all questions and format them to be displayed in the select component.
+     */
     selectOptions: function selectOptions() {
       var options = [];
       this.getQuestions[this.currentQuestion].options.forEach(function (option) {
-        options.push({
-          label: option.name,
-          value: option.id
-        });
+        options.push({ label: option.name, value: option.id });
       });
       return options;
     },
+
+
+    /**
+     * What to display in the select component.
+     */
     selectedOptionLabel: function selectedOptionLabel() {
       if (this.getAnswers[this.currentQuestion]) {
         return {
@@ -42942,6 +42968,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         };
       }
     },
+
+
+    /**
+     * Continue button is disabled unless an answer has been selected.
+     */
     buttonDisabled: function buttonDisabled() {
       return !this.getAnswers[this.currentQuestion];
     }
@@ -42964,16 +42995,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   methods: {
-    foundAnswer: function foundAnswer(option) {
+    /**
+     * Check whether an answer to the current question is present in the store.
+     */
+    answerExistsInStore: function answerExistsInStore(option) {
       var _this2 = this;
 
       return this.getAnswers.find(function (answer) {
         return answer.question_id === _this2.getQuestions[_this2.currentQuestion].id && answer.option_id === option.id;
       });
     },
-    selectedOption: function selectedOption(data) {
-      console.log(data);
 
+
+    /**
+     * Add or update an answer.
+     */
+    addAnswer: function addAnswer(data) {
       this.$store.dispatch('addAnswer', {
         user_id: this.getCurrentUser.id,
         question_id: this.getQuestions[this.currentQuestion].id,
@@ -42981,6 +43018,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         label: data.label
       });
     },
+
+
+    /**
+     * Continue to the next question.
+     */
     nextQuestion: function nextQuestion() {
       var _this3 = this;
 
@@ -43326,7 +43368,7 @@ var render = function() {
                                   options: _vm.selectOptions,
                                   value: _vm.selectedOptionLabel
                                 },
-                                on: { selectedOption: _vm.selectedOption }
+                                on: { selectedOption: _vm.addAnswer }
                               })
                             ],
                             1
@@ -43344,7 +43386,7 @@ var render = function() {
                                   return _c("li", {
                                     staticClass: "options__list-item",
                                     class: {
-                                      "options__list-item--active": _vm.foundAnswer(
+                                      "options__list-item--active": _vm.answerExistsInStore(
                                         option
                                       )
                                     },
@@ -43353,7 +43395,7 @@ var render = function() {
                                     },
                                     on: {
                                       click: function($event) {
-                                        _vm.selectedOption({
+                                        _vm.addAnswer({
                                           label: option.name,
                                           value: option.id
                                         })
@@ -43377,7 +43419,7 @@ var render = function() {
                                   return _c("li", {
                                     staticClass: "options__list-inline-item",
                                     class: {
-                                      "options__list-inline-item--active": _vm.foundAnswer(
+                                      "options__list-inline-item--active": _vm.answerExistsInStore(
                                         option
                                       )
                                     },
@@ -43386,7 +43428,7 @@ var render = function() {
                                     },
                                     on: {
                                       click: function($event) {
-                                        _vm.selectedOption({
+                                        _vm.addAnswer({
                                           label: option.name,
                                           value: option.id
                                         })
@@ -43410,19 +43452,10 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _c(
-          "transition",
-          { attrs: { name: "fade", mode: "out-in" } },
-          [
-            _vm.getQuestions.length && _vm.showContent
-              ? _c("AppContinue", {
-                  attrs: { label: "Continue", disabled: _vm.buttonDisabled },
-                  on: { nextQuestion: _vm.nextQuestion }
-                })
-              : _vm._e()
-          ],
-          1
-        )
+        _c("AppContinue", {
+          attrs: { label: "Continue", disabled: _vm.buttonDisabled },
+          on: { nextQuestion: _vm.nextQuestion }
+        })
       ],
       1
     )
