@@ -8,9 +8,7 @@
         </h1>
       </transition>
 
-      <div v-if="getQuestions.length"
-           :style="calculateHeight">
-
+      <div v-if="getQuestions.length">
         <div class="form__group">
           <transition name="fade" mode="out-in">
             <!--Dropdown-->
@@ -55,7 +53,6 @@
 
       <transition name="fade" mode="out-in">
         <AppContinue v-if="getQuestions.length && showContent"
-                     :style="{ 'bottom': 0 }"
                      label="Continue"
                      :disabled="buttonDisabled"
                      @nextQuestion="nextQuestion"/>
@@ -88,14 +85,6 @@
         'getQuestions',
         'getAnswers'
       ]),
-
-      calculateHeight() {
-        if (this.getQuestions[this.currentQuestion].type === 'dropdown') {
-          return 'height: 50vh'
-        }
-        return 'height:' + this.getQuestions[this.currentQuestion].options.length * 13.5 + 'vh;'
-          + 'margin-bottom: 5rem'
-      },
 
       typeDropdown() {
         return this.getQuestions[this.currentQuestion].type === 'dropdown'

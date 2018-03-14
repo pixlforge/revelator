@@ -42890,9 +42890,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
 
 
 
@@ -42912,12 +42909,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapGetters */])(['getCurrentUser', 'getQuestions', 'getAnswers']), {
-    calculateHeight: function calculateHeight() {
-      if (this.getQuestions[this.currentQuestion].type === 'dropdown') {
-        return 'height: 50vh';
-      }
-      return 'height:' + this.getQuestions[this.currentQuestion].options.length * 13.5 + 'vh;' + 'margin-bottom: 5rem';
-    },
     typeDropdown: function typeDropdown() {
       return this.getQuestions[this.currentQuestion].type === 'dropdown' && this.showContent;
     },
@@ -43065,8 +43056,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -43096,13 +43085,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "btn__container" }, [
-    _c("button", {
-      staticClass: "btn__continue",
-      domProps: { textContent: _vm._s(_vm.label) },
-      on: { click: _vm.nextQuestion }
-    })
-  ])
+  return _c("button", {
+    staticClass: "btn__continue",
+    domProps: { textContent: _vm._s(_vm.label) },
+    on: { click: _vm.nextQuestion }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43321,7 +43308,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _vm.getQuestions.length
-          ? _c("div", { style: _vm.calculateHeight }, [
+          ? _c("div", [
               _c(
                 "div",
                 { staticClass: "form__group" },
@@ -43429,7 +43416,6 @@ var render = function() {
           [
             _vm.getQuestions.length && _vm.showContent
               ? _c("AppContinue", {
-                  style: { bottom: 0 },
                   attrs: { label: "Continue", disabled: _vm.buttonDisabled },
                   on: { nextQuestion: _vm.nextQuestion }
                 })

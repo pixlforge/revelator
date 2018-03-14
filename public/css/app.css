@@ -378,20 +378,10 @@ a:visited:focus {
   text-decoration: none !important;
 }
 
-.btn__container {
-  position: absolute;
-  bottom: 5rem;
-  right: 0;
-  left: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
 .btn__continue {
+  position: fixed;
+  bottom: 4rem;
+  right: 5rem;
   background-color: transparent;
   cursor: pointer;
   color: #fff;

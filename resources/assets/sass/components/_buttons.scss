@@ -117,16 +117,10 @@
     }
   }
 
-  &__container {
-    position: absolute;
-    bottom: 5rem;
-    right: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-  }
-
   &__continue {
+    position: fixed;
+    bottom: 4rem;
+    right: 5rem;
     background-color: transparent;
     cursor: pointer;
     color: $white;

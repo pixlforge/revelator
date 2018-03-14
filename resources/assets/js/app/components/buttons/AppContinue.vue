@@ -1,10 +1,8 @@
 <template>
-  <div class="btn__container">
-    <button class="btn__continue"
-            v-text="label"
-            @click="nextQuestion">
-    </button>
-  </div>
+  <button class="btn__continue"
+          v-text="label"
+          @click="nextQuestion">
+  </button>
 </template>
 
 <script>
