@@ -42251,7 +42251,24 @@ var routes = [
 {
   path: '/diagnostic',
   name: 'diagnostic',
-  component: __WEBPACK_IMPORTED_MODULE_2__views_ViewDiagnostic___default.a
+  component: __WEBPACK_IMPORTED_MODULE_2__views_ViewDiagnostic___default.a,
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (window.currentUser === null) {
+      next({
+        name: 'home'
+      });
+    } else {
+      if (!to.query.question) {
+        to.query.question = '0';
+        next({
+          path: to.path,
+          query: to.query
+        });
+      } else {
+        next();
+      }
+    }
+  }
 },
 
 /**
@@ -42923,10 +42940,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   created: function created() {
     var _this = this;
 
-    if (!this.$route.query.question) {
-      this.$router.push({ query: { question: this.currentQuestion } });
-    }
-
     /**
      * Get the questions if the store is empty.
      */
@@ -42951,6 +42964,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     selectedOption: function selectedOption(data) {
       console.log(data);
+
       this.$store.dispatch('addAnswer', {
         user_id: this.$store.getters.getCurrentUser.id,
         question_id: this.getQuestions[this.currentQuestion].id,

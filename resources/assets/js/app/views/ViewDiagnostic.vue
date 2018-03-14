@@ -124,10 +124,6 @@
       }
     },
     created() {
-      if (!this.$route.query.question) {
-        this.$router.push({ query: { question: this.currentQuestion } })
-      }
-
       /**
        * Get the questions if the store is empty.
        */
@@ -140,7 +136,6 @@
           this.$store.dispatch('toggleLoader')
         })
       }
-
     },
     methods: {
       foundAnswer(option) {
@@ -152,6 +147,7 @@
 
       selectedOption(data) {
         console.log(data)
+
         this.$store.dispatch('addAnswer', {
           user_id: this.$store.getters.getCurrentUser.id,
           question_id: this.getQuestions[this.currentQuestion].id,

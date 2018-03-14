@@ -42,7 +42,24 @@ export const routes = [
   {
     path: '/diagnostic',
     name: 'diagnostic',
-    component: ViewDiagnostic
+    component: ViewDiagnostic,
+    beforeEnter: (to, from, next) => {
+      if (window.currentUser === null) {
+        next({
+          name: 'home'
+        })
+      } else {
+        if (!to.query.question) {
+          to.query.question = '0'
+          next({
+            path: to.path,
+            query: to.query
+          })
+        } else {
+          next()
+        }
+      }
+    }
   },
 
   /**
