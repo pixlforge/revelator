@@ -563,7 +563,7 @@ class OptionsTableSeeder extends Seeder
         $programs[8]->options()->save($optionBeautyFive, ['value' => 0]);
 
         $optionBeautySix = factory(\App\Option::class)->create([
-            'name' => 'Dryness',
+            'name' => 'Dark spots',
             'pos' => 6,
             'question_id' => 9
         ]);
@@ -578,7 +578,7 @@ class OptionsTableSeeder extends Seeder
         $programs[8]->options()->save($optionBeautySix, ['value' => 0]);
 
         $optionBeautySeven = factory(\App\Option::class)->create([
-            'name' => 'Dark spots',
+            'name' => 'Particular area shape (nose, chin, etc.)',
             'pos' => 7,
             'question_id' => 9
         ]);
@@ -591,21 +591,6 @@ class OptionsTableSeeder extends Seeder
         $programs[6]->options()->save($optionBeautySeven, ['value' => 0]);
         $programs[7]->options()->save($optionBeautySeven, ['value' => 0]);
         $programs[8]->options()->save($optionBeautySeven, ['value' => 0]);
-
-        $optionBeautyEight = factory(\App\Option::class)->create([
-            'name' => 'Particular area shape (nose, chin, etc.)',
-            'pos' => 8,
-            'question_id' => 9
-        ]);
-        $programs[0]->options()->save($optionBeautyEight, ['value' => 0]);
-        $programs[1]->options()->save($optionBeautyEight, ['value' => 0]);
-        $programs[2]->options()->save($optionBeautyEight, ['value' => 0]);
-        $programs[3]->options()->save($optionBeautyEight, ['value' => 0]);
-        $programs[4]->options()->save($optionBeautyEight, ['value' => 0]);
-        $programs[5]->options()->save($optionBeautyEight, ['value' => 0]);
-        $programs[6]->options()->save($optionBeautyEight, ['value' => 0]);
-        $programs[7]->options()->save($optionBeautyEight, ['value' => 0]);
-        $programs[8]->options()->save($optionBeautyEight, ['value' => 0]);
 
         /**
          * Country

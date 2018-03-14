@@ -42881,6 +42881,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -42899,7 +42911,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapGetters */])(['getQuestions', 'getAnswers']), {
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapGetters */])(['getCurrentUser', 'getQuestions', 'getAnswers']), {
+    calculateHeight: function calculateHeight() {
+      if (this.getQuestions[this.currentQuestion].type === 'dropdown') {
+        return 'height: 50vh';
+      }
+      return 'height:' + this.getQuestions[this.currentQuestion].options.length * 13.5 + 'vh;' + 'margin-bottom: 5rem';
+    },
     typeDropdown: function typeDropdown() {
       return this.getQuestions[this.currentQuestion].type === 'dropdown' && this.showContent;
     },
@@ -42923,9 +42941,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       return options;
     },
     selectedOptionLabel: function selectedOptionLabel() {
-      if (this.$store.getters.getAnswers[this.currentQuestion]) {
+      if (this.getAnswers[this.currentQuestion]) {
         return {
-          label: this.$store.getters.getAnswers[this.currentQuestion].label
+          label: this.getAnswers[this.currentQuestion].label
         };
       } else {
         return {
@@ -42934,7 +42952,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }
     },
     buttonDisabled: function buttonDisabled() {
-      return !this.$store.getters.getAnswers[this.currentQuestion];
+      return !this.getAnswers[this.currentQuestion];
     }
   }),
   created: function created() {
@@ -42943,7 +42961,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * Get the questions if the store is empty.
      */
-    if (!this.$store.getters.getQuestions.length) {
+    if (!this.getQuestions.length) {
       this.$store.dispatch('toggleLoader');
       this.$store.dispatch('fetchQuestions').then(function () {
         _this.$store.dispatch('toggleLoader');
@@ -42966,7 +42984,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       console.log(data);
 
       this.$store.dispatch('addAnswer', {
-        user_id: this.$store.getters.getCurrentUser.id,
+        user_id: this.getCurrentUser.id,
         question_id: this.getQuestions[this.currentQuestion].id,
         option_id: data.value,
         label: data.label
@@ -43303,69 +43321,106 @@ var render = function() {
         ]),
         _vm._v(" "),
         _vm.getQuestions.length
-          ? _c(
-              "div",
-              { staticClass: "form__group" },
-              [
-                _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
-                  _vm.typeDropdown
-                    ? _c(
-                        "div",
-                        [
-                          _c("AppDiagnosticSelect", {
-                            attrs: {
-                              options: _vm.selectOptions,
-                              value: _vm.selectedOptionLabel
-                            },
-                            on: { selectedOption: _vm.selectedOption }
-                          })
-                        ],
-                        1
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.typeMultiple
-                    ? _c("div", [_vm._v("\n          Multiple\n        ")])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.typeMultipleInline
-                    ? _c("div", [
-                        _c(
-                          "ul",
-                          { staticClass: "options__list-inline" },
-                          _vm._l(
-                            _vm.getQuestions[_vm.currentQuestion].options,
-                            function(option) {
-                              return _c("li", {
-                                staticClass: "options__list-inline-item",
-                                class: {
-                                  "options__list-inline-item--active": _vm.foundAnswer(
-                                    option
-                                  )
+          ? _c("div", { style: _vm.calculateHeight }, [
+              _c(
+                "div",
+                { staticClass: "form__group" },
+                [
+                  _c(
+                    "transition",
+                    { attrs: { name: "fade", mode: "out-in" } },
+                    [
+                      _vm.typeDropdown
+                        ? _c(
+                            "div",
+                            [
+                              _c("AppDiagnosticSelect", {
+                                attrs: {
+                                  options: _vm.selectOptions,
+                                  value: _vm.selectedOptionLabel
                                 },
-                                domProps: { textContent: _vm._s(option.name) },
-                                on: {
-                                  click: function($event) {
-                                    _vm.selectedOption({
-                                      label: option.name,
-                                      value: option.id
-                                    })
-                                  }
-                                }
+                                on: { selectedOption: _vm.selectedOption }
                               })
-                            }
+                            ],
+                            1
                           )
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.typeInfos
-                    ? _c("div", [_vm._v("\n          Infos\n        ")])
-                    : _vm._e()
-                ])
-              ],
-              1
-            )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.typeMultiple
+                        ? _c("div", [
+                            _c(
+                              "ul",
+                              { staticClass: "options__list" },
+                              _vm._l(
+                                _vm.getQuestions[_vm.currentQuestion].options,
+                                function(option) {
+                                  return _c("li", {
+                                    staticClass: "options__list-item",
+                                    class: {
+                                      "options__list-item--active": _vm.foundAnswer(
+                                        option
+                                      )
+                                    },
+                                    domProps: {
+                                      textContent: _vm._s(option.name)
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.selectedOption({
+                                          label: option.name,
+                                          value: option.id
+                                        })
+                                      }
+                                    }
+                                  })
+                                }
+                              )
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.typeMultipleInline
+                        ? _c("div", [
+                            _c(
+                              "ul",
+                              { staticClass: "options__list-inline" },
+                              _vm._l(
+                                _vm.getQuestions[_vm.currentQuestion].options,
+                                function(option) {
+                                  return _c("li", {
+                                    staticClass: "options__list-inline-item",
+                                    class: {
+                                      "options__list-inline-item--active": _vm.foundAnswer(
+                                        option
+                                      )
+                                    },
+                                    domProps: {
+                                      textContent: _vm._s(option.name)
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.selectedOption({
+                                          label: option.name,
+                                          value: option.id
+                                        })
+                                      }
+                                    }
+                                  })
+                                }
+                              )
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.typeInfos
+                        ? _c("div", [_vm._v("\n            Infos\n          ")])
+                        : _vm._e()
+                    ]
+                  )
+                ],
+                1
+              )
+            ])
           : _vm._e(),
         _vm._v(" "),
         _c(
@@ -43374,6 +43429,7 @@ var render = function() {
           [
             _vm.getQuestions.length && _vm.showContent
               ? _c("AppContinue", {
+                  style: { bottom: 0 },
                   attrs: { label: "Continue", disabled: _vm.buttonDisabled },
                   on: { nextQuestion: _vm.nextQuestion }
                 })

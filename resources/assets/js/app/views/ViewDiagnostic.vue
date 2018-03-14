@@ -8,42 +8,54 @@
         </h1>
       </transition>
 
-      <div class="form__group"
-           v-if="getQuestions.length">
-        <transition name="fade" mode="out-in">
-          <!--Dropdown-->
-          <div v-if="typeDropdown">
-            <AppDiagnosticSelect :options="selectOptions"
-                                 :value="selectedOptionLabel"
-                                 @selectedOption="selectedOption"/>
-          </div>
+      <div v-if="getQuestions.length"
+           :style="calculateHeight">
 
-          <!--Multiple-->
-          <div v-if="typeMultiple">
-            Multiple
-          </div>
+        <div class="form__group">
+          <transition name="fade" mode="out-in">
+            <!--Dropdown-->
+            <div v-if="typeDropdown">
+              <AppDiagnosticSelect :options="selectOptions"
+                                   :value="selectedOptionLabel"
+                                   @selectedOption="selectedOption"/>
+            </div>
 
-          <!--Multiple Inline-->
-          <div v-if="typeMultipleInline">
-            <ul class="options__list-inline">
-              <li class="options__list-inline-item"
-                  v-for="option in getQuestions[currentQuestion].options"
-                  :class="{ 'options__list-inline-item--active': foundAnswer(option) }"
-                  v-text="option.name"
-                  @click="selectedOption({ label: option.name, value: option.id })">
-              </li>
-            </ul>
-          </div>
+            <!--Multiple-->
+            <div v-if="typeMultiple">
+              <ul class="options__list">
+                <li class="options__list-item"
+                    v-for="option in getQuestions[currentQuestion].options"
+                    :class="{ 'options__list-item--active': foundAnswer(option) }"
+                    v-text="option.name"
+                    @click="selectedOption({ label: option.name, value: option.id })">
+                </li>
+              </ul>
+            </div>
 
-          <!--Infos-->
-          <div v-if="typeInfos">
-            Infos
-          </div>
-        </transition>
+            <!--Multiple Inline-->
+            <div v-if="typeMultipleInline">
+              <ul class="options__list-inline">
+                <li class="options__list-inline-item"
+                    v-for="option in getQuestions[currentQuestion].options"
+                    :class="{ 'options__list-inline-item--active': foundAnswer(option) }"
+                    v-text="option.name"
+                    @click="selectedOption({ label: option.name, value: option.id })">
+                </li>
+              </ul>
+            </div>
+
+            <!--Infos-->
+            <div v-if="typeInfos">
+              Infos
+            </div>
+          </transition>
+        </div>
+
       </div>
 
       <transition name="fade" mode="out-in">
         <AppContinue v-if="getQuestions.length && showContent"
+                     :style="{ 'bottom': 0 }"
                      label="Continue"
                      :disabled="buttonDisabled"
                      @nextQuestion="nextQuestion"/>
@@ -72,9 +84,18 @@
     },
     computed: {
       ...mapGetters([
+        'getCurrentUser',
         'getQuestions',
         'getAnswers'
       ]),
+
+      calculateHeight() {
+        if (this.getQuestions[this.currentQuestion].type === 'dropdown') {
+          return 'height: 50vh'
+        }
+        return 'height:' + this.getQuestions[this.currentQuestion].options.length * 13.5 + 'vh;'
+          + 'margin-bottom: 5rem'
+      },
 
       typeDropdown() {
         return this.getQuestions[this.currentQuestion].type === 'dropdown'
@@ -108,9 +129,9 @@
       },
 
       selectedOptionLabel() {
-        if (this.$store.getters.getAnswers[this.currentQuestion]) {
+        if (this.getAnswers[this.currentQuestion]) {
           return {
-            label: this.$store.getters.getAnswers[this.currentQuestion].label
+            label: this.getAnswers[this.currentQuestion].label
           }
         } else {
           return {
@@ -120,14 +141,14 @@
       },
 
       buttonDisabled() {
-        return !this.$store.getters.getAnswers[this.currentQuestion]
+        return !this.getAnswers[this.currentQuestion]
       }
     },
     created() {
       /**
        * Get the questions if the store is empty.
        */
-      if (!this.$store.getters.getQuestions.length) {
+      if (!this.getQuestions.length) {
         this.$store.dispatch('toggleLoader')
         this.$store.dispatch('fetchQuestions').then(() => {
           this.$store.dispatch('toggleLoader')
@@ -149,7 +170,7 @@
         console.log(data)
 
         this.$store.dispatch('addAnswer', {
-          user_id: this.$store.getters.getCurrentUser.id,
+          user_id: this.getCurrentUser.id,
           question_id: this.getQuestions[this.currentQuestion].id,
           option_id: data.value,
           label: data.label
