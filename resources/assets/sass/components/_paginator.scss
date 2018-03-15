@@ -4,7 +4,7 @@
     bottom: 0;
     left: 0;
     width: 100vw;
-    height: 25px;
+    height: 20px;
     display: flex;
     overflow: visible;
   }
@@ -14,10 +14,6 @@
     height: 100%;
     display: flex;
     justify-content: center;
-
-    &:not(:last-child) {
-      margin-right: 1px;
-    }
   }
 
   &__label-container {
