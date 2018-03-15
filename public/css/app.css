@@ -869,6 +869,69 @@ a:visited:focus {
   margin-top: 2rem;
 }
 
+.paginator__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: visible;
+}
+
+.paginator__element {
+  position: relative;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.paginator__element:not(:last-child) {
+  margin-right: 1px;
+}
+
+.paginator__label-container {
+  height: 100%;
+  width: 100%;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.paginator__label {
+  position: absolute;
+  right: 0;
+  left: 0;
+  text-align: center;
+  font-size: 1.6rem;
+  opacity: 0;
+  cursor: pointer;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.paginator__element:hover .paginator__label {
+  opacity: 1;
+  -webkit-transform: translateY(-5rem);
+          transform: translateY(-5rem);
+  height: 8rem;
+}
+
+.paginator__element:hover .paginator__label-container {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 100%;
+  -webkit-transform: translateY(-1rem);
+          transform: translateY(-1rem);
+  -webkit-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
 .main__container {
   width: 93vw;
   min-height: 72vh;

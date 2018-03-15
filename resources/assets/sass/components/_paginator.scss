@@ -1,0 +1,53 @@
+.paginator {
+  &__container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 25px;
+    display: flex;
+    overflow: visible;
+  }
+
+  &__element {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    &:not(:last-child) {
+      margin-right: 1px;
+    }
+  }
+
+  &__label-container {
+    height: 100%;
+    width: 100%;
+    transition: all .2s ease;
+  }
+
+  &__label {
+    position: absolute;
+    right: 0;
+    left: 0;
+    text-align: center;
+    font-size: 1.6rem;
+    opacity: 0;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+
+  &__element:hover &__label {
+    opacity: 1;
+    transform: translateY(-5rem);
+    height: 8rem;
+  }
+
+  &__element:hover &__label-container {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 100%;
+    transform: translateY(-1rem);
+    box-shadow: 0 8px 15px rgba($black, .1);
+  }
+}

@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
     },
     passwordVisibility: false,
     currentUser: null,
+    currentQuestion: 0,
     users: [],
     questions: [],
     programs: [],
@@ -56,6 +57,10 @@ export const store = new Vuex.Store({
     getAnswers: state => {
       return state.answers
     },
+
+    getCurrentQuestion: state => {
+      return state.currentQuestion
+    }
   },
   mutations: {
     /**
@@ -130,6 +135,20 @@ export const store = new Vuex.Store({
      */
     clearAnswers: state => {
       state.answers = []
+    },
+
+    /**
+     * incrementCurrentQuestion Mutation
+     */
+    incrementCurrentQuestion: state => {
+      state.currentQuestion++
+    },
+
+    /**
+     * setCurrentQuestion Mutation
+     */
+    setCurrentQuestion: (state, payload) => {
+      state.currentQuestion = payload
     },
 
     /**
@@ -555,6 +574,20 @@ export const store = new Vuex.Store({
           reject(err)
         })
       })
-    }
+    },
+
+    /**
+     * incrementCurrentQuestion Action
+     */
+    incrementCurrentQuestion: ({ commit }) => {
+      commit('incrementCurrentQuestion')
+    },
+
+    /**
+     * setCurrentQuestion Action
+     */
+    setCurrentQuestion: ({ commit }, payload) => {
+      commit('setCurrentQuestion', payload)
+    },
   }
 })
