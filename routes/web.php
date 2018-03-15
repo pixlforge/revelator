@@ -18,6 +18,7 @@ Route::prefix('/api')->group(function () {
      * Answers
      */
     Route::prefix('/answers')->namespace('Answer')->group(function () {
+        Route::get('/', 'AnswerController@index')->name('api.answers.index');
         Route::post('/', 'AnswerController@store')->name('api.answers.store');
     });
 

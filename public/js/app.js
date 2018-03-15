@@ -30034,6 +30034,13 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     },
 
     /**
+     * fetchExistingAnswers Mutation
+     */
+    fetchExistingAnswers: function fetchExistingAnswers(state, payload) {
+      state.answers = payload;
+    },
+
+    /**
      * incrementCurrentQuestion Mutation
      */
     incrementCurrentQuestion: function incrementCurrentQuestion(state) {
@@ -30540,11 +30547,30 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     },
 
     /**
-     * Logout Action
+     * fetchExistingAnswers Action
      */
-    logout: function logout(_ref40) {
+    fetchExistingAnswers: function fetchExistingAnswers(_ref40) {
       var commit = _ref40.commit,
           dispatch = _ref40.dispatch;
+
+      return new Promise(function (resolve, reject) {
+        axios.get(route('api.answers.index')).then(function (_ref41) {
+          var data = _ref41.data;
+
+          commit('fetchExistingAnswers', data);
+          resolve(data);
+        }).catch(function (err) {
+          reject(err);
+        });
+      });
+    },
+
+    /**
+     * Logout Action
+     */
+    logout: function logout(_ref42) {
+      var commit = _ref42.commit,
+          dispatch = _ref42.dispatch;
 
       commit('toggleLoader');
       return new Promise(function (resolve, reject) {
@@ -30562,14 +30588,14 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * Login Action
      */
-    login: function login(_ref41, payload) {
-      var commit = _ref41.commit,
-          dispatch = _ref41.dispatch;
+    login: function login(_ref43, payload) {
+      var commit = _ref43.commit,
+          dispatch = _ref43.dispatch;
 
       dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
-        axios.post(route('login'), payload).then(function (_ref42) {
-          var data = _ref42.data;
+        axios.post(route('login'), payload).then(function (_ref44) {
+          var data = _ref44.data;
 
           dispatch('hydrateCurrentUser', data);
           dispatch('toggleLoader');
@@ -30584,8 +30610,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * incrementCurrentQuestion Action
      */
-    incrementCurrentQuestion: function incrementCurrentQuestion(_ref43) {
-      var commit = _ref43.commit;
+    incrementCurrentQuestion: function incrementCurrentQuestion(_ref45) {
+      var commit = _ref45.commit;
 
       commit('incrementCurrentQuestion');
     },
@@ -30593,8 +30619,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * setCurrentQuestion Action
      */
-    setCurrentQuestion: function setCurrentQuestion(_ref44, payload) {
-      var commit = _ref44.commit;
+    setCurrentQuestion: function setCurrentQuestion(_ref46, payload) {
+      var commit = _ref46.commit;
 
       commit('setCurrentQuestion', payload);
     }
@@ -42951,7 +42977,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapGetters */])(['getCurrentQuestion', 'getCurrentUser', 'getQuestions', 'getAnswers']), {
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapGetters */])(['getCurrentQuestion', 'getCurrentUser', 'getQuestions', 'getAnswers', 'getOptions']), {
 
     /**
      * Filter questions of type 'dropdown'.
@@ -43027,6 +43053,28 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Parse the query params and set the current question number.
      */
     this.$store.dispatch('setCurrentQuestion', this.$route.query.question);
+
+    /**
+     * Get the options.
+     */
+    if (!this.getOptions.length) {
+      this.$store.dispatch('fetchOptions');
+    }
+
+    /**
+     * Get the answers for the current authenticated user.
+     */
+    if (!this.getAnswers.length) {
+      this.$store.dispatch('fetchExistingAnswers').then(function (res) {
+        _this.getAnswers.forEach(function (answer) {
+          return answer.label = _this.getOptions.find(function (option) {
+            return answer.option_id === option.id;
+          }).name;
+        });
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    }
 
     /**
      * Get the questions if the store is empty.

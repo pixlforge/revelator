@@ -20,6 +20,7 @@ class AnswerTest extends TestCase
         $this->dev = factory(User::class)->states('dev')->create();
         $this->admin = factory(User::class)->states('admin')->create();
         $this->user = factory(User::class)->create();
+        $this->guest = factory(User::class)->states('guest')->create();
     }
 
     /** @test */
@@ -67,5 +68,22 @@ class AnswerTest extends TestCase
         ])->assertStatus(401);
 
         $this->assertCount(0, Answer::all());
+    }
+
+    /** @test */
+    function guests_can_fetch_their_own_existing_answers()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->actingAs($this->guest);
+
+        factory(Answer::class)->create([
+            'user_id' => $this->guest->id
+        ]);
+
+        $this->getJson(route('api.answers.index'))
+            ->assertStatus(200);
+
+        $this->assertCount(1, Answer::own()->get());
     }
 }

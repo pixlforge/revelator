@@ -91,7 +91,8 @@
         'getCurrentQuestion',
         'getCurrentUser',
         'getQuestions',
-        'getAnswers'
+        'getAnswers',
+        'getOptions'
       ]),
 
       /**
@@ -164,6 +165,26 @@
        * Parse the query params and set the current question number.
        */
       this.$store.dispatch('setCurrentQuestion', this.$route.query.question)
+
+      /**
+       * Get the options.
+       */
+      if (!this.getOptions.length) {
+        this.$store.dispatch('fetchOptions')
+      }
+
+      /**
+       * Get the answers for the current authenticated user.
+       */
+      if (!this.getAnswers.length) {
+        this.$store.dispatch('fetchExistingAnswers').then(res => {
+          this.getAnswers.forEach(answer => {
+            return answer.label = this.getOptions.find(option => {
+              return answer.option_id === option.id
+            }).name
+          })
+        }).catch(err => console.log(err))
+      }
 
       /**
        * Get the questions if the store is empty.

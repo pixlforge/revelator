@@ -3,9 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Answer extends Model
 {
+    /**
+     * Scope the query to the user's own.
+     *
+     * @param Builder $builder
+     * @return Builder
+     */
+    public function scopeOwn(Builder $builder)
+    {
+        return $builder->where('user_id', auth()->id());
+    }
+
     /**
      * User relationship.
      *

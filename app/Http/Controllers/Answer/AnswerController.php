@@ -16,6 +16,26 @@ class AnswerController extends Controller
         $this->middleware(['auth']);
     }
 
+    /**
+     * Fetch existing answers.
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function index()
+    {
+        if (auth()->user()->isUser()) {
+            $answers = Answer::own()->get();
+        }
+
+        return response($answers, 200);
+    }
+
+    /**
+     * Store a new answer.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function store(Request $request)
     {
         $answer = Answer::where([

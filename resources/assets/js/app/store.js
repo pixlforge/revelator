@@ -138,6 +138,13 @@ export const store = new Vuex.Store({
     },
 
     /**
+     * fetchExistingAnswers Mutation
+     */
+    fetchExistingAnswers: (state, payload) => {
+      state.answers = payload
+    },
+
+    /**
      * incrementCurrentQuestion Mutation
      */
     incrementCurrentQuestion: state => {
@@ -540,6 +547,20 @@ export const store = new Vuex.Store({
     addAnswer: ({ commit, dispatch }, payload) => {
       commit('addAnswer', payload)
       axios.post(route('api.answers.store'), payload)
+    },
+
+    /**
+     * fetchExistingAnswers Action
+     */
+    fetchExistingAnswers: ({ commit, dispatch }) => {
+      return new Promise((resolve, reject) => {
+        axios.get(route('api.answers.index')).then(({ data }) => {
+          commit('fetchExistingAnswers', data)
+          resolve(data)
+        }).catch(err => {
+          reject(err)
+        })
+      })
     },
 
     /**
