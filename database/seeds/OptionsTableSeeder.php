@@ -595,6 +595,94 @@ class OptionsTableSeeder extends Seeder
         /**
          * Country
          */
+        $country = factory(\App\Option::class)->create(['name' => 'Switzerland', 'question_id' => 3]);
+        $programs[0]->options()->save($country, ['value' => 0]);
+        $programs[1]->options()->save($country, ['value' => 0]);
+        $programs[2]->options()->save($country, ['value' => 0]);
+        $programs[3]->options()->save($country, ['value' => 0]);
+        $programs[4]->options()->save($country, ['value' => 0]);
+        $programs[5]->options()->save($country, ['value' => 0]);
+        $programs[6]->options()->save($country, ['value' => 0]);
+        $programs[7]->options()->save($country, ['value' => 0]);
+        $programs[8]->options()->save($country, ['value' => 0]);
+
+        $country = factory(\App\Option::class)->create(['name' => 'United States of America', 'question_id' => 3]);
+        $programs[0]->options()->save($country, ['value' => 0]);
+        $programs[1]->options()->save($country, ['value' => 0]);
+        $programs[2]->options()->save($country, ['value' => 0]);
+        $programs[3]->options()->save($country, ['value' => 0]);
+        $programs[4]->options()->save($country, ['value' => 0]);
+        $programs[5]->options()->save($country, ['value' => 0]);
+        $programs[6]->options()->save($country, ['value' => 0]);
+        $programs[7]->options()->save($country, ['value' => 0]);
+        $programs[8]->options()->save($country, ['value' => 0]);
+
+        $country = factory(\App\Option::class)->create(['name' => 'China', 'question_id' => 3]);
+        $programs[0]->options()->save($country, ['value' => 0]);
+        $programs[1]->options()->save($country, ['value' => 0]);
+        $programs[2]->options()->save($country, ['value' => 0]);
+        $programs[3]->options()->save($country, ['value' => 0]);
+        $programs[4]->options()->save($country, ['value' => 0]);
+        $programs[5]->options()->save($country, ['value' => 0]);
+        $programs[6]->options()->save($country, ['value' => 0]);
+        $programs[7]->options()->save($country, ['value' => 0]);
+        $programs[8]->options()->save($country, ['value' => 0]);
+
+        $country = factory(\App\Option::class)->create(['name' => 'Russia', 'question_id' => 3]);
+        $programs[0]->options()->save($country, ['value' => 0]);
+        $programs[1]->options()->save($country, ['value' => 0]);
+        $programs[2]->options()->save($country, ['value' => 0]);
+        $programs[3]->options()->save($country, ['value' => 0]);
+        $programs[4]->options()->save($country, ['value' => 0]);
+        $programs[5]->options()->save($country, ['value' => 0]);
+        $programs[6]->options()->save($country, ['value' => 0]);
+        $programs[7]->options()->save($country, ['value' => 0]);
+        $programs[8]->options()->save($country, ['value' => 0]);
+
+        $country = factory(\App\Option::class)->create(['name' => 'France', 'question_id' => 3]);
+        $programs[0]->options()->save($country, ['value' => 0]);
+        $programs[1]->options()->save($country, ['value' => 0]);
+        $programs[2]->options()->save($country, ['value' => 0]);
+        $programs[3]->options()->save($country, ['value' => 0]);
+        $programs[4]->options()->save($country, ['value' => 0]);
+        $programs[5]->options()->save($country, ['value' => 0]);
+        $programs[6]->options()->save($country, ['value' => 0]);
+        $programs[7]->options()->save($country, ['value' => 0]);
+        $programs[8]->options()->save($country, ['value' => 0]);
+
+        $country = factory(\App\Option::class)->create(['name' => 'Germany', 'question_id' => 3]);
+        $programs[0]->options()->save($country, ['value' => 0]);
+        $programs[1]->options()->save($country, ['value' => 0]);
+        $programs[2]->options()->save($country, ['value' => 0]);
+        $programs[3]->options()->save($country, ['value' => 0]);
+        $programs[4]->options()->save($country, ['value' => 0]);
+        $programs[5]->options()->save($country, ['value' => 0]);
+        $programs[6]->options()->save($country, ['value' => 0]);
+        $programs[7]->options()->save($country, ['value' => 0]);
+        $programs[8]->options()->save($country, ['value' => 0]);
+
+        $country = factory(\App\Option::class)->create(['name' => 'Italy', 'question_id' => 3]);
+        $programs[0]->options()->save($country, ['value' => 0]);
+        $programs[1]->options()->save($country, ['value' => 0]);
+        $programs[2]->options()->save($country, ['value' => 0]);
+        $programs[3]->options()->save($country, ['value' => 0]);
+        $programs[4]->options()->save($country, ['value' => 0]);
+        $programs[5]->options()->save($country, ['value' => 0]);
+        $programs[6]->options()->save($country, ['value' => 0]);
+        $programs[7]->options()->save($country, ['value' => 0]);
+        $programs[8]->options()->save($country, ['value' => 0]);
+
+        $country = factory(\App\Option::class)->create(['name' => 'Austria', 'question_id' => 3]);
+        $programs[0]->options()->save($country, ['value' => 0]);
+        $programs[1]->options()->save($country, ['value' => 0]);
+        $programs[2]->options()->save($country, ['value' => 0]);
+        $programs[3]->options()->save($country, ['value' => 0]);
+        $programs[4]->options()->save($country, ['value' => 0]);
+        $programs[5]->options()->save($country, ['value' => 0]);
+        $programs[6]->options()->save($country, ['value' => 0]);
+        $programs[7]->options()->save($country, ['value' => 0]);
+        $programs[8]->options()->save($country, ['value' => 0]);
+
         $country = factory(\App\Option::class)->create(['name' => 'Afghanistan', 'question_id' => 3]);
         $programs[0]->options()->save($country, ['value' => 0]);
         $programs[1]->options()->save($country, ['value' => 0]);
@@ -678,17 +766,6 @@ class OptionsTableSeeder extends Seeder
         $programs[8]->options()->save($country, ['value' => 0]);
 
         $country = factory(\App\Option::class)->create(['name' => 'Australia', 'question_id' => 3]);
-        $programs[0]->options()->save($country, ['value' => 0]);
-        $programs[1]->options()->save($country, ['value' => 0]);
-        $programs[2]->options()->save($country, ['value' => 0]);
-        $programs[3]->options()->save($country, ['value' => 0]);
-        $programs[4]->options()->save($country, ['value' => 0]);
-        $programs[5]->options()->save($country, ['value' => 0]);
-        $programs[6]->options()->save($country, ['value' => 0]);
-        $programs[7]->options()->save($country, ['value' => 0]);
-        $programs[8]->options()->save($country, ['value' => 0]);
-
-        $country = factory(\App\Option::class)->create(['name' => 'Austria', 'question_id' => 3]);
         $programs[0]->options()->save($country, ['value' => 0]);
         $programs[1]->options()->save($country, ['value' => 0]);
         $programs[2]->options()->save($country, ['value' => 0]);
@@ -974,17 +1051,6 @@ class OptionsTableSeeder extends Seeder
         $programs[7]->options()->save($country, ['value' => 0]);
         $programs[8]->options()->save($country, ['value' => 0]);
 
-        $country = factory(\App\Option::class)->create(['name' => 'China', 'question_id' => 3]);
-        $programs[0]->options()->save($country, ['value' => 0]);
-        $programs[1]->options()->save($country, ['value' => 0]);
-        $programs[2]->options()->save($country, ['value' => 0]);
-        $programs[3]->options()->save($country, ['value' => 0]);
-        $programs[4]->options()->save($country, ['value' => 0]);
-        $programs[5]->options()->save($country, ['value' => 0]);
-        $programs[6]->options()->save($country, ['value' => 0]);
-        $programs[7]->options()->save($country, ['value' => 0]);
-        $programs[8]->options()->save($country, ['value' => 0]);
-
         $country = factory(\App\Option::class)->create(['name' => 'Colombia', 'question_id' => 3]);
         $programs[0]->options()->save($country, ['value' => 0]);
         $programs[1]->options()->save($country, ['value' => 0]);
@@ -1238,17 +1304,6 @@ class OptionsTableSeeder extends Seeder
         $programs[7]->options()->save($country, ['value' => 0]);
         $programs[8]->options()->save($country, ['value' => 0]);
 
-        $country = factory(\App\Option::class)->create(['name' => 'France', 'question_id' => 3]);
-        $programs[0]->options()->save($country, ['value' => 0]);
-        $programs[1]->options()->save($country, ['value' => 0]);
-        $programs[2]->options()->save($country, ['value' => 0]);
-        $programs[3]->options()->save($country, ['value' => 0]);
-        $programs[4]->options()->save($country, ['value' => 0]);
-        $programs[5]->options()->save($country, ['value' => 0]);
-        $programs[6]->options()->save($country, ['value' => 0]);
-        $programs[7]->options()->save($country, ['value' => 0]);
-        $programs[8]->options()->save($country, ['value' => 0]);
-
         $country = factory(\App\Option::class)->create(['name' => 'Gabon', 'question_id' => 3]);
         $programs[0]->options()->save($country, ['value' => 0]);
         $programs[1]->options()->save($country, ['value' => 0]);
@@ -1272,17 +1327,6 @@ class OptionsTableSeeder extends Seeder
         $programs[8]->options()->save($country, ['value' => 0]);
 
         $country = factory(\App\Option::class)->create(['name' => 'Georgia', 'question_id' => 3]);
-        $programs[0]->options()->save($country, ['value' => 0]);
-        $programs[1]->options()->save($country, ['value' => 0]);
-        $programs[2]->options()->save($country, ['value' => 0]);
-        $programs[3]->options()->save($country, ['value' => 0]);
-        $programs[4]->options()->save($country, ['value' => 0]);
-        $programs[5]->options()->save($country, ['value' => 0]);
-        $programs[6]->options()->save($country, ['value' => 0]);
-        $programs[7]->options()->save($country, ['value' => 0]);
-        $programs[8]->options()->save($country, ['value' => 0]);
-
-        $country = factory(\App\Option::class)->create(['name' => 'Germany', 'question_id' => 3]);
         $programs[0]->options()->save($country, ['value' => 0]);
         $programs[1]->options()->save($country, ['value' => 0]);
         $programs[2]->options()->save($country, ['value' => 0]);
@@ -1470,17 +1514,6 @@ class OptionsTableSeeder extends Seeder
         $programs[8]->options()->save($country, ['value' => 0]);
 
         $country = factory(\App\Option::class)->create(['name' => 'Israel', 'question_id' => 3]);
-        $programs[0]->options()->save($country, ['value' => 0]);
-        $programs[1]->options()->save($country, ['value' => 0]);
-        $programs[2]->options()->save($country, ['value' => 0]);
-        $programs[3]->options()->save($country, ['value' => 0]);
-        $programs[4]->options()->save($country, ['value' => 0]);
-        $programs[5]->options()->save($country, ['value' => 0]);
-        $programs[6]->options()->save($country, ['value' => 0]);
-        $programs[7]->options()->save($country, ['value' => 0]);
-        $programs[8]->options()->save($country, ['value' => 0]);
-
-        $country = factory(\App\Option::class)->create(['name' => 'Italy', 'question_id' => 3]);
         $programs[0]->options()->save($country, ['value' => 0]);
         $programs[1]->options()->save($country, ['value' => 0]);
         $programs[2]->options()->save($country, ['value' => 0]);
@@ -2173,17 +2206,6 @@ class OptionsTableSeeder extends Seeder
         $programs[7]->options()->save($country, ['value' => 0]);
         $programs[8]->options()->save($country, ['value' => 0]);
 
-        $country = factory(\App\Option::class)->create(['name' => 'Russia', 'question_id' => 3]);
-        $programs[0]->options()->save($country, ['value' => 0]);
-        $programs[1]->options()->save($country, ['value' => 0]);
-        $programs[2]->options()->save($country, ['value' => 0]);
-        $programs[3]->options()->save($country, ['value' => 0]);
-        $programs[4]->options()->save($country, ['value' => 0]);
-        $programs[5]->options()->save($country, ['value' => 0]);
-        $programs[6]->options()->save($country, ['value' => 0]);
-        $programs[7]->options()->save($country, ['value' => 0]);
-        $programs[8]->options()->save($country, ['value' => 0]);
-
         $country = factory(\App\Option::class)->create(['name' => 'Rwanda', 'question_id' => 3]);
         $programs[0]->options()->save($country, ['value' => 0]);
         $programs[1]->options()->save($country, ['value' => 0]);
@@ -2459,17 +2481,6 @@ class OptionsTableSeeder extends Seeder
         $programs[7]->options()->save($country, ['value' => 0]);
         $programs[8]->options()->save($country, ['value' => 0]);
 
-        $country = factory(\App\Option::class)->create(['name' => 'Switzerland', 'question_id' => 3]);
-        $programs[0]->options()->save($country, ['value' => 0]);
-        $programs[1]->options()->save($country, ['value' => 0]);
-        $programs[2]->options()->save($country, ['value' => 0]);
-        $programs[3]->options()->save($country, ['value' => 0]);
-        $programs[4]->options()->save($country, ['value' => 0]);
-        $programs[5]->options()->save($country, ['value' => 0]);
-        $programs[6]->options()->save($country, ['value' => 0]);
-        $programs[7]->options()->save($country, ['value' => 0]);
-        $programs[8]->options()->save($country, ['value' => 0]);
-
         $country = factory(\App\Option::class)->create(['name' => 'Syria', 'question_id' => 3]);
         $programs[0]->options()->save($country, ['value' => 0]);
         $programs[1]->options()->save($country, ['value' => 0]);
@@ -2625,17 +2636,6 @@ class OptionsTableSeeder extends Seeder
         $programs[8]->options()->save($country, ['value' => 0]);
 
         $country = factory(\App\Option::class)->create(['name' => 'United Kingdom', 'question_id' => 3]);
-        $programs[0]->options()->save($country, ['value' => 0]);
-        $programs[1]->options()->save($country, ['value' => 0]);
-        $programs[2]->options()->save($country, ['value' => 0]);
-        $programs[3]->options()->save($country, ['value' => 0]);
-        $programs[4]->options()->save($country, ['value' => 0]);
-        $programs[5]->options()->save($country, ['value' => 0]);
-        $programs[6]->options()->save($country, ['value' => 0]);
-        $programs[7]->options()->save($country, ['value' => 0]);
-        $programs[8]->options()->save($country, ['value' => 0]);
-
-        $country = factory(\App\Option::class)->create(['name' => 'United States', 'question_id' => 3]);
         $programs[0]->options()->save($country, ['value' => 0]);
         $programs[1]->options()->save($country, ['value' => 0]);
         $programs[2]->options()->save($country, ['value' => 0]);
