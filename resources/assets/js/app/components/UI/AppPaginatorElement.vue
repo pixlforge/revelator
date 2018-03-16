@@ -38,6 +38,7 @@
     methods: {
       navigate() {
         this.$store.dispatch('setCurrentQuestion', this.index)
+        this.$router.push({ query: { question: this.index } })
       }
     }
   }

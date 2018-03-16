@@ -43352,6 +43352,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     navigate: function navigate() {
       this.$store.dispatch('setCurrentQuestion', this.index);
+      this.$router.push({ query: { question: this.index } });
     }
   }
 });
