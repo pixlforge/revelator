@@ -164,7 +164,7 @@
       /**
        * Parse the query params and set the current question number.
        */
-      this.$store.dispatch('setCurrentQuestion', this.$route.query.question)
+      this.$store.dispatch('setCurrentQuestion', parseInt(this.$route.query.question))
 
       /**
        * Get the options.

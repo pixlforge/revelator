@@ -42723,6 +42723,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(5);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -42732,30 +42735,50 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])(['getCurrentUser']), {
+    btnText: function btnText() {
+      if (this.getCurrentUser !== null) {
+        return 'Continue';
+      } else {
+        return 'Run the diagnostic';
+      }
+    }
+  }),
   methods: {
-    runDiagnostic: function runDiagnostic() {
+    /**
+     * Log out the current user then create a new one and connect it or continue
+     * if a user is logged-in.
+     */
+    runOrContinue: function runOrContinue() {
       var _this = this;
 
-      /**
-       * Log out the current user then create a new one and connect it.
-       */
-      this.$store.dispatch('toggleLoader');
-
-      this.$store.dispatch('logoutDiagnosticUser').then(function () {
-        _this.$store.dispatch('loginDiagnosticUser').then(function () {
-          _this.$store.dispatch('fetchQuestions').then(function () {
-            _this.$store.dispatch('toggleLoader');
-            _this.$router.push({
-              name: 'diagnostic',
-              query: {
-                question: 0
-              }
+      if (this.getCurrentUser !== null) {
+        this.$router.push({
+          name: 'diagnostic',
+          query: {
+            question: 0
+          }
+        });
+      } else {
+        this.$store.dispatch('toggleLoader');
+        this.$store.dispatch('logoutDiagnosticUser').then(function () {
+          _this.$store.dispatch('loginDiagnosticUser').then(function () {
+            _this.$store.dispatch('fetchQuestions').then(function () {
+              _this.$store.dispatch('toggleLoader');
+              _this.$router.push({
+                name: 'diagnostic',
+                query: {
+                  question: 0
+                }
+              });
             });
           });
         });
-      });
+      }
     }
   }
 });
@@ -42771,8 +42794,8 @@ var render = function() {
   return _c("div", [
     _c("a", {
       staticClass: "btn__diagnostic",
-      domProps: { textContent: _vm._s("Run the diagnostic") },
-      on: { click: _vm.runDiagnostic }
+      domProps: { textContent: _vm._s(_vm.btnText) },
+      on: { click: _vm.runOrContinue }
     })
   ])
 }
@@ -43052,7 +43075,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     /**
      * Parse the query params and set the current question number.
      */
-    this.$store.dispatch('setCurrentQuestion', this.$route.query.question);
+    this.$store.dispatch('setCurrentQuestion', parseInt(this.$route.query.question));
 
     /**
      * Get the options.
