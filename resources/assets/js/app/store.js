@@ -142,6 +142,9 @@ export const store = new Vuex.Store({
      */
     fetchExistingAnswers: (state, payload) => {
       state.answers = payload
+      state.answers.forEach(answer => {
+        Vue.set(answer, 'label')
+      })
     },
 
     /**
@@ -438,14 +441,11 @@ export const store = new Vuex.Store({
      * fetchOptions Action
      */
     fetchOptions: ({ commit, dispatch }) => {
-      dispatch('toggleLoader')
       return new Promise((resolve, reject) => {
         axios.get(route('api.options.index')).then(({ data }) => {
           commit('fetchOptions', data)
-          dispatch('toggleLoader')
           resolve(data)
         }).catch(err => {
-          dispatch('toggleLoader')
           reject(err)
         })
       })

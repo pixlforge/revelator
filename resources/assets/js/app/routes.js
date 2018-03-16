@@ -1,6 +1,8 @@
 import App from './App'
 import ViewHome from './views/ViewHome'
 import ViewDiagnostic from './views/ViewDiagnostic'
+import ViewLastStep from './views/ViewLastStep'
+import ViewResults from './views/ViewResults'
 
 import ViewLogin from './views/auth/ViewLogin'
 import ViewResetEmail from './views/auth/passwords/ViewResetEmail'
@@ -59,6 +61,40 @@ export const routes = [
           next()
         }
       }
+    }
+  },
+
+  /**
+   * Last Step
+   */
+  {
+    path: '/last-step',
+    name: 'last-step',
+    component: ViewLastStep,
+    beforeEnter: (to, from, next) => {
+      if (window.currentUser === null) {
+        next({
+          name: 'home'
+        })
+      }
+      next()
+    }
+  },
+
+  /**
+   * Results
+   */
+  {
+    path: '/results',
+    name: 'results',
+    component: ViewResults,
+    beforeEnter: (to, from, next) => {
+      if (window.currentUser === null) {
+        next({
+          name: 'home'
+        })
+      }
+      next()
     }
   },
 

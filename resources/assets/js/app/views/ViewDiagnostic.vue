@@ -161,43 +161,25 @@
       }
     },
     created() {
-      /**
-       * Parse the query params and set the current question number.
-       */
-      this.$store.dispatch('setCurrentQuestion', parseInt(this.$route.query.question))
+      this.$store.dispatch('toggleLoader')
 
-      /**
-       * Get the options.
-       */
-      if (!this.getOptions.length) {
-        this.$store.dispatch('fetchOptions')
-      }
+      const setCurrentQuestion = this.$store.dispatch('setCurrentQuestion', parseInt(this.$route.query.question))
+      const fetchQuestions = this.$store.dispatch('fetchQuestions')
+      const fetchOptions = this.$store.dispatch('fetchOptions')
+      const fetchExistingAnswers = this.$store.dispatch('fetchExistingAnswers')
 
-      /**
-       * Get the answers for the current authenticated user.
-       */
-      if (!this.getAnswers.length) {
-        this.$store.dispatch('fetchExistingAnswers').then(res => {
-          this.getAnswers.forEach(answer => {
-            return answer.label = this.getOptions.find(option => {
-              return answer.option_id === option.id
-            }).name
-          })
-        }).catch(err => console.log(err))
-      }
-
-      /**
-       * Get the questions if the store is empty.
-       */
-      if (!this.getQuestions.length) {
-        this.$store.dispatch('toggleLoader')
-        this.$store.dispatch('fetchQuestions').then(() => {
-          this.$store.dispatch('toggleLoader')
-        }).catch(err => {
-          console.log(err)
-          this.$store.dispatch('toggleLoader')
+      Promise.all([
+        setCurrentQuestion,
+        fetchQuestions,
+        fetchOptions,
+        fetchExistingAnswers
+      ]).then(() => {
+        this.getAnswers.forEach(answer => {
+          return answer.label = this.getOptions.find(option => {
+            return answer.option_id === option.id
+          }).name
         })
-      }
+      }).then(() => this.$store.dispatch('toggleLoader'))
     },
     methods: {
       /**

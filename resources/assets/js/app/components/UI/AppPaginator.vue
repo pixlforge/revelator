@@ -34,6 +34,9 @@
       }
     },
     methods: {
+      /**
+       * Determine wheter an element should be styled.
+       */
       shouldStyleElement(element) {
         return element.id == this.getCurrentQuestion + 1 || this.questionHasAnAnswer(element) ? true : false
       },
