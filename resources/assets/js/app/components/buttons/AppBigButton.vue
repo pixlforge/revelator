@@ -17,7 +17,7 @@
       ]),
 
       btnText() {
-        if (this.getCurrentUser !== null) {
+        if (this.getCurrentUser) {
           return 'Continue'
         } else {
           return 'Run the diagnostic'
@@ -30,7 +30,7 @@
        * if a user is logged-in.
        */
       runOrContinue() {
-        if (this.getCurrentUser !== null) {
+        if (this.getCurrentUser) {
           this.$router.push({
             name: 'diagnostic',
             query: {

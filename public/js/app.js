@@ -42741,7 +42741,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])(['getCurrentUser']), {
     btnText: function btnText() {
-      if (this.getCurrentUser !== null) {
+      if (this.getCurrentUser) {
         return 'Continue';
       } else {
         return 'Run the diagnostic';
@@ -42756,7 +42756,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     runOrContinue: function runOrContinue() {
       var _this = this;
 
-      if (this.getCurrentUser !== null) {
+      if (this.getCurrentUser) {
         this.$router.push({
           name: 'diagnostic',
           query: {
