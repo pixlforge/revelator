@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Diagnostic;
 
 use App\User;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Guest\UpdateGuestRequest;
 
 class DiagnosticController extends Controller
 {
@@ -13,9 +14,6 @@ class DiagnosticController extends Controller
      */
     public function logout()
     {
-        /**
-         * Logout the user if he's currently logged in.
-         */
         if (auth()->user()) {
             Auth::logout();
         }
@@ -34,6 +32,23 @@ class DiagnosticController extends Controller
             ->states('guest')
             ->create();
         Auth::login($user);
+
+        return response($user, 200);
+    }
+
+    /**
+     * Update the guest's personal infos.
+     *
+     * @param UpdateGuestRequest $request
+     * @param User $user
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function update(UpdateGuestRequest $request, User $user)
+    {
+        $user->firstName = $request->firstName;
+        $user->lastName = $request->lastName;
+        $user->email = $request->email;
+        $user->save();
 
         return response($user, 200);
     }

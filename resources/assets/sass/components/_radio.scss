@@ -1,0 +1,22 @@
+.radio {
+  &__group {
+    margin-left: 8rem;
+    margin-top: 4rem;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    letter-spacing: 1.08pt;
+    font-size: 1.3rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    & p {
+      margin-left: 2rem;
+      user-select: none;
+    }
+  }
+}

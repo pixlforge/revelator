@@ -30623,6 +30623,25 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       var commit = _ref46.commit;
 
       commit('setCurrentQuestion', payload);
+    },
+
+    /**
+     * updateGuestInfos Action
+     */
+    updateGuestInfos: function updateGuestInfos(_ref47, payload) {
+      var dispatch = _ref47.dispatch,
+          state = _ref47.state;
+
+      dispatch('toggleLoader');
+      return new Promise(function (resolve, reject) {
+        axios.patch(route('api.diagnostics.update', state.currentUser.id), payload).then(function () {
+          dispatch('toggleLoader');
+          resolve();
+        }).catch(function (err) {
+          dispatch('toggleLoader');
+          reject(err);
+        });
+      });
     }
   }
 });
@@ -43496,6 +43515,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(5);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -43503,6 +43525,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -43515,9 +43539,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       required: true
     }
   },
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])(['getCurrentQuestion', 'getQuestions'])),
   methods: {
     nextQuestion: function nextQuestion() {
       if (!this.disabled) {
+        if (this.getCurrentQuestion + 1 === this.getQuestions.length) {
+          this.$router.push({ name: 'last-step' });
+        }
         this.$emit('nextQuestion');
       }
     }
@@ -43939,6 +43967,115 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_buttons_AppContinue__ = __webpack_require__(303);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_buttons_AppContinue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_buttons_AppContinue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_forms_AppTooltip__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_forms_AppTooltip___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_forms_AppTooltip__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_forms_AppFeedback__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_forms_AppFeedback___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_forms_AppFeedback__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_buttons_AppRadioButton__ = __webpack_require__(403);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_buttons_AppRadioButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_buttons_AppRadioButton__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -43946,7 +44083,74 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AppContinue: __WEBPACK_IMPORTED_MODULE_0__components_buttons_AppContinue___default.a,
+    AppRadioButton: __WEBPACK_IMPORTED_MODULE_3__components_buttons_AppRadioButton___default.a,
+    AppTooltip: __WEBPACK_IMPORTED_MODULE_1__components_forms_AppTooltip___default.a,
+    AppFeedback: __WEBPACK_IMPORTED_MODULE_2__components_forms_AppFeedback___default.a
+  },
+  data: function data() {
+    return {
+      radioSelect: 'yes',
+      guest: {
+        firstName: '',
+        lastName: '',
+        email: ''
+      },
+      old: {
+        firstName: '',
+        lastName: '',
+        email: ''
+      },
+      errors: {}
+    };
+  },
+
+  validations: {
+    guest: {
+      firstName: {
+        required: __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["required"],
+        minLength: Object(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["minLength"])(2),
+        maxLength: Object(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["maxLength"])(255)
+      },
+      lastName: {
+        required: __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["required"],
+        minLength: Object(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["minLength"])(2),
+        maxLength: Object(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["maxLength"])(255)
+      },
+      email: {
+        required: __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["required"],
+        email: __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["email"]
+      }
+    }
+  },
+  methods: {
+    saveAndContinue: function saveAndContinue() {
+      var _this = this;
+
+      this.$store.dispatch('updateGuestInfos', this.guest).then(function () {
+        _this.$toasted.global.success({
+          message: 'Infos saved successfully! Thank you for your participation!'
+        });
+        // this.$router.push({ name: 'results' })
+      }).catch(function (err) {
+        _this.$toasted.global.danger();
+        _this.errors = err.response.data.errors;
+        console.log(err); // tmp
+      });
+    },
+    radioSelection: function radioSelection(selection) {
+      this.radioSelect = selection;
+    }
+  }
+});
 
 /***/ }),
 /* 312 */
@@ -43956,16 +44160,281 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c(
+      "main",
+      {
+        staticClass: "main__container",
+        on: {
+          keyup: function($event) {
+            if (
+              !("button" in $event) &&
+              _vm._k($event.keyCode, "enter", 13, $event.key)
+            ) {
+              return null
+            }
+            _vm.saveAndContinue($event)
+          }
+        }
+      },
+      [
+        _c("h1", { staticClass: "main__title" }, [_vm._v("One Last Step!")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "main__lead" }, [
+          _vm._v(
+            "\n      In order to make you a personalized offer, we would like to know more about you and send you a few\n      recommendations.\n    "
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "radio__group" },
+          [
+            _c(
+              "AppRadioButton",
+              {
+                attrs: { option: "yes", selected: _vm.radioSelect === "yes" },
+                on: { radioSelect: _vm.radioSelection }
+              },
+              [
+                _c("p", [
+                  _vm._v(
+                    "Yes I agree to send my information and to be contacted for personalized offers."
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "AppRadioButton",
+              {
+                attrs: { option: "no", selected: _vm.radioSelect === "no" },
+                on: { radioSelect: _vm.radioSelection }
+              },
+              [
+                _c("p", [
+                  _vm._v(
+                    "No, I just want to see my results and stay anonymous."
+                  )
+                ])
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
+          _vm.radioSelect === "yes"
+            ? _c("div", [
+                _c(
+                  "div",
+                  { staticClass: "form__group form__group--last-step" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.guest.firstName,
+                          expression: "guest.firstName"
+                        }
+                      ],
+                      staticClass: "form__input form__input--inline",
+                      class: { "form__input--invalid": _vm.errors.firstName },
+                      attrs: {
+                        type: "text",
+                        name: "firstName",
+                        id: "firstName",
+                        placeholder: "First name",
+                        required: "",
+                        autocomplete: "off"
+                      },
+                      domProps: { value: _vm.guest.firstName },
+                      on: {
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.guest,
+                              "firstName",
+                              $event.target.value
+                            )
+                          },
+                          function($event) {
+                            _vm.$v.guest.firstName.$touch()
+                          }
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.$v.guest.firstName.$error
+                      ? _c("AppTooltip", { attrs: { "pos-x": 35 } }, [
+                          !_vm.$v.guest.firstName.required
+                            ? _c("p", [
+                                _vm._v("Please, provide your first name.")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !_vm.$v.guest.firstName.minLength
+                            ? _c("p", [_vm._v("Minimum 2 characters.")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !_vm.$v.guest.firstName.maxLength
+                            ? _c("p", [_vm._v("Maximum 255 characters.")])
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("AppFeedback", [
+                      _vm.errors.firstName
+                        ? _c("p", [_vm._v(_vm._s(_vm.errors.firstName[0]))])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.guest.lastName,
+                          expression: "guest.lastName"
+                        }
+                      ],
+                      staticClass: "form__input form__input--inline",
+                      class: { "form__input--invalid": _vm.errors.lastName },
+                      attrs: {
+                        type: "text",
+                        name: "lastName",
+                        id: "lastName",
+                        placeholder: "Last name",
+                        required: "",
+                        autocomplete: "off"
+                      },
+                      domProps: { value: _vm.guest.lastName },
+                      on: {
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.guest, "lastName", $event.target.value)
+                          },
+                          function($event) {
+                            _vm.$v.guest.lastName.$touch()
+                          }
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.$v.guest.lastName.$error
+                      ? _c("AppTooltip", { attrs: { "pos-x": 75 } }, [
+                          !_vm.$v.guest.lastName.required
+                            ? _c("p", [
+                                _vm._v("Please, provide your last name.")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !_vm.$v.guest.lastName.minLength
+                            ? _c("p", [_vm._v("Minimum 2 characters.")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !_vm.$v.guest.lastName.maxLength
+                            ? _c("p", [_vm._v("Maximum 255 characters.")])
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("AppFeedback", [
+                      _vm.errors.lastName
+                        ? _c("p", [_vm._v(_vm._s(_vm.errors.lastName[0]))])
+                        : _vm._e()
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form__group" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.guest.email,
+                          expression: "guest.email"
+                        }
+                      ],
+                      staticClass: "form__input",
+                      class: { "form__input--invalid": _vm.errors.email },
+                      attrs: {
+                        type: "email",
+                        name: "email",
+                        id: "email",
+                        placeholder: "Email",
+                        required: "",
+                        autocomplete: "off"
+                      },
+                      domProps: { value: _vm.guest.email },
+                      on: {
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.guest, "email", $event.target.value)
+                          },
+                          function($event) {
+                            _vm.$v.guest.email.$touch()
+                          }
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.$v.guest.email.$error
+                      ? _c("AppTooltip", { attrs: { "pos-x": 40 } }, [
+                          !_vm.$v.guest.email.required
+                            ? _c("p", [
+                                _vm._v("Please, provide a valid email address.")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !_vm.$v.guest.email.email
+                            ? _c("p", [
+                                _vm._v(
+                                  "Email format must have the 'address@email.tld' pattern."
+                                )
+                              ])
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("AppFeedback", [
+                      _vm.errors.email
+                        ? _c("p", [_vm._v(_vm._s(_vm.errors.email[0]))])
+                        : _vm._e()
+                    ])
+                  ],
+                  1
+                )
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn__continue",
+          domProps: { textContent: _vm._s("Continue") },
+          on: { click: _vm.saveAndContinue }
+        })
+      ],
+      1
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("One Last Step!")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -52847,6 +53316,210 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(406)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(404)
+/* template */
+var __vue_template__ = __webpack_require__(408)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-70bc9003"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/app/components/buttons/AppRadioButton.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-70bc9003", Component.options)
+  } else {
+    hotAPI.reload("data-v-70bc9003", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 404 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    option: {
+      type: String,
+      required: true
+    },
+    selected: {
+      type: Boolean,
+      required: true
+    }
+  },
+  computed: {
+    shouldStyle: function shouldStyle() {
+      return this.selected ? 'url(#gradient)' : 'white';
+    }
+  },
+  methods: {
+    selection: function selection() {
+      this.$emit('radioSelect', this.option);
+    }
+  }
+});
+
+/***/ }),
+/* 405 */,
+/* 406 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(407);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("c60d7da0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-70bc9003\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AppRadioButton.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-70bc9003\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AppRadioButton.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 407 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nsvg[data-v-70bc9003] {\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 408 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "radio__button", on: { click: _vm.selection } },
+    [
+      _c(
+        "svg",
+        { attrs: { width: "70px", height: "70px", viewBox: "0 0 70 70" } },
+        [
+          _c(
+            "defs",
+            [
+              _c(
+                "linearGradient",
+                { attrs: { id: "gradient" } },
+                [
+                  _c("stop", {
+                    staticClass: "stop-color--turquoise",
+                    attrs: { offset: "20%" }
+                  }),
+                  _vm._v(" "),
+                  _c("stop", {
+                    staticClass: "stop-color--dark-grey",
+                    attrs: { offset: "100%", "stop-opacity": "0.9" }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("circle", {
+            attrs: { cx: "35", cy: "35", r: "25", fill: _vm.shouldStyle }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _vm._t("default")
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-70bc9003", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

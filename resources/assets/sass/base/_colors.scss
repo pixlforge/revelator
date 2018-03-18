@@ -10,3 +10,13 @@ $success: #00c851;
 $info: #33b5e5;
 $warning: #ffbb33;
 $danger: #ff4444;
+
+.stop-color {
+  &--dark-grey {
+    stop-color: $dark-grey;
+  }
+
+  &--turquoise {
+    stop-color: $turquoise;
+  }
+}

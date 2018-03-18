@@ -9,6 +9,8 @@ $factory->define(App\User::class, function (Faker $faker) {
         'password' => bcrypt('secret'),
         'role' => 'user',
         'remember_token' => str_random(10),
+        'firstName' => null,
+        'lastName' => null
     ];
 });
 

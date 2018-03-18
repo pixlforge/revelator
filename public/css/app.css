@@ -1,3 +1,11 @@
+.stop-color--dark-grey {
+  stop-color: #4e4f4f;
+}
+
+.stop-color--turquoise {
+  stop-color: #0099a7;
+}
+
 @font-face {
   font-family: BrandonGrotesque-Light;
   src: url(/fonts/BrandonGrotesque-Light.otf?6bbc03fce479863549d93851a4ef0811);
@@ -182,6 +190,15 @@ a:visited:focus {
           align-items: center;
 }
 
+.form__group--last-step {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .form__label {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -232,6 +249,11 @@ a:visited:focus {
 .form__input--invalid,
 .form__select--invalid {
   border: 2px solid #ff4444;
+}
+
+.form__input--inline,
+.form__select--inline {
+  width: 48%;
 }
 
 .form__select {
@@ -927,6 +949,34 @@ a:visited:focus {
           box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
+.radio__group {
+  margin-left: 8rem;
+  margin-top: 4rem;
+}
+
+.radio__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  letter-spacing: 1.08pt;
+  font-size: 1.3rem;
+}
+
+.radio__button:hover {
+  cursor: pointer;
+}
+
+.radio__button p {
+  margin-left: 2rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 .main__container {
   width: 93vw;
   min-height: 72vh;
@@ -953,6 +1003,13 @@ a:visited:focus {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2pt;
+  margin-top: 2rem;
+}
+
+.main__lead {
+  font-size: 2rem;
+  letter-spacing: 1.67pt;
+  text-align: center;
   margin-top: 2rem;
 }
 

@@ -6,6 +6,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     props: {
       label: {
@@ -17,9 +19,18 @@
         required: true
       }
     },
+    computed: {
+      ...mapGetters([
+        'getCurrentQuestion',
+        'getQuestions'
+      ])
+    },
     methods: {
       nextQuestion() {
         if (!this.disabled) {
+          if (this.getCurrentQuestion + 1 === this.getQuestions.length) {
+            this.$router.push({ name: 'last-step' })
+          }
           this.$emit('nextQuestion')
         }
       }

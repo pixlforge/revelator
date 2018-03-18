@@ -15,7 +15,7 @@ export const store = new Vuex.Store({
     questions: [],
     programs: [],
     options: [],
-    answers: []
+    answers: [],
   },
   getters: {
     loaderState: state => {
@@ -60,7 +60,7 @@ export const store = new Vuex.Store({
 
     getCurrentQuestion: state => {
       return state.currentQuestion
-    }
+    },
   },
   mutations: {
     /**
@@ -610,5 +610,23 @@ export const store = new Vuex.Store({
     setCurrentQuestion: ({ commit }, payload) => {
       commit('setCurrentQuestion', payload)
     },
+
+    /**
+     * updateGuestInfos Action
+     */
+    updateGuestInfos: ({ dispatch, state }, payload) => {
+      dispatch('toggleLoader')
+      return new Promise((resolve, reject) => {
+        axios.patch(route('api.diagnostics.update', state.currentUser.id), payload)
+          .then(() => {
+            dispatch('toggleLoader')
+            resolve()
+          })
+          .catch(err => {
+            dispatch('toggleLoader')
+            reject(err)
+          })
+      })
+    }
   }
 })
