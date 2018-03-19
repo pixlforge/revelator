@@ -1,12 +1,11 @@
 <template>
   <div>
-    <main class="main__container"
+    <main class="main__container main__container--medium"
           @keyup.enter="saveAndContinue">
       <h1 class="main__title">One Last Step!</h1>
 
       <p class="main__lead">
-        In order to make you a personalized offer, we would like to know more about you and send you a few
-        recommendations.
+        In order to make you a personalized offer, we would like to know more about you and send you a few recommendations.
       </p>
 
       <div class="radio__group">

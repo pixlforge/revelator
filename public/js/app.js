@@ -44081,7 +44081,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -44164,7 +44163,7 @@ var render = function() {
     _c(
       "main",
       {
-        staticClass: "main__container",
+        staticClass: "main__container main__container--medium",
         on: {
           keyup: function($event) {
             if (
@@ -44182,7 +44181,7 @@ var render = function() {
         _vm._v(" "),
         _c("p", { staticClass: "main__lead" }, [
           _vm._v(
-            "\n      In order to make you a personalized offer, we would like to know more about you and send you a few\n      recommendations.\n    "
+            "\n      In order to make you a personalized offer, we would like to know more about you and send you a few recommendations.\n    "
           )
         ]),
         _vm._v(" "),
