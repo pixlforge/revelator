@@ -12,7 +12,7 @@ class QuestionsTableSeeder extends Seeder
     public function run()
     {
         factory(\App\Question::class)->create([
-            'name' => "I'm in the age range...",
+            'name' => "My age range is...",
             'type' => 'dropdown',
             'pos' => 1
         ]);
