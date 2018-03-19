@@ -44130,21 +44130,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     }
   },
+  computed: {
+    /**
+     * User agrees to send personal infos and to be contacted.
+     */
+    userAgrees: function userAgrees() {
+      return this.radioSelect === 'yes';
+    },
+
+
+    /**
+     * User does not agree to send personal infos and to be contacted.
+     */
+    userDoesNotAgree: function userDoesNotAgree() {
+      return this.radioSelect === 'no';
+    }
+  },
   methods: {
+    /**
+     * Save the user's personal infos if he agrees, then route to the results views.
+     */
     saveAndContinue: function saveAndContinue() {
+      if (this.userAgrees) {
+        this.updateGuestInfos();
+      } else if (this.userDoesNotAgree) {
+        this.goToResults();
+      }
+    },
+
+
+    /**
+     * Go to the results view.
+     */
+    goToResults: function goToResults() {
+      this.$router.push({ name: 'results' });
+    },
+
+
+    /**
+     * Update the guest's infos.
+     */
+    updateGuestInfos: function updateGuestInfos() {
       var _this = this;
 
       this.$store.dispatch('updateGuestInfos', this.guest).then(function () {
         _this.$toasted.global.success({
           message: 'Infos saved successfully! Thank you for your participation!'
         });
-        // this.$router.push({ name: 'results' })
+        _this.goToResults();
       }).catch(function (err) {
         _this.$toasted.global.danger();
         _this.errors = err.response.data.errors;
-        console.log(err); // tmp
       });
     },
+
+
+    /**
+     * Set the radio button selected state.
+     */
     radioSelection: function radioSelection(selection) {
       this.radioSelect = selection;
     }
@@ -44181,7 +44224,7 @@ var render = function() {
         _vm._v(" "),
         _c("p", { staticClass: "main__lead" }, [
           _vm._v(
-            "\n      In order to send you a personalised offer, we would like to know more about you and send you some recommendations.\n    "
+            "\n      In order to send you a personalised offer, we would like to know more about you and send you some\n      recommendations.\n    "
           )
         ]),
         _vm._v(" "),

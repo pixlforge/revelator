@@ -5,7 +5,8 @@
       <h1 class="main__title">One Last Step!</h1>
 
       <p class="main__lead">
-        In order to send you a personalised offer, we would like to know more about you and send you some recommendations.
+        In order to send you a personalised offer, we would like to know more about you and send you some
+        recommendations.
       </p>
 
       <div class="radio__group">
@@ -97,7 +98,6 @@
               v-text="'Continue'"
               @click="saveAndContinue">
       </button>
-
     </main>
   </div>
 </template>
@@ -155,22 +155,58 @@
         }
       }
     },
-    methods: {
-      saveAndContinue() {
-        this.$store.dispatch('updateGuestInfos', this.guest)
-          .then(() => {
-            this.$toasted.global.success({
-              message: `Infos saved successfully! Thank you for your participation!`
-            })
-            // this.$router.push({ name: 'results' })
-          })
-          .catch(err => {
-            this.$toasted.global.danger()
-            this.errors = err.response.data.errors
-            console.log(err) // tmp
-          })
+    computed: {
+      /**
+       * User agrees to send personal infos and to be contacted.
+       */
+      userAgrees() {
+        return this.radioSelect === 'yes'
       },
 
+      /**
+       * User does not agree to send personal infos and to be contacted.
+       */
+      userDoesNotAgree() {
+        return this.radioSelect === 'no'
+      }
+    },
+    methods: {
+      /**
+       * Save the user's personal infos if he agrees, then route to the results views.
+       */
+      saveAndContinue() {
+        if (this.userAgrees) {
+          this.updateGuestInfos()
+        } else if (this.userDoesNotAgree) {
+          this.goToResults()
+        }
+      },
+
+      /**
+       * Go to the results view.
+       */
+      goToResults() {
+        this.$router.push({ name: 'results' })
+      },
+
+      /**
+       * Update the guest's infos.
+       */
+      updateGuestInfos() {
+        this.$store.dispatch('updateGuestInfos', this.guest).then(() => {
+          this.$toasted.global.success({
+            message: `Infos saved successfully! Thank you for your participation!`
+          })
+          this.goToResults()
+        }).catch(err => {
+          this.$toasted.global.danger()
+          this.errors = err.response.data.errors
+        })
+      },
+
+      /**
+       * Set the radio button selected state.
+       */
       radioSelection(selection) {
         this.radioSelect = selection
       }
