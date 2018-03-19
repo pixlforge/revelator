@@ -256,6 +256,11 @@ a:visited:focus {
   width: 48%;
 }
 
+.form__input--small,
+.form__select--small {
+  font-size: 2rem;
+}
+
 .form__select {
   -webkit-appearance: none;
   -moz-appearance: none;

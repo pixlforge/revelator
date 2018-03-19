@@ -44232,7 +44232,8 @@ var render = function() {
                           expression: "guest.firstName"
                         }
                       ],
-                      staticClass: "form__input form__input--inline",
+                      staticClass:
+                        "form__input form__input--inline form__input--small",
                       class: { "form__input--invalid": _vm.errors.firstName },
                       attrs: {
                         type: "text",
@@ -44295,7 +44296,8 @@ var render = function() {
                           expression: "guest.lastName"
                         }
                       ],
-                      staticClass: "form__input form__input--inline",
+                      staticClass:
+                        "form__input form__input--inline form__input--small",
                       class: { "form__input--invalid": _vm.errors.lastName },
                       attrs: {
                         type: "text",
@@ -44361,7 +44363,7 @@ var render = function() {
                           expression: "guest.guestEmail"
                         }
                       ],
-                      staticClass: "form__input",
+                      staticClass: "form__input form__input--small",
                       class: { "form__input--invalid": _vm.errors.guestEmail },
                       attrs: {
                         type: "email",
