@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Guest;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateGuestRequest extends FormRequest
@@ -27,7 +26,7 @@ class UpdateGuestRequest extends FormRequest
         return [
             'firstName' => 'required|string|min:2|max:255',
             'lastName' => 'required|string|min:2|max:255',
-            'email' => 'required|email|max:255'
+            'guestEmail' => 'required|email|max:255'
         ];
     }
 
@@ -49,9 +48,9 @@ class UpdateGuestRequest extends FormRequest
             'lastName.min' => 'Minimum 2 characters.',
             'lastName.max' => 'Maximum 255 characters.',
 
-            'email.required' => 'An email address is required.',
-            'email.email' => 'Email address must match the pattern address@provided.tld.',
-            'email.max' => 'Maximum 255 characters.'
+            'guestEmail.required' => 'An email address is required.',
+            'guestEmail.email' => 'Email address must match the pattern address@provider.tld.',
+            'guestEmail.max' => 'Maximum 255 characters.'
         ];
     }
 }

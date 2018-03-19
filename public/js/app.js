@@ -44101,12 +44101,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       guest: {
         firstName: '',
         lastName: '',
-        email: ''
+        guestEmail: ''
       },
       old: {
         firstName: '',
         lastName: '',
-        email: ''
+        guestEmail: ''
       },
       errors: {}
     };
@@ -44124,7 +44124,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         minLength: Object(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["minLength"])(2),
         maxLength: Object(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["maxLength"])(255)
       },
-      email: {
+      guestEmail: {
         required: __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["required"],
         email: __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["email"]
       }
@@ -44357,45 +44357,49 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.guest.email,
-                          expression: "guest.email"
+                          value: _vm.guest.guestEmail,
+                          expression: "guest.guestEmail"
                         }
                       ],
                       staticClass: "form__input",
-                      class: { "form__input--invalid": _vm.errors.email },
+                      class: { "form__input--invalid": _vm.errors.guestEmail },
                       attrs: {
                         type: "email",
-                        name: "email",
-                        id: "email",
+                        name: "guestEmail",
+                        id: "guestEmail",
                         placeholder: "Email",
                         required: "",
                         autocomplete: "off"
                       },
-                      domProps: { value: _vm.guest.email },
+                      domProps: { value: _vm.guest.guestEmail },
                       on: {
                         input: [
                           function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(_vm.guest, "email", $event.target.value)
+                            _vm.$set(
+                              _vm.guest,
+                              "guestEmail",
+                              $event.target.value
+                            )
                           },
                           function($event) {
-                            _vm.$v.guest.email.$touch()
+                            _vm.$v.guest.guestEmail.$touch()
                           }
                         ]
                       }
                     }),
                     _vm._v(" "),
-                    _vm.$v.guest.email.$error
+                    _vm.$v.guest.guestEmail.$error
                       ? _c("AppTooltip", { attrs: { "pos-x": 40 } }, [
-                          !_vm.$v.guest.email.required
+                          !_vm.$v.guest.guestEmail.required
                             ? _c("p", [
                                 _vm._v("Please, provide a valid email address.")
                               ])
                             : _vm._e(),
                           _vm._v(" "),
-                          !_vm.$v.guest.email.email
+                          !_vm.$v.guest.guestEmail.email
                             ? _c("p", [
                                 _vm._v(
                                   "Email format must have the 'address@email.tld' pattern."
@@ -44406,8 +44410,8 @@ var render = function() {
                       : _vm._e(),
                     _vm._v(" "),
                     _c("AppFeedback", [
-                      _vm.errors.email
-                        ? _c("p", [_vm._v(_vm._s(_vm.errors.email[0]))])
+                      _vm.errors.guestEmail
+                        ? _c("p", [_vm._v(_vm._s(_vm.errors.guestEmail[0]))])
                         : _vm._e()
                     ])
                   ],

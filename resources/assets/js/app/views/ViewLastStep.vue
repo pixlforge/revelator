@@ -68,24 +68,24 @@
             </AppFeedback>
           </div>
 
-          <!--Email-->
+          <!--Guest Email-->
           <div class="form__group">
             <input type="email"
-                   name="email"
-                   id="email"
+                   name="guestEmail"
+                   id="guestEmail"
                    class="form__input"
-                   :class="{ 'form__input--invalid': errors.email }"
-                   @input="$v.guest.email.$touch()"
-                   v-model="guest.email"
+                   :class="{ 'form__input--invalid': errors.guestEmail }"
+                   @input="$v.guest.guestEmail.$touch()"
+                   v-model="guest.guestEmail"
                    placeholder="Email"
                    required autocomplete="off">
-            <AppTooltip v-if="$v.guest.email.$error"
+            <AppTooltip v-if="$v.guest.guestEmail.$error"
                         :pos-x="40">
-              <p v-if="!$v.guest.email.required">Please, provide a valid email address.</p>
-              <p v-if="!$v.guest.email.email">Email format must have the 'address@email.tld' pattern.</p>
+              <p v-if="!$v.guest.guestEmail.required">Please, provide a valid email address.</p>
+              <p v-if="!$v.guest.guestEmail.email">Email format must have the 'address@email.tld' pattern.</p>
             </AppTooltip>
             <AppFeedback>
-              <p v-if="errors.email">{{ errors.email[0] }}</p>
+              <p v-if="errors.guestEmail">{{ errors.guestEmail[0] }}</p>
             </AppFeedback>
           </div>
 
@@ -127,12 +127,12 @@
         guest: {
           firstName: '',
           lastName: '',
-          email: ''
+          guestEmail: ''
         },
         old: {
           firstName: '',
           lastName: '',
-          email: ''
+          guestEmail: ''
         },
         errors: {}
       }
@@ -149,7 +149,7 @@
           minLength: minLength(2),
           maxLength: maxLength(255)
         },
-        email: {
+        guestEmail: {
           required,
           email
         }

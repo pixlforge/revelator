@@ -45,7 +45,7 @@ class StoreUserRequest extends FormRequest
             'name.max' => 'Maximum 255 characters.',
 
             'email.required' => 'An email address is required.',
-            'email.email' => 'Email address must match the pattern address@provided.tld.',
+            'email.email' => 'Email address must match the pattern address@provider.tld.',
             'email.unique' => 'This email address is already in use.',
             'email.max' => 'Maximum 255 characters.',
 

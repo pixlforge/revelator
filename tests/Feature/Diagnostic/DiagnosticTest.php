@@ -21,14 +21,14 @@ class DiagnosticTest extends TestCase
         $this->patchJson(route('api.diagnostics.update', $guest->id), [
             'firstName' => 'John',
             'lastName' => 'Doe',
-            'email' => 'johndoe@example.com'
+            'guestEmail' => 'johndoe@example.com'
         ])->assertStatus(200);
 
         $this->assertDatabaseHas('users', [
             'name' => $guest->name,
             'firstName' => 'John',
             'lastName' => 'Doe',
-            'email' => 'johndoe@example.com'
+            'guestEmail' => 'johndoe@example.com'
         ]);
     }
 }

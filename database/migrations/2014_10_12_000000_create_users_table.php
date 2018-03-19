@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->enum('role', ['user', 'admin', 'dev'])->default('user');
             $table->string('firstName')->nullable();
             $table->string('lastName')->nullable();
+            $table->string('guestEmail')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

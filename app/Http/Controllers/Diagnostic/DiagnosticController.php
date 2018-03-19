@@ -47,7 +47,7 @@ class DiagnosticController extends Controller
     {
         $user->firstName = $request->firstName;
         $user->lastName = $request->lastName;
-        $user->email = $request->email;
+        $user->guestEmail = $request->guestEmail;
         $user->save();
 
         return response($user, 200);
