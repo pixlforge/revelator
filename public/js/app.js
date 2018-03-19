@@ -43771,7 +43771,7 @@ var render = function() {
         "main",
         { staticClass: "main__container main__container--medium" },
         [
-          _c("transition", { attrs: { name: "fade" } }, [
+          _c("transition", { attrs: { name: "fade-longer", mode: "out-in" } }, [
             _vm.getQuestions.length && _vm.showContent
               ? _c("h1", {
                   staticClass: "main__title",
@@ -43792,7 +43792,7 @@ var render = function() {
                   [
                     _c(
                       "transition",
-                      { attrs: { name: "fade", mode: "out-in" } },
+                      { attrs: { name: "fade-longer", mode: "out-in" } },
                       [
                         _vm.typeDropdown
                           ? _c(

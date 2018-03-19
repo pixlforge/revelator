@@ -493,6 +493,22 @@ a:visited:focus {
   transition: all .4s ease;
 }
 
+.fade-longer-enter,
+.fade-longer-leave-to {
+  opacity: 0;
+}
+
+.fade-longer-enter-to,
+.fade-longer-leave {
+  opacity: 1;
+}
+
+.fade-longer-enter-active,
+.fade-longer-leave-active {
+  -webkit-transition: all .8s ease;
+  transition: all .8s ease;
+}
+
 .card__content {
   width: 35rem;
   padding: 2rem 3rem;

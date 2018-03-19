@@ -3,7 +3,7 @@
     <main class="main__container main__container--medium">
 
       <!--Question-->
-      <transition name="fade">
+      <transition name="fade-longer" mode="out-in">
         <h1 class="main__title"
             v-if="getQuestions.length && showContent"
             v-text="getQuestions[getCurrentQuestion].name">
@@ -13,7 +13,7 @@
       <!--Answers-->
       <div v-if="getQuestions.length">
         <div class="form__group">
-          <transition name="fade" mode="out-in">
+          <transition name="fade-longer" mode="out-in">
 
             <!--Type Dropdown-->
             <div v-if="typeDropdown">
