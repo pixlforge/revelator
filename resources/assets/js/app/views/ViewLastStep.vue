@@ -123,7 +123,7 @@
     },
     data() {
       return {
-        radioSelect: 'yes',
+        radioSelect: '',
         guest: {
           firstName: '',
           lastName: '',
