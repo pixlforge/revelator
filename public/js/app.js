@@ -44181,7 +44181,7 @@ var render = function() {
         _vm._v(" "),
         _c("p", { staticClass: "main__lead" }, [
           _vm._v(
-            "\n      In order to make you a personalized offer, we would like to know more about you and send you a few recommendations.\n    "
+            "\n      In order to send you a personalised offer, we would like to know more about you and send you some recommendations.\n    "
           )
         ]),
         _vm._v(" "),
@@ -44195,13 +44195,7 @@ var render = function() {
                 attrs: { option: "yes", selected: _vm.radioSelect === "yes" },
                 on: { radioSelect: _vm.radioSelection }
               },
-              [
-                _c("p", [
-                  _vm._v(
-                    "Yes I agree to send my information and to be contacted for personalized offers."
-                  )
-                ])
-              ]
+              [_c("p", [_vm._v("Yes I agree to share my information.")])]
             ),
             _vm._v(" "),
             _c(
