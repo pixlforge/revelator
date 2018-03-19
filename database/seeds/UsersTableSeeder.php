@@ -28,11 +28,5 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@laprairie.ch',
             'role' => 'admin'
         ]);
-
-        factory(\App\User::class)->create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'role' => 'user'
-        ]);
     }
 }
