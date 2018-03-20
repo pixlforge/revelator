@@ -1,4 +1,10 @@
 .main {
+  &__results {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+
   &__container {
     width: 93vw;
     min-height: 72vh;
