@@ -95,6 +95,7 @@
   }
 
   &__diagnostic {
+    background-color: rgba($dove-grey, .34);
     position: absolute;
     bottom: 0;
     width: 100vw;
@@ -118,10 +119,10 @@
   }
 
   &__continue {
+    background-color: rgba($dove-grey, .34);
     position: fixed;
     bottom: 4rem;
     right: 5rem;
-    background-color: transparent;
     cursor: pointer;
     color: $white;
     font-size: 2.4rem;
