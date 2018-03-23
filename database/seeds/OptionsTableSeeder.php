@@ -80,7 +80,7 @@ class OptionsTableSeeder extends Seeder
          * Gender
          */
         $optionGenderOne = factory(\App\Option::class)->create([
-            'name' => 'Female',
+            'name' => 'a Woman',
             'pos' => 1,
             'question_id' => 2
         ]);
@@ -95,7 +95,7 @@ class OptionsTableSeeder extends Seeder
         $programs[8]->options()->save($optionGenderOne, ['value' => 0]);
 
         $optionGenderTwo = factory(\App\Option::class)->create([
-            'name' => 'Male',
+            'name' => 'a Man',
             'pos' => 2,
             'question_id' => 2
         ]);
