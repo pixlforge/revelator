@@ -8,6 +8,7 @@ export const store = new Vuex.Store({
     loader: {
       show: false
     },
+    showContent: true,
     passwordVisibility: false,
     currentUser: null,
     currentQuestion: 0,
@@ -61,6 +62,10 @@ export const store = new Vuex.Store({
     getCurrentQuestion: state => {
       return state.currentQuestion
     },
+    
+    getShowContentStatus: state => {
+      return state.showContent
+    }
   },
   mutations: {
     /**
@@ -159,6 +164,13 @@ export const store = new Vuex.Store({
      */
     setCurrentQuestion: (state, payload) => {
       state.currentQuestion = payload
+    },
+
+    /**
+     * setShowContentValue Mutation
+     */
+    setShowContentValue: (state, payload) => {
+      state.showContent = payload
     },
 
     /**
@@ -627,6 +639,13 @@ export const store = new Vuex.Store({
             reject(err)
           })
       })
+    },
+    
+    /**
+     * setShowContentValue Action
+     */
+    setShowContentValue: ({ commit }, payload) => {
+      commit('setShowContentValue', payload)
     }
   }
 })

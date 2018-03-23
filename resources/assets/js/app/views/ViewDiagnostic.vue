@@ -5,7 +5,7 @@
       <!--Question-->
       <transition name="fade-longer" mode="out-in">
         <h1 class="main__title"
-            v-if="getQuestions.length && showContent"
+            v-if="getQuestions.length && getShowContentStatus"
             v-text="getQuestions[getCurrentQuestion].name">
         </h1>
       </transition>
@@ -27,6 +27,7 @@
               <ul class="options__list">
                 <li class="options__list-item"
                     v-for="option in getQuestions[getCurrentQuestion].options"
+                    :key="option.id"
                     :class="{ 'options__list-item--active': answerExistsInStore(option) }"
                     v-text="option.name"
                     @click="addAnswer({ label: option.name, value: option.id })">
@@ -39,6 +40,7 @@
               <ul class="options__list-inline">
                 <li class="options__list-inline-item"
                     v-for="option in getQuestions[getCurrentQuestion].options"
+                    :key="option.id"
                     :class="{ 'options__list-inline-item--active': answerExistsInStore(option) }"
                     v-text="option.name"
                     @click="addAnswer({ label: option.name, value: option.id })">
@@ -46,10 +48,6 @@
               </ul>
             </div>
 
-            <!--Type Infos-->
-            <div v-if="typeInfos">
-              Infos
-            </div>
           </transition>
         </div>
       </div>
@@ -79,7 +77,6 @@
     },
     data() {
       return {
-        showContent: true,
         answers: []
       }
     },
@@ -92,7 +89,8 @@
         'getCurrentUser',
         'getQuestions',
         'getAnswers',
-        'getOptions'
+        'getOptions',
+        'getShowContentStatus'
       ]),
 
       /**
@@ -100,7 +98,7 @@
        */
       typeDropdown() {
         return this.getQuestions[this.getCurrentQuestion].type === 'dropdown'
-          && this.showContent
+          && this.getShowContentStatus
       },
 
       /**
@@ -108,7 +106,7 @@
        */
       typeMultiple() {
         return this.getQuestions[this.getCurrentQuestion].type === 'multiple'
-          && this.showContent
+          && this.getShowContentStatus
       },
 
       /**
@@ -116,15 +114,7 @@
        */
       typeMultipleInline() {
         return this.getQuestions[this.getCurrentQuestion].type === 'multiple-inline'
-          && this.showContent
-      },
-
-      /**
-       * Filter questions of type 'infos'.
-       */
-      typeInfos() {
-        return this.getQuestions[this.getCurrentQuestion].type === 'infos'
-          && this.showContent
+          && this.getShowContentStatus
       },
 
       /**
@@ -209,10 +199,10 @@
        */
       nextQuestion() {
         if (this.getCurrentQuestion < this.getQuestions.length - 1) {
-          this.showContent = false
+          this.$store.dispatch('setShowContentValue', false)
           this.$store.dispatch('incrementCurrentQuestion')
           setTimeout(() => {
-            this.showContent = true
+            this.$store.dispatch('setShowContentValue', true)
           }, 5)
           this.$router.push({ query: { question: this.getCurrentQuestion } })
         }

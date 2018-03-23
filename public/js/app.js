@@ -29951,6 +29951,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     loader: {
       show: false
     },
+    showContent: true,
     passwordVisibility: false,
     currentUser: null,
     currentQuestion: 0,
@@ -30003,6 +30004,10 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 
     getCurrentQuestion: function getCurrentQuestion(state) {
       return state.currentQuestion;
+    },
+
+    getShowContentStatus: function getShowContentStatus(state) {
+      return state.showContent;
     }
   },
   mutations: {
@@ -30102,6 +30107,13 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
      */
     setCurrentQuestion: function setCurrentQuestion(state, payload) {
       state.currentQuestion = payload;
+    },
+
+    /**
+     * setShowContentValue Mutation
+     */
+    setShowContentValue: function setShowContentValue(state, payload) {
+      state.showContent = payload;
     },
 
     /**
@@ -30689,6 +30701,15 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
           reject(err);
         });
       });
+    },
+
+    /**
+     * setShowContentValue Action
+     */
+    setShowContentValue: function setShowContentValue(_ref48, payload) {
+      var commit = _ref48.commit;
+
+      commit('setShowContentValue', payload);
     }
   }
 });
@@ -43085,8 +43106,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
 
 
 
@@ -43101,18 +43120,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
   data: function data() {
     return {
-      showContent: true,
       answers: []
     };
   },
 
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapGetters */])(['getCurrentQuestion', 'getCurrentUser', 'getQuestions', 'getAnswers', 'getOptions']), {
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapGetters */])(['getCurrentQuestion', 'getCurrentUser', 'getQuestions', 'getAnswers', 'getOptions', 'getShowContentStatus']), {
 
     /**
      * Filter questions of type 'dropdown'.
      */
     typeDropdown: function typeDropdown() {
-      return this.getQuestions[this.getCurrentQuestion].type === 'dropdown' && this.showContent;
+      return this.getQuestions[this.getCurrentQuestion].type === 'dropdown' && this.getShowContentStatus;
     },
 
 
@@ -43120,7 +43138,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Filter questions of type 'multiple'.
      */
     typeMultiple: function typeMultiple() {
-      return this.getQuestions[this.getCurrentQuestion].type === 'multiple' && this.showContent;
+      return this.getQuestions[this.getCurrentQuestion].type === 'multiple' && this.getShowContentStatus;
     },
 
 
@@ -43128,15 +43146,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Filter questions of type 'multiple-inline'.
      */
     typeMultipleInline: function typeMultipleInline() {
-      return this.getQuestions[this.getCurrentQuestion].type === 'multiple-inline' && this.showContent;
-    },
-
-
-    /**
-     * Filter questions of type 'infos'.
-     */
-    typeInfos: function typeInfos() {
-      return this.getQuestions[this.getCurrentQuestion].type === 'infos' && this.showContent;
+      return this.getQuestions[this.getCurrentQuestion].type === 'multiple-inline' && this.getShowContentStatus;
     },
 
 
@@ -43229,10 +43239,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this3 = this;
 
       if (this.getCurrentQuestion < this.getQuestions.length - 1) {
-        this.showContent = false;
+        this.$store.dispatch('setShowContentValue', false);
         this.$store.dispatch('incrementCurrentQuestion');
         setTimeout(function () {
-          _this3.showContent = true;
+          _this3.$store.dispatch('setShowContentValue', true);
         }, 5);
         this.$router.push({ query: { question: this.getCurrentQuestion } });
       }
@@ -43772,7 +43782,7 @@ var render = function() {
         { staticClass: "main__container main__container--medium" },
         [
           _c("transition", { attrs: { name: "fade-longer", mode: "out-in" } }, [
-            _vm.getQuestions.length && _vm.showContent
+            _vm.getQuestions.length && _vm.getShowContentStatus
               ? _c("h1", {
                   staticClass: "main__title",
                   domProps: {
@@ -43820,6 +43830,7 @@ var render = function() {
                                     .options,
                                   function(option) {
                                     return _c("li", {
+                                      key: option.id,
                                       staticClass: "options__list-item",
                                       class: {
                                         "options__list-item--active": _vm.answerExistsInStore(
@@ -43854,6 +43865,7 @@ var render = function() {
                                     .options,
                                   function(option) {
                                     return _c("li", {
+                                      key: option.id,
                                       staticClass: "options__list-inline-item",
                                       class: {
                                         "options__list-inline-item--active": _vm.answerExistsInStore(
@@ -43875,12 +43887,6 @@ var render = function() {
                                   }
                                 )
                               )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.typeInfos
-                          ? _c("div", [
-                              _vm._v("\n            Infos\n          ")
                             ])
                           : _vm._e()
                       ]
