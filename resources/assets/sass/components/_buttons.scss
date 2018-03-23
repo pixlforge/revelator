@@ -118,11 +118,10 @@
     }
   }
 
-  &__continue {
+  &__control {
     background-color: rgba($dove-grey, .34);
     position: fixed;
     bottom: 4rem;
-    right: 5rem;
     cursor: pointer;
     color: $white;
     font-size: 2.4rem;
@@ -133,6 +132,10 @@
     border: none;
     letter-spacing: 2pt;
     transition: all .2s ease;
+
+    &--continue {
+      right: 5rem;
+    }
 
     &--back {
       left: 5rem;

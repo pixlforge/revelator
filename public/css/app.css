@@ -406,11 +406,10 @@ a:visited:focus {
   text-decoration: none !important;
 }
 
-.btn__continue {
+.btn__control {
   background-color: rgba(117, 117, 117, 0.34);
   position: fixed;
   bottom: 4rem;
-  right: 5rem;
   cursor: pointer;
   color: #fff;
   font-size: 2.4rem;
@@ -424,11 +423,15 @@ a:visited:focus {
   transition: all .2s ease;
 }
 
-.btn__continue--back {
+.btn__control--continue {
+  right: 5rem;
+}
+
+.btn__control--back {
   left: 5rem;
 }
 
-.btn__continue:hover {
+.btn__control:hover {
   background-color: #4e4f4f;
   outline: none;
   border: none;
@@ -436,8 +439,8 @@ a:visited:focus {
           box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-.btn__continue:focus,
-.btn__continue:active {
+.btn__control:focus,
+.btn__control:active {
   outline: none;
 }
 

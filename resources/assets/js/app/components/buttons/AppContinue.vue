@@ -1,5 +1,5 @@
 <template>
-  <button class="btn__continue"
+  <button class="btn__control btn__control--continue"
           v-text="label"
           @click="nextQuestion">
   </button>

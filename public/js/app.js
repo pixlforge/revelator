@@ -43619,7 +43619,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("button", {
-    staticClass: "btn__continue",
+    staticClass: "btn__control btn__control--continue",
     domProps: { textContent: _vm._s(_vm.label) },
     on: { click: _vm.nextQuestion }
   })
@@ -53882,7 +53882,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("button", {
-    staticClass: "btn__continue btn__continue--back",
+    staticClass: "btn__control btn__control--back",
     domProps: { textContent: _vm._s(_vm.label) },
     on: { click: _vm.previousQuestion }
   })
