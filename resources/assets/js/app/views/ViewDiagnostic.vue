@@ -52,13 +52,18 @@
         </div>
       </div>
 
-      <!--Button Continue-->
+      <!-- Button Back -->
+      <AppBack label="Back"
+               :disabled="getCurrentQuestion <= 0"
+               @previousQuestion="previousQuestion"/>
+
+      <!-- Button Continue -->
       <AppContinue label="Continue"
                    :disabled="buttonDisabled"
                    @nextQuestion="nextQuestion"/>
     </main>
 
-    <!--Paginator-->
+    <!-- Paginator -->
     <AppPaginator/>
   </div>
 </template>
@@ -66,6 +71,7 @@
 <script>
   import AppPaginator from '../components/UI/AppPaginator'
   import AppContinue from '../components/buttons/AppContinue'
+  import AppBack from '../components/buttons/AppBack'
   import AppDiagnosticSelect from '../components/forms/AppDiagnosticSelect'
   import { mapGetters } from 'vuex'
 
@@ -73,6 +79,7 @@
     components: {
       AppPaginator,
       AppContinue,
+      AppBack,
       AppDiagnosticSelect
     },
     data() {
@@ -206,7 +213,21 @@
           }, 5)
           this.$router.push({ query: { question: this.getCurrentQuestion } })
         }
-      }
+      },
+
+      /**
+       * Go back to the previous question.
+       */
+       previousQuestion() {
+         if (this.getCurrentQuestion > 0) {
+           this.$store.dispatch('setShowContentValue', false)
+           this.$store.dispatch('decrementCurrentQuestion')
+           setTimeout(() => {
+             this.$store.dispatch('setShowContentValue', true)
+           }, 5)
+           this.$router.push({ query: { question: this.getCurrentQuestion } })
+         }
+       }
     }
   }
 </script>

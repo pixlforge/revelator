@@ -424,6 +424,10 @@ a:visited:focus {
   transition: all .2s ease;
 }
 
+.btn__continue--back {
+  left: 5rem;
+}
+
 .btn__continue:hover {
   background-color: #4e4f4f;
   outline: none;

@@ -134,6 +134,10 @@
     letter-spacing: 2pt;
     transition: all .2s ease;
 
+    &--back {
+      left: 5rem;
+    }
+
     &:hover {
       background-color: $dark-grey;
       outline: none;

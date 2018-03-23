@@ -30103,6 +30103,13 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     },
 
     /**
+     * decrementCurrentQuestion Mutation
+     */
+    decrementCurrentQuestion: function decrementCurrentQuestion(state) {
+      state.currentQuestion--;
+    },
+
+    /**
      * setCurrentQuestion Mutation
      */
     setCurrentQuestion: function setCurrentQuestion(state, payload) {
@@ -30676,10 +30683,19 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     },
 
     /**
+     * decrementCurrentQuestion Action
+     */
+    decrementCurrentQuestion: function decrementCurrentQuestion(_ref46) {
+      var commit = _ref46.commit;
+
+      commit('decrementCurrentQuestion');
+    },
+
+    /**
      * setCurrentQuestion Action
      */
-    setCurrentQuestion: function setCurrentQuestion(_ref46, payload) {
-      var commit = _ref46.commit;
+    setCurrentQuestion: function setCurrentQuestion(_ref47, payload) {
+      var commit = _ref47.commit;
 
       commit('setCurrentQuestion', payload);
     },
@@ -30687,9 +30703,9 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * updateGuestInfos Action
      */
-    updateGuestInfos: function updateGuestInfos(_ref47, payload) {
-      var dispatch = _ref47.dispatch,
-          state = _ref47.state;
+    updateGuestInfos: function updateGuestInfos(_ref48, payload) {
+      var dispatch = _ref48.dispatch,
+          state = _ref48.state;
 
       dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
@@ -30706,8 +30722,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * setShowContentValue Action
      */
-    setShowContentValue: function setShowContentValue(_ref48, payload) {
-      var commit = _ref48.commit;
+    setShowContentValue: function setShowContentValue(_ref49, payload) {
+      var commit = _ref49.commit;
 
       commit('setShowContentValue', payload);
     }
@@ -43036,9 +43052,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_UI_AppPaginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_UI_AppPaginator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_buttons_AppContinue__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_buttons_AppContinue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_buttons_AppContinue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_forms_AppDiagnosticSelect__ = __webpack_require__(306);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_forms_AppDiagnosticSelect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_forms_AppDiagnosticSelect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_buttons_AppBack__ = __webpack_require__(409);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_buttons_AppBack___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_buttons_AppBack__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_forms_AppDiagnosticSelect__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_forms_AppDiagnosticSelect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_forms_AppDiagnosticSelect__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(5);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -43106,6 +43124,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 
@@ -43116,7 +43140,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   components: {
     AppPaginator: __WEBPACK_IMPORTED_MODULE_0__components_UI_AppPaginator___default.a,
     AppContinue: __WEBPACK_IMPORTED_MODULE_1__components_buttons_AppContinue___default.a,
-    AppDiagnosticSelect: __WEBPACK_IMPORTED_MODULE_2__components_forms_AppDiagnosticSelect___default.a
+    AppBack: __WEBPACK_IMPORTED_MODULE_2__components_buttons_AppBack___default.a,
+    AppDiagnosticSelect: __WEBPACK_IMPORTED_MODULE_3__components_forms_AppDiagnosticSelect___default.a
   },
   data: function data() {
     return {
@@ -43124,7 +43149,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapGetters */])(['getCurrentQuestion', 'getCurrentUser', 'getQuestions', 'getAnswers', 'getOptions', 'getShowContentStatus']), {
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["c" /* mapGetters */])(['getCurrentQuestion', 'getCurrentUser', 'getQuestions', 'getAnswers', 'getOptions', 'getShowContentStatus']), {
 
     /**
      * Filter questions of type 'dropdown'.
@@ -43243,6 +43268,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         this.$store.dispatch('incrementCurrentQuestion');
         setTimeout(function () {
           _this3.$store.dispatch('setShowContentValue', true);
+        }, 5);
+        this.$router.push({ query: { question: this.getCurrentQuestion } });
+      }
+    },
+
+
+    /**
+     * Go back to the previous question.
+     */
+    previousQuestion: function previousQuestion() {
+      var _this4 = this;
+
+      if (this.getCurrentQuestion > 0) {
+        this.$store.dispatch('setShowContentValue', false);
+        this.$store.dispatch('decrementCurrentQuestion');
+        setTimeout(function () {
+          _this4.$store.dispatch('setShowContentValue', true);
         }, 5);
         this.$router.push({ query: { question: this.getCurrentQuestion } });
       }
@@ -43902,6 +43944,11 @@ var render = function() {
                 )
               ])
             : _vm._e(),
+          _vm._v(" "),
+          _c("AppBack", {
+            attrs: { label: "Back", disabled: _vm.getCurrentQuestion <= 0 },
+            on: { previousQuestion: _vm.previousQuestion }
+          }),
           _vm._v(" "),
           _c("AppContinue", {
             attrs: { label: "Continue", disabled: _vm.buttonDisabled },
@@ -53731,6 +53778,124 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 402 */,
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(410)
+/* template */
+var __vue_template__ = __webpack_require__(411)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/app/components/buttons/AppBack.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-16dc5ce1", Component.options)
+  } else {
+    hotAPI.reload("data-v-16dc5ce1", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 410 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(5);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    label: {
+      type: String,
+      required: true
+    },
+    disabled: {
+      type: Boolean,
+      required: true
+    }
+  },
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])(['getCurrentQuestion', 'getQuestions'])),
+  methods: {
+    previousQuestion: function previousQuestion() {
+      if (!this.disabled) {
+        this.$emit('previousQuestion');
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 411 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("button", {
+    staticClass: "btn__continue btn__continue--back",
+    domProps: { textContent: _vm._s(_vm.label) },
+    on: { click: _vm.previousQuestion }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-16dc5ce1", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -160,6 +160,13 @@ export const store = new Vuex.Store({
     },
 
     /**
+     * decrementCurrentQuestion Mutation
+     */
+    decrementCurrentQuestion: state => {
+      state.currentQuestion--
+    },
+
+    /**
      * setCurrentQuestion Mutation
      */
     setCurrentQuestion: (state, payload) => {
@@ -614,6 +621,13 @@ export const store = new Vuex.Store({
      */
     incrementCurrentQuestion: ({ commit }) => {
       commit('incrementCurrentQuestion')
+    },
+
+    /**
+     * decrementCurrentQuestion Action
+     */
+    decrementCurrentQuestion: ({ commit }) => {
+      commit('decrementCurrentQuestion')
     },
 
     /**
