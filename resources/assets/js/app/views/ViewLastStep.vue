@@ -8,6 +8,7 @@
         In order to send you a personalised offer, we would like to know more about you and send you some recommendations.
       </p>
 
+      <!-- Radio Buttons -->
       <div class="radio__group">
         <AppRadioButton option="yes"
                         :selected="radioSelect === 'yes'"
@@ -22,12 +23,13 @@
         </AppRadioButton>
       </div>
 
+      <!-- Personal Infos Inputs -->
       <transition name="fade" mode="out-in">
         <div v-if="radioSelect === 'yes'">
 
           <div class="form__group form__group--last-step">
 
-            <!--First Name-->
+            <!-- First Name -->
             <input type="text"
                    name="firstName"
                    id="firstName"
@@ -47,7 +49,7 @@
               <p v-if="errors.firstName">{{ errors.firstName[0] }}</p>
             </AppFeedback>
 
-            <!--Last Name-->
+            <!-- Last Name -->
             <input type="text"
                    name="lastName"
                    id="lastName"
@@ -68,7 +70,7 @@
             </AppFeedback>
           </div>
 
-          <!--Guest Email-->
+          <!-- Guest Email -->
           <div class="form__group">
             <input type="email"
                    name="guestEmail"
@@ -92,8 +94,8 @@
         </div>
       </transition>
 
-      <!--Button Continue-->
-      <button class="btn__continue"
+      <!-- Button Continue -->
+      <button class="btn__control btn__control--continue"
               v-text="'Continue'"
               @click="saveAndContinue">
       </button>

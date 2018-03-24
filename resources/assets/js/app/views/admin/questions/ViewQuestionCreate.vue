@@ -1,15 +1,18 @@
 <template>
   <main class="main__container main__container--medium"
         @keyup.enter="submit">
+
+    <!-- Back Button -->
     <router-link :to="{ name: 'admin.questions.index' }"
                  tag="a"
                  class="main__back">
       <i class="fas fa-arrow-left"></i>
     </router-link>
 
+    <!-- Title -->
     <h1 class="main__title">Add question</h1>
 
-    <!--Name-->
+    <!-- Name -->
     <div class="form__group">
       <label for="name" class="form__label">Name</label>
       <input type="text"
@@ -31,7 +34,7 @@
       </AppFeedback>
     </div>
 
-    <!--Type-->
+    <!-- Type -->
     <div class="form__group">
       <label for="type" class="form__label">Type</label>
       <AppSelect id="type"
@@ -47,7 +50,7 @@
       </AppFeedback>
     </div>
 
-    <!--Position-->
+    <!-- Position -->
     <div class="form__group">
       <label for="pos" class="form__label">Position</label>
       <input type="number"
@@ -70,7 +73,8 @@
     </div>
 
     <div class="form__group">
-      <!--Submit-->
+      
+      <!-- Submit -->
       <button class="btn btn--primary"
               :disabled="$v.$invalid"
               @click="submit">
@@ -78,7 +82,6 @@
         Add
       </button>
     </div>
-
   </main>
 </template>
 

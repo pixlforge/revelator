@@ -1,16 +1,19 @@
 <template>
   <main class="auth__container" @keyup.enter="submit">
+
+    <!-- Back Button -->
     <router-link :to="{ name: 'auth.login' }"
                  tag="a"
                  class="auth__back">
       <i class="fas fa-arrow-left"></i>
     </router-link>
 
+    <!-- Title -->
     <h1 class="auth__title">
       Request Password Reset Link
     </h1>
 
-    <!--Email-->
+    <!-- Email -->
     <div class="form__group">
       <label for="email" class="form__label">Email address</label>
       <input type="email"
@@ -32,7 +35,8 @@
     </div>
 
     <div class="form__group form__group--inline">
-      <!--Submit-->
+      
+      <!-- Submit -->
       <button class="btn btn--primary"
               :disabled="$v.$invalid"
               @click="submit">

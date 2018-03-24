@@ -7,7 +7,7 @@
         Thank you, here are the programs that we selected for you.
       </p>
 
-      <!--Results-->
+      <!-- Results -->
       <div class="main__results">
         <AppProgram v-for="program in getPrograms"
                     :key="program.id"

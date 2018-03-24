@@ -2,7 +2,7 @@
   <div>
     <main class="main__container main__container--medium">
 
-      <!--Question-->
+      <!-- Question -->
       <transition name="fade-longer" mode="out-in">
         <h1 class="main__title"
             v-if="getQuestions.length && getShowContentStatus"
@@ -10,19 +10,19 @@
         </h1>
       </transition>
 
-      <!--Answers-->
+      <!-- Answers -->
       <div v-if="getQuestions.length">
         <div class="form__group">
           <transition name="fade-longer" mode="out-in">
 
-            <!--Type Dropdown-->
+            <!-- Type Dropdown -->
             <div v-if="typeDropdown">
               <AppDiagnosticSelect :options="selectOptions"
                                    :value="selectedOptionLabel"
                                    @selectedOption="addAnswer"/>
             </div>
 
-            <!--Type Multiple-->
+            <!-- Type Multiple -->
             <div v-if="typeMultiple">
               <ul class="options__list">
                 <li class="options__list-item"
@@ -35,7 +35,7 @@
               </ul>
             </div>
 
-            <!--Type Multiple Inline-->
+            <!-- Type Multiple Inline -->
             <div v-if="typeMultipleInline">
               <ul class="options__list-inline">
                 <li class="options__list-inline-item"

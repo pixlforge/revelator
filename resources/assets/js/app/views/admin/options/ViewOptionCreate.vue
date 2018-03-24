@@ -1,15 +1,18 @@
 <template>
   <main class="main__container main__container--medium"
         @keyup.enter="submit">
+
+    <!-- Back Button -->
     <router-link :to="{ name: 'admin.options.index' }"
                  tag="a"
                  class="main__back">
       <i class="fas fa-arrow-left"></i>
     </router-link>
 
+    <!-- Title -->
     <h1 class="main__title">Add option</h1>
 
-    <!--Name-->
+    <!-- Name -->
     <div class="form__group">
       <label for="name" class="form__label">Name</label>
       <input type="text"
@@ -31,7 +34,7 @@
       </AppFeedback>
     </div>
 
-    <!--Pos-->
+    <!-- Pos -->
     <div class="form__group">
       <label for="pos" class="form__label">Position</label>
       <input type="number"
@@ -51,7 +54,7 @@
       </AppFeedback>
     </div>
 
-    <!--Question-->
+    <!-- Question -->
     <div class="form__group">
       <label for="question_id" class="form__label">Related question</label>
       <AppSelect id="question_id"
@@ -67,7 +70,7 @@
       </AppFeedback>
     </div>
 
-    <!--Associated Programs-->
+    <!-- Associated Programs -->
     <template v-if="showPrograms">
       <div class="form__group"
            v-for="(program, index) in getPrograms"
@@ -84,7 +87,8 @@
     </template>
 
     <div class="form__group">
-      <!--Submit-->
+      
+      <!-- Submit -->
       <button class="btn btn--primary"
               :disabled="$v.$invalid"
               @click="submit">
@@ -92,7 +96,6 @@
         Add
       </button>
     </div>
-
   </main>
 </template>
 

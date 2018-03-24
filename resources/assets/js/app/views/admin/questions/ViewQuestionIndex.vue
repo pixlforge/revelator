@@ -1,14 +1,19 @@
 <template>
   <main class="main__container">
+
+    <!-- Back Button -->
     <router-link :to="{ name: 'admin' }"
                  tag="a"
                  class="main__back">
       <i class="fas fa-arrow-left"></i>
     </router-link>
 
+    <!-- Title -->
     <h1 class="main__title">Questions</h1>
 
     <div class="main__row main__row--center">
+
+      <!-- Add -->
       <router-link :to="{ name: 'admin.questions.create' }"
                    class="btn__small btn__small--success">
         <i class="fas fa-plus"></i>

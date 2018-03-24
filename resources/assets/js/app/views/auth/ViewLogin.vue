@@ -1,14 +1,17 @@
 <template>
   <main class="auth__container" @keyup.enter="submit">
+
+    <!-- Back Button -->
     <router-link :to="{ name: 'home' }"
                  tag="a"
                  class="auth__back">
       <i class="fas fa-arrow-left"></i>
     </router-link>
 
+    <!-- Title -->
     <h1 class="auth__title">Login</h1>
 
-    <!--Email-->
+    <!-- Email -->
     <div class="form__group">
       <label for="email" class="form__label">Email address</label>
       <input type="email"
@@ -29,7 +32,7 @@
       </AppFeedback>
     </div>
 
-    <!--Password-->
+    <!-- Password -->
     <div class="form__group">
       <label for="password" class="form__label">Password</label>
       <input type="password"
@@ -46,17 +49,19 @@
       </AppTooltip>
     </div>
 
+    <!-- Remember -->
     <input type="hidden" name="remember" v-model="user.remember">
 
     <div class="form__group form__group--inline">
-      <!--Submit-->
+      
+      <!-- Submit -->
       <button class="btn btn--primary"
               :disabled="$v.$invalid"
               @click="submit">
         Sign In
       </button>
 
-      <!--Forgot Password-->
+      <!-- Forgot Password -->
       <router-link :to="{ name: 'reset.email' }" class="auth__forgotten">
         Forgot Your Password?
       </router-link>

@@ -1,15 +1,18 @@
 <template>
   <main class="main__container main__container--medium"
         @keyup.enter="submit">
+
+    <!-- Back Button -->
     <router-link :to="{ name: 'admin.users.index' }"
                  tag="a"
                  class="main__back">
       <i class="fas fa-arrow-left"></i>
     </router-link>
 
+    <!-- Title -->
     <h1 class="main__title">Add user</h1>
 
-    <!--Name-->
+    <!-- Name -->
     <div class="form__group">
       <label for="name" class="form__label">Name</label>
       <input type="text"
@@ -31,7 +34,7 @@
       </AppFeedback>
     </div>
 
-    <!--Email-->
+    <!-- Email -->
     <div class="form__group">
       <label for="email" class="form__label">Email</label>
       <input type="email"
@@ -52,7 +55,7 @@
       </AppFeedback>
     </div>
 
-    <!--Password-->
+    <!-- Password -->
     <div class="form__group">
       <label for="password" class="form__label">Password</label>
       <input :type="passwordFieldType"
@@ -75,7 +78,7 @@
       </AppFeedback>
     </div>
 
-    <!--Password Confirmation-->
+    <!-- Password Confirmation -->
     <div class="form__group">
       <label for="password_confirmation" class="form__label">Password Confirmation</label>
       <input :type="passwordFieldType"
@@ -96,7 +99,7 @@
       </AppTooltip>
     </div>
 
-    <!--Role-->
+    <!-- Role -->
     <div class="form__group">
       <label for="role" class="form__label">Role</label>
       <AppSelect id="role"
@@ -113,7 +116,8 @@
     </div>
 
     <div class="form__group">
-      <!--Submit-->
+      
+      <!-- Submit -->
       <button class="btn btn--primary"
               :disabled="$v.$invalid"
               @click="submit">
@@ -121,7 +125,6 @@
         Add
       </button>
     </div>
-
   </main>
 </template>
 

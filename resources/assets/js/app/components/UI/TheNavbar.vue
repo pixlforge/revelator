@@ -1,5 +1,7 @@
 <template>
   <nav class="nav__container">
+
+    <!-- Logo -->
     <div class="nav__brand">
       <router-link :to="{ name: 'home' }">
         <img src="/img/clp-logo.svg" alt="Logo La Prairie">
@@ -9,6 +11,8 @@
       <div class="nav__menu"
            v-if="$store.getters.getCurrentUser.role === 'dev' || $store.getters.getCurrentUser.role === 'admin'">
         <ul class="nav__list">
+
+          <!-- Home -->
           <li>
             <router-link :to="{ name: 'home' }"
                          active-class="nav__link-active"
@@ -16,12 +20,16 @@
               Home
             </router-link>
           </li>
+
+          <!-- Diagnostic -->
           <li>
             <router-link :to="{ name: 'diagnostic', query: { question: 0 } }"
                          active-class="nav__link-active">
               Diagnostic
             </router-link>
           </li>
+
+          <!-- Log In -->
           <li v-if="!$store.getters.getCurrentUser">
             <router-link :to="{ name: 'auth.login' }"
                          active-class="nav__link-active"
@@ -29,12 +37,16 @@
               Sign in
             </router-link>
           </li>
+
+          <!-- Admin -->
           <li v-if="userIsAdmin">
             <router-link :to="{ name: 'admin' }"
                          active-class="nav__link-active">
               Admin
             </router-link>
           </li>
+
+          <!-- Log Out -->
           <li v-if="$store.getters.getCurrentUser">
             <a @click="logout">Sign out</a>
           </li>

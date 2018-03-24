@@ -1,15 +1,18 @@
 <template>
   <main class="main__container main__container--medium"
         @keyup.enter="submit">
+
+    <!-- Back Button -->
     <router-link :to="{ name: 'admin.programs.index' }"
                  tag="a"
                  class="main__back">
       <i class="fas fa-arrow-left"></i>
     </router-link>
 
+    <!-- Title -->
     <h1 class="main__title">Edit program</h1>
 
-    <!--Title-->
+    <!-- Title -->
     <div class="form__group">
       <label for="title" class="form__label">Title</label>
       <input type="text"
@@ -31,7 +34,7 @@
       </AppFeedback>
     </div>
 
-    <!--Code-->
+    <!-- Code -->
     <div class="form__group">
       <label for="code" class="form__label">Code</label>
       <input type="text"
@@ -51,7 +54,7 @@
       </AppFeedback>
     </div>
 
-    <!--Description-->
+    <!-- Description -->
     <div class="form__group">
       <label for="description" class="form__label">Description</label>
       <input type="text"
@@ -71,7 +74,7 @@
       </AppFeedback>
     </div>
 
-    <!--URL-->
+    <!-- URL -->
     <div class="form__group">
       <label for="url" class="form__label">URL</label>
       <input type="text"
@@ -93,7 +96,8 @@
     </div>
 
     <div class="form__group">
-      <!--Submit-->
+      
+      <!-- Submit -->
       <button class="btn btn--primary"
               :disabled="$v.$invalid"
               @click="submit">
@@ -101,7 +105,6 @@
         Update
       </button>
     </div>
-
   </main>
 </template>
 
