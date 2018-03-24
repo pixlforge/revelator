@@ -7,8 +7,8 @@
 
   &__container {
     width: 93vw;
-    min-height: 72vh;
-    margin: 8rem auto 0;
+    margin: 0 auto;
+    padding-top: 25rem;
     position: relative;
 
     &--medium {
@@ -65,7 +65,7 @@
 
   &__back {
     position: absolute;
-    top: 1.8rem;
+    top: 25rem;
     left: 0;
     color: lighten($silver, 10%) !important;
     font-size: 4rem;

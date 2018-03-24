@@ -1,12 +1,14 @@
 .nav {
   &__container {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
     padding: 4rem 5rem;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-  }
-
-  &__brand {
   }
 
   &__menu {
@@ -25,6 +27,8 @@
       cursor: pointer;
       letter-spacing: 2pt;
       transition: all .4s ease;
+      background-color: $gallery;
+      box-shadow: 0 8px 15px rgba($black, .1);
 
       &:hover,
       &:focus,
@@ -35,7 +39,7 @@
   }
 
   &__link-active {
-    background-color: $dark-grey;
+    background-color: $dark-grey !important;
     color: $white !important;
     transform: translateY(-2px);
     box-shadow: 0 8px 15px rgba($black, .1);
