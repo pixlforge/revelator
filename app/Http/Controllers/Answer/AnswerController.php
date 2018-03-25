@@ -24,7 +24,7 @@ class AnswerController extends Controller
     public function index()
     {
         if (auth()->user()->isUser()) {
-            $answers = Answer::own()->get();
+            $answers = Answer::own()->with('option.programs')->get();
         }
 
         return response($answers, 200);
