@@ -45276,6 +45276,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -45285,43 +45287,64 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     AppProgram: __WEBPACK_IMPORTED_MODULE_0__components_UI_AppProgram___default.a
   },
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(['getPrograms', 'getAnswers', 'getOptions'])),
+  data: function data() {
+    return {
+      programs: []
+    };
+  },
   created: function created() {
-    var _this = this;
-
-    this.$store.dispatch('toggleLoader');
-
-    var fetchPrograms = this.$store.dispatch('fetchPrograms');
-    var fetchExistingAnswers = this.$store.dispatch('fetchExistingAnswers');
-    var fetchOptions = this.$store.dispatch('fetchOptions');
-
-    Promise.all([fetchPrograms, fetchExistingAnswers, fetchOptions]).then(function () {
-      _this.$store.dispatch('toggleLoader');
-      _this.getResultsByProgram();
-    }).catch(function (err) {
-      _this.$store.dispatch('toggleLoader');
-      console.log(err);
-    });
+    this.initComponent();
   },
 
   methods: {
+    /**
+     * Fetch the programs, options and existing answers.
+     */
+    initComponent: function initComponent() {
+      var _this = this;
+
+      this.$store.dispatch('toggleLoader');
+
+      var fetchPrograms = this.$store.dispatch('fetchPrograms');
+      var fetchExistingAnswers = this.$store.dispatch('fetchExistingAnswers');
+      var fetchOptions = this.$store.dispatch('fetchOptions');
+
+      Promise.all([fetchPrograms, fetchExistingAnswers, fetchOptions]).then(function () {
+        _this.$store.dispatch('toggleLoader');
+        _this.getResultsByProgram();
+      }).catch(function (err) {
+        _this.$store.dispatch('toggleLoader');
+        console.log(err);
+      });
+    },
     getResultsByProgram: function getResultsByProgram() {
-      var optionIds = [];
+      var _this2 = this;
 
+      /**
+       * Build the programs data property.
+       */
+      this.getPrograms.forEach(function (program) {
+        _this2.programs.push({
+          id: program.id,
+          title: program.title,
+          slogan: program.slogan,
+          url: program.url,
+          points: 0
+        });
+      });
+
+      /**
+       * Attribute points in relation with an option's weighting related to a program.
+       */
       this.getAnswers.forEach(function (answer) {
-        optionIds.push(answer.option_id);
+        answer.option.programs.forEach(function (program) {
+          _this2.programs.forEach(function (item) {
+            if (item.id === program.id) {
+              item.points += program.pivot.value;
+            }
+          });
+        });
       });
-
-      console.log('optionIds: ' + optionIds);
-
-      var selectedOptions = this.getOptions.find(function (option) {
-        return option.id === 2;
-      });
-
-      console.log(selectedOptions);
-
-      var programs = this.getPrograms;
-
-      console.log(programs);
     }
   }
 });
@@ -45431,7 +45454,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "program__container" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "program__result" }, [
+        _c("div", {
+          staticClass: "program__result-value",
+          domProps: { textContent: _vm._s(_vm.program.points) }
+        })
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "program__body" }, [
         _c("h2", {
@@ -45444,20 +45472,12 @@ var render = function() {
           domProps: { textContent: _vm._s(_vm.program.slogan) }
         }),
         _vm._v(" "),
-        _vm._m(1)
+        _vm._m(0)
       ])
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "program__result" }, [
-      _c("div", { staticClass: "program__result-value" })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -45499,7 +45519,7 @@ var render = function() {
       _c(
         "div",
         { staticClass: "main__results" },
-        _vm._l(_vm.getPrograms, function(program) {
+        _vm._l(_vm.programs, function(program) {
           return _c("AppProgram", {
             key: program.id,
             attrs: { program: program }

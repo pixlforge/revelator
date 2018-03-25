@@ -5,7 +5,7 @@
       <div class="program__result">
         <!--Circle-->
         <!--Result-->
-        <div class="program__result-value">
+        <div class="program__result-value" v-text="program.points">
         </div>
       </div>
 
