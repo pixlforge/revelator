@@ -45286,10 +45286,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   components: {
     AppProgram: __WEBPACK_IMPORTED_MODULE_0__components_UI_AppProgram___default.a
   },
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(['getPrograms', 'getAnswers', 'getOptions'])),
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(['getPrograms', 'getAnswers', 'getOptions', 'getQuestions'])),
   data: function data() {
     return {
-      programs: []
+      programs: [],
+      questions: []
     };
   },
   created: function created() {
@@ -45308,8 +45309,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var fetchPrograms = this.$store.dispatch('fetchPrograms');
       var fetchExistingAnswers = this.$store.dispatch('fetchExistingAnswers');
       var fetchOptions = this.$store.dispatch('fetchOptions');
+      var fetchQuestions = this.$store.dispatch('fetchQuestions');
 
-      Promise.all([fetchPrograms, fetchExistingAnswers, fetchOptions]).then(function () {
+      Promise.all([fetchPrograms, fetchExistingAnswers, fetchOptions, fetchQuestions]).then(function () {
         _this.$store.dispatch('toggleLoader');
         _this.getResultsByProgram();
       }).catch(function (err) {
@@ -45329,7 +45331,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           title: program.title,
           slogan: program.slogan,
           url: program.url,
-          points: 0
+          points: 0,
+          maxPoints: 0
         });
       });
 
@@ -45345,6 +45348,72 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           });
         });
       });
+
+      /* No edit above this line */
+
+      // Sort relevant attributes
+      this.getQuestions.forEach(function (question) {
+        _this2.questions.push({
+          id: question.id,
+          name: question.name,
+          options: question.options
+        });
+      });
+
+      this.questions.forEach(function (question) {
+        if (question.id !== 3) {
+          console.warn('START Question ID ' + question.id);
+
+          question.options.forEach(function (option) {
+            console.log('START Option ' + option.name);
+
+            option.programs.forEach(function (program) {
+              console.log(program);
+            });
+
+            console.log('STOP Option ' + option.name);
+          });
+
+          console.warn('STOP Question ID ' + question.id);
+        }
+      });
+
+      // console.log(this.questions)
+
+
+      // questions.forEach(question => {
+      //   question.options.forEach(option => {
+      //     if (option.question_id !== 3) {
+
+      //       console.log(option)
+
+      //     }
+      //   })
+      // })
+
+
+      // this.getQuestions.forEach(question => {
+      //   let maxValue = 0
+
+      //   question.options.forEach(option => {
+      //     if (option.question_id !== 3) {
+
+      //       option.programs.forEach(program => {
+      //         this.programs.forEach(item => {
+      //           if (item.id === program.id) {
+      //             console.log('--------------')
+      //             console.log(program)
+      //             console.log(item)
+      //             console.log('--------------')
+      //             item.maxPoints += program.pivot.value
+      //           }
+      //         })
+      //       })
+
+      //     }
+      //   })
+      // })
+
     }
   }
 });
