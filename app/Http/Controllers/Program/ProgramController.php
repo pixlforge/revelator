@@ -26,7 +26,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = Program::orderBy('title')->get();
+        $programs = Program::with('options')->orderBy('title')->get();
 
         return response($programs, 200);
     }
