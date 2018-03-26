@@ -25,7 +25,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::with('options')->orderBy('pos')->get();
+        $questions = Question::with('options.programs')->orderBy('pos')->get();
 
         return response($questions, 200);
     }
