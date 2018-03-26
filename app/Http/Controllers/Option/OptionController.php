@@ -26,7 +26,7 @@ class OptionController extends Controller
      */
     public function index()
     {
-        $options = Option::with('question')->orderBy('question_id')->get();
+        $options = Option::with('question', 'programs')->orderBy('question_id')->get();
 
         return response($options, 200);
     }
