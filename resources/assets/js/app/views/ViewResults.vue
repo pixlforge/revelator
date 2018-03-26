@@ -76,14 +76,41 @@
          * Build the programs data property.
          */
         this.getPrograms.forEach(program => {
+          console.log("START PROGRAM")
+          
+          let question_actual = 0;
+          let val_max = 0;
+          let sum_val_max = 0;
+
+          program.options.forEach(option => {
+
+            console.log("START OPTION")
+            if(program.id == option.pivot.program_id){
+              //On contrôle que la question n'a pas changé
+              if(question_actual != option.pivot.question_id){
+                question_actual = option.pivot.question_id;
+                sum_val_max += val_max;
+                val_max = 0;
+              }
+
+              //on attribue et corrige la valeur max de points
+              if(val_max < option.pivot.value){
+                val_max = option.pivot.value;
+              }
+            }
+            console.log("END OPTION")
+          })
+
           this.programs.push({
             id: program.id,
             title: program.title,
             slogan: program.slogan,
             url: program.url,
             points: 0,
-            maxPoints: 0
+            maxPoints: sum_val_max,
           })
+
+          console.log("END PROGRAM")
         })
 
         /**
@@ -110,23 +137,27 @@
           })
         })
 
-        this.questions.forEach(question => {
-          if (question.id !== 3) {
-            console.warn('START Question ID ' + question.id)
+
+
+
+
+        // this.questions.forEach(question => {
+        //   if (question.id !== 3) {
+        //     console.warn('START Question ID ' + question.id)
             
-            question.options.forEach(option => {
-              console.log('START Option ' + option.name)
+        //     question.options.forEach(option => {
+        //       console.log('START Option ' + option.name)
 
-              option.programs.forEach(program => {
-                console.log(program)
-              })
+        //       option.programs.forEach(program => {
+        //         console.log(program)
+        //       })
 
-              console.log('STOP Option ' + option.name)
-            })
+        //       console.log('STOP Option ' + option.name)
+        //     })
 
-            console.warn('STOP Question ID ' + question.id)
-          }
-        })
+        //     console.warn('STOP Question ID ' + question.id)
+        //   }
+        // })
 
         // console.log(this.questions)
 
