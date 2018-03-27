@@ -83,29 +83,29 @@
        */
       buildProgramsDataProperties() {
         this.getPrograms.forEach(program => {
-          
-          let currentQuestion = 0;
-          let max = 0;
-          let sum = 0;
+          let currentQuestion = 0
+          let max = 0
+          let sum = 0
 
           // For each option associated with the current program.
           program.options.forEach(option => {
 
             // If the current program's id is the same as the option's associated program id.
-            if (program.id == option.pivot.program_id) {
-
+            if (program.id === option.pivot.program_id) {
+              
               // Check whether the question has changed.
-              if (currentQuestion != option.pivot.question_id) {
-                currentQuestion = option.pivot.question_id;
-                sum += max;
-                max = 0;
+              if (currentQuestion !== option.question_id) {
+                currentQuestion = option.question_id
+                sum += max
+                max = 0
               }
 
               // Check for max value and attribute new max if necessary.
               if (max < option.pivot.value) {
-                max = option.pivot.value;
+                max = option.pivot.value
               }
             }
+
           })
 
           // Push the desired properties to the programs data property array.

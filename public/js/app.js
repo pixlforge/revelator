@@ -45336,7 +45336,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this2 = this;
 
       this.getPrograms.forEach(function (program) {
-
         var currentQuestion = 0;
         var max = 0;
         var sum = 0;
@@ -45345,11 +45344,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         program.options.forEach(function (option) {
 
           // If the current program's id is the same as the option's associated program id.
-          if (program.id == option.pivot.program_id) {
+          if (program.id === option.pivot.program_id) {
 
             // Check whether the question has changed.
-            if (currentQuestion != option.pivot.question_id) {
-              currentQuestion = option.pivot.question_id;
+            if (currentQuestion !== option.question_id) {
+              currentQuestion = option.question_id;
               sum += max;
               max = 0;
             }
