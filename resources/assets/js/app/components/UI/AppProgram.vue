@@ -5,7 +5,8 @@
       <div class="program__result">
         <!--Circle-->
         <!--Result-->
-        <div class="program__result-value" v-text="program.points">
+        <div class="program__result-value"
+             v-text="calculatePercentage">
         </div>
       </div>
 
@@ -36,6 +37,11 @@
       program: {
         type: Object,
         required: true
+      }
+    },
+    computed: {
+      calculatePercentage() {
+        return Math.ceil(Math.round((this.program.points / this.program.maxPoints) * 100)) + '%'
       }
     }
   }

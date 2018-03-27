@@ -77,7 +77,7 @@
         this.buildProgramsDataProperties()
         this.attributePoints()
       },
-
+      
       /**
        * Build the programs data properties.
        */
@@ -105,7 +105,6 @@
                 max = option.pivot.value
               }
             }
-
           })
 
           // Push the desired properties to the programs data property array.

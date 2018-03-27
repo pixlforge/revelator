@@ -45477,12 +45477,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     program: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    calculatePercentage: function calculatePercentage() {
+      return Math.ceil(Math.round(this.program.points / this.program.maxPoints * 100)) + '%';
     }
   }
 });
@@ -45500,7 +45506,7 @@ var render = function() {
       _c("div", { staticClass: "program__result" }, [
         _c("div", {
           staticClass: "program__result-value",
-          domProps: { textContent: _vm._s(_vm.program.points) }
+          domProps: { textContent: _vm._s(_vm.calculatePercentage) }
         })
       ]),
       _vm._v(" "),
