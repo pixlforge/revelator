@@ -42992,7 +42992,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("h2", { staticClass: "main__subtitle" }, [
-            _vm._v("Find the program that suits you")
+            _vm._v("Find the program that is perfect for you")
           ]),
           _vm._v(" "),
           _c("TheSummary")

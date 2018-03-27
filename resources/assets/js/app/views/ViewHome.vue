@@ -6,7 +6,7 @@
       <h1 class="main__title main__title--big">Revelator</h1>
 
       <!-- Subtitle -->
-      <h2 class="main__subtitle">Find the program that suits you</h2>
+      <h2 class="main__subtitle">Find the program that is perfect for you</h2>
 
       <!-- Summary -->
       <TheSummary/>
