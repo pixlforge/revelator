@@ -38,8 +38,7 @@
     },
     data() {
       return {
-        programs: [],
-        questions: []
+        programs: []
       }
     },
     created() {
@@ -71,51 +70,60 @@
         })
       },
 
+      /**
+       * Get the full results for each program.
+       */
       getResultsByProgram() {
-        /**
-         * Build the programs data property.
-         */
-        this.getPrograms.forEach(program => {
-          console.log("START PROGRAM")
-          
-          let question_actual = 0;
-          let val_max = 0;
-          let sum_val_max = 0;
+        this.buildProgramsDataProperties()
+        this.attributePoints()
+      },
 
+      /**
+       * Build the programs data properties.
+       */
+      buildProgramsDataProperties() {
+        this.getPrograms.forEach(program => {
+          
+          let currentQuestion = 0;
+          let max = 0;
+          let sum = 0;
+
+          // For each option associated with the current program.
           program.options.forEach(option => {
 
-            console.log("START OPTION")
-            if(program.id == option.pivot.program_id){
-              //On contrôle que la question n'a pas changé
-              if(question_actual != option.pivot.question_id){
-                question_actual = option.pivot.question_id;
-                sum_val_max += val_max;
-                val_max = 0;
+            // If the current program's id is the same as the option's associated program id.
+            if (program.id == option.pivot.program_id) {
+
+              // Check whether the question has changed.
+              if(currentQuestion != option.pivot.question_id){
+                currentQuestion = option.pivot.question_id;
+                sum += max;
+                max = 0;
               }
 
-              //on attribue et corrige la valeur max de points
-              if(val_max < option.pivot.value){
-                val_max = option.pivot.value;
+              // Check for max value and attribute new max if necessary.
+              if (max < option.pivot.value) {
+                max = option.pivot.value;
               }
             }
-            console.log("END OPTION")
           })
 
+          // Push the desired properties to the programs data property array.
           this.programs.push({
             id: program.id,
             title: program.title,
             slogan: program.slogan,
             url: program.url,
             points: 0,
-            maxPoints: sum_val_max,
+            maxPoints: sum,
           })
-
-          console.log("END PROGRAM")
         })
+      },
 
-        /**
-         * Attribute points in relation with an option's weighting related to a program.
-         */
+      /**
+       * Attribute points in relation with an option's weighting related to a program.
+       */
+      attributePoints() {
         this.getAnswers.forEach(answer => {
           answer.option.programs.forEach(program => {
             this.programs.forEach(item => {
@@ -125,79 +133,6 @@
             })
           })
         })
-
-        /* No edit above this line */
-
-        // Sort relevant attributes
-        this.getQuestions.forEach(question => {
-          this.questions.push({
-            id: question.id,
-            name: question.name,
-            options: question.options
-          })
-        })
-
-
-
-
-
-        // this.questions.forEach(question => {
-        //   if (question.id !== 3) {
-        //     console.warn('START Question ID ' + question.id)
-            
-        //     question.options.forEach(option => {
-        //       console.log('START Option ' + option.name)
-
-        //       option.programs.forEach(program => {
-        //         console.log(program)
-        //       })
-
-        //       console.log('STOP Option ' + option.name)
-        //     })
-
-        //     console.warn('STOP Question ID ' + question.id)
-        //   }
-        // })
-
-        // console.log(this.questions)
-
-
-        // questions.forEach(question => {
-        //   question.options.forEach(option => {
-        //     if (option.question_id !== 3) {
-
-        //       console.log(option)
-
-        //     }
-        //   })
-        // })
-
-
-        // this.getQuestions.forEach(question => {
-        //   let maxValue = 0
-
-        //   question.options.forEach(option => {
-        //     if (option.question_id !== 3) {
-
-        //       option.programs.forEach(program => {
-        //         this.programs.forEach(item => {
-        //           if (item.id === program.id) {
-        //             console.log('--------------')
-        //             console.log(program)
-        //             console.log(item)
-        //             console.log('--------------')
-        //             item.maxPoints += program.pivot.value
-        //           }
-        //         })
-        //       })
-
-        //     }
-        //   })
-        // })
-
-
-
-
       }
     }
   }
