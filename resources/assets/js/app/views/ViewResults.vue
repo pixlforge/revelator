@@ -95,7 +95,7 @@
             if (program.id == option.pivot.program_id) {
 
               // Check whether the question has changed.
-              if(currentQuestion != option.pivot.question_id){
+              if (currentQuestion != option.pivot.question_id) {
                 currentQuestion = option.pivot.question_id;
                 sum += max;
                 max = 0;
