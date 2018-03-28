@@ -42705,8 +42705,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_UI_TheSummary__ = __webpack_require__(290);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_UI_TheSummary___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_UI_TheSummary__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_buttons_AppBigButton__ = __webpack_require__(292);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_buttons_AppBigButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_buttons_AppBigButton__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_buttons_AppRunDiagnostic__ = __webpack_require__(412);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_buttons_AppRunDiagnostic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_buttons_AppRunDiagnostic__);
 //
 //
 //
@@ -42733,7 +42733,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     TheSummary: __WEBPACK_IMPORTED_MODULE_0__components_UI_TheSummary___default.a,
-    AppBigButton: __WEBPACK_IMPORTED_MODULE_1__components_buttons_AppBigButton___default.a
+    AppRunDiagnostic: __WEBPACK_IMPORTED_MODULE_1__components_buttons_AppRunDiagnostic___default.a
   }
 });
 
@@ -42834,145 +42834,9 @@ if (false) {
 }
 
 /***/ }),
-/* 292 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(293)
-/* template */
-var __vue_template__ = __webpack_require__(294)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/app/components/buttons/AppBigButton.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-19585370", Component.options)
-  } else {
-    hotAPI.reload("data-v-19585370", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 293 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(5);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])(['getCurrentUser']), {
-    btnText: function btnText() {
-      if (this.getCurrentUser) {
-        return 'Continue';
-      } else {
-        return 'Run the diagnostic';
-      }
-    }
-  }),
-  methods: {
-    /**
-     * Log out the current user then create a new one and connect it or continue
-     * if a user is logged-in.
-     */
-    runOrContinue: function runOrContinue() {
-      var _this = this;
-
-      if (this.getCurrentUser) {
-        this.$router.push({
-          name: 'diagnostic',
-          query: {
-            question: 0
-          }
-        });
-      } else {
-        this.$store.dispatch('toggleLoader');
-        this.$store.dispatch('logoutDiagnosticUser').then(function () {
-          _this.$store.dispatch('loginDiagnosticUser').then(function () {
-            _this.$store.dispatch('fetchQuestions').then(function () {
-              _this.$store.dispatch('toggleLoader');
-              _this.$router.push({
-                name: 'diagnostic',
-                query: {
-                  question: 0
-                }
-              });
-            });
-          });
-        });
-      }
-    }
-  }
-});
-
-/***/ }),
-/* 294 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("a", {
-      staticClass: "btn__diagnostic",
-      domProps: { textContent: _vm._s(_vm.btnText) },
-      on: { click: _vm.runOrContinue }
-    })
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-19585370", module.exports)
-  }
-}
-
-/***/ }),
+/* 292 */,
+/* 293 */,
+/* 294 */,
 /* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43000,7 +42864,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("AppBigButton")
+      _c("AppRunDiagnostic")
     ],
     1
   )
@@ -45478,6 +45342,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -45511,33 +45383,39 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "program__body" }, [
-        _c("h2", {
+        _c("p", {
           staticClass: "program__title",
           domProps: { textContent: _vm._s(_vm.program.title) }
         }),
         _vm._v(" "),
-        _c("h4", {
+        _c("p", {
           staticClass: "program__slogan",
           domProps: { textContent: _vm._s(_vm.program.slogan) }
         }),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "program__buttons" }, [
+          _c("a", { staticClass: "btn__results" }, [
+            _vm._v("\n          I'm interested\n        ")
+          ]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn__results",
+              attrs: {
+                href: _vm.program.url,
+                target: "_blank",
+                rel: "noopener noreferrer"
+              }
+            },
+            [_vm._v("\n          View details\n        ")]
+          )
+        ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "program__buttons" }, [
-      _c("button", [_vm._v("I'm interested")]),
-      _vm._v(" "),
-      _c("button", [_vm._v("View details")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -54052,6 +53930,145 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-16dc5ce1", module.exports)
+  }
+}
+
+/***/ }),
+/* 412 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(413)
+/* template */
+var __vue_template__ = __webpack_require__(414)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/app/components/buttons/AppRunDiagnostic.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f5e2f0f0", Component.options)
+  } else {
+    hotAPI.reload("data-v-f5e2f0f0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 413 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(5);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])(['getCurrentUser']), {
+    btnText: function btnText() {
+      if (this.getCurrentUser) {
+        return 'Continue';
+      } else {
+        return 'Run the diagnostic';
+      }
+    }
+  }),
+  methods: {
+    /**
+     * Log out the current user then create a new one and connect it or continue
+     * if a user is logged-in.
+     */
+    runOrContinue: function runOrContinue() {
+      var _this = this;
+
+      if (this.getCurrentUser) {
+        this.$router.push({
+          name: 'diagnostic',
+          query: {
+            question: 0
+          }
+        });
+      } else {
+        this.$store.dispatch('toggleLoader');
+        this.$store.dispatch('logoutDiagnosticUser').then(function () {
+          _this.$store.dispatch('loginDiagnosticUser').then(function () {
+            _this.$store.dispatch('fetchQuestions').then(function () {
+              _this.$store.dispatch('toggleLoader');
+              _this.$router.push({
+                name: 'diagnostic',
+                query: {
+                  question: 0
+                }
+              });
+            });
+          });
+        });
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 414 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("a", {
+      staticClass: "btn__diagnostic",
+      domProps: { textContent: _vm._s(_vm.btnText) },
+      on: { click: _vm.runOrContinue }
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-f5e2f0f0", module.exports)
   }
 }
 
