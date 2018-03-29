@@ -228,5 +228,9 @@
         text-decoration: none;
       }
     }
+
+    &--half {
+      width: calc(100vw / 2);
+    }
   }
 }

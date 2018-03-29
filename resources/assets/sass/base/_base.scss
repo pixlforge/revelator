@@ -1,4 +1,5 @@
 $bp-xl: 81.25em;               // 1300px
+$bp-md: 56.25em;               // 900px
 
 *,
 *::before,
@@ -13,6 +14,10 @@ $bp-xl: 81.25em;               // 1300px
 html {
   box-sizing: border-box;
   font-size: 62.5%; // 10px / 16px = 62.5% -> 1rem = 10px
+
+  @media all and (max-width: $bp-md) {
+    font-size: 50%;
+  }
 }
 
 body {

@@ -23,18 +23,21 @@
 
       <!--Send Me My Results-->
       <div class="btn__big"
+           v-if="userAgreedToShareDetails"
            @click="sendMeMyResults">
         <span>Send Me My Results</span>
       </div>
 
       <!--Start Again-->
       <div class="btn__big"
+           :class="shouldSetElementWidth"
            @click="startAgain">
         <span>Start Again</span>
       </div>
 
       <!--Discover La Prairie-->
-      <div class="btn__big">
+      <div class="btn__big"
+           :class="shouldSetElementWidth">
         <a href="https://www.laprairie.ch/"
            target="_blank"
            rel="noopener noreferrer">
@@ -58,8 +61,23 @@
         'getPrograms',
         'getAnswers',
         'getOptions',
-        'getQuestions'
-      ])
+        'getQuestions',
+        'getCurrentUser'
+      ]),
+
+      /**
+       * User has agreed to share his personal details.
+       */
+      userAgreedToShareDetails() {
+        return this.getCurrentUser.agrees_to_share_details
+      },
+
+      /**
+       * Set element's width to 50% if user hasn't agreed to share his personal details.
+       */
+      shouldSetElementWidth() {
+        return this.userAgreedToShareDetails ? '' : 'btn__big--half'
+      },
     },
     data() {
       return {

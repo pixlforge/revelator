@@ -30,7 +30,7 @@ $factory->state(App\User::class, 'admin', function () {
 
 $factory->state(App\User::class, 'guest', function () {
     return [
-        'name' => 'Guest ' . str_random(8),
+        'name' => str_random(8),
         'email' => null,
         'password' => null,
         'role' => 'user'

@@ -64,6 +64,12 @@ html {
   font-size: 62.5%;
 }
 
+@media all and (max-width: 56.25em) {
+  html {
+    font-size: 50%;
+  }
+}
+
 body {
   min-height: 100vh;
   font-size: 1.6rem;
@@ -536,6 +542,10 @@ a:visited:focus {
 .btn__big span:focus,
 .btn__big span:active {
   text-decoration: none;
+}
+
+.btn__big--half {
+  width: calc(100vw / 2);
 }
 
 .flash__alert {

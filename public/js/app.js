@@ -45185,6 +45185,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -45193,7 +45196,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   components: {
     AppProgram: __WEBPACK_IMPORTED_MODULE_0__components_UI_AppProgram___default.a
   },
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(['getPrograms', 'getAnswers', 'getOptions', 'getQuestions'])),
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(['getPrograms', 'getAnswers', 'getOptions', 'getQuestions', 'getCurrentUser']), {
+
+    /**
+     * User has agreed to share his personal details.
+     */
+    userAgreedToShareDetails: function userAgreedToShareDetails() {
+      return this.getCurrentUser.agrees_to_share_details;
+    },
+
+
+    /**
+     * Set element's width to 50% if user hasn't agreed to share his personal details.
+     */
+    shouldSetElementWidth: function shouldSetElementWidth() {
+      return this.userAgreedToShareDetails ? '' : 'btn__big--half';
+    }
+  }),
   data: function data() {
     return {
       programs: []
@@ -45523,40 +45542,41 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "main__btn-group" }, [
+      _vm.userAgreedToShareDetails
+        ? _c(
+            "div",
+            { staticClass: "btn__big", on: { click: _vm.sendMeMyResults } },
+            [_c("span", [_vm._v("Send Me My Results")])]
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "div",
-        { staticClass: "btn__big", on: { click: _vm.sendMeMyResults } },
-        [_c("span", [_vm._v("Send Me My Results")])]
+        {
+          staticClass: "btn__big",
+          class: _vm.shouldSetElementWidth,
+          on: { click: _vm.startAgain }
+        },
+        [_c("span", [_vm._v("Start Again")])]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "btn__big", on: { click: _vm.startAgain } }, [
-        _c("span", [_vm._v("Start Again")])
-      ]),
-      _vm._v(" "),
-      _vm._m(0)
+      _c("div", { staticClass: "btn__big", class: _vm.shouldSetElementWidth }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "https://www.laprairie.ch/",
+              target: "_blank",
+              rel: "noopener noreferrer"
+            }
+          },
+          [_vm._v("\n        Discover La Prairie\n      ")]
+        )
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "btn__big" }, [
-      _c(
-        "a",
-        {
-          attrs: {
-            href: "https://www.laprairie.ch/",
-            target: "_blank",
-            rel: "noopener noreferrer"
-          }
-        },
-        [_vm._v("\n        Discover La Prairie\n      ")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
