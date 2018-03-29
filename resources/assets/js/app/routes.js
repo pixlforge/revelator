@@ -51,8 +51,9 @@ export const routes = [
           name: 'home'
         })
       } else {
-        if (!to.query.question) {
+        if (!to.query.question || !to.query.name) {
           to.query.question = '0'
+          to.query.name = window.currentUser.name
           next({
             path: to.path,
             query: to.query
@@ -76,8 +77,17 @@ export const routes = [
         next({
           name: 'home'
         })
+      } else {
+        if (!to.query.name) {
+          to.query.name = window.currentUser.name
+          next({
+            path: to.path,
+            query: to.query
+          })
+        } else {
+          next()
+        }
       }
-      next()
     }
   },
 
@@ -93,8 +103,17 @@ export const routes = [
         next({
           name: 'home'
         })
+      } else {
+        if (!to.query.name) {
+          to.query.name = window.currentUser.name
+          next({
+            path: to.path,
+            query: to.query
+          })
+        } else {
+          next()
+        }
       }
-      next()
     }
   },
 

@@ -23,7 +23,7 @@
 
       <!--Send Me My Results-->
       <div class="btn__big"
-           v-if="userAgreedToShareDetails"
+           v-if="userConsents"
            @click="sendMeMyResults">
         <span>Send Me My Results</span>
       </div>
@@ -66,25 +66,22 @@
       ]),
 
       /**
-       * User has agreed to share his personal details.
-       */
-      userAgreedToShareDetails() {
-        return this.getCurrentUser.agrees_to_share_details
-      },
-
-      /**
        * Set element's width to 50% if user hasn't agreed to share his personal details.
        */
       shouldSetElementWidth() {
-        return this.userAgreedToShareDetails ? '' : 'btn__big--half'
+        return this.userConsents ? '' : 'btn__big--half'
       },
     },
     data() {
       return {
-        programs: []
+        programs: [],
+        userConsents: false
       }
     },
     created() {
+      /**
+       * Initialize the component.
+       */
       this.initComponent()
     },
     methods: {
@@ -127,6 +124,7 @@
         ]).then(() => {
           this.$store.dispatch('toggleLoader')
           this.getResultsByProgram()
+          this.doesUserConsent()
         }).catch(err => {
           this.$store.dispatch('toggleLoader')
           console.log(err)
@@ -195,6 +193,15 @@
             })
           })
         })
+      },
+
+      /**
+       * Determine if user consents to sharing personal details.
+       */
+      doesUserConsent() {
+        if (this.getCurrentUser.agrees_to_share_details) {
+          this.userConsents = true
+        }
       }
     }
   }
