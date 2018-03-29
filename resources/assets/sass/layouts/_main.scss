@@ -8,11 +8,15 @@
   &__container {
     width: 93vw;
     margin: 0 auto;
-    padding-top: 25rem;
+    // padding-top: 20rem;
     position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     &--medium {
-      width: 50vw;
+      width: 60vw;
     }
   }
 
