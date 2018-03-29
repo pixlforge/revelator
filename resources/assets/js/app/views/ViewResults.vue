@@ -137,6 +137,8 @@
       getResultsByProgram() {
         this.buildProgramsDataProperties()
         this.attributePoints()
+        this.calculatePercentage()
+        this.sortByPercentage()
       },
 
       /**
@@ -176,6 +178,7 @@
             url: program.url,
             points: 0,
             maxPoints: sum,
+            percentage: 0
           })
         })
       },
@@ -202,6 +205,21 @@
         if (this.getCurrentUser.user_consents) {
           this.userConsents = true
         }
+      },
+
+      /**
+       * Calculate the percentage property.
+       */
+      calculatePercentage() {
+        this.programs.forEach(program => {
+          program.percentage = Math.ceil(Math.round((program.points / program.maxPoints) * 100))
+        })
+      },
+
+      sortByPercentage() {
+        this.programs.sort((a, b) => {
+          return b.percentage - a.percentage
+        })
       }
     }
   }
