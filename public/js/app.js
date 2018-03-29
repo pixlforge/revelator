@@ -45516,6 +45516,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    /**
+     * Animate the results text and circle.
+     */
     animateResults: function animateResults() {
       var _this = this;
 
@@ -45532,9 +45535,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         path.setAttribute('d', arc);
 
         if (count >= end) {
-          element.innerHTML = end + '%';
-          arc = _this.drawArc(40, 40, 40, 0, end * 3.6);
-          path.setAttribute('d', arc);
           clearInterval(animation);
         }
       }, 5);
@@ -45542,7 +45542,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     /**
-     * Polar to Cartesian
+     * Polar to cartesian.
      */
     polarToCartesian: function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
       var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
@@ -45554,7 +45554,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     /**
-     * Draw Arc.
+     * Draw an arc.
      */
     drawArc: function drawArc(x, y, radius, startAngle, endAngle) {
       var start = this.polarToCartesian(x, y, radius, endAngle);

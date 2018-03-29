@@ -56,6 +56,9 @@
       this.animateResults()
     },
     methods: {
+      /**
+       * Animate the results text and circle.
+       */
       animateResults() {
         const path = document.getElementById('path_' + this.program.id)
         const element = document.querySelector('#result_' + this.program.id)
@@ -70,16 +73,13 @@
           path.setAttribute('d', arc);
 
           if (count >= end) {
-            element.innerHTML = end + '%'
-            arc = this.drawArc(40, 40, 40, 0, (end * 3.6));
-            path.setAttribute('d', arc);
             clearInterval(animation)
           }
         }, 5)
       },
 
       /**
-       * Polar to Cartesian
+       * Polar to cartesian.
        */
       polarToCartesian(centerX, centerY, radius, angleInDegrees) {
         let angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0
@@ -90,7 +90,7 @@
       },
 
       /**
-       * Draw Arc.
+       * Draw an arc.
        */
       drawArc(x, y, radius, startAngle, endAngle) {
         let start = this.polarToCartesian(x, y, radius, endAngle)
