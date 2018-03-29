@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Diagnostic;
 
+use App\Mail\SendMeMyResultsEmail;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Guest\UpdateGuestRequest;
+use Illuminate\Support\Facades\Mail;
 
 class DiagnosticController extends Controller
 {
@@ -52,5 +54,18 @@ class DiagnosticController extends Controller
         $user->save();
 
         return response($user, 200);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function send()
+    {
+        $user = auth()->user();
+
+        Mail::to($user->guest_email)
+            ->queue(new SendMeMyResultsEmail($user));
+
+        return response(null, 204);
     }
 }

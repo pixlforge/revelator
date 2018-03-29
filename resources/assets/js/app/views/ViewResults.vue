@@ -89,7 +89,13 @@
        * Send the user a mail along with a token used to consult his results.
        */
       sendMeMyResults() {
-        //
+        this.$store.dispatch('toggleLoader')
+        axios.get(route('api.diagnostics.send')).then(() => {
+          this.$store.dispatch('toggleLoader')
+          this.$toasted.global.success({
+            message: "We've sent you an email containing a permanent link to this session's results!"
+          })
+        })
       },
 
       /**

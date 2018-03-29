@@ -3,8 +3,10 @@
 namespace Tests\Feature\Diagnostic;
 
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\Mail\SendMeMyResultsEmail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DiagnosticTest extends TestCase
 {
@@ -32,5 +34,25 @@ class DiagnosticTest extends TestCase
             'last_name' => 'Doe',
             'guest_email' => 'johndoe@example.com'
         ]);
+    }
+
+    /** @test */
+    function a_guest_can_ask_for_an_email_of_his_results_to_be_sent()
+    {
+        $this->withoutExceptionHandling();
+
+        Mail::fake();
+
+        $guest = factory(User::class)->states('guest')->create([
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'guest_email' => 'johndoe@example.com'
+        ]);
+        $this->actingAs($guest);
+
+        $this->getJson(route('api.diagnostics.send'))
+            ->assertStatus(204);
+
+        Mail::assertQueued(SendMeMyResultsEmail::class);
     }
 }

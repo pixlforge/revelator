@@ -45252,7 +45252,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Send the user a mail along with a token used to consult his results.
      */
     sendMeMyResults: function sendMeMyResults() {
-      //
+      var _this = this;
+
+      this.$store.dispatch('toggleLoader');
+      axios.get(route('api.diagnostics.send')).then(function () {
+        _this.$store.dispatch('toggleLoader');
+        _this.$toasted.global.success({
+          message: "We've sent you an email containing a permanent link to this session's results!"
+        });
+      });
     },
 
 
@@ -45260,14 +45268,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Log out the user and redirect him to the home page.
      */
     startAgain: function startAgain() {
-      var _this = this;
+      var _this2 = this;
 
       this.$store.dispatch('toggleLoader');
       this.$store.dispatch('logoutDiagnosticUser').then(function () {
-        _this.$store.dispatch('toggleLoader');
-        _this.$router.push({ name: 'home' });
+        _this2.$store.dispatch('toggleLoader');
+        _this2.$router.push({ name: 'home' });
       }).catch(function () {
-        _this.$store.dispatch('toggleLoader');
+        _this2.$store.dispatch('toggleLoader');
       });
     },
 
@@ -45276,7 +45284,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Fetch the programs, options and existing answers.
      */
     initComponent: function initComponent() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.$store.dispatch('toggleLoader');
 
@@ -45286,11 +45294,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var fetchQuestions = this.$store.dispatch('fetchQuestions');
 
       Promise.all([fetchPrograms, fetchExistingAnswers, fetchOptions, fetchQuestions]).then(function () {
-        _this2.$store.dispatch('toggleLoader');
-        _this2.getResultsByProgram();
-        _this2.doesUserConsent();
+        _this3.$store.dispatch('toggleLoader');
+        _this3.getResultsByProgram();
+        _this3.doesUserConsent();
       }).catch(function (err) {
-        _this2.$store.dispatch('toggleLoader');
+        _this3.$store.dispatch('toggleLoader');
         console.log(err);
       });
     },
@@ -45311,7 +45319,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Build the programs data properties.
      */
     buildProgramsDataProperties: function buildProgramsDataProperties() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.getPrograms.forEach(function (program) {
         var currentQuestion = 0;
@@ -45339,7 +45347,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         });
 
         // Push the desired properties to the programs data property array.
-        _this3.programs.push({
+        _this4.programs.push({
           id: program.id,
           title: program.title,
           slogan: program.slogan,
@@ -45356,11 +45364,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Attribute points in relation with an option's weighting related to a program.
      */
     attributePoints: function attributePoints() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.getAnswers.forEach(function (answer) {
         answer.option.programs.forEach(function (program) {
-          _this4.programs.forEach(function (item) {
+          _this5.programs.forEach(function (item) {
             if (item.id === program.id) {
               item.points += program.pivot.value;
             }
