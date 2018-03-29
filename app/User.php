@@ -2,14 +2,20 @@
 
 namespace App;
 
-use App\Notifications\ResetPasswordNotification;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\ResetPasswordNotification;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    /**
+     * The attributes that are cast after a request.
+     */
+    protected $casts = [
+        'agrees_to_share_details' => 'boolean'
+    ];
 
     /**
      * The attributes that are mass assignable.

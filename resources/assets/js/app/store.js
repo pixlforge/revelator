@@ -62,7 +62,7 @@ export const store = new Vuex.Store({
     getCurrentQuestion: state => {
       return state.currentQuestion
     },
-    
+
     getShowContentStatus: state => {
       return state.showContent
     }
@@ -178,6 +178,13 @@ export const store = new Vuex.Store({
      */
     setShowContentValue: (state, payload) => {
       state.showContent = payload
+    },
+
+    /**
+     * setShareDetailsStatus Mutation
+     */
+    setShareDetailsStatus: (state, payload) => {
+      state.currentUser.agrees_to_share_details = payload
     },
 
     /**
@@ -640,21 +647,25 @@ export const store = new Vuex.Store({
     /**
      * updateGuestInfos Action
      */
-    updateGuestInfos: ({ dispatch, state }, payload) => {
+    updateGuestInfos: ({ dispatch, commit, state }, payload) => {
       dispatch('toggleLoader')
       return new Promise((resolve, reject) => {
-        axios.patch(route('api.diagnostics.update', state.currentUser.id), payload)
-          .then(() => {
-            dispatch('toggleLoader')
-            resolve()
-          })
-          .catch(err => {
-            dispatch('toggleLoader')
-            reject(err)
-          })
+        axios.patch(route('api.diagnostics.update', state.currentUser.id), {
+          agrees_to_share_details: true,
+          first_name: payload.first_name,
+          last_name: payload.last_name,
+          guest_email: payload.guest_email
+        }).then(() => {
+          commit('setShareDetailsStatus', true)
+          dispatch('toggleLoader')
+          resolve()
+        }).catch(err => {
+          dispatch('toggleLoader')
+          reject(err)
+        })
       })
     },
-    
+
     /**
      * setShowContentValue Action
      */

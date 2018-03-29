@@ -31,63 +31,63 @@
 
             <!-- First Name -->
             <input type="text"
-                   name="firstName"
-                   id="firstName"
+                   name="first_name"
+                   id="first_name"
                    class="form__input form__input--inline form__input--small"
-                   :class="{ 'form__input--invalid': errors.firstName }"
-                   @input="$v.guest.firstName.$touch()"
-                   v-model="guest.firstName"
+                   :class="{ 'form__input--invalid': errors.first_name }"
+                   @input="$v.guest.first_name.$touch()"
+                   v-model="guest.first_name"
                    placeholder="First name"
                    required autocomplete="off">
-            <AppTooltip v-if="$v.guest.firstName.$error"
+            <AppTooltip v-if="$v.guest.first_name.$error"
                         :pos-x="35">
-              <p v-if="!$v.guest.firstName.required">Please, provide your first name.</p>
-              <p v-if="!$v.guest.firstName.minLength">Minimum 2 characters.</p>
-              <p v-if="!$v.guest.firstName.maxLength">Maximum 255 characters.</p>
+              <p v-if="!$v.guest.first_name.required">Please, provide your first name.</p>
+              <p v-if="!$v.guest.first_name.minLength">Minimum 2 characters.</p>
+              <p v-if="!$v.guest.first_name.maxLength">Maximum 255 characters.</p>
             </AppTooltip>
             <AppFeedback>
-              <p v-if="errors.firstName">{{ errors.firstName[0] }}</p>
+              <p v-if="errors.first_name">{{ errors.first_name[0] }}</p>
             </AppFeedback>
 
             <!-- Last Name -->
             <input type="text"
-                   name="lastName"
-                   id="lastName"
+                   name="last_name"
+                   id="last_name"
                    class="form__input form__input--inline form__input--small"
-                   :class="{ 'form__input--invalid': errors.lastName }"
-                   @input="$v.guest.lastName.$touch()"
-                   v-model="guest.lastName"
+                   :class="{ 'form__input--invalid': errors.last_name }"
+                   @input="$v.guest.last_name.$touch()"
+                   v-model="guest.last_name"
                    placeholder="Last name"
                    required autocomplete="off">
-            <AppTooltip v-if="$v.guest.lastName.$error"
+            <AppTooltip v-if="$v.guest.last_name.$error"
                         :pos-x="75">
-              <p v-if="!$v.guest.lastName.required">Please, provide your last name.</p>
-              <p v-if="!$v.guest.lastName.minLength">Minimum 2 characters.</p>
-              <p v-if="!$v.guest.lastName.maxLength">Maximum 255 characters.</p>
+              <p v-if="!$v.guest.last_name.required">Please, provide your last name.</p>
+              <p v-if="!$v.guest.last_name.minLength">Minimum 2 characters.</p>
+              <p v-if="!$v.guest.last_name.maxLength">Maximum 255 characters.</p>
             </AppTooltip>
             <AppFeedback>
-              <p v-if="errors.lastName">{{ errors.lastName[0] }}</p>
+              <p v-if="errors.last_name">{{ errors.last_name[0] }}</p>
             </AppFeedback>
           </div>
 
           <!-- Guest Email -->
           <div class="form__group">
             <input type="email"
-                   name="guestEmail"
-                   id="guestEmail"
+                   name="guest_email"
+                   id="guest_email"
                    class="form__input form__input--small"
-                   :class="{ 'form__input--invalid': errors.guestEmail }"
-                   @input="$v.guest.guestEmail.$touch()"
-                   v-model="guest.guestEmail"
+                   :class="{ 'form__input--invalid': errors.guest_email }"
+                   @input="$v.guest.guest_email.$touch()"
+                   v-model="guest.guest_email"
                    placeholder="Email"
                    required autocomplete="off">
-            <AppTooltip v-if="$v.guest.guestEmail.$error"
+            <AppTooltip v-if="$v.guest.guest_email.$error"
                         :pos-x="40">
-              <p v-if="!$v.guest.guestEmail.required">Please, provide a valid email address.</p>
-              <p v-if="!$v.guest.guestEmail.email">Email format must have the 'address@email.tld' pattern.</p>
+              <p v-if="!$v.guest.guest_email.required">Please, provide a valid email address.</p>
+              <p v-if="!$v.guest.guest_email.email">Email format must have the 'address@email.tld' pattern.</p>
             </AppTooltip>
             <AppFeedback>
-              <p v-if="errors.guestEmail">{{ errors.guestEmail[0] }}</p>
+              <p v-if="errors.guest_email">{{ errors.guest_email[0] }}</p>
             </AppFeedback>
           </div>
 
@@ -126,31 +126,31 @@
       return {
         radioSelect: '',
         guest: {
-          firstName: '',
-          lastName: '',
-          guestEmail: ''
+          first_name: '',
+          last_name: '',
+          guest_email: ''
         },
         old: {
-          firstName: '',
-          lastName: '',
-          guestEmail: ''
+          first_name: '',
+          last_name: '',
+          guest_email: ''
         },
         errors: {}
       }
     },
     validations: {
       guest: {
-        firstName: {
+        first_name: {
           required,
           minLength: minLength(2),
           maxLength: maxLength(255)
         },
-        lastName: {
+        last_name: {
           required,
           minLength: minLength(2),
           maxLength: maxLength(255)
         },
-        guestEmail: {
+        guest_email: {
           required,
           email
         }

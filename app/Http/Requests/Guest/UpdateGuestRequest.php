@@ -24,9 +24,10 @@ class UpdateGuestRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstName' => 'required|string|min:2|max:255',
-            'lastName' => 'required|string|min:2|max:255',
-            'guestEmail' => 'required|email|max:255'
+            'agrees_to_share_details' => 'required|boolean',
+            'first_name' => 'required|string|min:2|max:255',
+            'last_name' => 'required|string|min:2|max:255',
+            'guest_email' => 'required|email|max:255'
         ];
     }
 
@@ -38,19 +39,22 @@ class UpdateGuestRequest extends FormRequest
     public function messages()
     {
         return [
-            'firstName.required' => 'A first name is required.',
-            'firstName.string' => 'The first name should be a character string.',
-            'firstName.min' => 'Minimum 2 characters.',
-            'firstName.max' => 'Maximum 255 characters.',
+            'agrees_to_share_details.required' => 'The field is required.',
+            'agrees_to_share_details.boolean' => 'The field must be of type boolean.',
 
-            'lastName.required' => 'A last name is required.',
-            'lastName.string' => 'The last name should be a character string.',
-            'lastName.min' => 'Minimum 2 characters.',
-            'lastName.max' => 'Maximum 255 characters.',
+            'first_name.required' => 'A first name is required.',
+            'first_name.string' => 'The first name should be a character string.',
+            'first_name.min' => 'Minimum 2 characters.',
+            'first_name.max' => 'Maximum 255 characters.',
 
-            'guestEmail.required' => 'An email address is required.',
-            'guestEmail.email' => 'Email address must match the pattern address@provider.tld.',
-            'guestEmail.max' => 'Maximum 255 characters.'
+            'last_name.required' => 'A last name is required.',
+            'last_name.string' => 'The last name should be a character string.',
+            'last_name.min' => 'Minimum 2 characters.',
+            'last_name.max' => 'Maximum 255 characters.',
+
+            'guest_email.required' => 'An email address is required.',
+            'guest_email.email' => 'Email address must match the pattern address@provider.tld.',
+            'guest_email.max' => 'Maximum 255 characters.'
         ];
     }
 }

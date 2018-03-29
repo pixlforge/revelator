@@ -30124,6 +30124,13 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     },
 
     /**
+     * setShareDetailsStatus Mutation
+     */
+    setShareDetailsStatus: function setShareDetailsStatus(state, payload) {
+      state.currentUser.agrees_to_share_details = payload;
+    },
+
+    /**
      * Logout Mutation
      */
     logout: function logout(state) {
@@ -30705,11 +30712,18 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
      */
     updateGuestInfos: function updateGuestInfos(_ref48, payload) {
       var dispatch = _ref48.dispatch,
+          commit = _ref48.commit,
           state = _ref48.state;
 
       dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
-        axios.patch(route('api.diagnostics.update', state.currentUser.id), payload).then(function () {
+        axios.patch(route('api.diagnostics.update', state.currentUser.id), {
+          agrees_to_share_details: true,
+          first_name: payload.first_name,
+          last_name: payload.last_name,
+          guest_email: payload.guest_email
+        }).then(function () {
+          commit('setShareDetailsStatus', true);
           dispatch('toggleLoader');
           resolve();
         }).catch(function (err) {
@@ -44043,14 +44057,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       radioSelect: '',
       guest: {
-        firstName: '',
-        lastName: '',
-        guestEmail: ''
+        first_name: '',
+        last_name: '',
+        guest_email: ''
       },
       old: {
-        firstName: '',
-        lastName: '',
-        guestEmail: ''
+        first_name: '',
+        last_name: '',
+        guest_email: ''
       },
       errors: {}
     };
@@ -44058,17 +44072,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   validations: {
     guest: {
-      firstName: {
+      first_name: {
         required: __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["required"],
         minLength: Object(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["minLength"])(2),
         maxLength: Object(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["maxLength"])(255)
       },
-      lastName: {
+      last_name: {
         required: __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["required"],
         minLength: Object(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["minLength"])(2),
         maxLength: Object(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["maxLength"])(255)
       },
-      guestEmail: {
+      guest_email: {
         required: __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["required"],
         email: __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__["email"]
       }
@@ -44847,22 +44861,22 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.guest.firstName,
-                          expression: "guest.firstName"
+                          value: _vm.guest.first_name,
+                          expression: "guest.first_name"
                         }
                       ],
                       staticClass:
                         "form__input form__input--inline form__input--small",
-                      class: { "form__input--invalid": _vm.errors.firstName },
+                      class: { "form__input--invalid": _vm.errors.first_name },
                       attrs: {
                         type: "text",
-                        name: "firstName",
-                        id: "firstName",
+                        name: "first_name",
+                        id: "first_name",
                         placeholder: "First name",
                         required: "",
                         autocomplete: "off"
                       },
-                      domProps: { value: _vm.guest.firstName },
+                      domProps: { value: _vm.guest.first_name },
                       on: {
                         input: [
                           function($event) {
@@ -44871,38 +44885,38 @@ var render = function() {
                             }
                             _vm.$set(
                               _vm.guest,
-                              "firstName",
+                              "first_name",
                               $event.target.value
                             )
                           },
                           function($event) {
-                            _vm.$v.guest.firstName.$touch()
+                            _vm.$v.guest.first_name.$touch()
                           }
                         ]
                       }
                     }),
                     _vm._v(" "),
-                    _vm.$v.guest.firstName.$error
+                    _vm.$v.guest.first_name.$error
                       ? _c("AppTooltip", { attrs: { "pos-x": 35 } }, [
-                          !_vm.$v.guest.firstName.required
+                          !_vm.$v.guest.first_name.required
                             ? _c("p", [
                                 _vm._v("Please, provide your first name.")
                               ])
                             : _vm._e(),
                           _vm._v(" "),
-                          !_vm.$v.guest.firstName.minLength
+                          !_vm.$v.guest.first_name.minLength
                             ? _c("p", [_vm._v("Minimum 2 characters.")])
                             : _vm._e(),
                           _vm._v(" "),
-                          !_vm.$v.guest.firstName.maxLength
+                          !_vm.$v.guest.first_name.maxLength
                             ? _c("p", [_vm._v("Maximum 255 characters.")])
                             : _vm._e()
                         ])
                       : _vm._e(),
                     _vm._v(" "),
                     _c("AppFeedback", [
-                      _vm.errors.firstName
-                        ? _c("p", [_vm._v(_vm._s(_vm.errors.firstName[0]))])
+                      _vm.errors.first_name
+                        ? _c("p", [_vm._v(_vm._s(_vm.errors.first_name[0]))])
                         : _vm._e()
                     ]),
                     _vm._v(" "),
@@ -44911,58 +44925,62 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.guest.lastName,
-                          expression: "guest.lastName"
+                          value: _vm.guest.last_name,
+                          expression: "guest.last_name"
                         }
                       ],
                       staticClass:
                         "form__input form__input--inline form__input--small",
-                      class: { "form__input--invalid": _vm.errors.lastName },
+                      class: { "form__input--invalid": _vm.errors.last_name },
                       attrs: {
                         type: "text",
-                        name: "lastName",
-                        id: "lastName",
+                        name: "last_name",
+                        id: "last_name",
                         placeholder: "Last name",
                         required: "",
                         autocomplete: "off"
                       },
-                      domProps: { value: _vm.guest.lastName },
+                      domProps: { value: _vm.guest.last_name },
                       on: {
                         input: [
                           function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(_vm.guest, "lastName", $event.target.value)
+                            _vm.$set(
+                              _vm.guest,
+                              "last_name",
+                              $event.target.value
+                            )
                           },
                           function($event) {
-                            _vm.$v.guest.lastName.$touch()
+                            _vm.$v.guest.last_name.$touch()
                           }
                         ]
                       }
                     }),
                     _vm._v(" "),
-                    _vm.$v.guest.lastName.$error
+                    _vm.$v.guest.last_name.$error
                       ? _c("AppTooltip", { attrs: { "pos-x": 75 } }, [
-                          !_vm.$v.guest.lastName.required
+                          !_vm.$v.guest.last_name.required
                             ? _c("p", [
                                 _vm._v("Please, provide your last name.")
                               ])
                             : _vm._e(),
                           _vm._v(" "),
-                          !_vm.$v.guest.lastName.minLength
+                          !_vm.$v.guest.last_name.minLength
                             ? _c("p", [_vm._v("Minimum 2 characters.")])
                             : _vm._e(),
                           _vm._v(" "),
-                          !_vm.$v.guest.lastName.maxLength
+                          !_vm.$v.guest.last_name.maxLength
                             ? _c("p", [_vm._v("Maximum 255 characters.")])
                             : _vm._e()
                         ])
                       : _vm._e(),
                     _vm._v(" "),
                     _c("AppFeedback", [
-                      _vm.errors.lastName
-                        ? _c("p", [_vm._v(_vm._s(_vm.errors.lastName[0]))])
+                      _vm.errors.last_name
+                        ? _c("p", [_vm._v(_vm._s(_vm.errors.last_name[0]))])
                         : _vm._e()
                     ])
                   ],
@@ -44978,21 +44996,21 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.guest.guestEmail,
-                          expression: "guest.guestEmail"
+                          value: _vm.guest.guest_email,
+                          expression: "guest.guest_email"
                         }
                       ],
                       staticClass: "form__input form__input--small",
-                      class: { "form__input--invalid": _vm.errors.guestEmail },
+                      class: { "form__input--invalid": _vm.errors.guest_email },
                       attrs: {
                         type: "email",
-                        name: "guestEmail",
-                        id: "guestEmail",
+                        name: "guest_email",
+                        id: "guest_email",
                         placeholder: "Email",
                         required: "",
                         autocomplete: "off"
                       },
-                      domProps: { value: _vm.guest.guestEmail },
+                      domProps: { value: _vm.guest.guest_email },
                       on: {
                         input: [
                           function($event) {
@@ -45001,26 +45019,26 @@ var render = function() {
                             }
                             _vm.$set(
                               _vm.guest,
-                              "guestEmail",
+                              "guest_email",
                               $event.target.value
                             )
                           },
                           function($event) {
-                            _vm.$v.guest.guestEmail.$touch()
+                            _vm.$v.guest.guest_email.$touch()
                           }
                         ]
                       }
                     }),
                     _vm._v(" "),
-                    _vm.$v.guest.guestEmail.$error
+                    _vm.$v.guest.guest_email.$error
                       ? _c("AppTooltip", { attrs: { "pos-x": 40 } }, [
-                          !_vm.$v.guest.guestEmail.required
+                          !_vm.$v.guest.guest_email.required
                             ? _c("p", [
                                 _vm._v("Please, provide a valid email address.")
                               ])
                             : _vm._e(),
                           _vm._v(" "),
-                          !_vm.$v.guest.guestEmail.email
+                          !_vm.$v.guest.guest_email.email
                             ? _c("p", [
                                 _vm._v(
                                   "Email format must have the 'address@email.tld' pattern."
@@ -45031,8 +45049,8 @@ var render = function() {
                       : _vm._e(),
                     _vm._v(" "),
                     _c("AppFeedback", [
-                      _vm.errors.guestEmail
-                        ? _c("p", [_vm._v(_vm._s(_vm.errors.guestEmail[0]))])
+                      _vm.errors.guest_email
+                        ? _c("p", [_vm._v(_vm._s(_vm.errors.guest_email[0]))])
                         : _vm._e()
                     ])
                   ],

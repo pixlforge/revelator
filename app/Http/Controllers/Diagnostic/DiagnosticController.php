@@ -45,9 +45,10 @@ class DiagnosticController extends Controller
      */
     public function update(UpdateGuestRequest $request, User $user)
     {
-        $user->firstName = $request->firstName;
-        $user->lastName = $request->lastName;
-        $user->guestEmail = $request->guestEmail;
+        $user->agrees_to_share_details = $request->agrees_to_share_details;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->guest_email = $request->guest_email;
         $user->save();
 
         return response($user, 200);

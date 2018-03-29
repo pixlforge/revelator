@@ -19,9 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();
             $table->enum('role', ['user', 'admin', 'dev'])->default('user');
-            $table->string('firstName')->nullable();
-            $table->string('lastName')->nullable();
-            $table->string('guestEmail')->nullable();
+            $table->boolean('agrees_to_share_details')->default(false);
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('guest_email')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
