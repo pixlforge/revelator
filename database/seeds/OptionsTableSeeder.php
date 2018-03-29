@@ -143,7 +143,7 @@ class OptionsTableSeeder extends Seeder
         $programs[8]->options()->save($optionSleepOne, ['value' => 0]);
 
         $optionSleepTwo = factory(\App\Option::class)->create([
-            'name' => 'I have sleep issues a few times par year',
+            'name' => 'I have sleep issues a few times per year',
             'pos' => 2,
             'question_id' => 4
         ]);
