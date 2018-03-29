@@ -45512,30 +45512,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   mounted: function mounted() {
-    var _this = this;
-
-    var path = document.getElementById('path_' + this.program.id);
-    var element = document.querySelector('#result_' + this.program.id);
-    var arc = void 0;
-    var count = 0;
-    var end = this.program.percentage;
-
-    var animation = setInterval(function () {
-      count += 1;
-      element.innerHTML = count + '%';
-      arc = _this.drawArc(40, 40, 40, 0, count * 3.6);
-      path.setAttribute('d', arc);
-
-      if (count >= end) {
-        element.innerHTML = end + '%';
-        arc = _this.drawArc(40, 40, 40, 0, end * 3.6);
-        path.setAttribute('d', arc);
-        clearInterval(animation);
-      }
-    }, 5);
+    this.animateResults();
   },
 
   methods: {
+    animateResults: function animateResults() {
+      var _this = this;
+
+      var path = document.getElementById('path_' + this.program.id);
+      var element = document.querySelector('#result_' + this.program.id);
+      var arc = void 0;
+      var count = 0;
+      var end = this.program.percentage;
+
+      var animation = setInterval(function () {
+        count += 1;
+        element.innerHTML = count + '%';
+        arc = _this.drawArc(40, 40, 40, 0, count * 3.6);
+        path.setAttribute('d', arc);
+
+        if (count >= end) {
+          element.innerHTML = end + '%';
+          arc = _this.drawArc(40, 40, 40, 0, end * 3.6);
+          path.setAttribute('d', arc);
+          clearInterval(animation);
+        }
+      }, 5);
+    },
+
+
     /**
      * Polar to Cartesian
      */

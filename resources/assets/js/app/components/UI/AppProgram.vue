@@ -53,27 +53,31 @@
       }
     },
     mounted() {
-      const path = document.getElementById('path_' + this.program.id)
-      const element = document.querySelector('#result_' + this.program.id)
-      let arc
-      let count = 0
-      let end = this.program.percentage
-
-      let animation = setInterval(() => {
-        count += 1
-        element.innerHTML = count + '%'
-        arc = this.drawArc(40, 40, 40, 0, (count * 3.6));
-        path.setAttribute('d', arc);
-
-        if (count >= end) {
-          element.innerHTML = end + '%'
-          arc = this.drawArc(40, 40, 40, 0, (end * 3.6));
-          path.setAttribute('d', arc);
-          clearInterval(animation)
-        }
-      }, 5)
+      this.animateResults()
     },
     methods: {
+      animateResults() {
+        const path = document.getElementById('path_' + this.program.id)
+        const element = document.querySelector('#result_' + this.program.id)
+        let arc
+        let count = 0
+        let end = this.program.percentage
+
+        let animation = setInterval(() => {
+          count += 1
+          element.innerHTML = count + '%'
+          arc = this.drawArc(40, 40, 40, 0, (count * 3.6));
+          path.setAttribute('d', arc);
+
+          if (count >= end) {
+            element.innerHTML = end + '%'
+            arc = this.drawArc(40, 40, 40, 0, (end * 3.6));
+            path.setAttribute('d', arc);
+            clearInterval(animation)
+          }
+        }, 5)
+      },
+
       /**
        * Polar to Cartesian
        */
