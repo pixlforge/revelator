@@ -77,4 +77,12 @@
       color: lighten($silver, 5%) !important;
     }
   }
+
+  &__btn-group {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+  }
 }

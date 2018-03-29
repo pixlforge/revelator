@@ -45142,6 +45142,31 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -45162,10 +45187,34 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   methods: {
     /**
+     * Send the user a mail along with a token used to consult his results.
+     */
+    sendMeMyResults: function sendMeMyResults() {
+      //
+    },
+
+
+    /**
+     * Log out the user and redirect him to the home page.
+     */
+    startAgain: function startAgain() {
+      var _this = this;
+
+      this.$store.dispatch('toggleLoader');
+      this.$store.dispatch('logoutDiagnosticUser').then(function () {
+        _this.$store.dispatch('toggleLoader');
+        _this.$router.push({ name: 'home' });
+      }).catch(function () {
+        _this.$store.dispatch('toggleLoader');
+      });
+    },
+
+
+    /**
      * Fetch the programs, options and existing answers.
      */
     initComponent: function initComponent() {
-      var _this = this;
+      var _this2 = this;
 
       this.$store.dispatch('toggleLoader');
 
@@ -45175,10 +45224,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var fetchQuestions = this.$store.dispatch('fetchQuestions');
 
       Promise.all([fetchPrograms, fetchExistingAnswers, fetchOptions, fetchQuestions]).then(function () {
-        _this.$store.dispatch('toggleLoader');
-        _this.getResultsByProgram();
+        _this2.$store.dispatch('toggleLoader');
+        _this2.getResultsByProgram();
       }).catch(function (err) {
-        _this.$store.dispatch('toggleLoader');
+        _this2.$store.dispatch('toggleLoader');
         console.log(err);
       });
     },
@@ -45197,7 +45246,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Build the programs data properties.
      */
     buildProgramsDataProperties: function buildProgramsDataProperties() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.getPrograms.forEach(function (program) {
         var currentQuestion = 0;
@@ -45225,7 +45274,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         });
 
         // Push the desired properties to the programs data property array.
-        _this2.programs.push({
+        _this3.programs.push({
           id: program.id,
           title: program.title,
           slogan: program.slogan,
@@ -45241,11 +45290,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Attribute points in relation with an option's weighting related to a program.
      */
     attributePoints: function attributePoints() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.getAnswers.forEach(function (answer) {
         answer.option.programs.forEach(function (program) {
-          _this3.programs.forEach(function (item) {
+          _this4.programs.forEach(function (item) {
             if (item.id === program.id) {
               item.points += program.pivot.value;
             }
@@ -45453,10 +45502,43 @@ var render = function() {
           })
         })
       )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "main__btn-group" }, [
+      _c(
+        "div",
+        { staticClass: "btn__big", on: { click: _vm.sendMeMyResults } },
+        [_c("span", [_vm._v("Send Me My Results")])]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "btn__big", on: { click: _vm.startAgain } }, [
+        _c("span", [_vm._v("Start Again")])
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "btn__big" }, [
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "https://www.laprairie.ch/",
+            target: "_blank",
+            rel: "noopener noreferrer"
+          }
+        },
+        [_vm._v("\n        Discover La Prairie\n      ")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

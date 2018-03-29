@@ -2,21 +2,46 @@
   <div>
     <main class="main__container">
 
-      <!-- Title -->
+      <!--Title-->
       <h1 class="main__title">Your diagnostic</h1>
 
-      <!-- Lead -->
+      <!--Lead-->
       <p class="main__lead">
         Thank you, here are the programs that we selected for you.
       </p>
 
-      <!-- Results -->
+      <!--Results-->
       <div class="main__results">
         <AppProgram v-for="program in programs"
                     :key="program.id"
                     :program="program"/>
       </div>
     </main>
+
+    <!--Button Group-->
+    <div class="main__btn-group">
+
+      <!--Send Me My Results-->
+      <div class="btn__big"
+           @click="sendMeMyResults">
+        <span>Send Me My Results</span>
+      </div>
+
+      <!--Start Again-->
+      <div class="btn__big"
+           @click="startAgain">
+        <span>Start Again</span>
+      </div>
+
+      <!--Discover La Prairie-->
+      <div class="btn__big">
+        <a href="https://www.laprairie.ch/"
+           target="_blank"
+           rel="noopener noreferrer">
+          Discover La Prairie
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -45,6 +70,26 @@
       this.initComponent()
     },
     methods: {
+      /**
+       * Send the user a mail along with a token used to consult his results.
+       */
+      sendMeMyResults() {
+        //
+      },
+
+      /**
+       * Log out the user and redirect him to the home page.
+       */
+      startAgain() {
+        this.$store.dispatch('toggleLoader')
+        this.$store.dispatch('logoutDiagnosticUser').then(() => {
+          this.$store.dispatch('toggleLoader')
+          this.$router.push({ name: 'home' })
+        }).catch(() => {
+          this.$store.dispatch('toggleLoader')
+        })
+      },
+
       /**
        * Fetch the programs, options and existing answers.
        */
@@ -77,7 +122,7 @@
         this.buildProgramsDataProperties()
         this.attributePoints()
       },
-      
+
       /**
        * Build the programs data properties.
        */
@@ -92,7 +137,7 @@
 
             // If the current program's id is the same as the option's associated program id.
             if (program.id === option.pivot.program_id) {
-              
+
               // Check whether the question has changed.
               if (currentQuestion !== option.question_id) {
                 currentQuestion = option.question_id

@@ -1,32 +1,40 @@
 <template>
   <div>
     <div class="program__container">
-
       <div class="program__result">
-        <!--Circle-->
-        <!--Result-->
+        <!-- Circle -->
+        
+
+        <!-- Result -->
         <div class="program__result-value"
              v-text="calculatePercentage">
         </div>
       </div>
 
       <div class="program__body">
-        <!--Title-->
-        <h2 class="program__title"
+        
+        <!-- Title -->
+        <p class="program__title"
             v-text="program.title">
-        </h2>
+        </p>
 
-        <!--Slogan-->
-        <h4 class="program__slogan"
+        <!-- Slogan -->
+        <p class="program__slogan"
             v-text="program.slogan">
-        </h4>
+        </p>
 
         <div class="program__buttons">
-          <button>I'm interested</button>
-          <button>View details</button>
+          <a class="btn__results">
+            I'm interested
+          </a>
+          <a class="btn__results"
+             :href="program.url"
+             target="_blank"
+             rel="noopener noreferrer">
+            View details
+          </a>
         </div>
       </div>
-
     </div>
   </div>
 </template>

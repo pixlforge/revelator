@@ -1,19 +1,61 @@
 .program {
   &__container {
+    width: 45rem;
+    height: 10rem;
+    margin-top: 4rem;
+    display: flex;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__result {
+    width: 12rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    position: relative;
   }
 
   &__title {
+    font-size: 1.8rem;
+    letter-spacing: 1.5pt;
+    position: absolute;
+    left: 0;
+    transition: all .4s ease;
   }
 
   &__slogan {
+    position: absolute;
+    top: 35%;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    letter-spacing: 1.25pt;
+    opacity: 0;
+    transition: all .4s .1s ease;
   }
 
   &__buttons {
+    position: absolute;
+    top: 65%;
+    opacity: 0;
+    transition: all .4s .1s ease;
+  }
+
+  &__container:hover &__title {
+    transform: translateY(-2.5rem);
+  }
+
+  &__container:hover &__slogan,
+  &__container:hover &__buttons {
+    opacity: 1;
   }
 }

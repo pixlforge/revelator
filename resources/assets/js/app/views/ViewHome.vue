@@ -13,18 +13,18 @@
     </main>
 
     <!-- Run the Diagnostic Button -->
-    <AppBigButton/>
+    <AppRunDiagnostic/>
   </div>
 </template>
 
 <script>
   import TheSummary from '../components/UI/TheSummary'
-  import AppBigButton from '../components/buttons/AppBigButton'
+  import AppRunDiagnostic from '../components/buttons/AppRunDiagnostic'
 
   export default {
     components: {
       TheSummary,
-      AppBigButton
+      AppRunDiagnostic
     }
   }
 </script>
