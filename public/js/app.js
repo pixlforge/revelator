@@ -30127,7 +30127,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
      * setShareDetailsStatus Mutation
      */
     setShareDetailsStatus: function setShareDetailsStatus(state, payload) {
-      state.currentUser.agrees_to_share_details = payload;
+      state.currentUser.user_consents = payload;
     },
 
     /**
@@ -30718,7 +30718,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
         axios.patch(route('api.diagnostics.update', state.currentUser.id), {
-          agrees_to_share_details: true,
+          user_consents: true,
           first_name: payload.first_name,
           last_name: payload.last_name,
           guest_email: payload.guest_email
@@ -45371,7 +45371,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Determine if user consents to sharing personal details.
      */
     doesUserConsent: function doesUserConsent() {
-      if (this.getCurrentUser.agrees_to_share_details) {
+      if (this.getCurrentUser.user_consents) {
         this.userConsents = true;
       }
     }

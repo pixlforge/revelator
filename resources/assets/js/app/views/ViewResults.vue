@@ -199,7 +199,7 @@
        * Determine if user consents to sharing personal details.
        */
       doesUserConsent() {
-        if (this.getCurrentUser.agrees_to_share_details) {
+        if (this.getCurrentUser.user_consents) {
           this.userConsents = true
         }
       }

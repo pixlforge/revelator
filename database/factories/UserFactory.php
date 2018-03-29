@@ -9,7 +9,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'password' => bcrypt('secret'),
         'role' => 'user',
         'remember_token' => str_random(10),
-        'agrees_to_share_details' => false,
+        'user_consents' => false,
         'first_name' => null,
         'last_name' => null,
         'guest_email' => null

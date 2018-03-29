@@ -24,7 +24,7 @@ class UpdateGuestRequest extends FormRequest
     public function rules()
     {
         return [
-            'agrees_to_share_details' => 'required|boolean',
+            'user_consents' => 'required|boolean',
             'first_name' => 'required|string|min:2|max:255',
             'last_name' => 'required|string|min:2|max:255',
             'guest_email' => 'required|email|max:255'
@@ -39,8 +39,8 @@ class UpdateGuestRequest extends FormRequest
     public function messages()
     {
         return [
-            'agrees_to_share_details.required' => 'The field is required.',
-            'agrees_to_share_details.boolean' => 'The field must be of type boolean.',
+            'user_consents.required' => 'The consent is required.',
+            'user_consents.boolean' => 'The consent must be of type boolean.',
 
             'first_name.required' => 'A first name is required.',
             'first_name.string' => 'The first name should be a character string.',
