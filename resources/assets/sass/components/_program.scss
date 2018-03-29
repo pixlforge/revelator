@@ -15,6 +15,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+  }
+
+  &__result-value {
+    position: absolute;
   }
 
   &__body {

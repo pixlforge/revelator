@@ -75,6 +75,7 @@ body {
   font-size: 1.6rem;
   text-transform: uppercase;
   color: #4e4f4f;
+  background-color: #f0f0f0;
   background-image: -webkit-gradient(linear, left top, right bottom, from(#fff), to(#cdcdcd));
   background-image: linear-gradient(to right bottom, #fff, #cdcdcd);
   background-repeat: no-repeat;
@@ -1111,6 +1112,11 @@ a:visited:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
+}
+
+.program__result-value {
+  position: absolute;
 }
 
 .program__body {
@@ -1164,6 +1170,16 @@ a:visited:focus {
 .program__container:hover .program__slogan,
 .program__container:hover .program__buttons {
   opacity: 1;
+}
+
+.svg__results {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+}
+
+.svg__circle {
+  display: block;
 }
 
 .main__results {

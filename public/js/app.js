@@ -45498,6 +45498,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -45506,9 +45511,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       required: true
     }
   },
-  computed: {
-    calculatePercentage: function calculatePercentage() {
-      return Math.ceil(Math.round(this.program.points / this.program.maxPoints * 100)) + '%';
+  mounted: function mounted() {
+    var _this = this;
+
+    var path = document.getElementById('path_' + this.program.id);
+    var element = document.querySelector('#result_' + this.program.id);
+    var arc = void 0;
+    var count = 0;
+    var end = this.program.percentage;
+
+    var animation = setInterval(function () {
+      count += 1;
+      element.innerHTML = count + '%';
+      arc = _this.drawArc(40, 40, 40, 0, count * 3.6);
+      path.setAttribute('d', arc);
+
+      if (count >= end) {
+        element.innerHTML = end + '%';
+        arc = _this.drawArc(40, 40, 40, 0, end * 3.6);
+        path.setAttribute('d', arc);
+        clearInterval(animation);
+      }
+    }, 5);
+  },
+
+  methods: {
+    /**
+     * Polar to Cartesian
+     */
+    polarToCartesian: function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+      var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+      return {
+        x: centerX + radius * Math.cos(angleInRadians),
+        y: centerY + radius * Math.sin(angleInRadians)
+      };
+    },
+
+
+    /**
+     * Draw Arc.
+     */
+    drawArc: function drawArc(x, y, radius, startAngle, endAngle) {
+      var start = this.polarToCartesian(x, y, radius, endAngle);
+      var end = this.polarToCartesian(x, y, radius, startAngle);
+      var arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
+      var d = (endAngle - startAngle) % 360 === 0 ? ["M", start.x, 0, "A", radius, radius, 0, 0, 0, start.x, radius * 2, "A", radius, radius, 0, 0, 0, start.x, 0] : ["M", start.x, start.y, "A", radius, radius, 0, arcSweep, 0, end.x, end.y, "L", x, y, "Z"];
+      return d.join(" ");
     }
   }
 });
@@ -45524,9 +45572,26 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "program__container" }, [
       _c("div", { staticClass: "program__result" }, [
+        _c("svg", { staticClass: "svg__results" }, [
+          _c("circle", {
+            staticClass: "svg__circle",
+            attrs: { cx: "40", cy: "40", r: "40", fill: "#fff" }
+          }),
+          _vm._v(" "),
+          _c("path", {
+            staticClass: "svg__path",
+            attrs: { id: "path_" + _vm.program.id, fill: "#4e4f4f" }
+          }),
+          _vm._v(" "),
+          _c("circle", {
+            staticClass: "svg__circle",
+            attrs: { cx: "40", cy: "40", r: "30", fill: "#f0f0f0" }
+          })
+        ]),
+        _vm._v(" "),
         _c("div", {
           staticClass: "program__result-value",
-          domProps: { textContent: _vm._s(_vm.calculatePercentage) }
+          attrs: { id: "result_" + _vm.program.id }
         })
       ]),
       _vm._v(" "),

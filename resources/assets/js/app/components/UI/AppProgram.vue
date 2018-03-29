@@ -2,25 +2,30 @@
   <div>
     <div class="program__container">
       <div class="program__result">
+
         <!-- Circle -->
-        
+        <svg class="svg__results">
+          <circle class="svg__circle" cx="40" cy="40" r="40" fill="#fff"></circle>
+          <path :id="'path_' + program.id" class="svg__path" fill="#4e4f4f"></path>
+          <circle class="svg__circle" cx="40" cy="40" r="30" fill="#f0f0f0"></circle>
+        </svg>
 
         <!-- Result -->
-        <div class="program__result-value"
-             v-text="calculatePercentage">
+        <div :id="'result_' + program.id"
+             class="program__result-value">
         </div>
       </div>
 
       <div class="program__body">
-        
+
         <!-- Title -->
         <p class="program__title"
-            v-text="program.title">
+           v-text="program.title">
         </p>
 
         <!-- Slogan -->
         <p class="program__slogan"
-            v-text="program.slogan">
+           v-text="program.slogan">
         </p>
 
         <div class="program__buttons">
@@ -47,9 +52,57 @@
         required: true
       }
     },
-    computed: {
-      calculatePercentage() {
-        return Math.ceil(Math.round((this.program.points / this.program.maxPoints) * 100)) + '%'
+    mounted() {
+      const path = document.getElementById('path_' + this.program.id)
+      const element = document.querySelector('#result_' + this.program.id)
+      let arc
+      let count = 0
+      let end = this.program.percentage
+
+      let animation = setInterval(() => {
+        count += 1
+        element.innerHTML = count + '%'
+        arc = this.drawArc(40, 40, 40, 0, (count * 3.6));
+        path.setAttribute('d', arc);
+
+        if (count >= end) {
+          element.innerHTML = end + '%'
+          arc = this.drawArc(40, 40, 40, 0, (end * 3.6));
+          path.setAttribute('d', arc);
+          clearInterval(animation)
+        }
+      }, 5)
+    },
+    methods: {
+      /**
+       * Polar to Cartesian
+       */
+      polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+        let angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0
+        return {
+          x: centerX + (radius * Math.cos(angleInRadians)),
+          y: centerY + (radius * Math.sin(angleInRadians))
+        }
+      },
+
+      /**
+       * Draw Arc.
+       */
+      drawArc(x, y, radius, startAngle, endAngle) {
+        let start = this.polarToCartesian(x, y, radius, endAngle)
+        let end = this.polarToCartesian(x, y, radius, startAngle)
+        let arcSweep = endAngle - startAngle <= 180 ? "0" : "1"
+        let d = (endAngle - startAngle) % 360 === 0 ? [
+          "M", start.x, 0,
+          "A", radius, radius, 0, 0, 0, start.x, (radius * 2),
+          "A", radius, radius, 0, 0, 0, start.x, 0,
+        ] : [
+          "M", start.x, start.y,
+          "A", radius, radius, 0, arcSweep, 0, end.x, end.y,
+          "L", x, y,
+          "Z"
+        ]
+        return d.join(" ")
       }
     }
   }
