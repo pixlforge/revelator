@@ -211,23 +211,33 @@
           setTimeout(() => {
             this.$store.dispatch('setShowContentValue', true)
           }, 5)
-          this.$router.push({ query: { question: this.getCurrentQuestion } })
+          this.$router.push({
+            query: {
+              question: this.getCurrentQuestion,
+              name: this.getCurrentUser.name
+            }
+          })
         }
       },
 
       /**
        * Go back to the previous question.
        */
-       previousQuestion() {
-         if (this.getCurrentQuestion > 0) {
-           this.$store.dispatch('setShowContentValue', false)
-           this.$store.dispatch('decrementCurrentQuestion')
-           setTimeout(() => {
-             this.$store.dispatch('setShowContentValue', true)
-           }, 5)
-           this.$router.push({ query: { question: this.getCurrentQuestion } })
-         }
-       }
+      previousQuestion() {
+        if (this.getCurrentQuestion > 0) {
+          this.$store.dispatch('setShowContentValue', false)
+          this.$store.dispatch('decrementCurrentQuestion')
+          setTimeout(() => {
+            this.$store.dispatch('setShowContentValue', true)
+          }, 5)
+          this.$router.push({
+            query: {
+              question: this.getCurrentQuestion,
+              name: this.getCurrentUser.name
+            }
+          })
+        }
+      }
     }
   }
 </script>

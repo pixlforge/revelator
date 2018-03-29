@@ -34,7 +34,8 @@
           this.$router.push({
             name: 'diagnostic',
             query: {
-              question: 0
+              question: 0,
+              name: this.getCurrentUser.name
             }
           })
         } else {
@@ -46,7 +47,8 @@
                 this.$router.push({
                   name: 'diagnostic',
                   query: {
-                    question: 0
+                    question: 0,
+                    name: this.getCurrentUser.name
                   }
                 })
               })

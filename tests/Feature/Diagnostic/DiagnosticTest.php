@@ -19,14 +19,14 @@ class DiagnosticTest extends TestCase
         $this->actingAs($guest);
 
         $this->patchJson(route('api.diagnostics.update', $guest->id), [
-            'agrees_to_share_details' => true,
+            'user_consents' => true,
             'first_name' => 'John',
             'last_name' => 'Doe',
             'guest_email' => 'johndoe@example.com'
         ])->assertStatus(200);
 
         $this->assertDatabaseHas('users', [
-            'agrees_to_share_details' => true,
+            'user_consents' => true,
             'name' => $guest->name,
             'first_name' => 'John',
             'last_name' => 'Doe',

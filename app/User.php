@@ -14,7 +14,7 @@ class User extends Authenticatable
      * The attributes that are cast after a request.
      */
     protected $casts = [
-        'agrees_to_share_details' => 'boolean'
+        'user_consents' => 'boolean'
     ];
 
     /**

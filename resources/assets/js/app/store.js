@@ -184,7 +184,7 @@ export const store = new Vuex.Store({
      * setShareDetailsStatus Mutation
      */
     setShareDetailsStatus: (state, payload) => {
-      state.currentUser.agrees_to_share_details = payload
+      state.currentUser.user_consents = payload
     },
 
     /**
@@ -651,7 +651,7 @@ export const store = new Vuex.Store({
       dispatch('toggleLoader')
       return new Promise((resolve, reject) => {
         axios.patch(route('api.diagnostics.update', state.currentUser.id), {
-          agrees_to_share_details: true,
+          user_consents: true,
           first_name: payload.first_name,
           last_name: payload.last_name,
           guest_email: payload.guest_email

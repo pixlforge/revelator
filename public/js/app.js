@@ -30127,7 +30127,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
      * setShareDetailsStatus Mutation
      */
     setShareDetailsStatus: function setShareDetailsStatus(state, payload) {
-      state.currentUser.agrees_to_share_details = payload;
+      state.currentUser.user_consents = payload;
     },
 
     /**
@@ -30718,7 +30718,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
         axios.patch(route('api.diagnostics.update', state.currentUser.id), {
-          agrees_to_share_details: true,
+          user_consents: true,
           first_name: payload.first_name,
           last_name: payload.last_name,
           guest_email: payload.guest_email
@@ -42456,8 +42456,9 @@ var routes = [
         name: 'home'
       });
     } else {
-      if (!to.query.question) {
+      if (!to.query.question || !to.query.name) {
         to.query.question = '0';
+        to.query.name = window.currentUser.name;
         next({
           path: to.path,
           query: to.query
@@ -42481,8 +42482,17 @@ var routes = [
       next({
         name: 'home'
       });
+    } else {
+      if (!to.query.name) {
+        to.query.name = window.currentUser.name;
+        next({
+          path: to.path,
+          query: to.query
+        });
+      } else {
+        next();
+      }
     }
-    next();
   }
 },
 
@@ -42498,8 +42508,17 @@ var routes = [
       next({
         name: 'home'
       });
+    } else {
+      if (!to.query.name) {
+        to.query.name = window.currentUser.name;
+        next({
+          path: to.path,
+          query: to.query
+        });
+      } else {
+        next();
+      }
     }
-    next();
   }
 },
 
@@ -42937,7 +42956,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         this.$router.push({
           name: 'diagnostic',
           query: {
-            question: 0
+            question: 0,
+            name: this.getCurrentUser.name
           }
         });
       } else {
@@ -42949,7 +42969,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
               _this.$router.push({
                 name: 'diagnostic',
                 query: {
-                  question: 0
+                  question: 0,
+                  name: _this.getCurrentUser.name
                 }
               });
             });
@@ -43303,7 +43324,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         setTimeout(function () {
           _this3.$store.dispatch('setShowContentValue', true);
         }, 5);
-        this.$router.push({ query: { question: this.getCurrentQuestion } });
+        this.$router.push({
+          query: {
+            question: this.getCurrentQuestion,
+            name: this.getCurrentUser.name
+          }
+        });
       }
     },
 
@@ -43320,7 +43346,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         setTimeout(function () {
           _this4.$store.dispatch('setShowContentValue', true);
         }, 5);
-        this.$router.push({ query: { question: this.getCurrentQuestion } });
+        this.$router.push({
+          query: {
+            question: this.getCurrentQuestion,
+            name: this.getCurrentUser.name
+          }
+        });
       }
     }
   }
@@ -45446,26 +45477,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(['getPrograms', 'getAnswers', 'getOptions', 'getQuestions', 'getCurrentUser']), {
 
     /**
-     * User has agreed to share his personal details.
-     */
-    userAgreedToShareDetails: function userAgreedToShareDetails() {
-      return this.getCurrentUser.agrees_to_share_details;
-    },
-
-
-    /**
      * Set element's width to 50% if user hasn't agreed to share his personal details.
      */
     shouldSetElementWidth: function shouldSetElementWidth() {
-      return this.userAgreedToShareDetails ? '' : 'btn__big--half';
+      return this.userConsents ? '' : 'btn__big--half';
     }
   }),
   data: function data() {
     return {
-      programs: []
+      programs: [],
+      userConsents: false
     };
   },
   created: function created() {
+    /**
+     * Initialize the component.
+     */
     this.initComponent();
   },
 
@@ -45510,6 +45537,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       Promise.all([fetchPrograms, fetchExistingAnswers, fetchOptions, fetchQuestions]).then(function () {
         _this2.$store.dispatch('toggleLoader');
         _this2.getResultsByProgram();
+        _this2.doesUserConsent();
       }).catch(function (err) {
         _this2.$store.dispatch('toggleLoader');
         console.log(err);
@@ -45585,6 +45613,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           });
         });
       });
+    },
+
+
+    /**
+     * Determine if user consents to sharing personal details.
+     */
+    doesUserConsent: function doesUserConsent() {
+      if (this.getCurrentUser.user_consents) {
+        this.userConsents = true;
+      }
     }
   }
 });
@@ -45789,7 +45827,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "main__btn-group" }, [
-      _vm.userAgreedToShareDetails
+      _vm.userConsents
         ? _c(
             "div",
             { staticClass: "btn__big", on: { click: _vm.sendMeMyResults } },
