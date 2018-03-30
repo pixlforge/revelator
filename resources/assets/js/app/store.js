@@ -181,9 +181,9 @@ export const store = new Vuex.Store({
     },
 
     /**
-     * setShareDetailsStatus Mutation
+     * setUserConsent Mutation
      */
-    setShareDetailsStatus: (state, payload) => {
+    setUserConsent: (state, payload) => {
       state.currentUser.user_consents = payload
     },
 
@@ -651,12 +651,12 @@ export const store = new Vuex.Store({
       dispatch('toggleLoader')
       return new Promise((resolve, reject) => {
         axios.patch(route('api.diagnostics.update', state.currentUser.id), {
-          user_consents: true,
+          user_consents: payload.user_consents,
           first_name: payload.first_name,
           last_name: payload.last_name,
           guest_email: payload.guest_email
         }).then(() => {
-          commit('setShareDetailsStatus', true)
+          commit('setUserConsent', payload.user_consents)
           dispatch('toggleLoader')
           resolve()
         }).catch(err => {

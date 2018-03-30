@@ -176,11 +176,41 @@
        * Save the user's personal infos if he agrees, then route to the results views.
        */
       saveAndContinue() {
+        let guest = []
+
         if (this.userAgrees) {
-          this.updateGuestInfos()
-        } else if (this.userDoesNotAgree) {
-          this.goToResults()
+          guest.user_consents = true
+        } else {
+          guest.user_consents = false
         }
+
+        if (this.guest.first_name.length) {
+          guest.first_name = this.guest.first_name
+        }
+
+        if (this.guest.last_name.length) {
+          guest.last_name = this.guest.last_name
+        }
+
+        if (this.guest.guest_email.length) {
+          guest.guest_email = this.guest.guest_email
+        }
+
+        this.$store.dispatch('updateGuestInfos', guest).then(() => {
+          if (guest.user_consents) {
+            this.$toasted.global.success({
+              message: `Infos saved successfully! Thank you for your participation!`
+            })
+          } else {
+            this.$toasted.global.success({
+              message: `Privacy preferences saved successfully! Thank you for your participation!`
+            })
+          }
+          this.goToResults()
+        }).catch(err => {
+          this.$toasted.global.danger()
+          this.errors = err.response.data.errors
+        })
       },
 
       /**
@@ -188,21 +218,6 @@
        */
       goToResults() {
         this.$router.push({ name: 'results' })
-      },
-
-      /**
-       * Update the guest's infos.
-       */
-      updateGuestInfos() {
-        this.$store.dispatch('updateGuestInfos', this.guest).then(() => {
-          this.$toasted.global.success({
-            message: `Infos saved successfully! Thank you for your participation!`
-          })
-          this.goToResults()
-        }).catch(err => {
-          this.$toasted.global.danger()
-          this.errors = err.response.data.errors
-        })
       },
 
       /**

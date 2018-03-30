@@ -30124,9 +30124,9 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     },
 
     /**
-     * setShareDetailsStatus Mutation
+     * setUserConsent Mutation
      */
-    setShareDetailsStatus: function setShareDetailsStatus(state, payload) {
+    setUserConsent: function setUserConsent(state, payload) {
       state.currentUser.user_consents = payload;
     },
 
@@ -30718,12 +30718,12 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
         axios.patch(route('api.diagnostics.update', state.currentUser.id), {
-          user_consents: true,
+          user_consents: payload.user_consents,
           first_name: payload.first_name,
           last_name: payload.last_name,
           guest_email: payload.guest_email
         }).then(function () {
-          commit('setShareDetailsStatus', true);
+          commit('setUserConsent', payload.user_consents);
           dispatch('toggleLoader');
           resolve();
         }).catch(function (err) {
@@ -44138,11 +44138,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * Save the user's personal infos if he agrees, then route to the results views.
      */
     saveAndContinue: function saveAndContinue() {
+      var _this = this;
+
+      var guest = [];
+
       if (this.userAgrees) {
-        this.updateGuestInfos();
-      } else if (this.userDoesNotAgree) {
-        this.goToResults();
+        guest.user_consents = true;
+      } else {
+        guest.user_consents = false;
       }
+
+      if (this.guest.first_name.length) {
+        guest.first_name = this.guest.first_name;
+      }
+
+      if (this.guest.last_name.length) {
+        guest.last_name = this.guest.last_name;
+      }
+
+      if (this.guest.guest_email.length) {
+        guest.guest_email = this.guest.guest_email;
+      }
+
+      this.$store.dispatch('updateGuestInfos', guest).then(function () {
+        if (guest.user_consents) {
+          _this.$toasted.global.success({
+            message: 'Infos saved successfully! Thank you for your participation!'
+          });
+        } else {
+          _this.$toasted.global.success({
+            message: 'Privacy preferences saved successfully! Thank you for your participation!'
+          });
+        }
+        _this.goToResults();
+      }).catch(function (err) {
+        _this.$toasted.global.danger();
+        _this.errors = err.response.data.errors;
+      });
     },
 
 
@@ -44151,24 +44183,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      */
     goToResults: function goToResults() {
       this.$router.push({ name: 'results' });
-    },
-
-
-    /**
-     * Update the guest's infos.
-     */
-    updateGuestInfos: function updateGuestInfos() {
-      var _this = this;
-
-      this.$store.dispatch('updateGuestInfos', this.guest).then(function () {
-        _this.$toasted.global.success({
-          message: 'Infos saved successfully! Thank you for your participation!'
-        });
-        _this.goToResults();
-      }).catch(function (err) {
-        _this.$toasted.global.danger();
-        _this.errors = err.response.data.errors;
-      });
     },
 
 
