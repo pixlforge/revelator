@@ -30596,14 +30596,36 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       var commit = _ref37.commit,
           dispatch = _ref37.dispatch;
 
+      dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
         axios.get(route('api.diagnostics.login')).then(function (_ref38) {
           var data = _ref38.data;
 
+          dispatch('toggleLoader');
           dispatch('hydrateCurrentUser', data);
           resolve();
         }).catch(function () {
+          dispatch('toggleLoader');
           reject();
+        });
+      });
+    },
+
+    /**
+     * loginExistingDiagnosticUser Action
+     */
+    loginExistingDiagnosticUser: function loginExistingDiagnosticUser(_ref39, payload) {
+      var commit = _ref39.commit,
+          dispatch = _ref39.dispatch;
+
+      return new Promise(function (resolve, reject) {
+        axios.get(route('api.diagnostics.login', [payload])).then(function (_ref40) {
+          var data = _ref40.data;
+
+          dispatch('hydrateCurrentUser', data);
+          resolve();
+        }).catch(function (err) {
+          reject(err);
         });
       });
     },
@@ -30611,9 +30633,9 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * addAnswer Action
      */
-    addAnswer: function addAnswer(_ref39, payload) {
-      var commit = _ref39.commit,
-          dispatch = _ref39.dispatch;
+    addAnswer: function addAnswer(_ref41, payload) {
+      var commit = _ref41.commit,
+          dispatch = _ref41.dispatch;
 
       commit('addAnswer', payload);
       axios.post(route('api.answers.store'), payload);
@@ -30622,13 +30644,13 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * fetchExistingAnswers Action
      */
-    fetchExistingAnswers: function fetchExistingAnswers(_ref40) {
-      var commit = _ref40.commit,
-          dispatch = _ref40.dispatch;
+    fetchExistingAnswers: function fetchExistingAnswers(_ref42) {
+      var commit = _ref42.commit,
+          dispatch = _ref42.dispatch;
 
       return new Promise(function (resolve, reject) {
-        axios.get(route('api.answers.index')).then(function (_ref41) {
-          var data = _ref41.data;
+        axios.get(route('api.answers.index')).then(function (_ref43) {
+          var data = _ref43.data;
 
           commit('fetchExistingAnswers', data);
           resolve(data);
@@ -30641,9 +30663,9 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * Logout Action
      */
-    logout: function logout(_ref42) {
-      var commit = _ref42.commit,
-          dispatch = _ref42.dispatch;
+    logout: function logout(_ref44) {
+      var commit = _ref44.commit,
+          dispatch = _ref44.dispatch;
 
       commit('toggleLoader');
       return new Promise(function (resolve, reject) {
@@ -30661,14 +30683,14 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * Login Action
      */
-    login: function login(_ref43, payload) {
-      var commit = _ref43.commit,
-          dispatch = _ref43.dispatch;
+    login: function login(_ref45, payload) {
+      var commit = _ref45.commit,
+          dispatch = _ref45.dispatch;
 
       dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
-        axios.post(route('login'), payload).then(function (_ref44) {
-          var data = _ref44.data;
+        axios.post(route('login'), payload).then(function (_ref46) {
+          var data = _ref46.data;
 
           dispatch('hydrateCurrentUser', data);
           dispatch('toggleLoader');
@@ -30683,8 +30705,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * incrementCurrentQuestion Action
      */
-    incrementCurrentQuestion: function incrementCurrentQuestion(_ref45) {
-      var commit = _ref45.commit;
+    incrementCurrentQuestion: function incrementCurrentQuestion(_ref47) {
+      var commit = _ref47.commit;
 
       commit('incrementCurrentQuestion');
     },
@@ -30692,8 +30714,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * decrementCurrentQuestion Action
      */
-    decrementCurrentQuestion: function decrementCurrentQuestion(_ref46) {
-      var commit = _ref46.commit;
+    decrementCurrentQuestion: function decrementCurrentQuestion(_ref48) {
+      var commit = _ref48.commit;
 
       commit('decrementCurrentQuestion');
     },
@@ -30701,8 +30723,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * setCurrentQuestion Action
      */
-    setCurrentQuestion: function setCurrentQuestion(_ref47, payload) {
-      var commit = _ref47.commit;
+    setCurrentQuestion: function setCurrentQuestion(_ref49, payload) {
+      var commit = _ref49.commit;
 
       commit('setCurrentQuestion', payload);
     },
@@ -30710,10 +30732,10 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * updateGuestInfos Action
      */
-    updateGuestInfos: function updateGuestInfos(_ref48, payload) {
-      var dispatch = _ref48.dispatch,
-          commit = _ref48.commit,
-          state = _ref48.state;
+    updateGuestInfos: function updateGuestInfos(_ref50, payload) {
+      var dispatch = _ref50.dispatch,
+          commit = _ref50.commit,
+          state = _ref50.state;
 
       dispatch('toggleLoader');
       return new Promise(function (resolve, reject) {
@@ -30736,8 +30758,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     /**
      * setShowContentValue Action
      */
-    setShowContentValue: function setShowContentValue(_ref49, payload) {
-      var commit = _ref49.commit;
+    setShowContentValue: function setShowContentValue(_ref51, payload) {
+      var commit = _ref51.commit;
 
       commit('setShowContentValue', payload);
     }
@@ -42504,20 +42526,14 @@ var routes = [
   name: 'results',
   component: __WEBPACK_IMPORTED_MODULE_4__views_ViewResults___default.a,
   beforeEnter: function beforeEnter(to, from, next) {
-    if (window.currentUser === null) {
+    if (window.currentUser !== null && !to.query.name) {
+      to.query.name = window.currentUser.name;
       next({
-        name: 'home'
+        path: to.path,
+        query: to.query
       });
     } else {
-      if (!to.query.name) {
-        to.query.name = window.currentUser.name;
-        next({
-          path: to.path,
-          query: to.query
-        });
-      } else {
-        next();
-      }
+      next();
     }
   }
 },
@@ -45255,10 +45271,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
   created: function created() {
+    var _this = this;
+
     /**
      * Initialize the component.
      */
-    this.initComponent();
+    if (window.currentUser) {
+      this.initComponent();
+    } else if (this.$route.query.name) {
+      this.$store.dispatch('loginExistingDiagnosticUser', this.$route.query.name).then(function () {
+        _this.initComponent();
+      });
+    }
+  },
+  beforeRouteLeave: function beforeRouteLeave(to, from, next) {
+    this.$store.dispatch('logoutDiagnosticUser').then(function () {
+      next();
+    });
   },
 
   methods: {
@@ -45266,12 +45295,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Send the user a mail along with a token used to consult his results.
      */
     sendMeMyResults: function sendMeMyResults() {
-      var _this = this;
+      var _this2 = this;
 
       this.$store.dispatch('toggleLoader');
       axios.get(route('api.diagnostics.send')).then(function () {
-        _this.$store.dispatch('toggleLoader');
-        _this.$toasted.global.success({
+        _this2.$store.dispatch('toggleLoader');
+        _this2.$toasted.global.success({
           message: "We've sent you an email containing a permanent link to this session's results!"
         });
       });
@@ -45282,14 +45311,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Log out the user and redirect him to the home page.
      */
     startAgain: function startAgain() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.$store.dispatch('toggleLoader');
       this.$store.dispatch('logoutDiagnosticUser').then(function () {
-        _this2.$store.dispatch('toggleLoader');
-        _this2.$router.push({ name: 'home' });
+        _this3.$store.dispatch('toggleLoader');
+        _this3.$router.push({ name: 'home' });
       }).catch(function () {
-        _this2.$store.dispatch('toggleLoader');
+        _this3.$store.dispatch('toggleLoader');
       });
     },
 
@@ -45298,7 +45327,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Fetch the programs, options and existing answers.
      */
     initComponent: function initComponent() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$store.dispatch('toggleLoader');
 
@@ -45308,11 +45337,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var fetchQuestions = this.$store.dispatch('fetchQuestions');
 
       Promise.all([fetchPrograms, fetchExistingAnswers, fetchOptions, fetchQuestions]).then(function () {
-        _this3.$store.dispatch('toggleLoader');
-        _this3.getResultsByProgram();
-        _this3.doesUserConsent();
+        _this4.$store.dispatch('toggleLoader');
+        _this4.getResultsByProgram();
+        _this4.doesUserConsent();
       }).catch(function (err) {
-        _this3.$store.dispatch('toggleLoader');
+        _this4.$store.dispatch('toggleLoader');
         console.log(err);
       });
     },
@@ -45333,7 +45362,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Build the programs data properties.
      */
     buildProgramsDataProperties: function buildProgramsDataProperties() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.getPrograms.forEach(function (program) {
         var currentQuestion = 0;
@@ -45361,7 +45390,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         });
 
         // Push the desired properties to the programs data property array.
-        _this4.programs.push({
+        _this5.programs.push({
           id: program.id,
           title: program.title,
           slogan: program.slogan,
@@ -45378,11 +45407,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Attribute points in relation with an option's weighting related to a program.
      */
     attributePoints: function attributePoints() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.getAnswers.forEach(function (answer) {
         answer.option.programs.forEach(function (program) {
-          _this5.programs.forEach(function (item) {
+          _this6.programs.forEach(function (item) {
             if (item.id === program.id) {
               item.points += program.pivot.value;
             }

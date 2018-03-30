@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Diagnostic;
 
 use App\Mail\SendMeMyResultsEmail;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Guest\UpdateGuestRequest;
@@ -26,14 +27,20 @@ class DiagnosticController extends Controller
     /**
      * Create a new user and log him in.
      *
+     * @param $user
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function login()
+    public function login($user = null)
     {
-        $user = factory(User::class)
-            ->states('guest')
-            ->create();
-        Auth::login($user);
+        if ($user) {
+            $user = User::where('name', $user)->first();
+            Auth::login($user);
+        } else {
+            $user = factory(User::class)
+                ->states('guest')
+                ->create();
+            Auth::login($user);
+        }
 
         return response($user, 200);
     }

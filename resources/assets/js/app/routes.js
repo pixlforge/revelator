@@ -99,20 +99,14 @@ export const routes = [
     name: 'results',
     component: ViewResults,
     beforeEnter: (to, from, next) => {
-      if (window.currentUser === null) {
+      if (window.currentUser !== null && !to.query.name) {
+        to.query.name = window.currentUser.name
         next({
-          name: 'home'
+          path: to.path,
+          query: to.query
         })
       } else {
-        if (!to.query.name) {
-          to.query.name = window.currentUser.name
-          next({
-            path: to.path,
-            query: to.query
-          })
-        } else {
-          next()
-        }
+        next()
       }
     }
   },

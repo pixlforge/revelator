@@ -557,12 +557,29 @@ export const store = new Vuex.Store({
      * loginDiagnosticUser Action
      */
     loginDiagnosticUser: ({ commit, dispatch }) => {
+      dispatch('toggleLoader')
       return new Promise((resolve, reject) => {
         axios.get(route('api.diagnostics.login')).then(({ data }) => {
+          dispatch('toggleLoader')
           dispatch('hydrateCurrentUser', data)
           resolve()
         }).catch(() => {
+          dispatch('toggleLoader')
           reject()
+        })
+      })
+    },
+
+    /**
+     * loginExistingDiagnosticUser Action
+     */
+    loginExistingDiagnosticUser: ({ commit, dispatch }, payload) => {
+      return new Promise((resolve, reject) => {
+        axios.get(route('api.diagnostics.login', [payload])).then(({ data }) => {
+          dispatch('hydrateCurrentUser', data)
+          resolve()
+        }).catch(err => {
+          reject(err)
         })
       })
     },

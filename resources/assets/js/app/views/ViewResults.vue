@@ -82,7 +82,18 @@
       /**
        * Initialize the component.
        */
-      this.initComponent()
+      if (window.currentUser) {
+        this.initComponent()
+      } else if (this.$route.query.name) {
+        this.$store.dispatch('loginExistingDiagnosticUser', this.$route.query.name).then(() => {
+          this.initComponent()
+        })
+      }
+    },
+    beforeRouteLeave(to, from, next) {
+      this.$store.dispatch('logoutDiagnosticUser').then(() => {
+        next()
+      })
     },
     methods: {
       /**

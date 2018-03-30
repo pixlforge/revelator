@@ -27,7 +27,7 @@ Route::prefix('/api')->group(function () {
      */
     Route::prefix('/diagnostics')->namespace('Diagnostic')->group(function () {
         Route::get('/logout', 'DiagnosticController@logout')->name('api.diagnostics.logout');
-        Route::get('/login', 'DiagnosticController@login')->name('api.diagnostics.login');
+        Route::get('/login/{user?}', 'DiagnosticController@login')->name('api.diagnostics.login');
         Route::patch('/{user}', 'DiagnosticController@update')->name('api.diagnostics.update');
         Route::get('/send-me-my-results', 'DiagnosticController@send')->name('api.diagnostics.send');
     });

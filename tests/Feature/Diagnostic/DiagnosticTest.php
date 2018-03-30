@@ -55,4 +55,17 @@ class DiagnosticTest extends TestCase
 
         Mail::assertQueued(SendMeMyResultsEmail::class);
     }
+
+    /** @test */
+    function a_guest_can_log_in_again_to_see_his_results()
+    {
+        $this->withoutExceptionHandling();
+
+        $guest = factory(User::class)->states('guest')->create();
+
+        $this->get(route('api.diagnostics.login', $guest->name))
+            ->assertStatus(200);
+
+        $this->assertAuthenticatedAs($guest);
+    }
 }
