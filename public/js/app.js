@@ -30907,6 +30907,7 @@ var app = new Vue({
 window.axios = __webpack_require__(150);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -45500,6 +45501,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(5);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -45546,6 +45550,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -45554,16 +45561,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       required: true
     }
   },
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])(['getCurrentUser'])),
   mounted: function mounted() {
     this.animateResults();
   },
 
   methods: {
     /**
+     * Subscribe to the Campaign Monitor list.
+     */
+    subscribe: function subscribe() {
+      var _this = this;
+
+      var payload = {
+        email: this.getCurrentUser.guest_email,
+        name: this.getCurrentUser.first_name + ' ' + this.getCurrentUser.last_name
+      };
+
+      this.$store.dispatch('toggleLoader');
+
+      axios.post(route('api.campaign.store'), payload).then(function (_ref) {
+        var data = _ref.data;
+
+        if (data.http_status_code === 201) {
+          _this.$toasted.global.success({
+            message: 'Thank you, you will receive more information about the ' + _this.program.title + ' program.'
+          });
+        } else {
+          _this.$toasted.global.danger();
+        }
+        _this.$store.dispatch('toggleLoader');
+      }).catch(function () {
+        _this.$toasted.global.danger();
+        _this.$store.dispatch('toggleLoader');
+      });
+    },
+
+
+    /**
      * Animate the results text and circle.
      */
     animateResults: function animateResults() {
-      var _this = this;
+      var _this2 = this;
 
       var path = document.getElementById('path_' + this.program.id);
       var element = document.querySelector('#result_' + this.program.id);
@@ -45574,7 +45613,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var animation = setInterval(function () {
         count += 1;
         element.innerHTML = count + '%';
-        arc = _this.drawArc(40, 40, 40, 0, count * 3.6);
+        arc = _this2.drawArc(40, 40, 40, 0, count * 3.6);
         path.setAttribute('d', arc);
 
         if (count >= end) {
@@ -45655,9 +45694,11 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", { staticClass: "program__buttons" }, [
-          _c("a", { staticClass: "btn__results" }, [
-            _vm._v("\n          I'm interested\n        ")
-          ]),
+          _c(
+            "a",
+            { staticClass: "btn__results", on: { click: _vm.subscribe } },
+            [_vm._v("\n          I'm interested\n        ")]
+          ),
           _vm._v(" "),
           _c(
             "a",

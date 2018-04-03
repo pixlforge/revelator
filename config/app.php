@@ -211,4 +211,9 @@ return [
 
     ],
 
+    'campaign_monitor' => [
+        'api_key' => env('CAMPAIGN_MONITOR_API_KEY'),
+        'subscriber_list_id' => env('CAMPAIGN_MONITOR_SUBSCRIBER_LIST_ID')
+    ]
+
 ];

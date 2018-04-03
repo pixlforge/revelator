@@ -29,7 +29,8 @@
         </p>
 
         <div class="program__buttons">
-          <a class="btn__results">
+          <a class="btn__results"
+             @click="subscribe">
             I'm interested
           </a>
           <a class="btn__results"
@@ -45,6 +46,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     props: {
       program: {
@@ -52,10 +55,41 @@
         required: true
       }
     },
+    computed: {
+      ...mapGetters([
+        'getCurrentUser'
+      ])
+    },
     mounted() {
       this.animateResults()
     },
     methods: {
+      /**
+       * Subscribe to the Campaign Monitor list.
+       */
+      subscribe() {
+        const payload = {
+          email: this.getCurrentUser.guest_email,
+          name: this.getCurrentUser.first_name + ' ' + this.getCurrentUser.last_name
+        }
+
+        this.$store.dispatch('toggleLoader')
+
+        axios.post(route('api.campaign.store'), payload).then(({ data }) => {
+          if (data.http_status_code === 201) {
+            this.$toasted.global.success({
+              message: `Thank you, you will receive more information about the ${this.program.title} program.`
+            })
+          } else {
+            this.$toasted.global.danger()
+          }
+          this.$store.dispatch('toggleLoader')
+        }).catch(() => {
+          this.$toasted.global.danger()
+          this.$store.dispatch('toggleLoader')
+        })
+      },
+
       /**
        * Animate the results text and circle.
        */

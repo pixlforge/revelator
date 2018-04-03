@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Diagnostic;
 
-use App\Mail\SendMeMyResultsEmail;
 use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Mail\SendMeMyResultsEmail;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Guest\UpdateGuestRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\Guest\UpdateGuestRequest;
 
 class DiagnosticController extends Controller
 {
@@ -68,7 +67,7 @@ class DiagnosticController extends Controller
      */
     public function send()
     {
-        $user = auth()->user();
+        $user = User::where('id', auth()->id())->first();
 
         Mail::to($user->guest_email)
             ->queue(new SendMeMyResultsEmail($user));

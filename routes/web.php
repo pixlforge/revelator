@@ -23,6 +23,13 @@ Route::prefix('/api')->group(function () {
     });
 
     /**
+     * Campaign Monitor
+     */
+    Route::prefix('/campaign')->namespace('Api')->group(function () {
+        Route::post('/', 'CampaignMonitorController@store')->name('api.campaign.store');
+    });
+
+    /**
      * Diagnostics
      */
     Route::prefix('/diagnostics')->namespace('Diagnostic')->group(function () {
