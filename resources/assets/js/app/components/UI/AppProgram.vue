@@ -69,8 +69,10 @@
        */
       subscribe() {
         const payload = {
+          first_name: this.getCurrentUser.first_name,
+          full_name: this.getCurrentUser.first_name + ' ' + this.getCurrentUser.last_name,
           email: this.getCurrentUser.guest_email,
-          name: this.getCurrentUser.first_name + ' ' + this.getCurrentUser.last_name
+          program: this.program.title + ' EN'
         }
 
         this.$store.dispatch('toggleLoader')
@@ -81,6 +83,7 @@
               message: `Thank you, you will receive more information about the ${this.program.title} program.`
             })
           } else {
+            console.log(data)
             this.$toasted.global.danger()
           }
           this.$store.dispatch('toggleLoader')

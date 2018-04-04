@@ -45574,8 +45574,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this = this;
 
       var payload = {
+        first_name: this.getCurrentUser.first_name,
+        full_name: this.getCurrentUser.first_name + ' ' + this.getCurrentUser.last_name,
         email: this.getCurrentUser.guest_email,
-        name: this.getCurrentUser.first_name + ' ' + this.getCurrentUser.last_name
+        program: this.program.title + ' EN'
       };
 
       this.$store.dispatch('toggleLoader');
@@ -45588,6 +45590,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             message: 'Thank you, you will receive more information about the ' + _this.program.title + ' program.'
           });
         } else {
+          console.log(data);
           _this.$toasted.global.danger();
         }
         _this.$store.dispatch('toggleLoader');
