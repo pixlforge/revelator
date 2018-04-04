@@ -11,7 +11,7 @@ class CampaignMonitorController extends Controller
 {
     /**
      * Store a new subscription to Campaign Monitor using the user's details.
-     * 
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
