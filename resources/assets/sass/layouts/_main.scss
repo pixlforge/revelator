@@ -8,16 +8,15 @@
   &__container {
     width: 93vw;
     margin: 0 auto;
-    min-height: 100vh;
-    padding-top: 8rem;
+    padding: 8rem 0;
     position: relative;
-
-    @media all and (max-width: $bp-lg) {
-      padding-top: 0;
-    }
 
     &--medium {
       width: 60vw;
+
+      @media all and (max-width: $bp-sm) {
+        width: 80vw;
+      }
     }
   }
 
@@ -27,6 +26,10 @@
 
     &--big {
       font-size: 10rem;
+
+      @media all and (max-width: $bp-xs) {
+        font-size: 6rem;
+      }
     }
   }
 
@@ -37,6 +40,10 @@
     text-transform: uppercase;
     letter-spacing: 2pt;
     margin-top: 2rem;
+
+    @media all and (max-width: $bp-xs) {
+      font-size: 2rem;
+    }
   }
 
   &__lead {

@@ -31,6 +31,10 @@
     max-height: 25rem;
     overflow-y: scroll;
 
+    @media all and (max-width: $bp-lg) {
+      top: 85%;
+    }
+
 
     & li {
       padding: 2rem 0;

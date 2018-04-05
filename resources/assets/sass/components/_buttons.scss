@@ -109,6 +109,7 @@
     transition: all .4s ease;
     cursor: pointer;
     user-select: none;
+    text-align: center;
 
     &:hover,
     &:focus,
@@ -133,12 +134,37 @@
     letter-spacing: 2pt;
     transition: all .2s ease;
 
+    @media all and (max-width: $bp-sm) {
+      padding: 2.25rem 4rem;
+    }
+
     &--continue {
       right: 5rem;
+
+      @media all and (max-width: $bp-sm) {
+        right: 2rem;
+      }
+
+      @media all and (max-width: $bp-xs) {
+        width: 80vw;
+        bottom: 12rem;
+        right: 50%;
+        transform: translateX(50%);
+      }
     }
 
     &--back {
       left: 5rem;
+
+      @media all and (max-width: $bp-sm) {
+        left: 2rem;
+      }
+
+      @media all and (max-width: $bp-xs) {
+        width: 80vw;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
 
     &:hover {

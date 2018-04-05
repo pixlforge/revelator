@@ -13,6 +13,10 @@
     align-items: flex-end;
     transition: all .4s ease;
     box-shadow: 0 8px 15px rgba($black, .1);
+
+    @media all and (max-width: $bp-xs) {
+      display: none;
+    }
   }
 
   &__viewbox {

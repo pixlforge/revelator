@@ -408,6 +408,7 @@ a:visited:focus {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  text-align: center;
 }
 
 .btn__diagnostic:hover,
@@ -434,12 +435,49 @@ a:visited:focus {
   transition: all .2s ease;
 }
 
+@media all and (max-width: 43.65em) {
+  .btn__control {
+    padding: 2.25rem 4rem;
+  }
+}
+
 .btn__control--continue {
   right: 5rem;
 }
 
+@media all and (max-width: 43.65em) {
+  .btn__control--continue {
+    right: 2rem;
+  }
+}
+
+@media all and (max-width: 23.75em) {
+  .btn__control--continue {
+    width: 80vw;
+    bottom: 12rem;
+    right: 50%;
+    -webkit-transform: translateX(50%);
+            transform: translateX(50%);
+  }
+}
+
 .btn__control--back {
   left: 5rem;
+}
+
+@media all and (max-width: 43.65em) {
+  .btn__control--back {
+    left: 2rem;
+  }
+}
+
+@media all and (max-width: 23.75em) {
+  .btn__control--back {
+    width: 80vw;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
 }
 
 .btn__control:hover {
@@ -759,6 +797,12 @@ a:visited:focus {
           box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
+@media all and (max-width: 23.75em) {
+  .tooltip__container {
+    display: none;
+  }
+}
+
 .tooltip__viewbox {
   position: absolute;
   bottom: -2.25rem;
@@ -936,6 +980,12 @@ a:visited:focus {
   overflow-y: scroll;
 }
 
+@media all and (max-width: 68.75em) {
+  .select__dropdown {
+    top: 85%;
+  }
+}
+
 .select__dropdown li {
   padding: 2rem 0;
   -webkit-transition: all .4s ease;
@@ -958,6 +1008,7 @@ a:visited:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding-bottom: 12rem;
 }
 
 .options__list-inline {
@@ -968,6 +1019,18 @@ a:visited:focus {
       -ms-flex-pack: justify;
           justify-content: space-between;
   list-style: none;
+}
+
+@media all and (max-width: 68.75em) {
+  .options__list-inline {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
 }
 
 .options__list-item,
@@ -985,6 +1048,13 @@ a:visited:focus {
           user-select: none;
   -webkit-transition: all .2s ease;
   transition: all .2s ease;
+}
+
+@media all and (max-width: 23.75em) {
+  .options__list-item,
+  .options__list-inline-item {
+    font-size: 1.8rem;
+  }
 }
 
 .options__list-item:hover,
@@ -1006,6 +1076,12 @@ a:visited:focus {
 
 .options__list-item:not(:first-child) {
   margin-top: 2rem;
+}
+
+@media all and (max-width: 68.75em) {
+  .options__list-inline-item:not(:first-child) {
+    margin-top: 2rem;
+  }
 }
 
 .paginator__container {
@@ -1204,19 +1280,18 @@ a:visited:focus {
 .main__container {
   width: 93vw;
   margin: 0 auto;
-  min-height: 100vh;
-  padding-top: 8rem;
+  padding: 8rem 0;
   position: relative;
-}
-
-@media all and (max-width: 68.75em) {
-  .main__container {
-    padding-top: 0;
-  }
 }
 
 .main__container--medium {
   width: 60vw;
+}
+
+@media all and (max-width: 43.65em) {
+  .main__container--medium {
+    width: 80vw;
+  }
 }
 
 .main__title {
@@ -1228,6 +1303,12 @@ a:visited:focus {
   font-size: 10rem;
 }
 
+@media all and (max-width: 23.75em) {
+  .main__title--big {
+    font-size: 6rem;
+  }
+}
+
 .main__subtitle {
   font-family: "BrandonGrotesque-Light", sans-serif;
   font-size: 2.5rem;
@@ -1235,6 +1316,12 @@ a:visited:focus {
   text-transform: uppercase;
   letter-spacing: 2pt;
   margin-top: 2rem;
+}
+
+@media all and (max-width: 23.75em) {
+  .main__subtitle {
+    font-size: 2rem;
+  }
 }
 
 .main__lead {

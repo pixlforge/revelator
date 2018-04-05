@@ -1,16 +1,21 @@
 .options {
   &__list {
-    // padding-bottom: 12rem;
     list-style: none;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 12rem;
   }
 
   &__list-inline {
     display: flex;
     justify-content: space-between;
     list-style: none;
+
+    @media all and (max-width: $bp-lg) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   &__list-item,
@@ -24,6 +29,10 @@
     padding: 1rem 6rem;
     user-select: none;
     transition: all .2s ease;
+
+    @media all and (max-width: $bp-xs) {
+      font-size: 1.8rem;
+    }
 
     &:hover {
       background-color: $dark-grey;
@@ -42,6 +51,14 @@
   &__list-item {
     &:not(:first-child) {
       margin-top: 2rem;
+    }
+  }
+
+  &__list-inline-item {
+    &:not(:first-child) {
+      @media all and (max-width: $bp-lg) {
+        margin-top: 2rem;
+      }
     }
   }
 }
