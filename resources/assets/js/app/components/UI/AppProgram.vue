@@ -30,6 +30,7 @@
 
         <div class="program__buttons">
           <a class="btn__results"
+             v-if="getCurrentUser.user_consents"
              @click="subscribe">
             I'm interested
           </a>

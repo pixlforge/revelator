@@ -45804,6 +45804,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -45950,11 +45951,13 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", { staticClass: "program__buttons" }, [
-          _c(
-            "a",
-            { staticClass: "btn__results", on: { click: _vm.subscribe } },
-            [_vm._v("\n          I'm interested\n        ")]
-          ),
+          _vm.getCurrentUser.user_consents
+            ? _c(
+                "a",
+                { staticClass: "btn__results", on: { click: _vm.subscribe } },
+                [_vm._v("\n          I'm interested\n        ")]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "a",
