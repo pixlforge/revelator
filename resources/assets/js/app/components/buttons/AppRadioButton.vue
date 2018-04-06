@@ -1,8 +1,10 @@
 <template>
   <div class="radio__button" @click="selection">
-    <svg width="70px" height="70px" viewBox="0 0 70 70">
-      <circle cx="35" cy="35" r="25" :fill="shouldStyle"/>
-    </svg>
+    <div>
+      <svg width="70px" height="70px" viewBox="0 0 70 70">
+        <circle cx="35" cy="35" r="25" :fill="shouldStyle"/>
+      </svg>
+    </div>
     <slot></slot>
   </div>
 </template>

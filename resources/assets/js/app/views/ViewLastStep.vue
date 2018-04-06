@@ -95,7 +95,7 @@
       </transition>
 
       <!-- Button Continue -->
-      <button class="btn__control btn__control--continue"
+      <button class="btn__control btn__control--last-step"
               v-text="'Continue'"
               @click="saveAndContinue">
       </button>

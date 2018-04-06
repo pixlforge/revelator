@@ -138,6 +138,18 @@
       padding: 2.25rem 4rem;
     }
 
+    &:hover {
+      background-color: $dark-grey;
+      outline: none;
+      border: none;
+      box-shadow: 0 8px 15px rgba($black, .1);
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+
     &--continue {
       right: 5rem;
 
@@ -167,16 +179,19 @@
       }
     }
 
-    &:hover {
-      background-color: $dark-grey;
-      outline: none;
-      border: none;
-      box-shadow: 0 8px 15px rgba($black, .1);
-    }
+    &--last-step {
+      right: 5rem;
 
-    &:focus,
-    &:active {
-      outline: none;
+      @media all and (max-width: $bp-sm) {
+        right: 2rem;
+      }
+
+      @media all and (max-width: $bp-xs) {
+        width: 80vw;
+        right: unset;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
   }
 

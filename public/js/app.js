@@ -44631,6 +44631,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -44667,15 +44669,17 @@ var render = function() {
     "div",
     { staticClass: "radio__button", on: { click: _vm.selection } },
     [
-      _c(
-        "svg",
-        { attrs: { width: "70px", height: "70px", viewBox: "0 0 70 70" } },
-        [
-          _c("circle", {
-            attrs: { cx: "35", cy: "35", r: "25", fill: _vm.shouldStyle }
-          })
-        ]
-      ),
+      _c("div", [
+        _c(
+          "svg",
+          { attrs: { width: "70px", height: "70px", viewBox: "0 0 70 70" } },
+          [
+            _c("circle", {
+              attrs: { cx: "35", cy: "35", r: "25", fill: _vm.shouldStyle }
+            })
+          ]
+        )
+      ]),
       _vm._v(" "),
       _vm._t("default")
     ],
@@ -45370,7 +45374,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("button", {
-          staticClass: "btn__control btn__control--continue",
+          staticClass: "btn__control btn__control--last-step",
           domProps: { textContent: _vm._s("Continue") },
           on: { click: _vm.saveAndContinue }
         })

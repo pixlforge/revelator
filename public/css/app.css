@@ -441,6 +441,19 @@ a:visited:focus {
   }
 }
 
+.btn__control:hover {
+  background-color: #4e4f4f;
+  outline: none;
+  border: none;
+  -webkit-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn__control:focus,
+.btn__control:active {
+  outline: none;
+}
+
 .btn__control--continue {
   right: 5rem;
 }
@@ -480,17 +493,24 @@ a:visited:focus {
   }
 }
 
-.btn__control:hover {
-  background-color: #4e4f4f;
-  outline: none;
-  border: none;
-  -webkit-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+.btn__control--last-step {
+  right: 5rem;
 }
 
-.btn__control:focus,
-.btn__control:active {
-  outline: none;
+@media all and (max-width: 43.65em) {
+  .btn__control--last-step {
+    right: 2rem;
+  }
+}
+
+@media all and (max-width: 23.75em) {
+  .btn__control--last-step {
+    width: 80vw;
+    right: unset;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
 }
 
 .btn__password {
