@@ -45814,6 +45814,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -45959,28 +45960,33 @@ var render = function() {
           domProps: { textContent: _vm._s(_vm.program.slogan) }
         }),
         _vm._v(" "),
-        _c("div", { staticClass: "program__buttons" }, [
-          _vm.getCurrentUser.user_consents
-            ? _c(
+        _vm.getCurrentUser
+          ? _c("div", { staticClass: "program__buttons" }, [
+              _vm.getCurrentUser.user_consents
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "btn__results",
+                      on: { click: _vm.subscribe }
+                    },
+                    [_vm._v("\n          I'm interested\n        ")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
                 "a",
-                { staticClass: "btn__results", on: { click: _vm.subscribe } },
-                [_vm._v("\n          I'm interested\n        ")]
+                {
+                  staticClass: "btn__results",
+                  attrs: {
+                    href: _vm.program.url,
+                    target: "_blank",
+                    rel: "noopener noreferrer"
+                  }
+                },
+                [_vm._v("\n          View details\n        ")]
               )
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn__results",
-              attrs: {
-                href: _vm.program.url,
-                target: "_blank",
-                rel: "noopener noreferrer"
-              }
-            },
-            [_vm._v("\n          View details\n        ")]
-          )
-        ])
+            ])
+          : _vm._e()
       ])
     ])
   ])

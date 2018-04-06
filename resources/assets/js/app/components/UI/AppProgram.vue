@@ -28,7 +28,8 @@
            v-text="program.slogan">
         </p>
 
-        <div class="program__buttons">
+        <div class="program__buttons"
+             v-if="getCurrentUser">
           <a class="btn__results"
              v-if="getCurrentUser.user_consents"
              @click="subscribe">
