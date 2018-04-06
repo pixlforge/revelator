@@ -210,6 +210,15 @@ a:visited:focus {
           justify-content: space-between;
 }
 
+@media all and (max-width: 23.75em) {
+  .form__group--last-step {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 .form__label {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -265,6 +274,13 @@ a:visited:focus {
 .form__input--inline,
 .form__select--inline {
   width: 48%;
+}
+
+@media all and (max-width: 23.75em) {
+  .form__input--inline,
+  .form__select--inline {
+    width: 100%;
+  }
 }
 
 .form__input--small,
@@ -851,6 +867,12 @@ a:visited:focus {
           box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1) !important;
 }
 
+@media all and (max-width: 23.75em) {
+  .toast {
+    width: 80vw !important;
+  }
+}
+
 .toast svg {
   margin-right: 1rem !important;
 }
@@ -879,6 +901,12 @@ a:visited:focus {
 
 .toasted-container.top-right {
   right: 5rem !important;
+}
+
+@media all and (max-width: 23.75em) {
+  .toasted-container.top-right {
+    right: 10% !important;
+  }
 }
 
 .manageable__container {
@@ -1203,6 +1231,18 @@ a:visited:focus {
   cursor: pointer;
 }
 
+@media all and (max-width: 60.625em) {
+  .program__container {
+    width: 38rem;
+  }
+}
+
+@media all and (max-width: 23.75em) {
+  .program__container {
+    width: 30rem;
+  }
+}
+
 .program__result {
   width: 12rem;
   display: -webkit-box;
@@ -1236,6 +1276,12 @@ a:visited:focus {
   position: relative;
 }
 
+@media all and (max-width: 50em) {
+  .program__body {
+    padding-left: 1.5rem;
+  }
+}
+
 .program__title {
   font-size: 1.8rem;
   letter-spacing: 1.5pt;
@@ -1243,6 +1289,18 @@ a:visited:focus {
   left: 0;
   -webkit-transition: all .4s ease;
   transition: all .4s ease;
+}
+
+@media all and (max-width: 60.625em) {
+  .program__title {
+    font-size: 1.4rem;
+  }
+}
+
+@media all and (max-width: 50em) {
+  .program__title {
+    padding-left: 1.5rem;
+  }
 }
 
 .program__slogan {
@@ -1254,6 +1312,12 @@ a:visited:focus {
   opacity: 0;
   -webkit-transition: all .4s .1s ease;
   transition: all .4s .1s ease;
+}
+
+@media all and (max-width: 60.625em) {
+  .program__slogan {
+    font-size: 1.2rem;
+  }
 }
 
 .program__buttons {
@@ -1284,19 +1348,6 @@ a:visited:focus {
   display: block;
 }
 
-.main__results {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
 .main__container {
   width: 93vw;
   margin: 0 auto;
@@ -1311,6 +1362,28 @@ a:visited:focus {
 @media all and (max-width: 43.65em) {
   .main__container--medium {
     width: 80vw;
+  }
+}
+
+.main__results {
+  padding-bottom: 10rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@media all and (max-width: 60.625em) {
+  .main__results {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 }
 

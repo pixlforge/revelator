@@ -8,6 +8,14 @@
     &:hover {
       cursor: pointer;
     }
+
+    @media all and (max-width: $bp-md-lg) {
+      width: 38rem;
+    }
+
+    @media all and (max-width: $bp-xs) {
+      width: 30rem;
+    }
   }
 
   &__result {
@@ -28,6 +36,10 @@
     justify-content: center;
     width: 100%;
     position: relative;
+
+    @media all and (max-width: $bp-md) {
+      padding-left: 1.5rem;
+    }
   }
 
   &__title {
@@ -36,6 +48,14 @@
     position: absolute;
     left: 0;
     transition: all .4s ease;
+    
+    @media all and (max-width: $bp-md-lg) {
+      font-size: 1.4rem;
+    }
+
+    @media all and (max-width: $bp-md) {
+      padding-left: 1.5rem;
+    }
   }
 
   &__slogan {
@@ -46,6 +66,10 @@
     letter-spacing: 1.25pt;
     opacity: 0;
     transition: all .4s .1s ease;
+
+    @media all and (max-width: $bp-md-lg) {
+      font-size: 1.2rem;
+    }
   }
 
   &__buttons {

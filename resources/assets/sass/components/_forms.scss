@@ -11,6 +11,10 @@
     &--last-step {
       display: flex;
       justify-content: space-between;
+
+      @media all and (max-width: $bp-xs) {
+        flex-direction: column;
+      }
     }
   }
 
@@ -56,6 +60,10 @@
 
     &--inline {
       width: 48%;
+
+      @media all and (max-width: $bp-xs) {
+        width: 100%;
+      }
     }
 
     &--small {

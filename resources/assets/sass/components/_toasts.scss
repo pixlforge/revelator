@@ -3,6 +3,10 @@
   border-radius: 3rem !important;
   box-shadow: 0 8px 15px rgba($black, .1) !important;
 
+  @media all and (max-width: $bp-xs) {
+    width: 80vw !important;
+  }
+
   svg {
     margin-right: 1rem !important;
   }
@@ -29,5 +33,9 @@
 
   &.top-right {
     right: 5rem !important;
+
+    @media all and (max-width: $bp-xs) {
+      right: 10% !important;
+    }
   }
 }

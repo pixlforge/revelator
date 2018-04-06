@@ -20,7 +20,7 @@ class ProgramsTableSeeder extends Seeder
 
         factory(\App\Program::class)->create([
             'title' => 'Master Detox',
-            'slogan' => 'Eliminate toxins and stimulate your longevity',
+            'slogan' => 'Stimulate your longevity',
             'code' => 'MDtx',
             'url' => 'http://laprairie.ch/medical-programs/master-detox'
         ]);
@@ -34,7 +34,7 @@ class ProgramsTableSeeder extends Seeder
 
         factory(\App\Program::class)->create([
             'title' => 'Medical Check-Up',
-            'slogan' => 'A complete evaluation of your health',
+            'slogan' => 'Complete evaluation of your health',
             'code' => 'CheckU',
             'url' => 'http://laprairie.ch/medical-programs/medical-check'
         ]);
@@ -55,14 +55,14 @@ class ProgramsTableSeeder extends Seeder
 
         factory(\App\Program::class)->create([
             'title' => 'Weight Management',
-            'slogan' => 'Weight control and healthy active living',
+            'slogan' => 'Healthy active living',
             'code' => 'Wloss',
             'url' => 'http://laprairie.ch/medical-programs/weight-management'
         ]);
 
         factory(\App\Program::class)->create([
             'title' => 'Rebalancing',
-            'slogan' => 'Bring balance to your mind, spirit and body',
+            'slogan' => 'Bring balance to your being',
             'code' => 'Rebal',
             'url' => 'http://laprairie.ch/medical-programs/rebalancing'
         ]);
