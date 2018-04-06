@@ -1,9 +1,9 @@
-$bp-xl: 81.25em;               // 1300px
-$bp-lg: 68.75em;               // 1100px
-$bp-md-lg: 60.625em;           //  970px
-$bp-md: 50em;                  //  800px
-$bp-sm: 43.65em;               //  700px
-$bp-xs: 23.75em;               //  380px
+$bp-xl: 81.25em; // 1300px
+$bp-lg: 68.75em; // 1100px
+$bp-md-lg: 60.625em; //  970px
+$bp-md: 50em; //  800px
+$bp-sm: 43.65em; //  700px
+$bp-xs: 23.75em; //  380px
 
 *,
 *::before,
@@ -69,4 +69,16 @@ a:visited {
 
 .loader__on {
   overflow: hidden;
+}
+
+.md-hidden {
+  @media all and (min-width: $bp-sm) {
+    display: none !important;
+  }
+}
+
+.sm-hidden {
+  @media all and (max-width: $bp-sm) {
+    display: none !important;
+  }
 }

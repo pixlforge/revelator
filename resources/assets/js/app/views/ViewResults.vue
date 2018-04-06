@@ -25,23 +25,32 @@
       <div class="btn__big"
            v-if="userConsents"
            @click="sendMeMyResults">
-        <span>Send Me My Results</span>
+        <span class="sm-hidden">Send Me My Results</span>
+        <span class="md-hidden"><i class="fas fa-envelope"></i></span>
       </div>
 
       <!--Start Again-->
       <div class="btn__big"
            :class="shouldSetElementWidth"
            @click="startAgain">
-        <span>Start Again</span>
+        <span class="sm-hidden">Start Again</span>
+        <span class="md-hidden"><i class="fas fa-undo"></i></span>
       </div>
 
       <!--Discover La Prairie-->
       <div class="btn__big"
            :class="shouldSetElementWidth">
-        <a href="https://www.laprairie.ch/"
+        <a class="sm-hidden"
+           href="https://www.laprairie.ch/"
            target="_blank"
            rel="noopener noreferrer">
           Discover La Prairie
+        </a>
+        <a class="md-hidden"
+           href="https://www.laprairie.ch/"
+           target="_blank"
+           rel="noopener noreferrer">
+          <i class="fas fa-home"></i>
         </a>
       </div>
     </div>

@@ -45501,6 +45501,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -46021,7 +46030,13 @@ var render = function() {
         ? _c(
             "div",
             { staticClass: "btn__big", on: { click: _vm.sendMeMyResults } },
-            [_c("span", [_vm._v("Send Me My Results")])]
+            [
+              _c("span", { staticClass: "sm-hidden" }, [
+                _vm._v("Send Me My Results")
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
+            ]
           )
         : _vm._e(),
       _vm._v(" "),
@@ -46032,13 +46047,18 @@ var render = function() {
           class: _vm.shouldSetElementWidth,
           on: { click: _vm.startAgain }
         },
-        [_c("span", [_vm._v("Start Again")])]
+        [
+          _c("span", { staticClass: "sm-hidden" }, [_vm._v("Start Again")]),
+          _vm._v(" "),
+          _vm._m(1)
+        ]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "btn__big", class: _vm.shouldSetElementWidth }, [
         _c(
           "a",
           {
+            staticClass: "sm-hidden",
             attrs: {
               href: "https://www.laprairie.ch/",
               target: "_blank",
@@ -46046,12 +46066,48 @@ var render = function() {
             }
           },
           [_vm._v("\n        Discover La Prairie\n      ")]
-        )
+        ),
+        _vm._v(" "),
+        _vm._m(2)
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "md-hidden" }, [
+      _c("i", { staticClass: "fas fa-envelope" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "md-hidden" }, [
+      _c("i", { staticClass: "fas fa-undo" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "md-hidden",
+        attrs: {
+          href: "https://www.laprairie.ch/",
+          target: "_blank",
+          rel: "noopener noreferrer"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-home" })]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
