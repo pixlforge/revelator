@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Diagnostic;
 use App\User;
 use App\Mail\SendMeMyResultsEmail;
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\Guest\UpdateGuestRequest;
@@ -63,15 +64,21 @@ class DiagnosticController extends Controller
     }
 
     /**
+     * Send the authenticated user a link to his results.
+     *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function send()
     {
         $user = User::where('id', auth()->id())->first();
 
-        Mail::to($user->guest_email)
-            ->queue(new SendMeMyResultsEmail($user));
+        try {
+            Mail::to($user->guest_email)
+                ->queue(new SendMeMyResultsEmail($user));
 
-        return response(null, 204);
+            return response(null, 204);
+        } catch (Exception $e) {
+            return response($e, 500);
+        }
     }
 }

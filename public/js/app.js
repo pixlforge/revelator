@@ -45561,10 +45561,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this2 = this;
 
       this.$store.dispatch('toggleLoader');
-      axios.get(route('api.diagnostics.send')).then(function () {
+      axios.get(route('api.diagnostics.send')).then(function (res) {
         _this2.$store.dispatch('toggleLoader');
-        _this2.$toasted.global.success({
-          message: "We've sent you an email containing a permanent link to this session's results!"
+        if (res.status === 204) {
+          _this2.$toasted.global.success({
+            message: "We've sent you an email containing a permanent link to this session's results!"
+          });
+        } else {
+          _this2.$toasted.global.danger({
+            message: 'Something went wrong. ' + res.status + ' ' + res.statusText + '.'
+          });
+        }
+      }).catch(function (err) {
+        _this2.$store.dispatch('toggleLoader');
+        _this2.$toasted.global.danger({
+          message: 'Something went wrong. ' + res.status + ' ' + res.statusText + '.'
         });
       });
     },

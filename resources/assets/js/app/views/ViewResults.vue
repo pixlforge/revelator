@@ -110,10 +110,21 @@
        */
       sendMeMyResults() {
         this.$store.dispatch('toggleLoader')
-        axios.get(route('api.diagnostics.send')).then(() => {
+        axios.get(route('api.diagnostics.send')).then(res => {
           this.$store.dispatch('toggleLoader')
-          this.$toasted.global.success({
-            message: "We've sent you an email containing a permanent link to this session's results!"
+          if (res.status === 204) {
+            this.$toasted.global.success({
+              message: "We've sent you an email containing a permanent link to this session's results!"
+            })
+          } else {
+            this.$toasted.global.danger({
+              message: `Something went wrong. ${res.status} ${res.statusText}.`
+            })
+          }
+        }).catch(err => {
+          this.$store.dispatch('toggleLoader')
+          this.$toasted.global.danger({
+            message: `Something went wrong. ${res.status} ${res.statusText}.`
           })
         })
       },
