@@ -70,6 +70,12 @@ html {
   }
 }
 
+@media all and (max-width: 43.65em) {
+  html {
+    font-size: 42.5%;
+  }
+}
+
 body {
   min-height: 100vh;
   font-size: 1.6rem;
@@ -180,6 +186,19 @@ a:visited:focus {
 .nav__list a:focus,
 .nav__list a:active {
   text-decoration: none;
+}
+
+@media all and (max-width: 50em) {
+  .nav__brand {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 50em) {
+  .nav__brand img {
+    width: 12rem;
+  }
 }
 
 .nav__link-active {
@@ -1386,8 +1405,14 @@ a:visited:focus {
 .main__container {
   width: 93vw;
   margin: 0 auto;
-  padding: 8rem 0;
+  padding: 12rem 0;
   position: relative;
+}
+
+@media all and (max-width: 50em) {
+  .main__container {
+    padding: 4rem 0;
+  }
 }
 
 .main__container--medium {

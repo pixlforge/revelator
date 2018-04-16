@@ -34,6 +34,19 @@
     }
   }
 
+  &__brand {
+    @media all and (max-width: $bp-md) {
+      width: 100%;
+      text-align: center;
+    }
+
+    & img {
+      @media all and (max-width: $bp-md) {
+        width: 12rem;
+      }
+    }
+  }
+
   &__link-active {
     background-color: $dark-grey !important;
     color: $white !important;

@@ -2,8 +2,12 @@
   &__container {
     width: 93vw;
     margin: 0 auto;
-    padding: 8rem 0;
+    padding: 12rem 0;
     position: relative;
+
+    @media all and (max-width: $bp-md) {
+      padding: 4rem 0;
+    }
 
     &--medium {
       width: 60vw;
