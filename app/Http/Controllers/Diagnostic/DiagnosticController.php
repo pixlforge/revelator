@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Diagnostic;
 
 use App\User;
+use Exception;
 use App\Mail\SendMeMyResultsEmail;
 use App\Http\Controllers\Controller;
-use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\Guest\UpdateGuestRequest;
