@@ -188,6 +188,15 @@ export const store = new Vuex.Store({
     },
 
     /**
+     * setUserDetails Mutation
+     */
+    setUserDetails: (state, payload) => {
+      state.currentUser.first_name = payload.first_name
+      state.currentUser.last_name = payload.last_name
+      state.currentUser.guest_email = payload.guest_email
+    },
+
+    /**
      * Logout Mutation
      */
     logout: state => {
@@ -674,6 +683,11 @@ export const store = new Vuex.Store({
           guest_email: payload.guest_email
         }).then(() => {
           commit('setUserConsent', payload.user_consents)
+          commit('setUserDetails', {
+            first_name: payload.first_name,
+            last_name: payload.last_name,
+            guest_email: payload.guest_email
+          })
           dispatch('toggleLoader')
           resolve()
         }).catch(err => {
