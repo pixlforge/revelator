@@ -26,6 +26,7 @@ class StoreProgramRequest extends FormRequest
         return [
             'title' => 'required|string|min:3|max:255',
             'code' => 'nullable|string|min:3|max:45',
+            'slogan' => 'nullable|string|min:3|max:255',
             'description' => 'nullable|string|min:5|max:3000',
             'url' => 'required|url|max:255'
         ];
@@ -47,6 +48,10 @@ class StoreProgramRequest extends FormRequest
             'code.string' => 'The code should be a character string.',
             'code.min' => 'Minimum 3 characters.',
             'code.max' => 'Maximum 45 characters.',
+
+            'slogan.string' => 'The slogan should be a character string.',
+            'slogan.min' => 'Minimum 3 characters.',
+            'slogan.max' => 'Maximum 45 characters.',
 
             'description.string' => 'The description should be a character string.',
             'description.min' => 'Minimum 5 characters.',

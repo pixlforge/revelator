@@ -54,6 +54,26 @@
       </AppFeedback>
     </div>
 
+    <!-- Slogan -->
+    <div class="form__group">
+      <label for="slogan" class="form__label">Slogan</label>
+      <input type="text"
+             name="slogan"
+             id="slogan"
+             class="form__input"
+             :class="{ 'form__input--invalid': errors.slogan }"
+             @input="$v.program.slogan.$touch()"
+             v-model="program.slogan">
+      <AppTooltip v-if="$v.program.slogan.$error"
+                  :pos-x="65">
+        <p v-if="!$v.program.slogan.minLength">Minimum 3 characters.</p>
+        <p v-if="!$v.program.slogan.maxLength">Maximum 255 characters.</p>
+      </AppTooltip>
+      <AppFeedback>
+        <p v-if="errors.slogan">{{ errors.slogan[0] }}</p>
+      </AppFeedback>
+    </div>
+
     <!-- Description -->
     <div class="form__group">
       <label for="description" class="form__label">Description</label>
@@ -130,12 +150,14 @@
         program: {
           title: '',
           code: '',
+          slogan: '',
           description: '',
           url: ''
         },
         old: {
           title: '',
           code: '',
+          slogan: '',
           description: '',
           url: ''
         },
@@ -152,6 +174,10 @@
         code: {
           minLength: minLength(3),
           maxLength: maxLength(45)
+        },
+        slogan: {
+          minLength: minLength(3),
+          maxLength: maxLength(255)
         },
         description: {
           minLength: minLength(5),
@@ -177,6 +203,12 @@
         }
       },
 
+      'program.slogan'() {
+        if (this.program.slogan !== this.old.slogan) {
+          this.errors = {}
+        }
+      },
+
       'program.description'() {
         if (this.program.description !== this.old.description) {
           this.errors = {}
@@ -197,6 +229,7 @@
         this.program.id = res.id
         this.program.title = res.title
         this.program.code = res.code
+        this.program.slogan = res.slogan
         this.program.description = res.description
         this.program.url = res.url
       }).catch(err => {
@@ -213,6 +246,7 @@
             id: this.program.id,
             title: this.program.title,
             code: this.program.code,
+            slogan: this.program.slogan,
             description: this.program.description,
             url: this.program.url
           }).then(() => {

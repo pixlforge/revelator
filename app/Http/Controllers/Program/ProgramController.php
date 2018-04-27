@@ -42,6 +42,7 @@ class ProgramController extends Controller
         $program = new Program;
         $program->title = $request->title;
         $program->code = $request->code;
+        $program->slogan = $request->slogan;
         $program->description = $request->description;
         $program->url = $request->url;
         $program->save();
@@ -77,6 +78,7 @@ class ProgramController extends Controller
     {
         $program->title = $request->title;
         $program->code = $request->code;
+        $program->slogan = $request->slogan;
         $program->description = $request->description;
         $program->url = $request->url;
         $program->save();

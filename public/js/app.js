@@ -53479,6 +53479,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -53496,12 +53516,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       program: {
         title: '',
         code: '',
+        slogan: '',
         description: '',
         url: ''
       },
       old: {
         title: '',
         code: '',
+        slogan: '',
         description: '',
         url: ''
       },
@@ -53519,6 +53541,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       code: {
         minLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["minLength"])(3),
         maxLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["maxLength"])(45)
+      },
+      slogan: {
+        minLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["minLength"])(3),
+        maxLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["maxLength"])(255)
       },
       description: {
         minLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["minLength"])(5),
@@ -53542,6 +53568,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.errors = {};
       }
     },
+    'program.slogan': function programSlogan() {
+      if (this.program.slogan !== this.old.slogan) {
+        this.errors = {};
+      }
+    },
     'program.description': function programDescription() {
       if (this.program.description !== this.old.description) {
         this.errors = {};
@@ -53561,6 +53592,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.$store.dispatch('addProgram', {
           title: this.program.title,
           code: this.program.code,
+          slogan: this.program.slogan,
           description: this.program.description,
           url: this.program.url
         }).then(function () {
@@ -53734,6 +53766,65 @@ var render = function() {
           _c("AppFeedback", [
             _vm.errors.code
               ? _c("p", [_vm._v(_vm._s(_vm.errors.code[0]))])
+              : _vm._e()
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form__group" },
+        [
+          _c(
+            "label",
+            { staticClass: "form__label", attrs: { for: "slogan" } },
+            [_vm._v("Slogan")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.program.slogan,
+                expression: "program.slogan"
+              }
+            ],
+            staticClass: "form__input",
+            class: { "form__input--invalid": _vm.errors.slogan },
+            attrs: { type: "text", name: "slogan", id: "slogan" },
+            domProps: { value: _vm.program.slogan },
+            on: {
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.program, "slogan", $event.target.value)
+                },
+                function($event) {
+                  _vm.$v.program.slogan.$touch()
+                }
+              ]
+            }
+          }),
+          _vm._v(" "),
+          _vm.$v.program.slogan.$error
+            ? _c("AppTooltip", { attrs: { "pos-x": 65 } }, [
+                !_vm.$v.program.slogan.minLength
+                  ? _c("p", [_vm._v("Minimum 3 characters.")])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.program.slogan.maxLength
+                  ? _c("p", [_vm._v("Maximum 255 characters.")])
+                  : _vm._e()
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("AppFeedback", [
+            _vm.errors.slogan
+              ? _c("p", [_vm._v(_vm._s(_vm.errors.slogan[0]))])
               : _vm._e()
           ])
         ],
@@ -54058,6 +54149,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -54075,12 +54186,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       program: {
         title: '',
         code: '',
+        slogan: '',
         description: '',
         url: ''
       },
       old: {
         title: '',
         code: '',
+        slogan: '',
         description: '',
         url: ''
       },
@@ -54098,6 +54211,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       code: {
         minLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["minLength"])(3),
         maxLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["maxLength"])(45)
+      },
+      slogan: {
+        minLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["minLength"])(3),
+        maxLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["maxLength"])(255)
       },
       description: {
         minLength: Object(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__["minLength"])(5),
@@ -54118,6 +54235,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     'program.code': function programCode() {
       if (this.program.code !== this.old.code) {
+        this.errors = {};
+      }
+    },
+    'program.slogan': function programSlogan() {
+      if (this.program.slogan !== this.old.slogan) {
         this.errors = {};
       }
     },
@@ -54142,6 +54264,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.program.id = res.id;
       _this.program.title = res.title;
       _this.program.code = res.code;
+      _this.program.slogan = res.slogan;
       _this.program.description = res.description;
       _this.program.url = res.url;
     }).catch(function (err) {
@@ -54161,6 +54284,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           id: this.program.id,
           title: this.program.title,
           code: this.program.code,
+          slogan: this.program.slogan,
           description: this.program.description,
           url: this.program.url
         }).then(function () {
@@ -54334,6 +54458,65 @@ var render = function() {
           _c("AppFeedback", [
             _vm.errors.code
               ? _c("p", [_vm._v(_vm._s(_vm.errors.code[0]))])
+              : _vm._e()
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form__group" },
+        [
+          _c(
+            "label",
+            { staticClass: "form__label", attrs: { for: "slogan" } },
+            [_vm._v("Slogan")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.program.slogan,
+                expression: "program.slogan"
+              }
+            ],
+            staticClass: "form__input",
+            class: { "form__input--invalid": _vm.errors.slogan },
+            attrs: { type: "text", name: "slogan", id: "slogan" },
+            domProps: { value: _vm.program.slogan },
+            on: {
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.program, "slogan", $event.target.value)
+                },
+                function($event) {
+                  _vm.$v.program.slogan.$touch()
+                }
+              ]
+            }
+          }),
+          _vm._v(" "),
+          _vm.$v.program.slogan.$error
+            ? _c("AppTooltip", { attrs: { "pos-x": 65 } }, [
+                !_vm.$v.program.slogan.minLength
+                  ? _c("p", [_vm._v("Minimum 3 characters.")])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.program.slogan.maxLength
+                  ? _c("p", [_vm._v("Maximum 255 characters.")])
+                  : _vm._e()
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("AppFeedback", [
+            _vm.errors.slogan
+              ? _c("p", [_vm._v(_vm._s(_vm.errors.slogan[0]))])
               : _vm._e()
           ])
         ],
