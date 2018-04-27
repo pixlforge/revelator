@@ -77,7 +77,10 @@
       ])
     },
     created() {
+      this.$store.dispatch('toggleLoader')
       this.$store.dispatch('fetchOptions')
+        .then(() => this.$store.dispatch('toggleLoader'))
+        .catch(() => this.$store.dispatch('toggleLoader'))
     },
     methods: {
       /**

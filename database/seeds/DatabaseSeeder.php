@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             QuestionsTableSeeder::class,
             ProgramsTableSeeder::class,
-            OptionsTableSeeder::class,
+//            OptionsTableSeeder::class,
         ]);
     }
 }
