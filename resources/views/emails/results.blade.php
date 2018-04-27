@@ -1,6 +1,5 @@
 @component('mail::message')
 # Diagnostic | Clinique La Prairie - Revelator 
-<img src="https://revelator.laprairie.ch/img/clp-logo.svg">
 
 Hello {{ $user->first_name }} {{ $user->last_name }}.<br>
 Here are the results of the diagnostic you did with Revelator :
