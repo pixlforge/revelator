@@ -965,11 +965,15 @@ a:visited:focus {
 
 .toasted-container.top-right {
   right: 5rem !important;
+  top: 3rem !important;
 }
 
-@media all and (max-width: 23.75em) {
+@media all and (max-width: 50em) {
   .toasted-container.top-right {
+    width: 80vw;
+    top: 10rem !important;
     right: 10% !important;
+    left: 10% !important;
   }
 }
 

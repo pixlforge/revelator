@@ -33,9 +33,13 @@
 
   &.top-right {
     right: 5rem !important;
+    top: 3rem !important;
 
-    @media all and (max-width: $bp-xs) {
+    @media all and (max-width: $bp-md) {
+      width: 80vw;
+      top: 10rem !important;
       right: 10% !important;
+      left: 10% !important;
     }
   }
 }
