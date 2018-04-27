@@ -114,7 +114,7 @@
           if (count >= end) {
             clearInterval(animation)
           }
-        }, 5)
+        }, 50)
       },
 
       /**
