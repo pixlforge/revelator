@@ -60,3 +60,4 @@ if (token) {
  */
 require('./fontawesome/fontawesome')
 require('./fontawesome/fa-solid')
+require('./fontawesome/fa-light')

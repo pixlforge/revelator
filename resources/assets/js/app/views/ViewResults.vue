@@ -26,7 +26,7 @@
            v-if="userConsents"
            @click="sendMeMyResults">
         <span class="sm-hidden">Send Me My Results</span>
-        <span class="md-hidden"><i class="fas fa-envelope"></i></span>
+        <span class="md-hidden"><i class="fal fa-envelope"></i></span>
       </div>
 
       <!--Start Again-->
@@ -34,7 +34,7 @@
            :class="shouldSetElementWidth"
            @click="startAgain">
         <span class="sm-hidden">Start Again</span>
-        <span class="md-hidden"><i class="fas fa-undo"></i></span>
+        <span class="md-hidden"><i class="fal fa-undo"></i></span>
       </div>
 
       <!--Discover La Prairie-->
@@ -50,7 +50,7 @@
            href="https://www.laprairie.ch/"
            target="_blank"
            rel="noopener noreferrer">
-          <i class="fas fa-home"></i>
+          <i class="fal fa-home"></i>
         </a>
       </div>
     </div>
