@@ -45992,17 +45992,6 @@ var render = function() {
         _vm._v(" "),
         _vm.getCurrentUser
           ? _c("div", { staticClass: "program__buttons" }, [
-              _vm.getCurrentUser.user_consents
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "btn__results",
-                      on: { click: _vm.subscribe }
-                    },
-                    [_vm._v("\n          I'm interested\n        ")]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
               _c(
                 "a",
                 {

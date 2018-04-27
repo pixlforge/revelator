@@ -620,7 +620,6 @@ a:visited:focus {
 
 .btn__results:first-child {
   margin-right: 1rem;
-  display: none;
 }
 
 .btn__results:hover {

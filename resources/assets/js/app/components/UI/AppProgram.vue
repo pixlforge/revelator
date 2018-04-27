@@ -30,11 +30,11 @@
 
         <div class="program__buttons"
              v-if="getCurrentUser">
-          <a class="btn__results"
-             v-if="getCurrentUser.user_consents"
-             @click="subscribe">
-            I'm interested
-          </a>
+          <!--<a class="btn__results"-->
+             <!--v-if="getCurrentUser.user_consents"-->
+             <!--@click="subscribe">-->
+            <!--I'm interested-->
+          <!--</a>-->
           <a class="btn__results"
              :href="program.url"
              target="_blank"
