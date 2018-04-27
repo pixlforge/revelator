@@ -35,7 +35,7 @@ class SendMeMyResultsEmail extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->from(config('mail.from.address'))
-            ->subject('Perma-link to your results')
+            ->subject('My Results | Clinique La Prairie - Revelator')
             ->markdown('emails.results');
     }
 }

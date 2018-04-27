@@ -1,13 +1,16 @@
 @component('mail::message')
-# Your permalink to your results
+# Diagnostic | Clinique La Prairie - Revelator 
+<img src="https://revelator.laprairie.ch/img/clp-logo.svg">
 
-Hello, {{ $user->first_name }} {{ $user->last_name }}.<br>
-You requested that we send you a permanent link to your results so you can check them at any given time, so here you go:
+Hello {{ $user->first_name }} {{ $user->last_name }}.<br>
+Here are the results of the diagnostic you did with Revelator :
 
 @component('mail::button', ['url' => url('/results?name=' . $user->name)])
 Results
 @endcomponent
 
-Thank you for your trust,<br>
+Feel free to contact if you need any further information about our programs,<br>
+Best regards, 
+
 {{ config('app.name') }}
 @endcomponent
