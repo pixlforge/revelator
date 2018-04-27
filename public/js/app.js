@@ -45530,6 +45530,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -46105,7 +46112,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "md-hidden" }, [
-      _c("i", { staticClass: "fal fa-envelope" })
+      _c("div", [_c("i", { staticClass: "fal fa-envelope" })]),
+      _vm._v(" "),
+      _c("div", { staticClass: "small-label" }, [_vm._v("Send Results")])
     ])
   },
   function() {
@@ -46113,7 +46122,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "md-hidden" }, [
-      _c("i", { staticClass: "fal fa-undo" })
+      _c("div", [_c("i", { staticClass: "fal fa-undo" })]),
+      _vm._v(" "),
+      _c("div", { staticClass: "small-label" }, [_vm._v("Start Again")])
     ])
   },
   function() {
@@ -46130,7 +46141,11 @@ var staticRenderFns = [
           rel: "noopener noreferrer"
         }
       },
-      [_c("i", { staticClass: "fal fa-home" })]
+      [
+        _c("div", [_c("i", { staticClass: "fal fa-home" })]),
+        _vm._v(" "),
+        _c("div", { staticClass: "small-label" }, [_vm._v("La Prairie")])
+      ]
     )
   }
 ]
