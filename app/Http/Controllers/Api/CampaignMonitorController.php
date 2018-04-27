@@ -17,6 +17,8 @@ class CampaignMonitorController extends Controller
      */
     public function store(Request $request)
     {
+        abort('You do not have permission to access this resource.', 401);
+
         $auth = ['api_key' => config('app.campaign_monitor.api_key')];
 
         $wrap = new CS_REST_Subscribers(config('app.campaign_monitor.subscriber_list_id'), $auth);
