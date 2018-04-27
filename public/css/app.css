@@ -1215,16 +1215,27 @@ a:visited:focus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.paginator__element:hover {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
 .paginator__label-container {
+  background-color: #4e4f4f;
   height: 100%;
+  width: 0;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+}
+
+.paginator__label-container-active {
   width: 100%;
-  -webkit-transition: all .2s ease;
-  transition: all .2s ease;
 }
 
 .paginator__label {

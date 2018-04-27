@@ -13,13 +13,22 @@
     position: relative;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+
+    &:hover {
+      justify-content: center;
+    }
   }
 
   &__label-container {
+    background-color: $dark-grey;
     height: 100%;
+    width: 0;
+    transition: all .4s ease;
+  }
+
+  &__label-container-active {
     width: 100%;
-    transition: all .2s ease;
   }
 
   &__label {

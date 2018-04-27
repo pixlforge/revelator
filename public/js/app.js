@@ -43576,9 +43576,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   computed: {
-    styleLabelContainer: function styleLabelContainer() {
-      return this.shouldStyleElement ? 'background-color: #4e4f4f;!important;' : 'display: none;';
-    },
     styleLabel: function styleLabel() {
       return this.shouldStyleElement ? '' : 'display: none;';
     }
@@ -43608,7 +43605,7 @@ var render = function() {
   return _c("div", { on: { click: _vm.navigate } }, [
     _c("div", {
       staticClass: "paginator__label-container",
-      style: _vm.styleLabelContainer
+      class: { "paginator__label-container-active": this.shouldStyleElement }
     }),
     _vm._v(" "),
     _c("h5", {

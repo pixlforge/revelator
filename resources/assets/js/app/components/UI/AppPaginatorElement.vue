@@ -1,7 +1,7 @@
 <template>
   <div @click="navigate">
     <div class="paginator__label-container"
-         :style="styleLabelContainer">
+         :class="{ 'paginator__label-container-active' : this.shouldStyleElement }">
     </div>
     <h5 class="paginator__label"
         :style="styleLabel"
@@ -27,10 +27,6 @@
       }
     },
     computed: {
-      styleLabelContainer() {
-        return this.shouldStyleElement ? 'background-color: #4e4f4f;!important;' : 'display: none;'
-      },
-
       styleLabel() {
         return this.shouldStyleElement ? '' : 'display: none;'
       }
