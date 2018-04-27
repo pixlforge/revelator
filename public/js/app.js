@@ -43693,7 +43693,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       required: true
     }
   },
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])(['getCurrentQuestion', 'getQuestions'])),
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])(['getCurrentQuestion', 'getQuestions']), {
+    classes: function classes() {
+      if (!this.disabled) {
+        return 'btn__control btn__control--continue-active';
+      } else {
+        return 'btn__control btn__control--continue';
+      }
+    }
+  }),
   methods: {
     nextQuestion: function nextQuestion() {
       if (!this.disabled) {
@@ -43715,7 +43723,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("button", {
-    staticClass: "btn__control btn__control--continue",
+    class: _vm.classes,
     domProps: { textContent: _vm._s(_vm.label) },
     on: { click: _vm.nextQuestion }
   })

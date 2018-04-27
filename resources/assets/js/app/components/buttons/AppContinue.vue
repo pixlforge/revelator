@@ -1,5 +1,5 @@
 <template>
-  <button class="btn__control btn__control--continue"
+  <button :class="classes"
           v-text="label"
           @click="nextQuestion">
   </button>
@@ -23,7 +23,15 @@
       ...mapGetters([
         'getCurrentQuestion',
         'getQuestions'
-      ])
+      ]),
+
+      classes() {
+        if (!this.disabled) {
+          return 'btn__control btn__control--continue-active'
+        } else {
+          return 'btn__control btn__control--continue'
+        }
+      }
     },
     methods: {
       nextQuestion() {

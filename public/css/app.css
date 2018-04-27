@@ -478,8 +478,8 @@ a:visited:focus {
   text-transform: uppercase;
   border: none;
   letter-spacing: 2pt;
-  -webkit-transition: all .2s ease;
-  transition: all .2s ease;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
 }
 
 @media all and (max-width: 43.65em) {
@@ -519,6 +519,31 @@ a:visited:focus {
     -webkit-transform: translateX(50%);
             transform: translateX(50%);
   }
+}
+
+.btn__control--continue-active {
+  background-color: rgba(0, 153, 167, 0.34);
+  right: 5rem;
+}
+
+@media all and (max-width: 43.65em) {
+  .btn__control--continue-active {
+    right: 2rem;
+  }
+}
+
+@media all and (max-width: 23.75em) {
+  .btn__control--continue-active {
+    width: 80vw;
+    bottom: 12rem;
+    right: 50%;
+    -webkit-transform: translateX(50%);
+            transform: translateX(50%);
+  }
+}
+
+.btn__control--continue-active:hover {
+  background-color: #0099a7;
 }
 
 .btn__control--back {
