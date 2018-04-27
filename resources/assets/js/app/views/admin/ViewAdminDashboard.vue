@@ -25,11 +25,6 @@
       <AppManageable to="admin.programs.index"
                      icon="fa-crosshairs"
                      label="Programs"/>
-
-      <!-- Answers -->
-      <AppManageable to="admin.users.index"
-                     icon="fa-exclamation"
-                     label="Answers"/>
     </div>
   </main>
 </template>

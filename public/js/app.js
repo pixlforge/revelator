@@ -47442,11 +47442,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -47612,14 +47607,6 @@ var render = function() {
             to: "admin.programs.index",
             icon: "fa-crosshairs",
             label: "Programs"
-          }
-        }),
-        _vm._v(" "),
-        _c("AppManageable", {
-          attrs: {
-            to: "admin.users.index",
-            icon: "fa-exclamation",
-            label: "Answers"
           }
         })
       ],
