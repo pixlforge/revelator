@@ -47,6 +47,11 @@ h6 {
   color: #ff4444;
 }
 
+.text__table-is-empty {
+  margin-top: 8rem;
+  text-align: center;
+}
+
 .small-label {
   font-size: 11px;
   text-transform: lowercase;

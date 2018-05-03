@@ -21,7 +21,8 @@
       </router-link>
     </div>
 
-    <table class="table">
+    <p class="text__table-is-empty" v-if="tableIsEmpty">There isn't any program defined at the moment.</p>
+    <table class="table" v-else>
       <tr class="table__row">
         <th class="table__header">Title</th>
         <th class="table__header">Code</th>
@@ -71,6 +72,11 @@
   import { mapGetters } from 'vuex'
 
   export default {
+    data() {
+      return {
+        fetching: false
+      }
+    },
     mixins: [
       admin,
       dates
@@ -78,13 +84,20 @@
     computed: {
       ...mapGetters([
         'getPrograms'
-      ])
+      ]),
+
+      tableIsEmpty() {
+        return !this.getPrograms.length && this.fetching === false
+      }
     },
     created() {
+      this.fetching = true
       this.$store.dispatch('toggleLoader')
       this.$store.dispatch('fetchPrograms').then(() => {
+        this.fetching = false
         this.$store.dispatch('toggleLoader')
       }).catch(() => {
+        this.fetching = false
         this.$store.dispatch('toggleLoader')
       })
     },

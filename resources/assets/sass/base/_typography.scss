@@ -35,13 +35,18 @@ h6 {
   font-weight: 400;
 }
 
-.text{
+.text {
   &--dark-grey {
     color: $dark-grey;
   }
 
   &--red {
     color: $danger;
+  }
+
+  &__table-is-empty {
+    margin-top: 8rem;
+    text-align: center;
   }
 }
 
