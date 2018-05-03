@@ -21,44 +21,46 @@
       </router-link>
     </div>
 
-    <p class="text__table-is-empty" v-if="tableIsEmpty">There isn't any question defined at the moment.</p>
-    <table class="table" v-else>
-      <tr class="table__row">
-        <th class="table__header">Name</th>
-        <th class="table__header">Type</th>
-        <th class="table__header">Position</th>
-        <th class="table__header">Created</th>
-        <th class="table__header">Actions</th>
-      </tr>
-      <tr class="table__row"
-          v-for="question in getQuestions"
-          :key="question.id">
-        <td class="table__cell"
-            v-text="question.name">
-        </td>
-        <td class="table__cell"
-            v-text="question.type">
-        </td>
-        <td class="table__cell"
-            v-text="question.pos">
-        </td>
-        <td class="table__cell"
-            v-text="formatDate(question.created_at)">
-        </td>
-        <td class="table__cell">
-          <router-link :to="{ name: 'admin.questions.edit', params: { id: question.id } }"
-                       class="btn__small btn__small--primary">
-            <i class="fas fa-cog"></i>
-            Update
-          </router-link>
-          <button class="btn__small btn__small--danger"
-                  @click.prevent="deleteQuestion(question)">
-            <i class="fas fa-times"></i>
-            Delete
-          </button>
-        </td>
-      </tr>
-    </table>
+    <div class="main__table-wrapper">
+      <p class="text__table-is-empty" v-if="tableIsEmpty">There isn't any question defined at the moment.</p>
+      <table class="table" v-else>
+        <tr class="table__row">
+          <th class="table__header">Name</th>
+          <th class="table__header">Type</th>
+          <th class="table__header">Position</th>
+          <th class="table__header">Created</th>
+          <th class="table__header">Actions</th>
+        </tr>
+        <tr class="table__row"
+            v-for="question in getQuestions"
+            :key="question.id">
+          <td class="table__cell"
+              v-text="question.name">
+          </td>
+          <td class="table__cell"
+              v-text="question.type">
+          </td>
+          <td class="table__cell"
+              v-text="question.pos">
+          </td>
+          <td class="table__cell"
+              v-text="formatDate(question.created_at)">
+          </td>
+          <td class="table__cell">
+            <router-link :to="{ name: 'admin.questions.edit', params: { id: question.id } }"
+                         class="btn__small btn__small--primary">
+              <i class="fas fa-cog"></i>
+              Update
+            </router-link>
+            <button class="btn__small btn__small--danger"
+                    @click.prevent="deleteQuestion(question)">
+              <i class="fas fa-times"></i>
+              Delete
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
   </main>
 </template>
 

@@ -48446,6 +48446,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -48814,88 +48816,90 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "table",
-        { staticClass: "table" },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._l(_vm.getUsers, function(user) {
-            return _c("tr", { key: user.id, staticClass: "table__row" }, [
-              _c("td", {
-                staticClass: "table__cell",
-                domProps: { textContent: _vm._s(user.name) }
-              }),
-              _vm._v(" "),
-              _c("td", {
-                staticClass: "table__cell",
-                domProps: { textContent: _vm._s(user.email) }
-              }),
-              _vm._v(" "),
-              _c("td", { staticClass: "table__cell" }, [
-                _vm._v(
-                  "\n        " +
-                    _vm._s(_vm._f("formatRole")(user.role)) +
-                    "\n      "
+      _c("div", { staticClass: "main__table-wrapper" }, [
+        _c(
+          "table",
+          { staticClass: "table" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._l(_vm.getUsers, function(user) {
+              return _c("tr", { key: user.id, staticClass: "table__row" }, [
+                _c("td", {
+                  staticClass: "table__cell",
+                  domProps: { textContent: _vm._s(user.name) }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  staticClass: "table__cell",
+                  domProps: { textContent: _vm._s(user.email) }
+                }),
+                _vm._v(" "),
+                _c("td", { staticClass: "table__cell" }, [
+                  _vm._v(
+                    "\n          " +
+                      _vm._s(_vm._f("formatRole")(user.role)) +
+                      "\n        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", {
+                  staticClass: "table__cell",
+                  domProps: {
+                    textContent: _vm._s(_vm.formatDate(user.created_at))
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "table__cell" },
+                  [
+                    user.role !== "dev"
+                      ? _c(
+                          "router-link",
+                          {
+                            staticClass: "btn__small btn__small--primary",
+                            attrs: {
+                              to: {
+                                name: "admin.users.edit",
+                                params: { id: user.id }
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-cog" }),
+                            _vm._v("\n            Update\n          ")
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    user.role !== "dev"
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn__small btn__small--danger",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.deleteUser(user)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-times" }),
+                            _vm._v("\n            Delete\n          ")
+                          ]
+                        )
+                      : _vm._e()
+                  ],
+                  1
                 )
-              ]),
-              _vm._v(" "),
-              _c("td", {
-                staticClass: "table__cell",
-                domProps: {
-                  textContent: _vm._s(_vm.formatDate(user.created_at))
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "table__cell" },
-                [
-                  user.role !== "dev"
-                    ? _c(
-                        "router-link",
-                        {
-                          staticClass: "btn__small btn__small--primary",
-                          attrs: {
-                            to: {
-                              name: "admin.users.edit",
-                              params: { id: user.id }
-                            }
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-cog" }),
-                          _vm._v("\n          Update\n        ")
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  user.role !== "dev"
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn__small btn__small--danger",
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.deleteUser(user)
-                            }
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-times" }),
-                          _vm._v("\n          Delete\n        ")
-                        ]
-                      )
-                    : _vm._e()
-                ],
-                1
-              )
-            ])
-          })
-        ],
-        2
-      )
+              ])
+            })
+          ],
+          2
+        )
+      ])
     ],
     1
   )
@@ -51016,6 +51020,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -51108,89 +51114,93 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.tableIsEmpty
-        ? _c("p", { staticClass: "text__table-is-empty" }, [
-            _vm._v("There isn't any question defined at the moment.")
-          ])
-        : _c(
-            "table",
-            { staticClass: "table" },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._l(_vm.getQuestions, function(question) {
-                return _c(
-                  "tr",
-                  { key: question.id, staticClass: "table__row" },
-                  [
-                    _c("td", {
-                      staticClass: "table__cell",
-                      domProps: { textContent: _vm._s(question.name) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      staticClass: "table__cell",
-                      domProps: { textContent: _vm._s(question.type) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      staticClass: "table__cell",
-                      domProps: { textContent: _vm._s(question.pos) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      staticClass: "table__cell",
-                      domProps: {
-                        textContent: _vm._s(_vm.formatDate(question.created_at))
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "table__cell" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn__small btn__small--primary",
-                            attrs: {
-                              to: {
-                                name: "admin.questions.edit",
-                                params: { id: question.id }
+      _c("div", { staticClass: "main__table-wrapper" }, [
+        _vm.tableIsEmpty
+          ? _c("p", { staticClass: "text__table-is-empty" }, [
+              _vm._v("There isn't any question defined at the moment.")
+            ])
+          : _c(
+              "table",
+              { staticClass: "table" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._l(_vm.getQuestions, function(question) {
+                  return _c(
+                    "tr",
+                    { key: question.id, staticClass: "table__row" },
+                    [
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: { textContent: _vm._s(question.name) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: { textContent: _vm._s(question.type) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: { textContent: _vm._s(question.pos) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.formatDate(question.created_at)
+                          )
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "table__cell" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn__small btn__small--primary",
+                              attrs: {
+                                to: {
+                                  name: "admin.questions.edit",
+                                  params: { id: question.id }
+                                }
                               }
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "fas fa-cog" }),
-                            _vm._v("\n          Update\n        ")
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn__small btn__small--danger",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.deleteQuestion(question)
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-cog" }),
+                              _vm._v("\n            Update\n          ")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn__small btn__small--danger",
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.deleteQuestion(question)
+                                }
                               }
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "fas fa-times" }),
-                            _vm._v("\n          Delete\n        ")
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              })
-            ],
-            2
-          )
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-times" }),
+                              _vm._v("\n            Delete\n          ")
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+      ])
     ],
     1
   )
@@ -52337,6 +52347,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -52429,85 +52442,91 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.tableIsEmpty
-        ? _c("p", { staticClass: "text__table-is-empty" }, [
-            _vm._v("There isn't any option defined at the moment.")
-          ])
-        : _c(
-            "table",
-            { staticClass: "table" },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._l(_vm.getOptions, function(option) {
-                return _c("tr", { key: option.id, staticClass: "table__row" }, [
-                  _c("td", {
-                    staticClass: "table__cell",
-                    domProps: { textContent: _vm._s(option.name) }
-                  }),
-                  _vm._v(" "),
-                  _c("td", {
-                    staticClass: "table__cell",
-                    domProps: { textContent: _vm._s(option.pos) }
-                  }),
-                  _vm._v(" "),
-                  _c("td", {
-                    staticClass: "table__cell",
-                    domProps: { textContent: _vm._s(option.question.name) }
-                  }),
-                  _vm._v(" "),
-                  _c("td", {
-                    staticClass: "table__cell",
-                    domProps: {
-                      textContent: _vm._s(_vm.formatDate(option.created_at))
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "table__cell" },
+      _c("div", { staticClass: "main__table-wrapper" }, [
+        _vm.tableIsEmpty
+          ? _c("p", { staticClass: "text__table-is-empty" }, [
+              _vm._v("There isn't any option defined at the moment.")
+            ])
+          : _c(
+              "table",
+              { staticClass: "table" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._l(_vm.getOptions, function(option) {
+                  return _c(
+                    "tr",
+                    { key: option.id, staticClass: "table__row" },
                     [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn__small btn__small--primary",
-                          attrs: {
-                            to: {
-                              name: "admin.options.edit",
-                              params: { id: option.id }
-                            }
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-cog" }),
-                          _vm._v("\n          Update\n        ")
-                        ]
-                      ),
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: { textContent: _vm._s(option.name) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: { textContent: _vm._s(option.pos) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: { textContent: _vm._s(option.question.name) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: {
+                          textContent: _vm._s(_vm.formatDate(option.created_at))
+                        }
+                      }),
                       _vm._v(" "),
                       _c(
-                        "button",
-                        {
-                          staticClass: "btn__small btn__small--danger",
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.deleteOption(option)
-                            }
-                          }
-                        },
+                        "td",
+                        { staticClass: "table__cell" },
                         [
-                          _c("i", { staticClass: "fas fa-times" }),
-                          _vm._v("\n          Delete\n        ")
-                        ]
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn__small btn__small--primary",
+                              attrs: {
+                                to: {
+                                  name: "admin.options.edit",
+                                  params: { id: option.id }
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-cog" }),
+                              _vm._v("\n            Update\n          ")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn__small btn__small--danger",
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.deleteOption(option)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-times" }),
+                              _vm._v("\n            Delete\n          ")
+                            ]
+                          )
+                        ],
+                        1
                       )
-                    ],
-                    1
+                    ]
                   )
-                ])
-              })
-            ],
-            2
-          )
+                })
+              ],
+              2
+            )
+      ])
     ],
     1
   )
@@ -53862,6 +53881,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -53954,94 +53975,98 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.tableIsEmpty
-        ? _c("p", { staticClass: "text__table-is-empty" }, [
-            _vm._v("There isn't any program defined at the moment.")
-          ])
-        : _c(
-            "table",
-            { staticClass: "table" },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._l(_vm.getPrograms, function(program) {
-                return _c(
-                  "tr",
-                  { key: program.id, staticClass: "table__row" },
-                  [
-                    _c("td", {
-                      staticClass: "table__cell",
-                      domProps: { textContent: _vm._s(program.title) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      staticClass: "table__cell",
-                      domProps: { textContent: _vm._s(program.code) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      staticClass: "table__cell",
-                      domProps: { textContent: _vm._s(program.description) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      staticClass: "table__cell",
-                      domProps: { textContent: _vm._s(program.url) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      staticClass: "table__cell",
-                      domProps: {
-                        textContent: _vm._s(_vm.formatDate(program.created_at))
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "table__cell" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn__small btn__small--primary",
-                            attrs: {
-                              to: {
-                                name: "admin.programs.edit",
-                                params: { id: program.id }
+      _c("div", { staticClass: "main__table-wrapper" }, [
+        _vm.tableIsEmpty
+          ? _c("p", { staticClass: "text__table-is-empty" }, [
+              _vm._v("There isn't any program defined at the moment.")
+            ])
+          : _c(
+              "table",
+              { staticClass: "table" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._l(_vm.getPrograms, function(program) {
+                  return _c(
+                    "tr",
+                    { key: program.id, staticClass: "table__row" },
+                    [
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: { textContent: _vm._s(program.title) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: { textContent: _vm._s(program.code) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: { textContent: _vm._s(program.description) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: { textContent: _vm._s(program.url) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "table__cell",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.formatDate(program.created_at)
+                          )
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "table__cell" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn__small btn__small--primary",
+                              attrs: {
+                                to: {
+                                  name: "admin.programs.edit",
+                                  params: { id: program.id }
+                                }
                               }
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "fas fa-cog" }),
-                            _vm._v("\n          Update\n        ")
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn__small btn__small--danger",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.deleteProgram(program)
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-cog" }),
+                              _vm._v("\n            Update\n          ")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn__small btn__small--danger",
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.deleteProgram(program)
+                                }
                               }
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "fas fa-times" }),
-                            _vm._v("\n          Delete\n        ")
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              })
-            ],
-            2
-          )
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-times" }),
+                              _vm._v("\n            Delete\n          ")
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+      ])
     ],
     1
   )

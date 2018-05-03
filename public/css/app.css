@@ -1042,6 +1042,7 @@ a:visited:focus {
 .table {
   margin-top: 7rem;
   width: 100%;
+  min-width: 110rem;
   border-collapse: collapse;
   font-size: 1.4rem;
 }
@@ -1611,6 +1612,11 @@ a:visited:focus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.main__table-wrapper {
+  width: 100%;
+  overflow-x: scroll;
 }
 
 .auth__container {

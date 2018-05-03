@@ -106,4 +106,9 @@
     width: 100vw;
     display: flex;
   }
+
+  &__table-wrapper {
+    width: 100%;
+    overflow-x: scroll;
+  }
 }

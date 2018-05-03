@@ -21,45 +21,47 @@
       </router-link>
     </div>
 
-    <table class="table">
-      <tr class="table__row">
-        <th class="table__header">Name</th>
-        <th class="table__header">Email</th>
-        <th class="table__header">Role</th>
-        <th class="table__header">Created</th>
-        <th class="table__header">Actions</th>
-      </tr>
-      <tr class="table__row"
-          v-for="user in getUsers"
-          :key="user.id">
-        <td class="table__cell"
-            v-text="user.name">
-        </td>
-        <td class="table__cell"
-            v-text="user.email">
-        </td>
-        <td class="table__cell">
-          {{ user.role | formatRole }}
-        </td>
-        <td class="table__cell"
-            v-text="formatDate(user.created_at)">
-        </td>
-        <td class="table__cell">
-          <router-link v-if="user.role !== 'dev'"
-                       :to="{ name: 'admin.users.edit', params: { id: user.id } }"
-                       class="btn__small btn__small--primary">
-            <i class="fas fa-cog"></i>
-            Update
-          </router-link>
-          <button v-if="user.role !== 'dev'"
-                  class="btn__small btn__small--danger"
-                  @click.prevent="deleteUser(user)">
-            <i class="fas fa-times"></i>
-            Delete
-          </button>
-        </td>
-      </tr>
-    </table>
+    <div class="main__table-wrapper">
+      <table class="table">
+        <tr class="table__row">
+          <th class="table__header">Name</th>
+          <th class="table__header">Email</th>
+          <th class="table__header">Role</th>
+          <th class="table__header">Created</th>
+          <th class="table__header">Actions</th>
+        </tr>
+        <tr class="table__row"
+            v-for="user in getUsers"
+            :key="user.id">
+          <td class="table__cell"
+              v-text="user.name">
+          </td>
+          <td class="table__cell"
+              v-text="user.email">
+          </td>
+          <td class="table__cell">
+            {{ user.role | formatRole }}
+          </td>
+          <td class="table__cell"
+              v-text="formatDate(user.created_at)">
+          </td>
+          <td class="table__cell">
+            <router-link v-if="user.role !== 'dev'"
+                         :to="{ name: 'admin.users.edit', params: { id: user.id } }"
+                         class="btn__small btn__small--primary">
+              <i class="fas fa-cog"></i>
+              Update
+            </router-link>
+            <button v-if="user.role !== 'dev'"
+                    class="btn__small btn__small--danger"
+                    @click.prevent="deleteUser(user)">
+              <i class="fas fa-times"></i>
+              Delete
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
   </main>
 </template>
 

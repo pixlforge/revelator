@@ -21,44 +21,47 @@
       </router-link>
     </div>
 
-    <p class="text__table-is-empty" v-if="tableIsEmpty">There isn't any option defined at the moment.</p>
-    <table class="table" v-else>
-      <tr class="table__row">
-        <th class="table__header">Name</th>
-        <th class="table__header">Pos</th>
-        <th class="table__header">Question</th>
-        <th class="table__header">Created</th>
-        <th class="table__header">Actions</th>
-      </tr>
-      <tr class="table__row"
-          v-for="option in getOptions"
-          :key="option.id">
-        <td class="table__cell"
-            v-text="option.name">
-        </td>
-        <td class="table__cell"
-            v-text="option.pos">
-        </td>
-        <td class="table__cell"
-            v-text="option.question.name">
-        </td>
-        <td class="table__cell"
-            v-text="formatDate(option.created_at)">
-        </td>
-        <td class="table__cell">
-          <router-link :to="{ name: 'admin.options.edit', params: { id: option.id } }"
-                       class="btn__small btn__small--primary">
-            <i class="fas fa-cog"></i>
-            Update
-          </router-link>
-          <button class="btn__small btn__small--danger"
-                  @click.prevent="deleteOption(option)">
-            <i class="fas fa-times"></i>
-            Delete
-          </button>
-        </td>
-      </tr>
-    </table>
+    <div class="main__table-wrapper">
+      <p class="text__table-is-empty" v-if="tableIsEmpty">There isn't any option defined at the moment.</p>
+      <table class="table" v-else>
+        <tr class="table__row">
+          <th class="table__header">Name</th>
+          <th class="table__header">Pos</th>
+          <th class="table__header">Question</th>
+          <th class="table__header">Created</th>
+          <th class="table__header">Actions</th>
+        </tr>
+        <tr class="table__row"
+            v-for="option in getOptions"
+            :key="option.id">
+          <td class="table__cell"
+              v-text="option.name">
+          </td>
+          <td class="table__cell"
+              v-text="option.pos">
+          </td>
+          <td class="table__cell"
+              v-text="option.question.name">
+          </td>
+          <td class="table__cell"
+              v-text="formatDate(option.created_at)">
+          </td>
+          <td class="table__cell">
+            <router-link :to="{ name: 'admin.options.edit', params: { id: option.id } }"
+                         class="btn__small btn__small--primary">
+              <i class="fas fa-cog"></i>
+              Update
+            </router-link>
+            <button class="btn__small btn__small--danger"
+                    @click.prevent="deleteOption(option)">
+              <i class="fas fa-times"></i>
+              Delete
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
   </main>
 </template>
 
