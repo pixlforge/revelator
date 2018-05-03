@@ -70,6 +70,7 @@
       </AppFeedback>
     </div>
 
+
     <!-- Associated Programs -->
     <template v-if="showPrograms">
       <div class="form__group"
@@ -86,8 +87,9 @@
       </div>
     </template>
 
+
     <div class="form__group">
-      
+
       <!-- Submit -->
       <button class="btn btn--primary"
               :disabled="$v.$invalid"
@@ -210,8 +212,8 @@
               id: program.id,
               label: program.title,
               value: {
-                label: 'Select a value',
-                value: 0
+                label: program.options[0].pivot.value.toString(),
+                value: program.options[0].pivot.value
               }
             })
           })
@@ -233,21 +235,18 @@
       /**
        * Get the option passed in params and populate the fields accordingly.
        */
-      const getOption = this.$store.dispatch('getOption', this.$route.params.id).then(res => {
-
-        // TODO (doesn't populate select fields correctly)
-        console.log(res)
-
-        this.option.id = res.id
-        this.option.name = res.name
-        this.option.pos = res.pos
-        this.option.question_id = {
-          label: '',
-          value: res.question_id
-        }
-      }).catch(err => {
-        this.errors = err.response.data.errors
-      })
+      const getOption = this.$store.dispatch('getOption', this.$route.params.id)
+        .then(res => {
+          this.option.id = res.id
+          this.option.name = res.name
+          this.option.pos = res.pos
+          this.option.question_id = {
+            label: '',
+            value: res.question_id
+          }
+        }).catch(err => {
+          this.errors = err.response.data.errors
+        })
 
       /**
        * Resolve all promises and turn off the loader once it's done.

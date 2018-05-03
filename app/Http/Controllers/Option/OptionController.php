@@ -93,14 +93,14 @@ class OptionController extends Controller
         $option->question_id = $request->question_id;
         $option->save();
 
-        // TODO (doesn't update)
         $sorted = array_values(array_sort($request->programs, function ($value) {
             return $value['id'];
         }));
 
         $programs = Program::all();
+
         foreach ($programs as $index => $program) {
-            $program->options()->syncWithoutDetaching($option, [
+            $program->options()->updateExistingPivot($option, [
                 'value' => $sorted[$index]['value']['value']
             ]);
         }

@@ -53285,6 +53285,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -53380,8 +53382,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           id: program.id,
           label: program.title,
           value: {
-            label: 'Select a value',
-            value: 0
+            label: program.options[0].pivot.value.toString(),
+            value: program.options[0].pivot.value
           }
         });
       });
@@ -53403,10 +53405,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      * Get the option passed in params and populate the fields accordingly.
      */
     var getOption = this.$store.dispatch('getOption', this.$route.params.id).then(function (res) {
-
-      // TODO (doesn't populate select fields correctly)
-      console.log(res);
-
       _this.option.id = res.id;
       _this.option.name = res.name;
       _this.option.pos = res.pos;
