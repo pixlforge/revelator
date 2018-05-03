@@ -44284,12 +44284,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     navigate: function navigate() {
       var _this = this;
 
-      this.$store.dispatch('setCurrentQuestion', this.index);
-      this.$store.dispatch('setShowContentValue', false);
-      setTimeout(function () {
-        _this.$store.dispatch('setShowContentValue', true);
-      }, 5);
-      this.$router.push({ query: { question: this.index } });
+      if (this.shouldStyleElement) {
+        this.$store.dispatch('setCurrentQuestion', this.index);
+        this.$store.dispatch('setShowContentValue', false);
+        setTimeout(function () {
+          _this.$store.dispatch('setShowContentValue', true);
+        }, 5);
+        this.$router.push({ query: { question: this.index } });
+      }
     }
   }
 });

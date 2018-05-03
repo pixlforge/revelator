@@ -33,12 +33,14 @@
     },
     methods: {
       navigate() {
-        this.$store.dispatch('setCurrentQuestion', this.index)
-        this.$store.dispatch('setShowContentValue', false)
-        setTimeout(() => {
+        if (this.shouldStyleElement) {
+          this.$store.dispatch('setCurrentQuestion', this.index)
+          this.$store.dispatch('setShowContentValue', false)
+          setTimeout(() => {
             this.$store.dispatch('setShowContentValue', true)
-        }, 5)
-        this.$router.push({ query: { question: this.index } })
+          }, 5)
+          this.$router.push({ query: { question: this.index } })
+        }
       }
     }
   }
