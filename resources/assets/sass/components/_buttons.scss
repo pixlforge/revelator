@@ -158,10 +158,9 @@
       }
 
       @media all and (max-width: $bp-xs) {
-        width: 80vw;
-        bottom: 12rem;
-        right: 50%;
-        transform: translateX(50%);
+        font-size: 1.75rem;
+        letter-spacing: 1pt;
+        padding: 1.75rem 2.5rem;
       }
     }
 
@@ -174,10 +173,9 @@
       }
 
       @media all and (max-width: $bp-xs) {
-        width: 80vw;
-        bottom: 12rem;
-        right: 50%;
-        transform: translateX(50%);
+        font-size: 1.75rem;
+        letter-spacing: 1pt;
+        padding: 1.75rem 2.5rem;
       }
 
       &:hover {
@@ -193,9 +191,9 @@
       }
 
       @media all and (max-width: $bp-xs) {
-        width: 80vw;
-        left: 50%;
-        transform: translateX(-50%);
+        font-size: 1.75rem;
+        letter-spacing: 1pt;
+        padding: 1.75rem 2.5rem;
       }
     }
 
