@@ -46989,6 +46989,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -47085,187 +47090,201 @@ var render = function() {
       }
     },
     [
-      _c(
-        "router-link",
-        {
-          staticClass: "auth__back",
-          attrs: { to: { name: "home" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
-      ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "auth__title" }, [_vm._v("Login")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "form__group" },
-        [
-          _c("label", { staticClass: "form__label", attrs: { for: "email" } }, [
-            _vm._v("Email address")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
+      _c("div", [
+        _c(
+          "div",
+          { staticClass: "auth__title-box" },
+          [
+            _c(
+              "router-link",
               {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.user.email,
-                expression: "user.email"
-              }
-            ],
-            staticClass: "form__input",
-            class: { "form__input--invalid": _vm.errors.email },
-            attrs: {
-              type: "email",
-              name: "email",
-              id: "email",
-              required: "",
-              autofocus: "",
-              autocomplete: "off"
-            },
-            domProps: { value: _vm.user.email },
-            on: {
-              input: [
-                function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.user, "email", $event.target.value)
-                },
-                function($event) {
-                  _vm.$v.user.email.$touch()
+                staticClass: "auth__back",
+                attrs: { to: { name: "home" }, tag: "a" }
+              },
+              [_c("i", { staticClass: "fas fa-arrow-left" })]
+            ),
+            _vm._v(" "),
+            _c("h1", { staticClass: "auth__title" }, [_vm._v("Login")])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form__group" },
+          [
+            _c(
+              "label",
+              { staticClass: "form__label", attrs: { for: "email" } },
+              [_vm._v("Email address")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.email,
+                  expression: "user.email"
                 }
-              ]
-            }
-          }),
-          _vm._v(" "),
-          _vm.$v.user.email.$error
-            ? _c("AppTooltip", { attrs: { "pos-x": 35 } }, [
-                !_vm.$v.user.email.required
-                  ? _c("p", [_vm._v("Please, provide a valid email address.")])
-                  : _vm._e(),
-                _vm._v(" "),
-                !_vm.$v.user.email.email
-                  ? _c("p", [
-                      _vm._v(
-                        "Email format must have the 'address@email.tld' pattern."
-                      )
-                    ])
-                  : _vm._e()
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("AppFeedback", [
-            _vm.errors.email
-              ? _c("p", [_vm._v(_vm._s(_vm.errors.email[0]))])
+              ],
+              staticClass: "form__input",
+              class: { "form__input--invalid": _vm.errors.email },
+              attrs: {
+                type: "email",
+                name: "email",
+                id: "email",
+                required: "",
+                autofocus: "",
+                autocomplete: "off"
+              },
+              domProps: { value: _vm.user.email },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.user, "email", $event.target.value)
+                  },
+                  function($event) {
+                    _vm.$v.user.email.$touch()
+                  }
+                ]
+              }
+            }),
+            _vm._v(" "),
+            _vm.$v.user.email.$error
+              ? _c("AppTooltip", { attrs: { "pos-x": 35 } }, [
+                  !_vm.$v.user.email.required
+                    ? _c("p", [
+                        _vm._v("Please, provide a valid email address.")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.$v.user.email.email
+                    ? _c("p", [
+                        _vm._v(
+                          "Email format must have the 'address@email.tld' pattern."
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("AppFeedback", [
+              _vm.errors.email
+                ? _c("p", [_vm._v(_vm._s(_vm.errors.email[0]))])
+                : _vm._e()
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form__group" },
+          [
+            _c(
+              "label",
+              { staticClass: "form__label", attrs: { for: "password" } },
+              [_vm._v("Password")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.password,
+                  expression: "user.password"
+                }
+              ],
+              staticClass: "form__input",
+              class: { "form__input--invalid": _vm.errors.email },
+              attrs: {
+                type: "password",
+                name: "password",
+                id: "password",
+                required: ""
+              },
+              domProps: { value: _vm.user.password },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.user, "password", $event.target.value)
+                  },
+                  function($event) {
+                    _vm.$v.user.password.$touch()
+                  }
+                ]
+              }
+            }),
+            _vm._v(" "),
+            _vm.$v.user.password.$error
+              ? _c("AppTooltip", { attrs: { "pos-x": 45 } }, [
+                  !_vm.$v.user.password.required
+                    ? _c("p", [
+                        _vm._v("Please, provide the matching password.")
+                      ])
+                    : _vm._e()
+                ])
               : _vm._e()
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "form__group" },
-        [
-          _c(
-            "label",
-            { staticClass: "form__label", attrs: { for: "password" } },
-            [_vm._v("Password")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.user.password,
-                expression: "user.password"
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.user.remember,
+              expression: "user.remember"
+            }
+          ],
+          attrs: { type: "hidden", name: "remember" },
+          domProps: { value: _vm.user.remember },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
               }
-            ],
-            staticClass: "form__input",
-            class: { "form__input--invalid": _vm.errors.email },
-            attrs: {
-              type: "password",
-              name: "password",
-              id: "password",
-              required: ""
-            },
-            domProps: { value: _vm.user.password },
-            on: {
-              input: [
-                function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.user, "password", $event.target.value)
-                },
-                function($event) {
-                  _vm.$v.user.password.$touch()
-                }
-              ]
+              _vm.$set(_vm.user, "remember", $event.target.value)
             }
-          }),
-          _vm._v(" "),
-          _vm.$v.user.password.$error
-            ? _c("AppTooltip", { attrs: { "pos-x": 45 } }, [
-                !_vm.$v.user.password.required
-                  ? _c("p", [_vm._v("Please, provide the matching password.")])
-                  : _vm._e()
-              ])
-            : _vm._e()
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.user.remember,
-            expression: "user.remember"
           }
-        ],
-        attrs: { type: "hidden", name: "remember" },
-        domProps: { value: _vm.user.remember },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.user, "remember", $event.target.value)
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "form__group form__group--inline" },
-        [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn--primary",
-              attrs: { disabled: _vm.$v.$invalid },
-              on: { click: _vm.submit }
-            },
-            [_vm._v("\n      Sign In\n    ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "auth__forgotten",
-              attrs: { to: { name: "reset.email" } }
-            },
-            [_vm._v("\n      Forgot Your Password?\n    ")]
-          )
-        ],
-        1
-      )
-    ],
-    1
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form__group form__group--inline" },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn--primary",
+                attrs: { disabled: _vm.$v.$invalid },
+                on: { click: _vm.submit }
+              },
+              [_vm._v("\n        Sign In\n      ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "auth__forgotten",
+                attrs: { to: { name: "reset.email" } }
+              },
+              [_vm._v("\n        Forgot Your Password?\n      ")]
+            )
+          ],
+          1
+        )
+      ])
+    ]
   )
 }
 var staticRenderFns = []

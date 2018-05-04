@@ -1,71 +1,76 @@
 <template>
   <main class="auth__container" @keyup.enter="submit">
 
-    <!-- Back Button -->
-    <router-link :to="{ name: 'home' }"
-                 tag="a"
-                 class="auth__back">
-      <i class="fas fa-arrow-left"></i>
-    </router-link>
+    <div>
+      <div class="auth__title-box">
+        <!-- Back Button -->
+        <router-link :to="{ name: 'home' }"
+                     tag="a"
+                     class="auth__back">
+          <i class="fas fa-arrow-left"></i>
+        </router-link>
 
-    <!-- Title -->
-    <h1 class="auth__title">Login</h1>
+        <!-- Title -->
+        <h1 class="auth__title">Login</h1>
+      </div>
 
-    <!-- Email -->
-    <div class="form__group">
-      <label for="email" class="form__label">Email address</label>
-      <input type="email"
-             name="email"
-             id="email"
-             class="form__input"
-             :class="{ 'form__input--invalid': errors.email }"
-             @input="$v.user.email.$touch()"
-             v-model="user.email"
-             required autofocus autocomplete="off">
-      <AppTooltip v-if="$v.user.email.$error"
-                  :pos-x="35">
-        <p v-if="!$v.user.email.required">Please, provide a valid email address.</p>
-        <p v-if="!$v.user.email.email">Email format must have the 'address@email.tld' pattern.</p>
-      </AppTooltip>
-      <AppFeedback>
-        <p v-if="errors.email">{{ errors.email[0] }}</p>
-      </AppFeedback>
+      <!-- Email -->
+      <div class="form__group">
+        <label for="email" class="form__label">Email address</label>
+        <input type="email"
+               name="email"
+               id="email"
+               class="form__input"
+               :class="{ 'form__input--invalid': errors.email }"
+               @input="$v.user.email.$touch()"
+               v-model="user.email"
+               required autofocus autocomplete="off">
+        <AppTooltip v-if="$v.user.email.$error"
+                    :pos-x="35">
+          <p v-if="!$v.user.email.required">Please, provide a valid email address.</p>
+          <p v-if="!$v.user.email.email">Email format must have the 'address@email.tld' pattern.</p>
+        </AppTooltip>
+        <AppFeedback>
+          <p v-if="errors.email">{{ errors.email[0] }}</p>
+        </AppFeedback>
+      </div>
+
+      <!-- Password -->
+      <div class="form__group">
+        <label for="password" class="form__label">Password</label>
+        <input type="password"
+               name="password"
+               id="password"
+               class="form__input"
+               :class="{ 'form__input--invalid': errors.email }"
+               @input="$v.user.password.$touch()"
+               v-model="user.password"
+               required>
+        <AppTooltip v-if="$v.user.password.$error"
+                    :pos-x="45">
+          <p v-if="!$v.user.password.required">Please, provide the matching password.</p>
+        </AppTooltip>
+      </div>
+
+      <!-- Remember -->
+      <input type="hidden" name="remember" v-model="user.remember">
+
+      <div class="form__group form__group--inline">
+
+        <!-- Submit -->
+        <button class="btn btn--primary"
+                :disabled="$v.$invalid"
+                @click="submit">
+          Sign In
+        </button>
+
+        <!-- Forgot Password -->
+        <router-link :to="{ name: 'reset.email' }" class="auth__forgotten">
+          Forgot Your Password?
+        </router-link>
+      </div>
     </div>
 
-    <!-- Password -->
-    <div class="form__group">
-      <label for="password" class="form__label">Password</label>
-      <input type="password"
-             name="password"
-             id="password"
-             class="form__input"
-             :class="{ 'form__input--invalid': errors.email }"
-             @input="$v.user.password.$touch()"
-             v-model="user.password"
-             required>
-      <AppTooltip v-if="$v.user.password.$error"
-                  :pos-x="45">
-        <p v-if="!$v.user.password.required">Please, provide the matching password.</p>
-      </AppTooltip>
-    </div>
-
-    <!-- Remember -->
-    <input type="hidden" name="remember" v-model="user.remember">
-
-    <div class="form__group form__group--inline">
-      
-      <!-- Submit -->
-      <button class="btn btn--primary"
-              :disabled="$v.$invalid"
-              @click="submit">
-        Sign In
-      </button>
-
-      <!-- Forgot Password -->
-      <router-link :to="{ name: 'reset.email' }" class="auth__forgotten">
-        Forgot Your Password?
-      </router-link>
-    </div>
   </main>
 </template>
 
