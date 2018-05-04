@@ -1,47 +1,51 @@
 <template>
-  <main class="auth__container" @keyup.enter="submit">
+  <main class="auth__container"
+        @keyup.enter="submit">
+    <div>
+      <div class="auth__title-box">
+        <!-- Back Button -->
+        <router-link :to="{ name: 'auth.login' }"
+                     tag="a"
+                     class="auth__back">
+          <i class="fas fa-arrow-left"></i>
+        </router-link>
 
-    <!-- Back Button -->
-    <router-link :to="{ name: 'auth.login' }"
-                 tag="a"
-                 class="auth__back">
-      <i class="fas fa-arrow-left"></i>
-    </router-link>
+        <!-- Title -->
+        <h1 class="auth__title">
+          Request Password Reset Link
+        </h1>
+      </div>
 
-    <!-- Title -->
-    <h1 class="auth__title">
-      Request Password Reset Link
-    </h1>
+      <!-- Email -->
+      <div class="form__group">
+        <label for="email" class="form__label">Email address</label>
+        <input type="email"
+               name="email"
+               id="email"
+               class="form__input"
+               :class="{ 'form__input--invalid': errors.email }"
+               @input="$v.user.email.$touch()"
+               v-model="user.email"
+               required autofocus autocomplete="off">
+        <AppTooltip v-if="$v.user.email.$error"
+                    :pos-x="40">
+          <p v-if="!$v.user.email.required">Please, provide a valid email address.</p>
+          <p v-if="!$v.user.email.email">Email format must have the 'address@email.tld' pattern.</p>
+        </AppTooltip>
+        <AppFeedback>
+          <p v-if="errors.email">{{ errors.email[0] }}</p>
+        </AppFeedback>
+      </div>
 
-    <!-- Email -->
-    <div class="form__group">
-      <label for="email" class="form__label">Email address</label>
-      <input type="email"
-             name="email"
-             id="email"
-             class="form__input"
-             :class="{ 'form__input--invalid': errors.email }"
-             @input="$v.user.email.$touch()"
-             v-model="user.email"
-             required autofocus autocomplete="off">
-      <AppTooltip v-if="$v.user.email.$error"
-                  :pos-x="40">
-        <p v-if="!$v.user.email.required">Please, provide a valid email address.</p>
-        <p v-if="!$v.user.email.email">Email format must have the 'address@email.tld' pattern.</p>
-      </AppTooltip>
-      <AppFeedback>
-        <p v-if="errors.email">{{ errors.email[0] }}</p>
-      </AppFeedback>
-    </div>
+      <div class="form__group form__group--inline">
 
-    <div class="form__group form__group--inline">
-      
-      <!-- Submit -->
-      <button class="btn btn--primary"
-              :disabled="$v.$invalid"
-              @click="submit">
-        Send Password Reset Link
-      </button>
+        <!-- Submit -->
+        <button class="btn btn--primary"
+                :disabled="$v.$invalid"
+                @click="submit">
+          Send Password Reset Link
+        </button>
+      </div>
     </div>
   </main>
 </template>

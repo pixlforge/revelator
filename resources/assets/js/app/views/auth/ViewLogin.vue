@@ -1,6 +1,6 @@
 <template>
-  <main class="auth__container" @keyup.enter="submit">
-
+  <main class="auth__container"
+        @keyup.enter="submit">
     <div>
       <div class="auth__title-box">
         <!-- Back Button -->
@@ -70,7 +70,6 @@
         </router-link>
       </div>
     </div>
-
   </main>
 </template>
 
