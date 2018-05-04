@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main class="main__container main__container--medium"
+    <main class="main__container main__container--last-step"
           @keyup.enter="saveAndContinue">
       <h1 class="main__title">One Last Step!</h1>
 

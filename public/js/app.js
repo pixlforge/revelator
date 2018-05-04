@@ -45830,7 +45830,7 @@ var render = function() {
     _c(
       "main",
       {
-        staticClass: "main__container main__container--medium",
+        staticClass: "main__container main__container--last-step",
         on: {
           keyup: function($event) {
             if (

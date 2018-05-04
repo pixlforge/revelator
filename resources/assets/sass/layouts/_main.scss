@@ -10,7 +10,7 @@
     flex-direction: column;
 
     @media all and (max-width: $bp-md) {
-      padding: 4rem 0;
+      padding-bottom: 6rem;
     }
 
     &--medium {
@@ -22,7 +22,21 @@
     }
 
     &--results {
-      padding-top: 15rem;
+      @media all and (max-width: $bp-md) {
+        min-height: 50vh;
+      }
+    }
+
+    &--last-step {
+      width: 67.5vw;
+
+      @media all and (max-width: $bp-md) {
+        min-height: 70vh;
+      }
+
+      @media all and (max-width: $bp-sm) {
+        width: 80vw;
+      }
     }
   }
 
