@@ -46738,7 +46738,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("main", { staticClass: "main__container main__container--medium" }, [
+    _c("main", { staticClass: "main__container main__container--results" }, [
       _c("h1", { staticClass: "main__title" }, [_vm._v("Your diagnostic")]),
       _vm._v(" "),
       _c("p", { staticClass: "main__lead" }, [

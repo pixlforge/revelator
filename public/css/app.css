@@ -1351,7 +1351,7 @@ a:visited:focus {
 }
 
 .program__container {
-  width: 45rem;
+  width: 40rem;
   height: 10rem;
   margin-top: 4rem;
   display: -webkit-box;
@@ -1363,7 +1363,7 @@ a:visited:focus {
   cursor: pointer;
 }
 
-@media all and (max-width: 60.625em) {
+@media all and (max-width: 23.75em) {
   .program__container {
     width: 90vw;
   }
@@ -1400,12 +1400,15 @@ a:visited:focus {
       -ms-flex-pack: center;
           justify-content: center;
   width: 100%;
+  padding-left: 2rem;
   position: relative;
+  -webkit-transform: translateY(-0.75rem);
+          transform: translateY(-0.75rem);
 }
 
-@media all and (max-width: 50em) {
+@media all and (max-width: 43.65em) {
   .program__body {
-    padding-left: 3.5rem;
+    padding-left: 1rem;
   }
 }
 
@@ -1413,7 +1416,7 @@ a:visited:focus {
   font-size: 1.8rem;
   letter-spacing: 1.5pt;
   position: absolute;
-  left: 0;
+  left: 2rem;
   -webkit-transition: all .4s ease;
   transition: all .4s ease;
 }
@@ -1427,7 +1430,6 @@ a:visited:focus {
 @media all and (max-width: 50em) {
   .program__title {
     font-size: 18px;
-    padding-left: 3.5rem;
     -webkit-transform: translateY(-2.5rem);
             transform: translateY(-2.5rem);
   }
@@ -1435,6 +1437,7 @@ a:visited:focus {
 
 @media all and (max-width: 43.65em) {
   .program__title {
+    left: 1rem;
     font-size: 14px;
     letter-spacing: 1.1pt;
   }
@@ -1502,7 +1505,7 @@ a:visited:focus {
 
 .main__container {
   width: 93vw;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 2rem 0;
   position: relative;
@@ -1532,6 +1535,10 @@ a:visited:focus {
   .main__container--medium {
     width: 80vw;
   }
+}
+
+.main__container--results {
+  padding-top: 15rem;
 }
 
 .main__results {

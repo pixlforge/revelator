@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main class="main__container">
+    <main class="main__container main__container--results">
 
       <!--Title-->
       <h1 class="main__title">Your diagnostic</h1>
