@@ -14,6 +14,14 @@
   <meta name="msapplication-TileColor" content="#2b5797">
   <meta name="theme-color" content="#ffffff">
 
+  {{--Facebook Open Graph--}}
+  <meta property="og:image:height" content="1036">
+  <meta property="og:image:width" content="1978">
+  <meta property="og:description" content="Answer the questions and find the program that's best for you.">
+  <meta property="og:title" content="Revelator by La Prairie ">
+  <meta property="og:url" content="https://revelator.laprairie.ch/">
+  <meta property="og:image" content="https://revelator.laprairie.ch/og-image.jpg">
+
   {{--CSRF Token--}}
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
