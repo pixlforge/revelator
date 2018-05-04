@@ -1,16 +1,20 @@
 .main {
   &__container {
     width: 93vw;
+    height: 100vh;
     margin: 0 auto;
-    padding: 12rem 0;
+    padding: 2rem 0;
     position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
     @media all and (max-width: $bp-md) {
       padding: 4rem 0;
     }
 
     &--medium {
-      width: 60vw;
+      width: 67.5vw;
 
       @media all and (max-width: $bp-sm) {
         width: 80vw;
@@ -30,7 +34,7 @@
   }
 
   &__title {
-    font-size: 6.4rem;
+    font-size: 6rem;
     text-align: center;
 
     &--big {
