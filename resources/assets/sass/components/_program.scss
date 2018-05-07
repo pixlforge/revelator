@@ -11,6 +11,7 @@
 
     @media all and (max-width: $bp-xs) {
       width: 90vw;
+      padding-left: 2rem;
     }
   }
 
@@ -32,12 +33,12 @@
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    padding-left: 2rem;
+    padding-left: 3.5rem;
     position: relative;
     transform: translateY(-.75rem);
 
     @media all and (max-width: $bp-sm) {
-      padding-left: 1rem;
+      //padding-left: 1rem;
     }
   }
 
@@ -45,7 +46,7 @@
     font-size: 1.8rem;
     letter-spacing: 1.5pt;
     position: absolute;
-    left: 2rem;
+    left: 3.5rem;
     transition: all .4s ease;
     
     @media all and (max-width: $bp-md-lg) {
@@ -58,7 +59,7 @@
     }
 
     @media all and (max-width: $bp-sm) {
-      left: 1rem;
+      //left: 1rem;
       font-size: 14px;
       letter-spacing: 1.1pt;
     }
