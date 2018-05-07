@@ -44746,7 +44746,7 @@ var render = function() {
           _c("transition", { attrs: { name: "fade-longer", mode: "out-in" } }, [
             _vm.getQuestions.length && _vm.getShowContentStatus
               ? _c("h1", {
-                  staticClass: "main__title",
+                  staticClass: "main__title main__title--diagnostic",
                   domProps: {
                     textContent: _vm._s(
                       _vm.getQuestions[_vm.getCurrentQuestion].name
@@ -45844,7 +45844,9 @@ var render = function() {
         }
       },
       [
-        _c("h1", { staticClass: "main__title" }, [_vm._v("One Last Step!")]),
+        _c("h1", { staticClass: "main__title main__title--diagnostic" }, [
+          _vm._v("One Last Step!")
+        ]),
         _vm._v(" "),
         _c("p", { staticClass: "main__lead" }, [
           _vm._v(
@@ -46739,7 +46741,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("main", { staticClass: "main__container main__container--results" }, [
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Your diagnostic")]),
+      _c("h1", { staticClass: "main__title main__title--diagnostic" }, [
+        _vm._v("Your diagnostic")
+      ]),
       _vm._v(" "),
       _c("p", { staticClass: "main__lead" }, [
         _vm._v(
@@ -48500,6 +48504,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -48834,127 +48839,129 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "main",
-    { staticClass: "main__container" },
-    [
-      _c(
-        "router-link",
-        {
-          staticClass: "main__back",
-          attrs: { to: { name: "admin" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
-      ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Users")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "main__row main__row--center" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn__small btn__small--success",
-              attrs: { to: { name: "admin.users.create" } }
-            },
-            [
-              _c("i", { staticClass: "fas fa-user-plus" }),
-              _vm._v("\n      Add\n    ")
-            ]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "main__table-wrapper" }, [
+  return _c("main", { staticClass: "main__container main__container--admin" }, [
+    _c(
+      "div",
+      { staticClass: "main__title-group" },
+      [
         _c(
-          "table",
-          { staticClass: "table" },
+          "router-link",
+          {
+            staticClass: "main__back",
+            attrs: { to: { name: "admin" }, tag: "a" }
+          },
+          [_c("i", { staticClass: "fas fa-arrow-left" })]
+        ),
+        _vm._v(" "),
+        _c("h1", { staticClass: "main__title" }, [_vm._v("Users")])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "main__row main__row--center" },
+      [
+        _c(
+          "router-link",
+          {
+            staticClass: "btn__small btn__small--success",
+            attrs: { to: { name: "admin.users.create" } }
+          },
           [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._l(_vm.getUsers, function(user) {
-              return _c("tr", { key: user.id, staticClass: "table__row" }, [
-                _c("td", {
-                  staticClass: "table__cell",
-                  domProps: { textContent: _vm._s(user.name) }
-                }),
-                _vm._v(" "),
-                _c("td", {
-                  staticClass: "table__cell",
-                  domProps: { textContent: _vm._s(user.email) }
-                }),
-                _vm._v(" "),
-                _c("td", { staticClass: "table__cell" }, [
-                  _vm._v(
-                    "\n          " +
-                      _vm._s(_vm._f("formatRole")(user.role)) +
-                      "\n        "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", {
-                  staticClass: "table__cell",
-                  domProps: {
-                    textContent: _vm._s(_vm.formatDate(user.created_at))
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "table__cell" },
-                  [
-                    user.role !== "dev"
-                      ? _c(
-                          "router-link",
-                          {
-                            staticClass: "btn__small btn__small--primary",
-                            attrs: {
-                              to: {
-                                name: "admin.users.edit",
-                                params: { id: user.id }
-                              }
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "fas fa-cog" }),
-                            _vm._v("\n            Update\n          ")
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    user.role !== "dev"
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn__small btn__small--danger",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.deleteUser(user)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "fas fa-times" }),
-                            _vm._v("\n            Delete\n          ")
-                          ]
-                        )
-                      : _vm._e()
-                  ],
-                  1
-                )
-              ])
-            })
-          ],
-          2
+            _c("i", { staticClass: "fas fa-user-plus" }),
+            _vm._v("\n      Add\n    ")
+          ]
         )
-      ])
-    ],
-    1
-  )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "main__table-wrapper" }, [
+      _c(
+        "table",
+        { staticClass: "table" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._l(_vm.getUsers, function(user) {
+            return _c("tr", { key: user.id, staticClass: "table__row" }, [
+              _c("td", {
+                staticClass: "table__cell",
+                domProps: { textContent: _vm._s(user.name) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                staticClass: "table__cell",
+                domProps: { textContent: _vm._s(user.email) }
+              }),
+              _vm._v(" "),
+              _c("td", { staticClass: "table__cell" }, [
+                _vm._v(
+                  "\n          " +
+                    _vm._s(_vm._f("formatRole")(user.role)) +
+                    "\n        "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", {
+                staticClass: "table__cell",
+                domProps: {
+                  textContent: _vm._s(_vm.formatDate(user.created_at))
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "table__cell" },
+                [
+                  user.role !== "dev"
+                    ? _c(
+                        "router-link",
+                        {
+                          staticClass: "btn__small btn__small--primary",
+                          attrs: {
+                            to: {
+                              name: "admin.users.edit",
+                              params: { id: user.id }
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-cog" }),
+                          _vm._v("\n            Update\n          ")
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  user.role !== "dev"
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn__small btn__small--danger",
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.deleteUser(user)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-times" }),
+                          _vm._v("\n            Delete\n          ")
+                        ]
+                      )
+                    : _vm._e()
+                ],
+                1
+              )
+            ])
+          })
+        ],
+        2
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -49050,6 +49057,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_vuelidate_lib_validators__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
 //
 //
 //
@@ -49539,7 +49547,7 @@ var render = function() {
   return _c(
     "main",
     {
-      staticClass: "main__container main__container--medium",
+      staticClass: "main__container main__container--admin-with-form",
       on: {
         keyup: function($event) {
           if (
@@ -49554,15 +49562,22 @@ var render = function() {
     },
     [
       _c(
-        "router-link",
-        {
-          staticClass: "main__back",
-          attrs: { to: { name: "admin.users.index" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
+        "div",
+        { staticClass: "main__title-group" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "main__back",
+              attrs: { to: { name: "admin.users.index" }, tag: "a" }
+            },
+            [_c("i", { staticClass: "fas fa-arrow-left" })]
+          ),
+          _vm._v(" "),
+          _c("h1", { staticClass: "main__title" }, [_vm._v("Add user")])
+        ],
+        1
       ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Add user")]),
       _vm._v(" "),
       _c(
         "div",
@@ -50051,8 +50066,7 @@ var render = function() {
           ]
         )
       ])
-    ],
-    1
+    ]
   )
 }
 var staticRenderFns = []
@@ -50132,6 +50146,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_vuelidate_lib_validators__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
 //
 //
 //
@@ -50424,7 +50439,7 @@ var render = function() {
   return _c(
     "main",
     {
-      staticClass: "main__container main__container--medium",
+      staticClass: "main__container main__container--admin-with-form",
       on: {
         keyup: function($event) {
           if (
@@ -50439,15 +50454,22 @@ var render = function() {
     },
     [
       _c(
-        "router-link",
-        {
-          staticClass: "main__back",
-          attrs: { to: { name: "admin.users.index" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
+        "div",
+        { staticClass: "main__title-group" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "main__back",
+              attrs: { to: { name: "admin.users.index" }, tag: "a" }
+            },
+            [_c("i", { staticClass: "fas fa-arrow-left" })]
+          ),
+          _vm._v(" "),
+          _c("h1", { staticClass: "main__title" }, [_vm._v("Edit user")])
+        ],
+        1
       ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Edit user")]),
       _vm._v(" "),
       _c(
         "div",
@@ -50936,8 +50958,7 @@ var render = function() {
           ]
         )
       ])
-    ],
-    1
+    ]
   )
 }
 var staticRenderFns = []
@@ -51074,6 +51095,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -51132,130 +51154,127 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "main",
-    { staticClass: "main__container" },
-    [
-      _c(
-        "router-link",
-        {
-          staticClass: "main__back",
-          attrs: { to: { name: "admin" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
-      ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Questions")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "main__row main__row--center" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn__small btn__small--success",
-              attrs: { to: { name: "admin.questions.create" } }
-            },
+  return _c("main", { staticClass: "main__container main__container--admin" }, [
+    _c(
+      "div",
+      { staticClass: "main__title-group" },
+      [
+        _c(
+          "router-link",
+          {
+            staticClass: "main__back",
+            attrs: { to: { name: "admin" }, tag: "a" }
+          },
+          [_c("i", { staticClass: "fas fa-arrow-left" })]
+        ),
+        _vm._v(" "),
+        _c("h1", { staticClass: "main__title" }, [_vm._v("Questions")])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "main__row main__row--center" },
+      [
+        _c(
+          "router-link",
+          {
+            staticClass: "btn__small btn__small--success",
+            attrs: { to: { name: "admin.questions.create" } }
+          },
+          [_c("i", { staticClass: "fas fa-plus" }), _vm._v("\n      Add\n    ")]
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "main__table-wrapper" }, [
+      _vm.tableIsEmpty
+        ? _c("p", { staticClass: "text__table-is-empty" }, [
+            _vm._v("There isn't any question defined at the moment.")
+          ])
+        : _c(
+            "table",
+            { staticClass: "table" },
             [
-              _c("i", { staticClass: "fas fa-plus" }),
-              _vm._v("\n      Add\n    ")
-            ]
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._l(_vm.getQuestions, function(question) {
+                return _c(
+                  "tr",
+                  { key: question.id, staticClass: "table__row" },
+                  [
+                    _c("td", {
+                      staticClass: "table__cell",
+                      domProps: { textContent: _vm._s(question.name) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      staticClass: "table__cell",
+                      domProps: { textContent: _vm._s(question.type) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      staticClass: "table__cell",
+                      domProps: { textContent: _vm._s(question.pos) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      staticClass: "table__cell",
+                      domProps: {
+                        textContent: _vm._s(_vm.formatDate(question.created_at))
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "table__cell" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn__small btn__small--primary",
+                            attrs: {
+                              to: {
+                                name: "admin.questions.edit",
+                                params: { id: question.id }
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-cog" }),
+                            _vm._v("\n            Update\n          ")
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn__small btn__small--danger",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.deleteQuestion(question)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-times" }),
+                            _vm._v("\n            Delete\n          ")
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                )
+              })
+            ],
+            2
           )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "main__table-wrapper" }, [
-        _vm.tableIsEmpty
-          ? _c("p", { staticClass: "text__table-is-empty" }, [
-              _vm._v("There isn't any question defined at the moment.")
-            ])
-          : _c(
-              "table",
-              { staticClass: "table" },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._l(_vm.getQuestions, function(question) {
-                  return _c(
-                    "tr",
-                    { key: question.id, staticClass: "table__row" },
-                    [
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: { textContent: _vm._s(question.name) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: { textContent: _vm._s(question.type) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: { textContent: _vm._s(question.pos) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: {
-                          textContent: _vm._s(
-                            _vm.formatDate(question.created_at)
-                          )
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "table__cell" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "btn__small btn__small--primary",
-                              attrs: {
-                                to: {
-                                  name: "admin.questions.edit",
-                                  params: { id: question.id }
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "fas fa-cog" }),
-                              _vm._v("\n            Update\n          ")
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn__small btn__small--danger",
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  _vm.deleteQuestion(question)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "fas fa-times" }),
-                              _vm._v("\n            Delete\n          ")
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ]
-                  )
-                })
-              ],
-              2
-            )
-      ])
-    ],
-    1
-  )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -51346,6 +51365,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_middleware__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__);
+//
 //
 //
 //
@@ -51540,7 +51560,7 @@ var render = function() {
   return _c(
     "main",
     {
-      staticClass: "main__container main__container--medium",
+      staticClass: "main__container main__container--admin-with-form",
       on: {
         keyup: function($event) {
           if (
@@ -51555,15 +51575,22 @@ var render = function() {
     },
     [
       _c(
-        "router-link",
-        {
-          staticClass: "main__back",
-          attrs: { to: { name: "admin.questions.index" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
+        "div",
+        { staticClass: "main__title-group" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "main__back",
+              attrs: { to: { name: "admin.questions.index" }, tag: "a" }
+            },
+            [_c("i", { staticClass: "fas fa-arrow-left" })]
+          ),
+          _vm._v(" "),
+          _c("h1", { staticClass: "main__title" }, [_vm._v("Add question")])
+        ],
+        1
       ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Add question")]),
       _vm._v(" "),
       _c(
         "div",
@@ -51752,8 +51779,7 @@ var render = function() {
           ]
         )
       ])
-    ],
-    1
+    ]
   )
 }
 var staticRenderFns = []
@@ -51828,6 +51854,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_middleware__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vuelidate_lib_validators__);
+//
 //
 //
 //
@@ -52051,7 +52078,7 @@ var render = function() {
   return _c(
     "main",
     {
-      staticClass: "main__container main__container--medium",
+      staticClass: "main__container main__container--admin-with-form",
       on: {
         keyup: function($event) {
           if (
@@ -52066,15 +52093,22 @@ var render = function() {
     },
     [
       _c(
-        "router-link",
-        {
-          staticClass: "main__back",
-          attrs: { to: { name: "admin.questions.index" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
+        "div",
+        { staticClass: "main__title-group" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "main__back",
+              attrs: { to: { name: "admin.questions.index" }, tag: "a" }
+            },
+            [_c("i", { staticClass: "fas fa-arrow-left" })]
+          ),
+          _vm._v(" "),
+          _c("h1", { staticClass: "main__title" }, [_vm._v("Edit question")])
+        ],
+        1
       ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Edit question")]),
       _vm._v(" "),
       _c(
         "div",
@@ -52263,8 +52297,7 @@ var render = function() {
           ]
         )
       ])
-    ],
-    1
+    ]
   )
 }
 var staticRenderFns = []
@@ -52402,6 +52435,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -52460,128 +52494,123 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "main",
-    { staticClass: "main__container" },
-    [
-      _c(
-        "router-link",
-        {
-          staticClass: "main__back",
-          attrs: { to: { name: "admin" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
-      ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Options")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "main__row main__row--center" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn__small btn__small--success",
-              attrs: { to: { name: "admin.options.create" } }
-            },
+  return _c("main", { staticClass: "main__container main__container--admin" }, [
+    _c(
+      "div",
+      { staticClass: "main__title-group" },
+      [
+        _c(
+          "router-link",
+          {
+            staticClass: "main__back",
+            attrs: { to: { name: "admin" }, tag: "a" }
+          },
+          [_c("i", { staticClass: "fas fa-arrow-left" })]
+        ),
+        _vm._v(" "),
+        _c("h1", { staticClass: "main__title" }, [_vm._v("Options")])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "main__row main__row--center" },
+      [
+        _c(
+          "router-link",
+          {
+            staticClass: "btn__small btn__small--success",
+            attrs: { to: { name: "admin.options.create" } }
+          },
+          [_c("i", { staticClass: "fas fa-plus" }), _vm._v("\n      Add\n    ")]
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "main__table-wrapper" }, [
+      _vm.tableIsEmpty
+        ? _c("p", { staticClass: "text__table-is-empty" }, [
+            _vm._v("There isn't any option defined at the moment.")
+          ])
+        : _c(
+            "table",
+            { staticClass: "table" },
             [
-              _c("i", { staticClass: "fas fa-plus" }),
-              _vm._v("\n      Add\n    ")
-            ]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "main__table-wrapper" }, [
-        _vm.tableIsEmpty
-          ? _c("p", { staticClass: "text__table-is-empty" }, [
-              _vm._v("There isn't any option defined at the moment.")
-            ])
-          : _c(
-              "table",
-              { staticClass: "table" },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._l(_vm.getOptions, function(option) {
-                  return _c(
-                    "tr",
-                    { key: option.id, staticClass: "table__row" },
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._l(_vm.getOptions, function(option) {
+                return _c("tr", { key: option.id, staticClass: "table__row" }, [
+                  _c("td", {
+                    staticClass: "table__cell",
+                    domProps: { textContent: _vm._s(option.name) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    staticClass: "table__cell",
+                    domProps: { textContent: _vm._s(option.pos) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    staticClass: "table__cell",
+                    domProps: { textContent: _vm._s(option.question.name) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    staticClass: "table__cell",
+                    domProps: {
+                      textContent: _vm._s(_vm.formatDate(option.created_at))
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "table__cell" },
                     [
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: { textContent: _vm._s(option.name) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: { textContent: _vm._s(option.pos) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: { textContent: _vm._s(option.question.name) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: {
-                          textContent: _vm._s(_vm.formatDate(option.created_at))
-                        }
-                      }),
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn__small btn__small--primary",
+                          attrs: {
+                            to: {
+                              name: "admin.options.edit",
+                              params: { id: option.id }
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-cog" }),
+                          _vm._v("\n            Update\n          ")
+                        ]
+                      ),
                       _vm._v(" "),
                       _c(
-                        "td",
-                        { staticClass: "table__cell" },
+                        "button",
+                        {
+                          staticClass: "btn__small btn__small--danger",
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.deleteOption(option)
+                            }
+                          }
+                        },
                         [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "btn__small btn__small--primary",
-                              attrs: {
-                                to: {
-                                  name: "admin.options.edit",
-                                  params: { id: option.id }
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "fas fa-cog" }),
-                              _vm._v("\n            Update\n          ")
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn__small btn__small--danger",
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  _vm.deleteOption(option)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "fas fa-times" }),
-                              _vm._v("\n            Delete\n          ")
-                            ]
-                          )
-                        ],
-                        1
+                          _c("i", { staticClass: "fas fa-times" }),
+                          _vm._v("\n            Delete\n          ")
+                        ]
                       )
-                    ]
+                    ],
+                    1
                   )
-                })
-              ],
-              2
-            )
-      ])
-    ],
-    1
-  )
+                ])
+              })
+            ],
+            2
+          )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -52675,6 +52704,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vuelidate_lib_validators__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
 //
 //
 //
@@ -52934,7 +52964,7 @@ var render = function() {
   return _c(
     "main",
     {
-      staticClass: "main__container main__container--medium",
+      staticClass: "main__container main__container--admin-with-form",
       on: {
         keyup: function($event) {
           if (
@@ -52949,15 +52979,22 @@ var render = function() {
     },
     [
       _c(
-        "router-link",
-        {
-          staticClass: "main__back",
-          attrs: { to: { name: "admin.options.index" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
+        "div",
+        { staticClass: "main__title-group" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "main__back",
+              attrs: { to: { name: "admin.options.index" }, tag: "a" }
+            },
+            [_c("i", { staticClass: "fas fa-arrow-left" })]
+          ),
+          _vm._v(" "),
+          _c("h1", { staticClass: "main__title" }, [_vm._v("Add option")])
+        ],
+        1
       ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Add option")]),
       _vm._v(" "),
       _c(
         "div",
@@ -53358,6 +53395,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -53551,7 +53589,7 @@ var render = function() {
   return _c(
     "main",
     {
-      staticClass: "main__container main__container--medium",
+      staticClass: "main__container main__container--admin-with-form",
       on: {
         keyup: function($event) {
           if (
@@ -53566,15 +53604,22 @@ var render = function() {
     },
     [
       _c(
-        "router-link",
-        {
-          staticClass: "main__back",
-          attrs: { to: { name: "admin.options.index" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
+        "div",
+        { staticClass: "main__title-group" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "main__back",
+              attrs: { to: { name: "admin.options.index" }, tag: "a" }
+            },
+            [_c("i", { staticClass: "fas fa-arrow-left" })]
+          ),
+          _vm._v(" "),
+          _c("h1", { staticClass: "main__title" }, [_vm._v("Edit option")])
+        ],
+        1
       ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Edit option")]),
       _vm._v(" "),
       _c(
         "div",
@@ -53935,6 +53980,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -53993,135 +54039,132 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "main",
-    { staticClass: "main__container" },
-    [
-      _c(
-        "router-link",
-        {
-          staticClass: "main__back",
-          attrs: { to: { name: "admin" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
-      ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Programs")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "main__row main__row--center" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn__small btn__small--success",
-              attrs: { to: { name: "admin.programs.create" } }
-            },
+  return _c("main", { staticClass: "main__container main__container--admin" }, [
+    _c(
+      "div",
+      { staticClass: "main__title-group" },
+      [
+        _c(
+          "router-link",
+          {
+            staticClass: "main__back",
+            attrs: { to: { name: "admin" }, tag: "a" }
+          },
+          [_c("i", { staticClass: "fas fa-arrow-left" })]
+        ),
+        _vm._v(" "),
+        _c("h1", { staticClass: "main__title" }, [_vm._v("Programs")])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "main__row main__row--center" },
+      [
+        _c(
+          "router-link",
+          {
+            staticClass: "btn__small btn__small--success",
+            attrs: { to: { name: "admin.programs.create" } }
+          },
+          [_c("i", { staticClass: "fas fa-plus" }), _vm._v("\n      Add\n    ")]
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "main__table-wrapper" }, [
+      _vm.tableIsEmpty
+        ? _c("p", { staticClass: "text__table-is-empty" }, [
+            _vm._v("There isn't any program defined at the moment.")
+          ])
+        : _c(
+            "table",
+            { staticClass: "table" },
             [
-              _c("i", { staticClass: "fas fa-plus" }),
-              _vm._v("\n      Add\n    ")
-            ]
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._l(_vm.getPrograms, function(program) {
+                return _c(
+                  "tr",
+                  { key: program.id, staticClass: "table__row" },
+                  [
+                    _c("td", {
+                      staticClass: "table__cell",
+                      domProps: { textContent: _vm._s(program.title) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      staticClass: "table__cell",
+                      domProps: { textContent: _vm._s(program.code) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      staticClass: "table__cell",
+                      domProps: { textContent: _vm._s(program.description) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      staticClass: "table__cell",
+                      domProps: { textContent: _vm._s(program.url) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      staticClass: "table__cell",
+                      domProps: {
+                        textContent: _vm._s(_vm.formatDate(program.created_at))
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "table__cell" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn__small btn__small--primary",
+                            attrs: {
+                              to: {
+                                name: "admin.programs.edit",
+                                params: { id: program.id }
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-cog" }),
+                            _vm._v("\n            Update\n          ")
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn__small btn__small--danger",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.deleteProgram(program)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-times" }),
+                            _vm._v("\n            Delete\n          ")
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                )
+              })
+            ],
+            2
           )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "main__table-wrapper" }, [
-        _vm.tableIsEmpty
-          ? _c("p", { staticClass: "text__table-is-empty" }, [
-              _vm._v("There isn't any program defined at the moment.")
-            ])
-          : _c(
-              "table",
-              { staticClass: "table" },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._l(_vm.getPrograms, function(program) {
-                  return _c(
-                    "tr",
-                    { key: program.id, staticClass: "table__row" },
-                    [
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: { textContent: _vm._s(program.title) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: { textContent: _vm._s(program.code) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: { textContent: _vm._s(program.description) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: { textContent: _vm._s(program.url) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        staticClass: "table__cell",
-                        domProps: {
-                          textContent: _vm._s(
-                            _vm.formatDate(program.created_at)
-                          )
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "table__cell" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "btn__small btn__small--primary",
-                              attrs: {
-                                to: {
-                                  name: "admin.programs.edit",
-                                  params: { id: program.id }
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "fas fa-cog" }),
-                              _vm._v("\n            Update\n          ")
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn__small btn__small--danger",
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  _vm.deleteProgram(program)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "fas fa-times" }),
-                              _vm._v("\n            Delete\n          ")
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ]
-                  )
-                })
-              ],
-              2
-            )
-      ])
-    ],
-    1
-  )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -54212,6 +54255,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_middleware__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__);
+//
 //
 //
 //
@@ -54463,7 +54507,7 @@ var render = function() {
   return _c(
     "main",
     {
-      staticClass: "main__container main__container--medium",
+      staticClass: "main__container main__container--admin-with-form",
       on: {
         keyup: function($event) {
           if (
@@ -54478,15 +54522,22 @@ var render = function() {
     },
     [
       _c(
-        "router-link",
-        {
-          staticClass: "main__back",
-          attrs: { to: { name: "admin.programs.index" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
+        "div",
+        { staticClass: "main__title-group" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "main__back",
+              attrs: { to: { name: "admin.programs.index" }, tag: "a" }
+            },
+            [_c("i", { staticClass: "fas fa-arrow-left" })]
+          ),
+          _vm._v(" "),
+          _c("h1", { staticClass: "main__title" }, [_vm._v("Add program")])
+        ],
+        1
       ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Add program")]),
       _vm._v(" "),
       _c(
         "div",
@@ -54808,8 +54859,7 @@ var render = function() {
           ]
         )
       ])
-    ],
-    1
+    ]
   )
 }
 var staticRenderFns = []
@@ -54882,6 +54932,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_middleware__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuelidate_lib_validators__);
+//
 //
 //
 //
@@ -55155,7 +55206,7 @@ var render = function() {
   return _c(
     "main",
     {
-      staticClass: "main__container main__container--medium",
+      staticClass: "main__container main__container--admin-with-form",
       on: {
         keyup: function($event) {
           if (
@@ -55170,15 +55221,22 @@ var render = function() {
     },
     [
       _c(
-        "router-link",
-        {
-          staticClass: "main__back",
-          attrs: { to: { name: "admin.programs.index" }, tag: "a" }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-left" })]
+        "div",
+        { staticClass: "main__title-group" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "main__back",
+              attrs: { to: { name: "admin.programs.index" }, tag: "a" }
+            },
+            [_c("i", { staticClass: "fas fa-arrow-left" })]
+          ),
+          _vm._v(" "),
+          _c("h1", { staticClass: "main__title" }, [_vm._v("Edit program")])
+        ],
+        1
       ),
-      _vm._v(" "),
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Edit program")]),
       _vm._v(" "),
       _c(
         "div",
@@ -55500,8 +55558,7 @@ var render = function() {
           ]
         )
       ])
-    ],
-    1
+    ]
   )
 }
 var staticRenderFns = []

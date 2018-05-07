@@ -13,6 +13,31 @@
       padding-bottom: 6rem;
     }
 
+    &--admin {
+      padding: 15rem 0;
+
+      @media all and (max-width: $bp-md) {
+        padding-top: 3rem;
+      }
+    }
+
+    &--admin-with-form {
+      width: 60vw;
+      padding: 15rem 0;
+
+      @media all and (max-width: $bp-lg) {
+        width: 70vw;
+      }
+
+      @media all and (max-width: $bp-md) {
+        padding-top: 3rem;
+      }
+
+      @media all and (max-width: $bp-sm) {
+        width: 80vw;
+      }
+    }
+
     &--medium {
       width: 67.5vw;
 
@@ -51,7 +76,12 @@
     }
   }
 
+  &__title-group {
+    position: relative;
+  }
+
   &__title {
+    width: 100%;
     font-size: 6rem;
     text-align: center;
 
@@ -61,6 +91,10 @@
       @media all and (max-width: $bp-xs) {
         font-size: 6rem;
       }
+    }
+
+    &--diagnostic {
+      margin-bottom: 4rem;
     }
   }
 
@@ -108,8 +142,9 @@
 
   &__back {
     position: absolute;
-    top: 13.5rem;
+    top: 50%;
     left: 0;
+    transform: translateY(-50%);
     color: lighten($silver, 10%) !important;
     font-size: 4rem;
     transition: all .4s ease;

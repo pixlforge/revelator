@@ -1,15 +1,16 @@
 <template>
-  <main class="main__container">
+  <main class="main__container main__container--admin">
+    <div class="main__title-group">
+      <!-- Back Button -->
+      <router-link :to="{ name: 'admin' }"
+                   tag="a"
+                   class="main__back">
+        <i class="fas fa-arrow-left"></i>
+      </router-link>
 
-    <!-- Back Button -->
-    <router-link :to="{ name: 'admin' }"
-                 tag="a"
-                 class="main__back">
-      <i class="fas fa-arrow-left"></i>
-    </router-link>
-
-    <!-- Title -->
-    <h1 class="main__title">Users</h1>
+      <!-- Title -->
+      <h1 class="main__title">Users</h1>
+    </div>
 
     <div class="main__row main__row--center">
 

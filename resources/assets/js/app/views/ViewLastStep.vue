@@ -2,7 +2,7 @@
   <div>
     <main class="main__container main__container--last-step"
           @keyup.enter="saveAndContinue">
-      <h1 class="main__title">One Last Step!</h1>
+      <h1 class="main__title main__title--diagnostic">One Last Step!</h1>
 
       <p class="main__lead">
         In order to send you a personalised offer, we would like to know more about you and send you some recommendations.

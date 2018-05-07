@@ -1,16 +1,17 @@
 <template>
-  <main class="main__container main__container--medium"
+  <main class="main__container main__container--admin-with-form"
         @keyup.enter="submit">
+    <div class="main__title-group">
+      <!-- Back Button -->
+      <router-link :to="{ name: 'admin.users.index' }"
+                   tag="a"
+                   class="main__back">
+        <i class="fas fa-arrow-left"></i>
+      </router-link>
 
-    <!-- Back Button -->
-    <router-link :to="{ name: 'admin.users.index' }"
-                 tag="a"
-                 class="main__back">
-      <i class="fas fa-arrow-left"></i>
-    </router-link>
-
-    <!-- Title -->
-    <h1 class="main__title">Edit user</h1>
+      <!-- Title -->
+      <h1 class="main__title">Edit user</h1>
+    </div>
 
     <!-- Name -->
     <div class="form__group">

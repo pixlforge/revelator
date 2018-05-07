@@ -4,7 +4,7 @@
 
       <!-- Question -->
       <transition name="fade-longer" mode="out-in">
-        <h1 class="main__title"
+        <h1 class="main__title main__title--diagnostic"
             v-if="getQuestions.length && getShowContentStatus"
             v-text="getQuestions[getCurrentQuestion].name">
         </h1>

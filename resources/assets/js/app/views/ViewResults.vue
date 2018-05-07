@@ -3,7 +3,7 @@
     <main class="main__container main__container--results">
 
       <!--Title-->
-      <h1 class="main__title">Your diagnostic</h1>
+      <h1 class="main__title main__title--diagnostic">Your diagnostic</h1>
 
       <!--Lead-->
       <p class="main__lead">
