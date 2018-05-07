@@ -6,7 +6,7 @@ body, body *:not(html):not(style):not(br):not(tr):not(code) {
 }
 
 body {
-    background-color: #f5f8fa;
+    background-color: #F5F5F5;
     color: #74787E;
     height: 100%;
     hyphens: auto;
@@ -82,7 +82,7 @@ img {
 /* Layout */
 
 .wrapper {
-    background-color: #f5f8fa;
+    background-color: #F5F5F5;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -108,7 +108,7 @@ img {
 }
 
 .header a {
-    color: #bbbfc3;
+    color: #333;
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
@@ -119,8 +119,6 @@ img {
 
 .body {
     background-color: #FFFFFF;
-    border-bottom: 1px solid #EDEFF2;
-    border-top: 1px solid #EDEFF2;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -164,7 +162,7 @@ img {
 }
 
 .footer p {
-    color: #AEAEAE;
+    color: #333;
     font-size: 12px;
     text-align: center;
 }
@@ -210,7 +208,7 @@ img {
 }
 
 .button {
-    border-radius: 3px;
+    border-radius: 30px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
     color: #FFF;
     display: inline-block;
@@ -219,11 +217,11 @@ img {
 }
 
 .button-blue {
-    background-color: #3097D1;
-    border-top: 10px solid #3097D1;
-    border-right: 18px solid #3097D1;
-    border-bottom: 10px solid #3097D1;
-    border-left: 18px solid #3097D1;
+    background-color: #2399A7;
+    border-top: 15px solid #2399A7;
+    border-right: 40px solid #2399A7;
+    border-bottom: 15px solid #2399A7;
+    border-left: 40px solid #2399A7;
 }
 
 .button-green {

@@ -1,13 +1,13 @@
 @component('mail::message')
-# Your permalink to your results
+# The permalink to your results
 
-Hello, {{ $user->first_name }} {{ $user->last_name }}.<br>
-You requested that we send you a permanent link to your results so you can check them at any given time, so here you go:
+Hello {{ $user->first_name }} {{ $user->last_name }}.<br>
+You requested a permanent link to your results.
 
 @component('mail::button', ['url' => url('/results?name=' . $user->name)])
-Results
+Check my results
 @endcomponent
 
-Thank you for your trust,<br>
+Best Regards,<br>
 {{ config('app.name') }}
 @endcomponent
