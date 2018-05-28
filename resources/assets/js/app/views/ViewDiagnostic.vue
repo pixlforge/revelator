@@ -186,6 +186,9 @@ export default {
      * Get all questions and format them to be displayed in the select component.
      */
     getSelectOptions() {
+      if (this.options.length > 0) {
+        this.options = [];
+      }
       this.getQuestions[this.getCurrentQuestion].options.forEach(option => {
         this.options.push({ label: option.name, value: option.id });
       });
