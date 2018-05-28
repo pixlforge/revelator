@@ -1,4 +1,3 @@
-import App from './App'
 import ViewHome from './views/ViewHome'
 import ViewDiagnostic from './views/ViewDiagnostic'
 import ViewLastStep from './views/ViewLastStep'
@@ -25,8 +24,6 @@ import ViewOptionEdit from './views/admin/options/ViewOptionEdit'
 import ViewProgramIndex from './views/admin/programs/ViewProgramIndex'
 import ViewProgramCreate from './views/admin/programs/ViewProgramCreate'
 import ViewProgramEdit from './views/admin/programs/ViewProgramEdit'
-
-import { store } from './store'
 
 export const routes = [
   /**
