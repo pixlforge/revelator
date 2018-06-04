@@ -45451,6 +45451,34 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -45465,7 +45493,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     return {
       programs: [],
       featuredProgram: null,
-      userConsents: false
+      userConsents: false,
+      displayProgramsNow: false
     };
   },
 
@@ -45475,6 +45504,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
      */
     shouldSetElementWidth: function shouldSetElementWidth() {
       return this.userConsents ? "" : "btn__big--half";
+    },
+    shouldDisplayProgramsNow: function shouldDisplayProgramsNow() {
+      return this.programs.length && this.displayProgramsNow;
     }
   }),
   created: function created() {
@@ -45557,7 +45589,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           _this4.$store.dispatch("toggleLoader");
           _this4.getResultsByProgram();
           _this4.doesUserConsent();
-        }, 0);
+        }, 3000);
       }).catch(function () {
         _this4.$store.dispatch("toggleLoader");
       });
@@ -45573,6 +45605,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.sortByPercentage();
       this.isolateFeaturedProgram();
       this.removeFeaturedProgramFromProgramsList();
+      this.startProgramsDisplayDelayTimeout();
     },
 
     /**
@@ -45662,6 +45695,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     removeFeaturedProgramFromProgramsList: function removeFeaturedProgramFromProgramsList() {
       this.programs.shift();
+    },
+    startProgramsDisplayDelayTimeout: function startProgramsDisplayDelayTimeout() {
+      var _this7 = this;
+
+      setTimeout(function () {
+        _this7.displayProgramsNow = true;
+      }, 3000);
     }
   }
 });
@@ -45965,31 +46005,64 @@ var render = function() {
       "main",
       { staticClass: "main__container main__container--results" },
       [
-        _c("h1", { staticClass: "main__title main__title--diagnostic" }, [
-          _vm._v("Your diagnostic")
-        ]),
-        _vm._v(" "),
-        _vm.featuredProgram
-          ? _c("AppFeaturedProgram", {
-              attrs: { program: _vm.featuredProgram }
-            })
-          : _vm._e(),
-        _vm._v(" "),
-        _c("p", { staticClass: "main__lead" }, [
-          _vm._v(
-            "\n      Here are the programs that we selected for you.\n    "
-          )
-        ]),
+        _c(
+          "transition",
+          { attrs: { name: "fade", mode: "out-in", appear: "" } },
+          [
+            _vm.programs.length
+              ? _c(
+                  "h1",
+                  { staticClass: "main__title main__title--diagnostic" },
+                  [_vm._v("\n        Your diagnostic\n      ")]
+                )
+              : _vm._e()
+          ]
+        ),
         _vm._v(" "),
         _c(
-          "div",
-          { staticClass: "main__results" },
-          _vm._l(_vm.programs, function(program) {
-            return _c("AppProgram", {
-              key: program.id,
-              attrs: { program: program }
-            })
-          })
+          "transition",
+          { attrs: { name: "fade", mode: "out-in", appear: "" } },
+          [
+            _vm.featuredProgram
+              ? _c("AppFeaturedProgram", {
+                  attrs: { program: _vm.featuredProgram }
+                })
+              : _vm._e()
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "transition",
+          { attrs: { name: "fade", mode: "out-in", appear: "" } },
+          [
+            _vm.shouldDisplayProgramsNow
+              ? _c("p", { staticClass: "main__lead" }, [
+                  _vm._v(
+                    "\n        Here are the programs that we selected for you.\n      "
+                  )
+                ])
+              : _vm._e()
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "transition",
+          { attrs: { name: "fade", mode: "out-in", appear: "" } },
+          [
+            _vm.shouldDisplayProgramsNow
+              ? _c(
+                  "div",
+                  { staticClass: "main__results" },
+                  _vm._l(_vm.programs, function(program) {
+                    return _c("AppProgram", {
+                      key: program.id,
+                      attrs: { program: program }
+                    })
+                  })
+                )
+              : _vm._e()
+          ]
         )
       ],
       1

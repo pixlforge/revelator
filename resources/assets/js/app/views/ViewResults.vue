@@ -1,21 +1,49 @@
 <template>
   <div>
     <main class="main__container main__container--results">
-      <h1 class="main__title main__title--diagnostic">Your diagnostic</h1>
-      <AppFeaturedProgram
-        v-if="featuredProgram"
-        :program="featuredProgram"/>
+      <transition
+        name="fade"
+        mode="out-in"
+        appear>
+        <h1
+          v-if="programs.length"
+          class="main__title main__title--diagnostic">
+          Your diagnostic
+        </h1>
+      </transition>
+      <transition
+        name="fade"
+        mode="out-in"
+        appear>
+        <AppFeaturedProgram
+          v-if="featuredProgram"
+          :program="featuredProgram"/>
+      </transition>
 
-      <p class="main__lead">
-        Here are the programs that we selected for you.
-      </p>
+      <transition
+        name="fade"
+        mode="out-in"
+        appear>
+        <p
+          v-if="shouldDisplayProgramsNow"
+          class="main__lead">
+          Here are the programs that we selected for you.
+        </p>
+      </transition>
 
-      <div class="main__results">
-        <AppProgram
-          v-for="program in programs"
-          :key="program.id"
-          :program="program"/>
-      </div>
+      <transition
+        name="fade"
+        mode="out-in"
+        appear>
+        <div
+          v-if="shouldDisplayProgramsNow"
+          class="main__results">
+          <AppProgram
+            v-for="program in programs"
+            :key="program.id"
+            :program="program"/>
+        </div>
+      </transition>
     </main>
 
     <div class="main__btn-group">
@@ -78,7 +106,8 @@ export default {
     return {
       programs: [],
       featuredProgram: null,
-      userConsents: false
+      userConsents: false,
+      displayProgramsNow: false
     };
   },
   computed: {
@@ -94,6 +123,9 @@ export default {
      */
     shouldSetElementWidth() {
       return this.userConsents ? "" : "btn__big--half";
+    },
+    shouldDisplayProgramsNow() {
+      return this.programs.length && this.displayProgramsNow;
     }
   },
   created() {
@@ -180,7 +212,7 @@ export default {
             this.$store.dispatch("toggleLoader");
             this.getResultsByProgram();
             this.doesUserConsent();
-          }, 0);
+          }, 3000);
         })
         .catch(() => {
           this.$store.dispatch("toggleLoader");
@@ -196,6 +228,7 @@ export default {
       this.sortByPercentage();
       this.isolateFeaturedProgram();
       this.removeFeaturedProgramFromProgramsList();
+      this.startProgramsDisplayDelayTimeout();
     },
     /**
      * Build the programs data properties.
@@ -279,6 +312,11 @@ export default {
     },
     removeFeaturedProgramFromProgramsList() {
       this.programs.shift();
+    },
+    startProgramsDisplayDelayTimeout() {
+      setTimeout(() => {
+        this.displayProgramsNow = true;
+      }, 3000);
     }
   }
 };
