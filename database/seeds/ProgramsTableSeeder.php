@@ -73,5 +73,12 @@ class ProgramsTableSeeder extends Seeder
             'code' => 'WKND',
             'url' => 'http://laprairie.ch/medical-programs/weekend-escape'
         ]);
+
+        factory(\App\Program::class)->create([
+            'title' => 'Revitalisation Premium',
+            'slogan' => 'The ultimate power regeneration',
+            'code' => 'Rev++',
+            'url' => 'http://laprairie.ch/medical-programs/revitalisation'
+        ]);
     }
 }
