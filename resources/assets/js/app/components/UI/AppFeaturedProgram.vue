@@ -17,7 +17,7 @@
             class="featured__circle"
             cx="70"
             cy="70"
-            r="45"
+            r="55"
             fill="#f0f0f0"/>
         </svg>
         <div class="featured__value">

@@ -46,7 +46,9 @@
       </transition>
     </main>
 
-    <div class="main__btn-group">
+    <div
+      v-if="programs.length"
+      class="main__btn-group">
       <div
         v-if="userConsents"
         class="btn__big"
