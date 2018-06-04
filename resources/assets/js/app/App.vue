@@ -22,11 +22,17 @@
       name="fade"
       mode="out-in"
       appear>
-      <OrbitSpinner
-        v-if="loaderState"
-        :animation-duration="1000"
-        :size="100"
-        :color="'#ffffff'"/>
+      <div class="spinner__container">
+        <OrbitSpinner
+          v-if="loaderState"
+          :animation-duration="1000"
+          :size="100"
+          :color="'#ffffff'"/>
+        <div v-if="$router.currentRoute.name === 'results' && loaderState">
+          <p class="spinner__please-wait">Please wait</p>
+          <p class="spinner__analyzing">We are collecting and analyzing your answers</p>
+        </div>
+      </div>
     </transition>
     <transition
       name="fade"
@@ -34,7 +40,7 @@
       appear>
       <div
         v-if="loaderState"
-        class="loader__background"/>
+        class="spinner__background"/>
     </transition>
   </div>
 </template>

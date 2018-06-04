@@ -63,7 +63,7 @@ export const store = new Vuex.Store({
      */
     toggleLoader: state => {
       state.loader.show = !state.loader.show
-      document.querySelector('body').classList.toggle('loader__on')
+      document.querySelector('body').classList.toggle('spinner__on')
     },
     /**
      * togglePasswordVisiblity Mutation

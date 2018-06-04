@@ -170,9 +170,11 @@ export default {
         fetchQuestions
       ])
         .then(() => {
-          this.$store.dispatch("toggleLoader");
-          this.getResultsByProgram();
-          this.doesUserConsent();
+          setTimeout(() => {
+            this.$store.dispatch("toggleLoader");
+            this.getResultsByProgram();
+            this.doesUserConsent();
+          }, 3000);
         })
         .catch(() => {
           this.$store.dispatch("toggleLoader");
