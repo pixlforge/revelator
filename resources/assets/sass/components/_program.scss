@@ -36,10 +36,6 @@
     padding-left: 3.5rem;
     position: relative;
     transform: translateY(-.75rem);
-
-    @media all and (max-width: $bp-sm) {
-      //padding-left: 1rem;
-    }
   }
 
   &__title {

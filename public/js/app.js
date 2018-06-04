@@ -45378,9 +45378,11 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_UI_AppProgram__ = __webpack_require__(343);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_UI_AppProgram___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_UI_AppProgram__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_UI_AppFeaturedProgram__ = __webpack_require__(413);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_UI_AppFeaturedProgram___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_UI_AppFeaturedProgram__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_UI_AppProgram__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_UI_AppProgram___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_UI_AppProgram__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(4);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -45446,22 +45448,28 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    AppProgram: __WEBPACK_IMPORTED_MODULE_0__components_UI_AppProgram___default.a
+    AppFeaturedProgram: __WEBPACK_IMPORTED_MODULE_0__components_UI_AppFeaturedProgram___default.a,
+    AppProgram: __WEBPACK_IMPORTED_MODULE_1__components_UI_AppProgram___default.a
   },
   data: function data() {
     return {
       programs: [],
+      featuredProgram: null,
       userConsents: false
     };
   },
 
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(["getPrograms", "getAnswers", "getOptions", "getQuestions", "getCurrentUser"]), {
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapGetters */])(["getPrograms", "getAnswers", "getOptions", "getQuestions", "getCurrentUser"]), {
     /**
      * Set element's width to 50% if user hasn't agreed to share his personal details.
      */
@@ -45549,7 +45557,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           _this4.$store.dispatch("toggleLoader");
           _this4.getResultsByProgram();
           _this4.doesUserConsent();
-        }, 3000);
+        }, 0);
       }).catch(function () {
         _this4.$store.dispatch("toggleLoader");
       });
@@ -45563,6 +45571,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.attributePoints();
       this.calculatePercentage();
       this.sortByPercentage();
+      this.isolateFeaturedProgram();
+      this.removeFeaturedProgramFromProgramsList();
     },
 
     /**
@@ -45645,6 +45655,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.programs.sort(function (a, b) {
         return b.percentage - a.percentage;
       });
+    },
+    isolateFeaturedProgram: function isolateFeaturedProgram() {
+      this.featuredProgram = this.programs.slice(0, 1);
+      this.featuredProgram = this.featuredProgram[0];
+    },
+    removeFeaturedProgramFromProgramsList: function removeFeaturedProgramFromProgramsList() {
+      this.programs.shift();
     }
   }
 });
@@ -45944,28 +45961,39 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("main", { staticClass: "main__container main__container--results" }, [
-      _c("h1", { staticClass: "main__title main__title--diagnostic" }, [
-        _vm._v("Your diagnostic")
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "main__lead" }, [
-        _vm._v(
-          "\n      Thank you, here are the programs that we selected for you.\n    "
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "main__results" },
-        _vm._l(_vm.programs, function(program) {
-          return _c("AppProgram", {
-            key: program.id,
-            attrs: { program: program }
+    _c(
+      "main",
+      { staticClass: "main__container main__container--results" },
+      [
+        _c("h1", { staticClass: "main__title main__title--diagnostic" }, [
+          _vm._v("Your diagnostic")
+        ]),
+        _vm._v(" "),
+        _vm.featuredProgram
+          ? _c("AppFeaturedProgram", {
+              attrs: { program: _vm.featuredProgram }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _c("p", { staticClass: "main__lead" }, [
+          _vm._v(
+            "\n      Here are the programs that we selected for you.\n    "
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "main__results" },
+          _vm._l(_vm.programs, function(program) {
+            return _c("AppProgram", {
+              key: program.id,
+              attrs: { program: program }
+            })
           })
-        })
-      )
-    ]),
+        )
+      ],
+      1
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "main__btn-group" }, [
       _vm.userConsents
@@ -55755,6 +55783,250 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(414)
+/* template */
+var __vue_template__ = __webpack_require__(415)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/app/components/UI/AppFeaturedProgram.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5d16fa37", Component.options)
+  } else {
+    hotAPI.reload("data-v-5d16fa37", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 414 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    program: {
+      type: Object,
+      required: true
+    }
+  },
+  mounted: function mounted() {
+    this.animateResults();
+  },
+
+  methods: {
+    /**
+     * Animate the results text and circle.
+     */
+    animateResults: function animateResults() {
+      var _this = this;
+
+      var path = document.getElementById("path_" + this.program.id);
+      var element = document.querySelector("#result_" + this.program.id);
+      var arc = void 0;
+      var count = 0;
+      var end = this.program.percentage;
+
+      var animation = setInterval(function () {
+        count += 1;
+        element.innerHTML = count + "%";
+        arc = _this.drawArc(70, 70, 70, 0, count * 3.6);
+        path.setAttribute("d", arc);
+
+        if (count >= end) {
+          clearInterval(animation);
+        }
+      }, 25);
+    },
+
+
+    /**
+     * Polar to cartesian.
+     */
+    polarToCartesian: function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+      var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+      return {
+        x: centerX + radius * Math.cos(angleInRadians),
+        y: centerY + radius * Math.sin(angleInRadians)
+      };
+    },
+
+
+    /**
+     * Draw an arc.
+     */
+    drawArc: function drawArc(x, y, radius, startAngle, endAngle) {
+      var start = this.polarToCartesian(x, y, radius, endAngle);
+      var end = this.polarToCartesian(x, y, radius, startAngle);
+      var arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
+      var d = (endAngle - startAngle) % 360 === 0 ? ["M", start.x, 0, "A", radius, radius, 0, 0, 0, start.x, radius * 2, "A", radius, radius, 0, 0, 0, start.x, 0] : ["M", start.x, start.y, "A", radius, radius, 0, arcSweep, 0, end.x, end.y, "L", x, y, "Z"];
+      return d.join(" ");
+    }
+  }
+});
+
+/***/ }),
+/* 415 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "featured__container" }, [
+    _c("div", { staticClass: "featured__body" }, [
+      _c("p", { staticClass: "featured__lead" }, [
+        _vm._v("Thank you, here is the program that best fits your needs")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "featured__result" }, [
+        _c("svg", { staticClass: "featured__svg" }, [
+          _c("circle", {
+            staticClass: "featured__circle",
+            attrs: { cx: "70", cy: "70", r: "70", fill: "#fff" }
+          }),
+          _vm._v(" "),
+          _c("path", {
+            attrs: { id: "path_" + _vm.program.id, fill: "#4e4f4f" }
+          }),
+          _vm._v(" "),
+          _c("circle", {
+            staticClass: "featured__circle",
+            attrs: { cx: "70", cy: "70", r: "45", fill: "#f0f0f0" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "featured__value" }, [
+          _c("div", { attrs: { id: "result_" + _vm.program.id } }),
+          _vm._v(" "),
+          _c("p", { staticClass: "featured__compatible" }, [
+            _vm._v("Compatible")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "featured__details" }, [
+        _c("p", {
+          staticClass: "featured__title",
+          domProps: { textContent: _vm._s(_vm.program.title) }
+        }),
+        _vm._v(" "),
+        _c("p", {
+          staticClass: "featured__slogan",
+          domProps: { textContent: _vm._s(_vm.program.slogan) }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("a", {
+      staticClass: "featured__button",
+      attrs: {
+        href: _vm.program.url,
+        role: "button",
+        target: "_blank",
+        rel: "noopener noreferrer"
+      },
+      domProps: { textContent: _vm._s("Discover the program") }
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5d16fa37", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

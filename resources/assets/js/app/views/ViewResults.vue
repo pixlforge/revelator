@@ -2,8 +2,12 @@
   <div>
     <main class="main__container main__container--results">
       <h1 class="main__title main__title--diagnostic">Your diagnostic</h1>
+      <AppFeaturedProgram
+        v-if="featuredProgram"
+        :program="featuredProgram"/>
+
       <p class="main__lead">
-        Thank you, here are the programs that we selected for you.
+        Here are the programs that we selected for you.
       </p>
 
       <div class="main__results">
@@ -15,7 +19,6 @@
     </main>
 
     <div class="main__btn-group">
-
       <div
         v-if="userConsents"
         class="btn__big"
@@ -62,16 +65,19 @@
 </template>
 
 <script>
+import AppFeaturedProgram from "../components/UI/AppFeaturedProgram";
 import AppProgram from "../components/UI/AppProgram";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
+    AppFeaturedProgram,
     AppProgram
   },
   data() {
     return {
       programs: [],
+      featuredProgram: null,
       userConsents: false
     };
   },
@@ -174,7 +180,7 @@ export default {
             this.$store.dispatch("toggleLoader");
             this.getResultsByProgram();
             this.doesUserConsent();
-          }, 3000);
+          }, 0);
         })
         .catch(() => {
           this.$store.dispatch("toggleLoader");
@@ -188,6 +194,8 @@ export default {
       this.attributePoints();
       this.calculatePercentage();
       this.sortByPercentage();
+      this.isolateFeaturedProgram();
+      this.removeFeaturedProgramFromProgramsList();
     },
     /**
      * Build the programs data properties.
@@ -264,6 +272,13 @@ export default {
       this.programs.sort((a, b) => {
         return b.percentage - a.percentage;
       });
+    },
+    isolateFeaturedProgram() {
+      this.featuredProgram = this.programs.slice(0, 1);
+      this.featuredProgram = this.featuredProgram[0];
+    },
+    removeFeaturedProgramFromProgramsList() {
+      this.programs.shift();
     }
   }
 };
