@@ -45,15 +45,15 @@
     left: 3.5rem;
     transition: all .4s ease;
     
-    @media all and (max-width: $bp-md-lg) {
-      font-size: 1.4rem;
-    }
-
-    @media all and (max-width: $bp-md) {
+    @media all and (max-width: $bp-xxl) {
       font-size: 18px;
       position: initial;
     }
-
+    
+    @media all and (max-width: $bp-md-lg) {
+      font-size: 1.4rem;
+    }
+    
     @media all and (max-width: $bp-sm) {
       font-size: 14px;
       letter-spacing: 1.1pt;
@@ -69,16 +69,16 @@
     opacity: 0;
     transition: all .4s .1s ease;
 
-    @media all and (max-width: $bp-md-lg) {
-      font-size: 11px;
-    }
-
-    @media all and (max-width: $bp-md) {
+    @media all and (max-width: $bp-xxl) {
       font-size: 10px;
       opacity: 1;
       letter-spacing: 1pt;
       position: initial;
       margin-bottom: 1rem;
+    }
+
+    @media all and (max-width: $bp-md-lg) {
+      font-size: 11px;
     }
   }
 
@@ -88,8 +88,7 @@
     opacity: 0;
     transition: all .4s .1s ease;
 
-    @media all and (max-width: $bp-md) {
-      top: 70%;
+    @media all and (max-width: $bp-xxl) {
       opacity: 1;
       position: initial;
     }
@@ -98,7 +97,7 @@
   &__container:hover &__title {
     transform: translateY(-2.5rem);
 
-    @media all and (max-width: $bp-md) {
+    @media all and (max-width: $bp-xxl) {
       transform: none;
     }
   }
