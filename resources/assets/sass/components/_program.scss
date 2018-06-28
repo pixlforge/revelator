@@ -51,11 +51,10 @@
 
     @media all and (max-width: $bp-md) {
       font-size: 18px;
-      transform: translateY(-2.5rem);
+      position: initial;
     }
 
     @media all and (max-width: $bp-sm) {
-      //left: 1rem;
       font-size: 14px;
       letter-spacing: 1.1pt;
     }
@@ -78,6 +77,8 @@
       font-size: 10px;
       opacity: 1;
       letter-spacing: 1pt;
+      position: initial;
+      margin-bottom: 1rem;
     }
   }
 
@@ -90,11 +91,16 @@
     @media all and (max-width: $bp-md) {
       top: 70%;
       opacity: 1;
+      position: initial;
     }
   }
 
   &__container:hover &__title {
     transform: translateY(-2.5rem);
+
+    @media all and (max-width: $bp-md) {
+      transform: none;
+    }
   }
 
   &__container:hover &__slogan,
