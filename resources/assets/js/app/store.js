@@ -224,13 +224,15 @@ export const store = new Vuex.Store({
     getUser: ({ dispatch }, payload) => {
       dispatch('toggleLoader')
       return new Promise((resolve, reject) => {
-        window.axios.get(window.route('api.users.edit', [payload])).then(({ data }) => {
-          dispatch('toggleLoader')
-          resolve(data)
-        }).catch(err => {
-          dispatch('toggleLoader')
-          reject(err)
-        })
+        window.axios.get(window.route('api.users.edit', [payload]))
+          .then(({ data }) => {
+            dispatch('toggleLoader')
+            resolve(data)
+          })
+          .catch(err => {
+            dispatch('toggleLoader')
+            reject(err)
+          })
       })
     },
     /**
